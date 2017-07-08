@@ -3,9 +3,8 @@ package ifaces
 import (
 	"net/http"
 
-	"github.com/rackspace/gophercloud"
 	"github.com/kirk-enterprise/openstack/lib/auth"
-	"github.com/kirk-enterprise/openstack/lib/models"
+	"github.com/rackspace/gophercloud"
 )
 
 type Openstacker interface {
@@ -13,8 +12,6 @@ type Openstacker interface {
 	OpenstackClienter
 
 	ProjectID() string
-	PrependSharedNetwork(networks []*models.NetworkModel) []*models.NetworkModel
-	PrependSharedSubnet(subnets []*models.SubnetModel) []*models.SubnetModel
 }
 
 type OpenstackAuther interface {
