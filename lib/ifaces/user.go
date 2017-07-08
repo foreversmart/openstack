@@ -8,14 +8,7 @@ type User interface {
 	UserProjecter
 
 	// old apis
-	Register(username, password, email string, enabled bool) (user *models.UserResult, err error)
-	ChangePassword(userId, newPassword string) error
-	AddAccessKey(user, accessKey, secretKey string) error
-	All() (userInfos []*models.UserResult, err error)
-	Query(id string) (userInfo *models.UserResult, err error)
-
-	// new apis
-	AllV3(opts options.ListUserOpts) (user []*models.UserModel, err error)
+	All(opts options.ListUserOpts) (user []*models.UserModel, err error)
 	Create(opts options.CreateUserOpts) (user *models.UserModel, err error)
 	Show(UserID string) (user *models.UserModel, err error)
 	Update(UserID string, opts options.UpdateUserOpts) (userInfo *models.UserModel, err error)
