@@ -6,12 +6,13 @@ import (
 )
 
 type EndpointModel struct {
-	Id        string `json:"id" mapstructure:"id"`
-	RegionId  string `json:"region_id" mapstructure:"region_id"`
-	Region    string `json:"region" mapstructure:"region"`
+	ID        string `json:"id" mapstructure:"id"`
+	Url       string `json:"url" mapstructure:"url"`
 	Interface string `json:"interface" mapstructure:"interface"`
-	ServiceId string `json:"service_id" mapstructure:"service_id"`
 	Enabled   bool   `json:"enabled" mapstructure:"enabled"`
+	RegionID  string `json:"region_id" mapstructure:"region_id"`
+	Region    string `json:"region" mapstructure:"region"`
+	ServiceID string `json:"service_id" mapstructure:"service_id"`
 }
 
 func ExtractEndpoint(result gophercloud.Result) (endpoint *EndpointModel, err error) {

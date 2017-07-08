@@ -21,7 +21,7 @@
         "project_id": "803d363c5c4649b591fd74b96a8c30f5"
     },
     "token": {
-        "id": "gAAAAABZYLlxnW_3hwNswhWrD7_maGHQ8Ml55KkWvzBFlulUq_iY3JTbIKUzO6fow_jDb1F4WoNJsO0x9iQo74wY25EIC0RZangWstwyTX5qB5Ke4ZG5hbJR1NxDzgqHSQul7QkH-A7JZ7nTA3ixT0s9_hPD_RelsGp7l9GfMJ72viKpthRAJws"
+        "id": "gAAAAABZYMiBnln4J1zMIUtvM9vXgk0lu8zsyggdNh6vJ52prJeUPUG07CIleDUm6VbeAaV5Slemd9f5b2FIqsWQSXfyXhG_4VHYU4BzhaS7RCVCgIEBgcK0tcC4ipCzi7CnNnK_Or8RtTKL4jrGSacNfN_l8-Ey0YUvDcMvZh65YSLRtloTq3U"
     },
     "v2": {
         "scoped": {
@@ -309,50 +309,61 @@
             }
         },
         "DELETE /projects/:id": {},
-        "GET /endpoints": {
-            "endpoints": [
+        "GET /services": {
+            "services": [
                 {
-                    "region_id": "RegionOne",
+                    "description": "OpenStack Identity Service",
                     "links": {
-                        "self": "http://api.ecloud.com:35357/v3/endpoints/416a8465b7e54312a4b07a2c51595ee2"
+                        "self": "http://api.ecloud.com:35357/v3/services/2d8f8e19de1142769420837f9d9e3b49"
                     },
-                    "url": "http://api.ecloud.com:35357/v3",
-                    "region": "RegionOne",
                     "enabled": true,
-                    "interface": "admin",
-                    "service_id": "2d8f8e19de1142769420837f9d9e3b49",
-                    "id": "416a8465b7e54312a4b07a2c51595ee2"
-                },
-                {
-                    "region_id": "RegionOne",
-                    "links": {
-                        "self": "http://api.ecloud.com:35357/v3/endpoints/ad9d692c9cfc4bfc9e9f0b6c3b91e80f"
-                    },
-                    "url": "http://api.ecloud.com:5000/v3",
-                    "region": "RegionOne",
-                    "enabled": true,
-                    "interface": "public",
-                    "service_id": "2d8f8e19de1142769420837f9d9e3b49",
-                    "id": "ad9d692c9cfc4bfc9e9f0b6c3b91e80f"
-                },
-                {
-                    "region_id": "RegionOne",
-                    "links": {
-                        "self": "http://api.ecloud.com:35357/v3/endpoints/f08fb7f958014fa3a230263eb39fec62"
-                    },
-                    "url": "http://api.ecloud.com:5000/v3",
-                    "region": "RegionOne",
-                    "enabled": true,
-                    "interface": "internal",
-                    "service_id": "2d8f8e19de1142769420837f9d9e3b49",
-                    "id": "f08fb7f958014fa3a230263eb39fec62"
+                    "type": "identity",
+                    "id": "2d8f8e19de1142769420837f9d9e3b49",
+                    "name": "keystone"
                 }
             ],
             "links": {
-                "self": "http://api.ecloud.com:35357/v3/endpoints",
+                "self": "http://api.ecloud.com:35357/v3/services",
                 "previous": null,
                 "next": null
             }
-        }
+        },
+        "POST /services": {
+            "service": {
+                "name": "testing service",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/services/9688464c0f1d430ab22944416338251f"
+                },
+                "enabled": false,
+                "type": "kirk",
+                "id": "9688464c0f1d430ab22944416338251f",
+                "description": "Kirk custom service"
+            }
+        },
+        "GET /services/:id": {
+            "service": {
+                "name": "testing service",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/services/9688464c0f1d430ab22944416338251f"
+                },
+                "enabled": false,
+                "type": "kirk",
+                "id": "9688464c0f1d430ab22944416338251f",
+                "description": "Kirk custom service"
+            }
+        },
+        "PATCH /services/:id": {
+            "service": {
+                "name": "testing service",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/services/9688464c0f1d430ab22944416338251f"
+                },
+                "enabled": true,
+                "type": "kirk",
+                "id": "9688464c0f1d430ab22944416338251f",
+                "description": "Kirk custom service"
+            }
+        },
+        "DELETE /services/:id": {}
     }
 }
