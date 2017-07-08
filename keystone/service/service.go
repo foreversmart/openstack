@@ -3,9 +3,9 @@ package service
 import (
 	"github.com/kirk-enterprise/openstack/lib/errors"
 	"github.com/kirk-enterprise/openstack/lib/ifaces"
+	"github.com/kirk-enterprise/openstack/lib/models"
 	"github.com/kirk-enterprise/openstack/lib/options"
 	"github.com/rackspace/gophercloud"
-	"qbox.us/gogo/lib/evm/models"
 )
 
 const (
