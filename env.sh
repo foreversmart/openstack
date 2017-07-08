@@ -31,12 +31,18 @@ export PATH
 
 # mock development && test envs
 if [ -f "$APPROOT/openstack.go" ]; then
-    if [ ! -d "$APPROOT/src/github.com/kirk-enterprise/openstack" ]; then
-        mkdir -p "$APPROOT/src/github.com/kirk-enterprise"
+    if [ "$1" == "travis" ]; then
+        parent=$(cd $APPROOT/../; pwd)
 
-        if [ "$1" == "travis" ]; then
-            cp -r "$APPROOT" "$APPROOT/src/github.com/kirk-enterprise"
-        else
+        if [ ! -d "$parent/gopkg/src/github.com/kirk-enterprise/openstack"]; then
+            mkdir -p "$parent/gopkg/src/github.com/kirk-enterprise"
+
+            cp -r "$APPROOT" "$parent/gopkg/src/github.com/kirk-enterprise"
+        fi
+    else
+        if [ ! -d "$APPROOT/src/github.com/kirk-enterprise/openstack" ]; then
+            mkdir -p "$APPROOT/src/github.com/kirk-enterprise"
+
             ln -s "$APPROOT" "$APPROOT/src/github.com/kirk-enterprise"
         fi
     fi

@@ -10,7 +10,9 @@ go:
   - 1.8
 
 install:
-  - cd $TRAVIS_BUILD_DIR/..
+  - mkdir -p $TRAVIS_BUILD_DIR/gopkg
+  - export GOPATH=$TRAVIS_BUILD_DIR/gopkg:$GOPATH
+  - export PATH=$TRAVIS_BUILD_DIR/gopkg/bin:$PATH
 
 before_script:
 
