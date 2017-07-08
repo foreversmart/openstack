@@ -52,8 +52,8 @@ func (opts *CreateProjectOpts) ToPayload() interface{} {
 }
 
 type UpdateProjectOpts struct {
-	DomainID    *string `json:"domain_id,omitempty"`
 	Name        string  `json:"name,omitempty"`
+	DomainID    *string `json:"domain_id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	IsDomain    *bool   `json:"is_domain,omitempty"`
 	Enabled     *bool   `json:"enabled,omitempty"`

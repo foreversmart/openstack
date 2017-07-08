@@ -364,6 +364,70 @@
                 "description": "Kirk custom service"
             }
         },
-        "DELETE /services/:id": {}
+        "DELETE /services/:id": {},
+        "GET /endpoints": {
+            "endpoints": [
+                {
+                    "region_id": "RegionOne",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/endpoints/416a8465b7e54312a4b07a2c51595ee2"
+                    },
+                    "url": "http://api.ecloud.com:35357/v3",
+                    "region": "RegionOne",
+                    "enabled": true,
+                    "interface": "admin",
+                    "service_id": "2d8f8e19de1142769420837f9d9e3b49",
+                    "id": "416a8465b7e54312a4b07a2c51595ee2"
+                }
+            ],
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/endpoints",
+                "previous": null,
+                "next": null
+            }
+        },
+        "POST /endpoints": {
+            "endpoint": {
+                "region_id": "RegionOne",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/endpoints/5cd78999ff164068933e0046d13f8ae7"
+                },
+                "url": "http://api.ecloud.com:8989/kirk",
+                "region": "RegionOne",
+                "enabled": false,
+                "interface": "public",
+                "service_id": "9688464c0f1d430ab22944416338251f",
+                "id": "5cd78999ff164068933e0046d13f8ae7"
+            }
+        },
+        "GET /endpoints/:id": {
+            "endpoint": {
+                "region_id": "RegionOne",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/endpoints/5cd78999ff164068933e0046d13f8ae7"
+                },
+                "url": "http://api.ecloud.com:8989/kirk",
+                "region": "RegionOne",
+                "enabled": false,
+                "interface": "public",
+                "service_id": "9688464c0f1d430ab22944416338251f",
+                "id": "5cd78999ff164068933e0046d13f8ae7"
+            }
+        },
+        "PATCH /endpoints/:id": {
+            "endpoint": {
+                "region_id": "RegionOne",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/endpoints/5cd78999ff164068933e0046d13f8ae7"
+                },
+                "url": "http://api.ecloud.com:8989/kirk",
+                "region": "RegionOne",
+                "enabled": true,
+                "interface": "public",
+                "service_id": "9688464c0f1d430ab22944416338251f",
+                "id": "5cd78999ff164068933e0046d13f8ae7"
+            }
+        },
+        "DELETE /endpoints/:id": {}
     }
 }

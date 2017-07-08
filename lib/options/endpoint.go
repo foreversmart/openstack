@@ -1,10 +1,14 @@
 package options
 
-import "net/url"
+import (
+	"net/url"
+
+	"github.com/kirk-enterprise/openstack/lib/enums"
+)
 
 type ListEndpointOpts struct {
-	Interface *string `json:"interface"`  //optional
-	ServiceId *string `json:"service_id"` //optional
+	Interface *enums.EndpointInterface `json:"interface"`  //optional
+	ServiceId *string                  `json:"service_id"` //optional
 }
 
 func (opts *ListEndpointOpts) ToQuery() (options url.Values) {
@@ -12,7 +16,7 @@ func (opts *ListEndpointOpts) ToQuery() (options url.Values) {
 
 	if opts != nil {
 		if opts.Interface != nil {
-			options.Add("interface", *opts.Interface)
+			options.Add("interface", string(*opts.Interface))
 		}
 
 		if opts.ServiceId != nil {
@@ -24,11 +28,11 @@ func (opts *ListEndpointOpts) ToQuery() (options url.Values) {
 }
 
 type CreateEndpointOpts struct {
-	RegionId  *string `json:"region_id,omitempty"` //optional
-	Interface string  `json:"interface"`
-	ServiceId string  `json:"service_id"`
-	Url       string  `json:"url"`
-	Enabled   *bool   `json:"enabled,omitempty"` //optional
+	Url       string                  `json:"url"`
+	Interface enums.EndpointInterface `json:"interface"`
+	Enabled   *bool                   `json:"enabled,omitempty"`   //optional
+	RegionID  *string                 `json:"region_id,omitempty"` //optional
+	ServiceID string                  `json:"service_id"`
 }
 
 func (opts *CreateEndpointOpts) ToPayload() interface{} {
@@ -42,9 +46,11 @@ func (opts *CreateEndpointOpts) ToPayload() interface{} {
 }
 
 type UpdateEndpointOpts struct {
-	RegionId  string `json:"region_id"`
-	Interface string `json:"interface"`
-	ServiceId string `json:"service_id"`
+	Url       *string                  `json:"url,omitempty"`
+	Interface *enums.EndpointInterface `json:"interface,omitempty"`
+	Enabled   *bool                    `json:"enabled,omitempty"`
+	RegionID  *string                  `json:"region_id,omitempty"`
+	ServiceID *string                  `json:"service_id,omitempty"`
 }
 
 func (opts *UpdateEndpointOpts) ToPayload() interface{} {
