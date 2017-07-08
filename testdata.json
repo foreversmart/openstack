@@ -21,7 +21,7 @@
         "project_id": "803d363c5c4649b591fd74b96a8c30f5"
     },
     "token": {
-        "id": "gAAAAABZYI3IKodjH8PPo-0ijSUnPM8Vf_55D2YUw8RlL5z5Hq_ucyrG_D2SUTiTgjywJ6abw5HjRDcGvQUbH_k0FGF2oOOwSezwYfaSCVAXj8vt-HEvAb9etncPnv3bcNW5t0O7PYC3Tl_YUdGTf6ust5_DR8QhM65NitMvtaJ0GHK3TcM0IfQ"
+        "id": "gAAAAABZYLlxnW_3hwNswhWrD7_maGHQ8Ml55KkWvzBFlulUq_iY3JTbIKUzO6fow_jDb1F4WoNJsO0x9iQo74wY25EIC0RZangWstwyTX5qB5Ke4ZG5hbJR1NxDzgqHSQul7QkH-A7JZ7nTA3ixT0s9_hPD_RelsGp7l9GfMJ72viKpthRAJws"
     },
     "v2": {
         "scoped": {
@@ -105,6 +105,27 @@
         }
     },
     "v3": {
+        "unscoped": {
+            "token": {
+                "issued_at": "2017-07-08T09:13:28.000000Z",
+                "audit_ids": [
+                    "B1-BRSkTT5Cd_Oga63mgiQ"
+                ],
+                "methods": [
+                    "password"
+                ],
+                "expires_at": "2017-07-08T10:13:28.000000Z",
+                "user": {
+                    "password_expires_at": null,
+                    "domain": {
+                        "id": "default",
+                        "name": "Default"
+                    },
+                    "id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+                    "name": "admin"
+                }
+            }
+        },
         "scoped": {
             "token": {
                 "is_domain": false,
@@ -113,119 +134,115 @@
                 ],
                 "roles": [
                     {
-                        "id": "e14b42707c1f448298e1846623a00f59",
+                        "id": "f1e75d0b191e4a909f45fd57668f4e48",
                         "name": "admin"
                     }
                 ],
-                "expires_at": "2017-06-22T07:48:30.000000Z",
+                "expires_at": "2017-07-08T10:55:14.000000Z",
                 "project": {
                     "domain": {
                         "id": "default",
                         "name": "Default"
                     },
-                    "id": "63397e0193f04dc4b2165490669ed4a1",
-                    "name": "testing"
+                    "id": "fcfeddf071284e4a8c54760d4bf67c29",
+                    "name": "admin"
                 },
                 "catalog": [
                     {
                         "endpoints": [
                             {
-                                "url": "mitm://api.ecloud.com/v2.1/network",
+                                "region_id": "RegionOne",
+                                "url": "mitm://api.ecloud.com:35357/v3",
+                                "region": "RegionOne",
                                 "interface": "admin",
-                                "region": "RegionOne",
-                                "region_id": "RegionOne",
-                                "id": "58037b7153b64994b5575f1dc5b8ea89"
+                                "id": "416a8465b7e54312a4b07a2c51595ee2"
                             },
                             {
-                                "url": "mitm://api.ecloud.com/v2.1/network",
+                                "region_id": "RegionOne",
+                                "url": "mitm://api.ecloud.com:5000/v3",
+                                "region": "RegionOne",
                                 "interface": "public",
-                                "region": "RegionOne",
-                                "region_id": "RegionOne",
-                                "id": "712719d7c5974d819d89f522c0a9f3d8"
+                                "id": "ad9d692c9cfc4bfc9e9f0b6c3b91e80f"
                             },
                             {
-                                "url": "mitm://api.ecloud.com/v2.1/network",
+                                "region_id": "RegionOne",
+                                "url": "mitm://api.ecloud.com:5000/v3",
+                                "region": "RegionOne",
                                 "interface": "internal",
-                                "region": "RegionOne",
-                                "region_id": "RegionOne",
-                                "id": "7ecb85a9aeab490d98b235b34fd774e5"
-                            }
-                        ],
-                        "type": "network",
-                        "id": "2a4d649b2ef945d3b87618dd7415a9cc",
-                        "name": "neutron"
-                    },
-                    {
-                        "endpoints": [
-                            {
-                                "url": "mitm://api.ecloud.com/v3/identity",
-                                "interface": "public",
-                                "region": "RegionOne",
-                                "region_id": "RegionOne",
-                                "id": "2171a51cbce646ae807fb2f07263f61d"
-                            },
-                            {
-                                "url": "mitm://api.ecloud.com/v3/identity",
-                                "interface": "internal",
-                                "region": "RegionOne",
-                                "region_id": "RegionOne",
-                                "id": "895c905520b344b085e875f2b19642d1"
-                            },
-                            {
-                                "url": "mitm://api.ecloud.com/v3/admin",
-                                "interface": "admin",
-                                "region": "RegionOne",
-                                "region_id": "RegionOne",
-                                "id": "d777934344e4447a951f178efb04dd75"
+                                "id": "f08fb7f958014fa3a230263eb39fec62"
                             }
                         ],
                         "type": "identity",
-                        "id": "c44834db161f43d68888db189bb83926",
+                        "id": "2d8f8e19de1142769420837f9d9e3b49",
                         "name": "keystone"
-                    },
-                    {
-                        "endpoints": [
-                            {
-                                "url": "mitm://api.ecloud.com/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
-                                "interface": "internal",
-                                "region": "RegionOne",
-                                "region_id": "RegionOne",
-                                "id": "5f9eb7c6701a499b9461853126f23c17"
-                            },
-                            {
-                                "url": "mitm://api.ecloud.com/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
-                                "interface": "admin",
-                                "region": "RegionOne",
-                                "region_id": "RegionOne",
-                                "id": "9d514c0194d44572a2a4a4dbbd92ef59"
-                            },
-                            {
-                                "url": "mitm://api.ecloud.com/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
-                                "interface": "public",
-                                "region": "RegionOne",
-                                "region_id": "RegionOne",
-                                "id": "b28c2732db7440a69a7543c852f94475"
-                            }
-                        ],
-                        "type": "compute",
-                        "id": "dc067b8e3d514173a3037292c6d4de40",
-                        "name": "nova"
                     }
                 ],
                 "user": {
+                    "password_expires_at": null,
                     "domain": {
                         "id": "default",
                         "name": "Default"
                     },
-                    "id": "668d5ce711f04629a35f4787cc5a1704",
-                    "name": "testing",
-                    "password_expires_at": null
+                    "id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+                    "name": "admin"
                 },
                 "audit_ids": [
-                    "iM8WUc5MT4mGtgD58kZiZA"
+                    "AVAtPP-nR7iYERNmXTD2-A"
                 ],
-                "issued_at": "2017-06-22T06:48:30.000000Z"
+                "issued_at": "2017-07-08T09:55:14.000000Z"
             }
-        }
+        },
+        "GET /domains": {
+            "domains": [
+                {
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/domains/default"
+                    },
+                    "description": "The default domain",
+                    "name": "Default",
+                    "enabled": true,
+                    "id": "default"
+                }
+            ],
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/domains",
+                "previous": null,
+                "next": null
+            }
+        },
+        "GET /domains/:id": {
+            "domain": {
+                "id": "default",
+                "enabled": true,
+                "description": "The default domain",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/domains/default"
+                },
+                "name": "Default"
+            }
+        },
+        "POST /domains": {
+            "domain": {
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/domains/f8d184f66fee4bef83d558fd55fc9514"
+                },
+                "description": "The domain for tesing",
+                "name": "testing domain",
+                "enabled": true,
+                "id": "f8d184f66fee4bef83d558fd55fc9514"
+            }
+        },
+        "PATCH /domains/:id": {
+            "domain": {
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/domains/f8d184f66fee4bef83d558fd55fc9514"
+                },
+                "description": "The domain for tesing",
+                "name": "testing domain",
+                "enabled": false,
+                "id": "f8d184f66fee4bef83d558fd55fc9514"
+            }
+        },
+        "DELETE /domains/:id": {}
     }
 }
