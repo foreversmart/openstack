@@ -8,7 +8,7 @@ goclean:
 	go clean -i ./...
 
 goinstall:
-	# go get -t -v github.com/kirk-enterprise/openstack
+	go get -t -v github.com/kirk-enterprise/openstack
 	go get github.com/dolab/gogo
 	go get github.com/dolab/httpmitm
 	go get github.com/dolab/httptesting
@@ -17,7 +17,7 @@ goinstall:
 	go get github.com/rackspace/gophercloud
 
 goreinstall:
-	# go get -t -u -v github.com/kirk-enterprise/openstack
+	go get -t -u -v github.com/kirk-enterprise/openstack
 	go get -u -v github.com/dolab/gogo
 	go get -u -v github.com/dolab/httpmitm
 	go get -u -v github.com/dolab/httptesting
@@ -26,7 +26,8 @@ goreinstall:
 	go get -u -v github.com/rackspace/gophercloud
 
 gotest: goinstall
+	go test github.com/kirk-enterprise/openstack
 	go test github.com/kirk-enterprise/openstack/lib/...
-	go test github.com/kirk-enterprise/openstack/keystone/...
+	# go test github.com/kirk-enterprise/openstack/keystone/...
 
 travis: gobuild gotest

@@ -30,7 +30,7 @@ export PATH
 
 
 # mock development && test envs
-if [ -d "$APPROOT/ifaces" ]; then
+if [ -f "$APPROOT/openstack.go" ]; then
     if [ ! -d "$APPROOT/src/github.com/kirk-enterprise/openstack" ]; then
         mkdir -p "$APPROOT/src/github.com/kirk-enterprise"
 
