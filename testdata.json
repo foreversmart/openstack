@@ -243,6 +243,116 @@
                 "id": "f8d184f66fee4bef83d558fd55fc9514"
             }
         },
-        "DELETE /domains/:id": {}
+        "DELETE /domains/:id": {},
+        "GET /projects": {
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/projects",
+                "previous": null,
+                "next": null
+            },
+            "projects": [
+                {
+                    "is_domain": false,
+                    "description": "admin tenant",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/projects/fcfeddf071284e4a8c54760d4bf67c29"
+                    },
+                    "enabled": true,
+                    "id": "fcfeddf071284e4a8c54760d4bf67c29",
+                    "parent_id": "default",
+                    "domain_id": "default",
+                    "name": "admin"
+                }
+            ]
+        },
+        "POST /projects": {
+            "project": {
+                "is_domain": false,
+                "description": "",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/projects/29041f5248d44c0c938d1677def87bc6"
+                },
+                "enabled": true,
+                "id": "29041f5248d44c0c938d1677def87bc6",
+                "parent_id": "default",
+                "domain_id": "default",
+                "name": "testing project"
+            }
+        },
+        "GET /projects/:id": {
+            "project": {
+                "is_domain": false,
+                "description": "",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/projects/29041f5248d44c0c938d1677def87bc6"
+                },
+                "enabled": true,
+                "id": "29041f5248d44c0c938d1677def87bc6",
+                "parent_id": "default",
+                "domain_id": "default",
+                "name": "testing project"
+            }
+        },
+        "PATCH /projects/:id": {
+            "project": {
+                "is_domain": false,
+                "description": "",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/projects/29041f5248d44c0c938d1677def87bc6"
+                },
+                "extra": {},
+                "enabled": false,
+                "id": "29041f5248d44c0c938d1677def87bc6",
+                "parent_id": "default",
+                "domain_id": "default",
+                "name": "testing project"
+            }
+        },
+        "DELETE /projects/:id": {},
+        "GET /endpoints": {
+            "endpoints": [
+                {
+                    "region_id": "RegionOne",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/endpoints/416a8465b7e54312a4b07a2c51595ee2"
+                    },
+                    "url": "http://api.ecloud.com:35357/v3",
+                    "region": "RegionOne",
+                    "enabled": true,
+                    "interface": "admin",
+                    "service_id": "2d8f8e19de1142769420837f9d9e3b49",
+                    "id": "416a8465b7e54312a4b07a2c51595ee2"
+                },
+                {
+                    "region_id": "RegionOne",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/endpoints/ad9d692c9cfc4bfc9e9f0b6c3b91e80f"
+                    },
+                    "url": "http://api.ecloud.com:5000/v3",
+                    "region": "RegionOne",
+                    "enabled": true,
+                    "interface": "public",
+                    "service_id": "2d8f8e19de1142769420837f9d9e3b49",
+                    "id": "ad9d692c9cfc4bfc9e9f0b6c3b91e80f"
+                },
+                {
+                    "region_id": "RegionOne",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/endpoints/f08fb7f958014fa3a230263eb39fec62"
+                    },
+                    "url": "http://api.ecloud.com:5000/v3",
+                    "region": "RegionOne",
+                    "enabled": true,
+                    "interface": "internal",
+                    "service_id": "2d8f8e19de1142769420837f9d9e3b49",
+                    "id": "f08fb7f958014fa3a230263eb39fec62"
+                }
+            ],
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/endpoints",
+                "previous": null,
+                "next": null
+            }
+        }
     }
 }
