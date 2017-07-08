@@ -34,7 +34,7 @@ if [ -f "$APPROOT/openstack.go" ]; then
     if [ "$1" == "travis" ]; then
         parent=$(cd $APPROOT/../; pwd)
 
-        if [ ! -d "$parent/gopkg/src/github.com/kirk-enterprise/openstack"]; then
+        if [ ! -d "$parent/gopkg/src/github.com/kirk-enterprise/openstack" ]; then
             mkdir -p "$parent/gopkg/src/github.com/kirk-enterprise"
 
             cp -r "$APPROOT" "$parent/gopkg/src/github.com/kirk-enterprise"
