@@ -173,7 +173,7 @@ func (td *TestData) MockResourceURLWithSSL(path string) string {
 func (td *TestData) MockCatalog() interface{} {
 	switch td.version {
 	case "v2":
-		data, err := td.API("catalog.scoped.access")
+		data, err := td.API("scoped.access")
 		if err != nil {
 			panic(err.Error())
 		}
@@ -192,7 +192,7 @@ func (td *TestData) MockCatalog() interface{} {
 		}
 
 	case "v3":
-		data, err := td.API("catalog.scoped.token")
+		data, err := td.API("scoped.token")
 
 		// TODO: convert v3 catalog entry to v2's
 		var result struct {
