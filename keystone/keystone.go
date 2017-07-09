@@ -1,7 +1,6 @@
 package keystone
 
 import (
-	"github.com/kirk-enterprise/openstack/internal"
 	"github.com/kirk-enterprise/openstack/keystone/credential"
 	"github.com/kirk-enterprise/openstack/keystone/domain"
 	"github.com/kirk-enterprise/openstack/keystone/endpoint"
@@ -16,73 +15,73 @@ import (
 )
 
 type Keystone struct {
-	*internal.Openstack
+	client ifaces.Openstacker
 
 	_ bool
 }
 
-func New(endpoint string) *Keystone {
+func New(client ifaces.Openstacker) *Keystone {
 	return &Keystone{
-		Openstack: internal.New(endpoint),
+		client: client,
 	}
 }
 
 func (ks *Keystone) NewCredential() ifaces.Credentialer {
-	return credential.New(ks)
+	return credential.New(ks.client)
 }
 
 func (ks *Keystone) NewDomain() ifaces.Domainer {
-	return domain.New(ks)
+	return domain.New(ks.client)
 }
 
 func (ks *Keystone) NewEndpoint() ifaces.Endpointer {
-	return endpoint.New(ks)
+	return endpoint.New(ks.client)
 }
 
 func (ks *Keystone) NewGroup() ifaces.Grouper {
-	return group.New(ks)
+	return group.New(ks.client)
 }
 
 func (ks *Keystone) NewGroupUser() ifaces.GroupUser {
-	return group.NewGroupUser(ks)
+	return group.NewGroupUser(ks.client)
 }
 
 func (ks *Keystone) NewPolicy() ifaces.Policier {
-	return policy.New(ks)
+	return policy.New(ks.client)
 }
 
 func (ks *Keystone) NewProject() ifaces.Projecter {
-	return project.New(ks)
+	return project.New(ks.client)
 }
 
 func (ks *Keystone) NewRegion() ifaces.Regioner {
-	return region.New(ks)
+	return region.New(ks.client)
 }
 
 func (ks *Keystone) NewRole() ifaces.Roler {
-	return role.New(ks)
+	return role.New(ks.client)
 }
 
 func (ks *Keystone) NewDomainGroupRole() ifaces.AbstractRoler {
-	return role.NewDomainGroupRole(ks)
+	return role.NewDomainGroupRole(ks.client)
 }
 
 func (ks *Keystone) NewDomainUserRole() ifaces.AbstractRoler {
-	return role.NewDomainUserRole(ks)
+	return role.NewDomainUserRole(ks.client)
 }
 
 func (ks *Keystone) NewProjectUserRole() ifaces.AbstractRoler {
-	return role.NewProjectUserRole(ks)
+	return role.NewProjectUserRole(ks.client)
 }
 
 func (ks *Keystone) NewProjectGroupRole() ifaces.AbstractRoler {
-	return role.NewProjectGroupRole(ks)
+	return role.NewProjectGroupRole(ks.client)
 }
 
 func (ks *Keystone) NewService() ifaces.Servicer {
-	return service.New(ks)
+	return service.New(ks.client)
 }
 
 func (ks *Keystone) NewUser() ifaces.User {
-	return user.New(ks)
+	return user.New(ks.client)
 }

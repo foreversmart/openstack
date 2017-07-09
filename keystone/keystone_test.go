@@ -10,9 +10,9 @@ import (
 func Test_Keystone(t *testing.T) {
 	assertion := assert.New(t)
 
-	ks := New("")
+	ks := New(nil)
 	assertion.NotNil(ks)
-	assertion.Implements((*ifaces.Openstacker)(nil), ks)
+	// assertion.Implements((*ifaces.Openstacker)(nil), ks)
 	assertion.Implements((*ifaces.Credentialer)(nil), ks.NewCredential())
 	assertion.Implements((*ifaces.Domainer)(nil), ks.NewDomain())
 	assertion.Implements((*ifaces.Endpointer)(nil), ks.NewEndpoint())

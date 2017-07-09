@@ -4,11 +4,13 @@ import (
 	"testing"
 
 	"github.com/golib/assert"
+	"github.com/kirk-enterprise/openstack/lib/ifaces"
 )
 
 func Test_Openstack(t *testing.T) {
 	assertion := assert.New(t)
 
-	os := New()
+	os := New("")
 	assertion.NotNil(os)
+	assertion.Implements((*ifaces.Openstacker)(nil), os)
 }
