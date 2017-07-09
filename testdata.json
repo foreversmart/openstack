@@ -21,7 +21,7 @@
         "project_id": "803d363c5c4649b591fd74b96a8c30f5"
     },
     "token": {
-        "id": "gAAAAABZYeAVx4-Kw85XsovUIw4PcVe1DXbVe6gWxMcFtcd4ZGYgl0LNDgfGroOMqmBPhrPTZ7ZrG4JhBMq0BxEvd8P4K69rpOitCAN-9RYb-58hVBcxutsgmGg0LqXZxT9fFFhP2qlCou_mDjI04YMlNE4UK9Pt4Xap22NxgtkzWKQOiWoAySY"
+        "id": "gAAAAABZYfz63DE93KQK9hQBVo82HPKfRX7TBntt5IIPt1qgKnLLXOt4SRjETr3gg32VSLcMssar3k_rD5z23aEsNOsprNDDPHu0du8-MZdds6rJDw6oXWFj6VtDcZcVnVOR0SvkoV8o5zYdVfLdkS1gGpCUo6bB5mLCVeX8wt-qDe8XuQxPwaA"
     },
     "v2": {
         "scoped": {
@@ -764,6 +764,90 @@
                 "blob": "{\"user\":{\"id\":123321},\"access_key\":{\"id\":\"ak\",\"secret\":\"sk\"}}"
             }
         },
-        "DELETE /policies/:id": {}
+        "DELETE /policies/:id": {},
+        "GET /roles": {
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/roles",
+                "previous": null,
+                "next": null
+            },
+            "roles": [
+                {
+                    "domain_id": null,
+                    "id": "9fe2ff9ee4384b1894a90878d3e92bab",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/roles/9fe2ff9ee4384b1894a90878d3e92bab"
+                    },
+                    "name": "_member_"
+                },
+                {
+                    "domain_id": null,
+                    "id": "bc3b36e8748f4950ac826688e73c4b11",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/roles/bc3b36e8748f4950ac826688e73c4b11"
+                    },
+                    "name": "ResellerAdmin"
+                },
+                {
+                    "domain_id": null,
+                    "id": "f1e75d0b191e4a909f45fd57668f4e48",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/roles/f1e75d0b191e4a909f45fd57668f4e48"
+                    },
+                    "name": "admin"
+                }
+            ]
+        },
+        "POST /roles": {
+            "role": {
+                "domain_id": null,
+                "id": "110342312f8f4c4b9350f35b86e48d08",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/roles/110342312f8f4c4b9350f35b86e48d08"
+                },
+                "name": "KirkAdmin"
+            }
+        },
+        "GET /roles/:id": {
+            "role": {
+                "domain_id": null,
+                "id": "110342312f8f4c4b9350f35b86e48d08",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/roles/110342312f8f4c4b9350f35b86e48d08"
+                },
+                "name": "KirkAdmin"
+            }
+        },
+        "PATCH /roles/:id": {
+            "role": {
+                "domain_id": null,
+                "id": "110342312f8f4c4b9350f35b86e48d08",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/roles/110342312f8f4c4b9350f35b86e48d08"
+                },
+                "name": "TestingAdmin"
+            }
+        },
+        "DELETE /roles/:id": {},
+        "GET /projects/:id/users/:id/roles": {
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/projects/29041f5248d44c0c938d1677def87bc6/users/d98fba22c3f04b6eb1c0639a30c2ff48/roles",
+                "previous": null,
+                "next": null
+            },
+            "roles": [
+                {
+                    "domain_id": null,
+                    "id": "f1e75d0b191e4a909f45fd57668f4e48",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/roles/f1e75d0b191e4a909f45fd57668f4e48"
+                    },
+                    "name": "admin"
+                }
+            ]
+        },
+        "PUT /projects/:id/users/:id/roles/:id": {},
+        "HEAD /projects/:id/users/:id/roles/:id": {},
+        "DELETE /projects/:id/users/:id/roles/:id": {}
     }
 }

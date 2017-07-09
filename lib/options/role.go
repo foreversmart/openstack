@@ -12,21 +12,11 @@ type ListRoleOpts struct {
 	Name *string `json:"name,omitempty"`
 }
 
-type CreateRoleOpts struct {
-	//The ID of the domain, optional
-	DomainId *string `json:"id,omitempty"`
-
-	//The role name, optional
-	Name *string `json:"name,omitempty"`
-}
-
-type UpdateRoleOpts struct {
-	//The new role name, optional
-	Name *string `json:"name,omitempty"`
-}
-
 func (opts *ListRoleOpts) ToQuery() (param url.Values) {
 	param = url.Values{}
+	if opts == nil {
+		return
+	}
 
 	if opts != nil {
 		if opts.Name != nil {
@@ -41,6 +31,14 @@ func (opts *ListRoleOpts) ToQuery() (param url.Values) {
 	return param
 }
 
+type CreateRoleOpts struct {
+	//The ID of the domain, optional
+	DomainId *string `json:"id,omitempty"`
+
+	//The role name
+	Name string `json:"name"`
+}
+
 func (opts *CreateRoleOpts) ToPayLoad() interface{} {
 	type payload struct {
 		Role *CreateRoleOpts `json:"role"`
@@ -49,6 +47,14 @@ func (opts *CreateRoleOpts) ToPayLoad() interface{} {
 	return payload{
 		Role: opts,
 	}
+}
+
+type UpdateRoleOpts struct {
+	//The new role name, optional
+	Name *string `json:"name,omitempty"`
+
+	//The new role domain, optional
+	DomainID *string `json:"domain_id,omitempty"`
 }
 
 func (opts *UpdateRoleOpts) ToPayLoad() interface{} {

@@ -85,7 +85,7 @@ func (groupUser *GroupUser) HasUser(groupID, userID string) (ok bool) {
 		return
 	}
 
-	response, err := client.Request(http.MethodHead, client.ServiceURL(GroupUrl, groupID, GroupUserUrl, userID), gophercloud.RequestOpts{
+	response, _ := client.Request(http.MethodHead, client.ServiceURL(GroupUrl, groupID, GroupUserUrl, userID), gophercloud.RequestOpts{
 		OkCodes: []int{204, 404},
 	})
 

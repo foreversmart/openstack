@@ -6,9 +6,9 @@ import (
 )
 
 type RoleModel struct {
-	Id       *string `mapstructure:"id" json:"id"`
-	Name     *string `mapstructure:"name" json:"name"`
-	DomainId *string `mapstructure:"domain_id" json:"domain_id"`
+	ID       string `mapstructure:"id" json:"id"`
+	Name     string `mapstructure:"name" json:"name"`
+	DomainID string `mapstructure:"domain_id" json:"domain_id"`
 }
 
 func ExtractRole(result gophercloud.Result) (role *RoleModel, err error) {
