@@ -716,6 +716,54 @@
                 "id": "06aa5d720a3d42aa9329e7c0f3383603"
             }
         },
-        "DELETE /credentials/:id": {}
+        "DELETE /credentials/:id": {},
+        "GET /policies": {
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/policies",
+                "previous": null,
+                "next": null
+            },
+            "policies": [
+                {
+                    "type": "application/json",
+                    "id": "d0203b8928fe434cb563cba11190f1f4",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/policies/d0203b8928fe434cb563cba11190f1f4"
+                    },
+                    "blob": "{}"
+                }
+            ]
+        },
+        "POST /policies": {
+            "policy": {
+                "type": "application/json",
+                "id": "d0203b8928fe434cb563cba11190f1f4",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/policies/d0203b8928fe434cb563cba11190f1f4"
+                },
+                "blob": "{}"
+            }
+        },
+        "GET /policies/:id": {
+            "policy": {
+                "type": "application/json",
+                "id": "d0203b8928fe434cb563cba11190f1f4",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/policies/d0203b8928fe434cb563cba11190f1f4"
+                },
+                "blob": "{}"
+            }
+        },
+        "PATCH /policies/:id": {
+            "policy": {
+                "type": "",
+                "id": "d0203b8928fe434cb563cba11190f1f4",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/policies/d0203b8928fe434cb563cba11190f1f4"
+                },
+                "blob": "{\"user\":{\"id\":123321},\"access_key\":{\"id\":\"ak\",\"secret\":\"sk\"}}"
+            }
+        },
+        "DELETE /policies/:id": {}
     }
 }

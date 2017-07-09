@@ -8,8 +8,11 @@ type ListPolicyOpts struct {
 	Type *string `json:"type"`
 }
 
-func (opts ListPolicyOpts) ToQuery() (options url.Values) {
+func (opts *ListPolicyOpts) ToQuery() (options url.Values) {
 	options = url.Values{}
+	if opts == nil {
+		return
+	}
 
 	if opts.Type != nil {
 		options.Add("type", *opts.Type)

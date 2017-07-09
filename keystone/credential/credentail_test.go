@@ -63,11 +63,11 @@ func Test_Show_Credential(t *testing.T) {
 
 	credential, err := New(openstacker).Show(credentialID)
 	assertion.Nil(err)
-	assertion.Equal(apiv3.APIString("POST /credentials.credential.id"), credential.ID)
-	assertion.Equal(apiv3.APIString("POST /credentials.credential.project_id"), credential.ProjectID)
-	assertion.Equal(apiv3.APIString("POST /credentials.credential.user_id"), credential.UserID)
-	assertion.Equal(apiv3.APIString("POST /credentials.credential.type"), credential.Type)
-	assertion.Equal(apiv3.APIString("POST /credentials.credential.blob"), credential.Blob)
+	assertion.Equal(apiv3.APIString("GET /credentials/:id.credential.id"), credential.ID)
+	assertion.Equal(apiv3.APIString("GET /credentials/:id.credential.project_id"), credential.ProjectID)
+	assertion.Equal(apiv3.APIString("GET /credentials/:id.credential.user_id"), credential.UserID)
+	assertion.Equal(apiv3.APIString("GET /credentials/:id.credential.type"), credential.Type)
+	assertion.Equal(apiv3.APIString("GET /credentials/:id.credential.blob"), credential.Blob)
 }
 
 func Test_Update_Credential(t *testing.T) {
