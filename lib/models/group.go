@@ -45,3 +45,20 @@ func ExtractGroups(result gophercloud.Result) (groups []*GroupModel, err error) 
 
 	return
 }
+
+func ExtractUserGroups(result gophercloud.Result) (groups []*GroupModel, err error) {
+	if result.Err != nil {
+		return nil, result.Err
+	}
+
+	var response struct {
+		Groups []*GroupModel `mapstructure:"groups"`
+	}
+
+	err = mapstructure.Decode(result.Body, &response)
+	if err == nil {
+		groups = response.Groups
+	}
+
+	return
+}

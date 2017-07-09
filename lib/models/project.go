@@ -43,6 +43,23 @@ func ExtractProject(result gophercloud.Result) (project *ProjectModel, err error
 	return
 }
 
+func ExtractUserProjects(result gophercloud.Result) (projects []*ProjectModel, err error) {
+	if result.Err != nil {
+		return nil, result.Err
+	}
+
+	var response struct {
+		Projects []*ProjectModel `mapstructure:"projects"`
+	}
+
+	err = mapstructure.Decode(result.Body, &response)
+	if err == nil {
+		projects = response.Projects
+	}
+
+	return
+}
+
 func ExtractProjects(result gophercloud.Result) (projects []*ProjectModel, err error) {
 	if result.Err != nil {
 		return nil, result.Err

@@ -553,6 +553,113 @@
         },
         "PUT /groups/:id/users/:id": {},
         "HEAD /groups/:id/users/:id": {},
-        "DELETE /groups/:id/users/:id": {}
+        "DELETE /groups/:id/users/:id": {},
+        "GET /users": {
+            "users": [
+                {
+                    "name": "testing",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/users/4536e6cd5efc4aabbf0b3734eb7ad3b2"
+                    },
+                    "domain_id": "default",
+                    "enabled": true,
+                    "options": {},
+                    "default_project_id": "98b814b6698c47b38508853f91d82021",
+                    "id": "4536e6cd5efc4aabbf0b3734eb7ad3b2",
+                    "email": "testing@ecloud.com",
+                    "password_expires_at": null
+                }
+            ],
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/users",
+                "previous": null,
+                "next": null
+            }
+        },
+        "POST /users": {
+            "user": {
+                "password_expires_at": null,
+                "name": "testing kirk",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/users/d98fba22c3f04b6eb1c0639a30c2ff48"
+                },
+                "domain_id": "default",
+                "enabled": true,
+                "id": "d98fba22c3f04b6eb1c0639a30c2ff48",
+                "options": {}
+            }
+        },
+        "GET /users/:id": {
+            "user": {
+                "password_expires_at": null,
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/users/d98fba22c3f04b6eb1c0639a30c2ff48"
+                },
+                "enabled": true,
+                "id": "d98fba22c3f04b6eb1c0639a30c2ff48",
+                "options": {},
+                "domain_id": "default",
+                "name": "testing kirk"
+            }
+        },
+        "PATCH /users/:id": {
+            "user": {
+                "name": "testing kirk",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/users/d98fba22c3f04b6eb1c0639a30c2ff48"
+                },
+                "extra": {
+                    "email": "kirk@api.testing"
+                },
+                "domain_id": "default",
+                "enabled": true,
+                "options": {},
+                "default_project_id": "29041f5248d44c0c938d1677def87bc6",
+                "id": "d98fba22c3f04b6eb1c0639a30c2ff48",
+                "email": "kirk@api.testing",
+                "password_expires_at": null
+            }
+        },
+        "POST /users/:password": {},
+        "DELETE /users/:id": {},
+        "GET /users/:id/groups": {
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/users/d98fba22c3f04b6eb1c0639a30c2ff48/groups",
+                "previous": null,
+                "next": null
+            },
+            "groups": [
+                {
+                    "domain_id": "default",
+                    "description": "testing group description",
+                    "id": "acf3a97b0f884d40878a0ceb43d88390",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/groups/acf3a97b0f884d40878a0ceb43d88390"
+                    },
+                    "name": "testing group"
+                }
+            ]
+        },
+        "GET /users/:id/projects": {
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/users/d98fba22c3f04b6eb1c0639a30c2ff48/projects",
+                "previous": null,
+                "next": null
+            },
+            "projects": [
+                {
+                    "is_domain": false,
+                    "description": "",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/projects/29041f5248d44c0c938d1677def87bc6"
+                    },
+                    "enabled": true,
+                    "id": "29041f5248d44c0c938d1677def87bc6",
+                    "parent_id": "default",
+                    "domain_id": "default",
+                    "name": "testing project"
+                }
+            ]
+        }
     }
 }
