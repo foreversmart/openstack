@@ -6,9 +6,9 @@ import (
 )
 
 type RegionModel struct {
-	Id             *string `json:"id"`
-	Description    *string `json:"description"`
-	ParentRegionId *string `json:"parent_region_id"`
+	ID             string `json:"id"`
+	Description    string `json:"description"`
+	ParentRegionID string `json:"parent_region_id"`
 }
 
 func ExtractRegion(result gophercloud.Result) (region *RegionModel, err error) {

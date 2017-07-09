@@ -21,7 +21,7 @@
         "project_id": "803d363c5c4649b591fd74b96a8c30f5"
     },
     "token": {
-        "id": "gAAAAABZYMiBnln4J1zMIUtvM9vXgk0lu8zsyggdNh6vJ52prJeUPUG07CIleDUm6VbeAaV5Slemd9f5b2FIqsWQSXfyXhG_4VHYU4BzhaS7RCVCgIEBgcK0tcC4ipCzi7CnNnK_Or8RtTKL4jrGSacNfN_l8-Ey0YUvDcMvZh65YSLRtloTq3U"
+        "id": "gAAAAABZYbEzJISJLKAqTfd33HzcGYr6dAd3pVfrqSXgiB9ZHezHnmeSrOHTxNgnecK-8BvMaflImiwOalJqBXfaSLodnu1Fp9HYHYsuj-0uvPhU37rqbXp8-G8Pwwvz70ukAxgo1Tq6MwnR0QTnJmbIljpXv8d0M4Hu7KxktfkheVeccLmgkrU"
     },
     "v2": {
         "scoped": {
@@ -428,6 +428,54 @@
                 "id": "5cd78999ff164068933e0046d13f8ae7"
             }
         },
-        "DELETE /endpoints/:id": {}
+        "DELETE /endpoints/:id": {},
+        "GET /regions": {
+            "regions": [
+                {
+                    "parent_region_id": null,
+                    "id": "RegionOne",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/regions/RegionOne"
+                    },
+                    "description": ""
+                }
+            ],
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/regions",
+                "previous": null,
+                "next": null
+            }
+        },
+        "POST /regions": {
+            "region": {
+                "parent_region_id": null,
+                "id": "TestingRegion",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/regions/TestingRegion"
+                },
+                "description": ""
+            }
+        },
+        "GET /regions/:id": {
+            "region": {
+                "parent_region_id": null,
+                "id": "TestingRegion",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/regions/TestingRegion"
+                },
+                "description": ""
+            }
+        },
+        "PATCH /regions/:id": {
+            "region": {
+                "parent_region_id": null,
+                "id": "TestingRegion",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/regions/TestingRegion"
+                },
+                "description": "Testing region for kirk"
+            }
+        },
+        "DELETE /regions/:id": {}
     }
 }

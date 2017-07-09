@@ -16,6 +16,16 @@ type CreateRegionOpts struct {
 	ParentRegionId *string `json:"parent_region_id,omitempty"`
 }
 
+func (opts *CreateRegionOpts) ToPayLoad() interface{} {
+	type payload struct {
+		Region *CreateRegionOpts `json:"region"`
+	}
+
+	return payload{
+		Region: opts,
+	}
+}
+
 type UpdateRegionOpts struct {
 	//The region description, optional
 	Description *string `json:"description,omitempty"`
@@ -23,6 +33,16 @@ type UpdateRegionOpts struct {
 	//To make this region a child of another region,
 	//set this parameter to the ID of the parent region, optional
 	ParentRegionId *string `json:"parent_region_id,omitempty"`
+}
+
+func (opts *UpdateRegionOpts) ToPayLoad() interface{} {
+	type payload struct {
+		Region *UpdateRegionOpts `json:"region"`
+	}
+
+	return payload{
+		Region: opts,
+	}
 }
 
 type ListRegionOpts struct {
@@ -39,24 +59,4 @@ func (opts *ListRegionOpts) ToQuery() (param url.Values) {
 	}
 
 	return param
-}
-
-func (opts *CreateRegionOpts) ToPayLoad() interface{} {
-	type payload struct {
-		Region *CreateRegionOpts `json:"region"`
-	}
-
-	return payload{
-		Region: opts,
-	}
-}
-
-func (opts *UpdateRegionOpts) ToPayLoad() interface{} {
-	type payload struct {
-		Region *UpdateRegionOpts `json:"region"`
-	}
-
-	return payload{
-		Region: opts,
-	}
 }
