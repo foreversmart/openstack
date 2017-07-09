@@ -15,8 +15,8 @@ var (
 
 func TestMain(m *testing.M) {
 	// setup dependences
-	apiv2 = testdata.NewWithFilename("../", auth.V2)
-	apiv3 = testdata.NewWithFilename("../", auth.V3)
+	apiv2 = testdata.NewWithFilename("./", auth.V2)
+	apiv3 = testdata.NewWithFilename("./", auth.V3)
 
 	// run testings
 	code := m.Run()
