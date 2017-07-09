@@ -21,7 +21,7 @@
         "project_id": "803d363c5c4649b591fd74b96a8c30f5"
     },
     "token": {
-        "id": "gAAAAABZYc5WzAh-S3rU6JdqOfpGRDSAZE3rOS2LCJsEvD6WO2gUi5B87qj2ZCfDMthtL2SlAsefblhdxKeqcBPgt-jy2EWaDKpj4K9hCn6bN1WwNkAMEUUqHpibhiLHJtPpdcRPY-1teF3BEOZPvktuECRz3m7tOuF_Rk6Zp2qi41_2PMWUVFQ"
+        "id": "gAAAAABZYeAVx4-Kw85XsovUIw4PcVe1DXbVe6gWxMcFtcd4ZGYgl0LNDgfGroOMqmBPhrPTZ7ZrG4JhBMq0BxEvd8P4K69rpOitCAN-9RYb-58hVBcxutsgmGg0LqXZxT9fFFhP2qlCou_mDjI04YMlNE4UK9Pt4Xap22NxgtkzWKQOiWoAySY"
     },
     "v2": {
         "scoped": {
@@ -660,6 +660,62 @@
                     "name": "testing project"
                 }
             ]
-        }
+        },
+        "GET /credentials": {
+            "credentials": [
+                {
+                    "user_id": "d98fba22c3f04b6eb1c0639a30c2ff48",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/credentials/06aa5d720a3d42aa9329e7c0f3383603"
+                    },
+                    "blob": "",
+                    "project_id": "29041f5248d44c0c938d1677def87bc6",
+                    "type": "kirk",
+                    "id": "06aa5d720a3d42aa9329e7c0f3383603"
+                }
+            ],
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/credentials",
+                "previous": null,
+                "next": null
+            }
+        },
+        "POST /credentials": {
+            "credential": {
+                "user_id": "d98fba22c3f04b6eb1c0639a30c2ff48",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/credentials/06aa5d720a3d42aa9329e7c0f3383603"
+                },
+                "blob": "",
+                "project_id": "29041f5248d44c0c938d1677def87bc6",
+                "type": "kirk",
+                "id": "06aa5d720a3d42aa9329e7c0f3383603"
+            }
+        },
+        "GET /credentials/:id": {
+            "credential": {
+                "user_id": "d98fba22c3f04b6eb1c0639a30c2ff48",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/credentials/06aa5d720a3d42aa9329e7c0f3383603"
+                },
+                "blob": "",
+                "project_id": "29041f5248d44c0c938d1677def87bc6",
+                "type": "kirk",
+                "id": "06aa5d720a3d42aa9329e7c0f3383603"
+            }
+        },
+        "PATCH /credentials/:id": {
+            "credential": {
+                "user_id": "d98fba22c3f04b6eb1c0639a30c2ff48",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/credentials/06aa5d720a3d42aa9329e7c0f3383603"
+                },
+                "blob": "{\"user\":{\"id\":123321},\"access_key\":{\"id\":\"ak\",\"secret\":\"sk\"}}",
+                "project_id": "29041f5248d44c0c938d1677def87bc6",
+                "type": "kirk",
+                "id": "06aa5d720a3d42aa9329e7c0f3383603"
+            }
+        },
+        "DELETE /credentials/:id": {}
     }
 }

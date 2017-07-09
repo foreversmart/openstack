@@ -7,9 +7,9 @@ import (
 
 type CredentialModel struct {
 	ID        string `mapstructure:"id" json:"id"`
-	Type      string `mapstructure:"type" json:"type"`
-	UserID    string `mapstructure:"user_id" json:"user_id"`
 	ProjectID string `mapstructure:"project_id" json:"project_id"`
+	UserID    string `mapstructure:"user_id" json:"user_id"`
+	Type      string `mapstructure:"type" json:"type"`
 	Blob      string `mapstructure:"blob" json:"blob"`
 }
 

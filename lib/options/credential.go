@@ -24,9 +24,9 @@ func (opts *ListCredentialOpts) ToQuery() (options url.Values) {
 }
 
 type CreateCredentialOpts struct {
-	ProjectId string `json:"project_id"`
-	Type      string `json:"type"`
+	ProjectID string `json:"project_id"`
 	UserID    string `json:"user_id"`
+	Type      string `json:"type"`
 	Blob      string `json:"blob"`
 }
 
@@ -41,9 +41,9 @@ func (opts *CreateCredentialOpts) ToPayload() interface{} {
 }
 
 type UpdateCredentialOpts struct {
-	ProjectId string  `json:"project_id"`
-	Type      *string `json:"type,omitempty"`
+	ProjectID *string `json:"project_id,omitempty"`
 	UserID    *string `json:"user_id,omitempty"`
+	Type      *string `json:"type,omitempty"`
 	Blob      *string `json:"blob,omitempty"`
 }
 
