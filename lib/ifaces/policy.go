@@ -6,7 +6,8 @@ import (
 )
 
 type Policier interface {
-	All(opts options.ListPolicyOpts) (policies []*models.PolicyModel, err error)
+	All() (policies []*models.PolicyModel, err error)
+	AllByParams(opts *options.ListPolicyOpts) (policies []*models.PolicyModel, err error)
 	Create(opts options.CreatePolicyOpts) (policy *models.PolicyModel, err error)
 	Show(id string) (policy *models.PolicyModel, err error)
 	Update(id string, opts options.UpdatePolicyOpts) (policyInfo *models.PolicyModel, err error)

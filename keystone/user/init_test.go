@@ -23,7 +23,7 @@ var (
 
 func TestMain(m *testing.M) {
 	// setup dependences
-	apiv3 = testdata.NewWithFilename("../../", auth.V3)
+	apiv3 = testdata.NewWithFilename("../", auth.V3)
 
 	mocker = httpmitm.NewMitmTransport().StubDefaultTransport(nil)
 	defer mocker.UnstubDefaultTransport()

@@ -6,7 +6,8 @@ import (
 )
 
 type Roler interface {
-	All(opts *options.ListRoleOpts) (roles []*models.RoleModel, err error)
+	All() (roles []*models.RoleModel, err error)
+	AllByParams(opts *options.ListRoleOpts) (roles []*models.RoleModel, err error)
 	Create(opts *options.CreateRoleOpts) (role *models.RoleModel, err error)
 	Show(id string) (role *models.RoleModel, err error)
 	Update(id string, opts *options.UpdateRoleOpts) (role *models.RoleModel, err error)

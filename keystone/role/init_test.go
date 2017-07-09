@@ -27,7 +27,7 @@ var (
 
 func TestMain(m *testing.M) {
 	// setup dependences
-	apiv3 = testdata.NewWithFilename("../../", auth.V3)
+	apiv3 = testdata.NewWithFilename("../", auth.V3)
 
 	abstractResourceID = apiv3.APIString("POST /projects.project.id")
 	abstractTargetID = apiv3.APIString("POST /users.user.id")
