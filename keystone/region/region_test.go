@@ -21,7 +21,7 @@ func Test_All_Region(t *testing.T) {
 	assertion.EqualValues(1, len(regions))
 	assertion.Equal(apiv3.APIString("GET /regions.regions.0.id"), regions[0].ID)
 	assertion.Equal(apiv3.APIString("GET /regions.regions.0.description"), regions[0].Description)
-	assertion.Equal(apiv3.APIString("GET /regions.regions.0.parent_region_id"), regions[0].ParentRegionID)
+	assertion.Empty(regions[0].ParentRegionID)
 }
 
 func Test_Create_Region(t *testing.T) {
@@ -59,7 +59,7 @@ func Test_Show_Region(t *testing.T) {
 	assertion.Nil(err)
 	assertion.Equal(apiv3.APIString("GET /regions/:id.region.id"), region.ID)
 	assertion.Equal(apiv3.APIString("GET /regions/:id.region.description"), region.Description)
-	assertion.Equal(apiv3.APIString("GET /regions/:id.region.parent_region_id"), region.ParentRegionID)
+	assertion.Empty(region.ParentRegionID)
 }
 
 func Test_Update_Region(t *testing.T) {
@@ -81,7 +81,7 @@ func Test_Update_Region(t *testing.T) {
 	assertion.Nil(err)
 	assertion.Equal(apiv3.APIString("PATCH /regions/:id.region.id"), region.ID)
 	assertion.Equal(*opts.Description, region.Description)
-	assertion.Equal(apiv3.APIString("PATCH /regions/:id.region.parent_region_id"), region.ParentRegionID)
+	assertion.Empty(region.ParentRegionID)
 }
 
 func Test_Delete_Region(t *testing.T) {

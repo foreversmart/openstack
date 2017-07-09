@@ -26,7 +26,7 @@ func Test_All_GUser(t *testing.T) {
 	assertion.Equal(apiv3.APIString("GET /groups/:id/users.users.0.email"), users[0].Email)
 	assertion.Equal(apiv3.APIString("GET /groups/:id/users.users.0.domain_id"), users[0].DomainID)
 	assertion.Equal(apiv3.APIString("GET /groups/:id/users.users.0.default_project_id"), users[0].DefaultProjectID)
-	assertion.Equal(apiv3.APIString("GET /groups/:id/users.users.0.password_expires_at"), users[0].PasswordExpiresAt)
+	assertion.Empty(users[0].PasswordExpiresAt)
 }
 
 func Test_Create_GUser(t *testing.T) {

@@ -72,7 +72,7 @@ func Test_Show_User(t *testing.T) {
 	// assertion.Equal(apiv3.APIString("GET /users/:id.user.email"), user.Email)
 	assertion.Equal(apiv3.APIString("GET /users/:id.user.domain_id"), user.DomainID)
 	// assertion.Equal(apiv3.APIString("GET /users/:id.user.default_project_id"), user.DefaultProjectID)
-	assertion.Equal(apiv3.APIString("GET /users/:id.user.password_expires_at"), user.PasswordExpiresAt)
+	assertion.Empty(user.PasswordExpiresAt)
 }
 
 func Test_Update_User(t *testing.T) {
@@ -100,7 +100,7 @@ func Test_Update_User(t *testing.T) {
 	assertion.Equal(apiv3.APIString("PATCH /users/:id.user.extra.email"), user.Extra["email"])
 	assertion.Equal(apiv3.APIString("PATCH /users/:id.user.domain_id"), user.DomainID)
 	assertion.Equal(apiv3.APIString("PATCH /users/:id.user.default_project_id"), user.DefaultProjectID)
-	assertion.Equal(apiv3.APIString("PATCH /users/:id.user.password_expires_at"), user.PasswordExpiresAt)
+	assertion.Empty(user.PasswordExpiresAt)
 }
 
 func Test_ChangePassword_User(t *testing.T) {
