@@ -6,7 +6,7 @@ import (
 )
 
 type ServiceModel struct {
-	Id      string `json:"id" mapstructure:"id"`
+	ID      string `json:"id" mapstructure:"id"`
 	Type    string `json:"type" mapstructure:"type"`
 	Name    string `json:"name" mapstructure:"name"`
 	Desc    string `json:"description" mapstructure:"description"`
@@ -30,7 +30,7 @@ func ExtractService(result gophercloud.Result) (service *ServiceModel, err error
 	return
 }
 
-func ExtractServicesByResult(result gophercloud.Result) (services []*ServiceModel, err error) {
+func ExtractServices(result gophercloud.Result) (services []*ServiceModel, err error) {
 	if result.Err != nil {
 		err = result.Err
 		return

@@ -1,18 +1,19 @@
 package models
 
 import (
+	"github.com/kirk-enterprise/openstack/lib/enums"
 	"github.com/mitchellh/mapstructure"
 	"github.com/rackspace/gophercloud"
 )
 
 type EndpointModel struct {
-	ID        string `json:"id" mapstructure:"id"`
-	Url       string `json:"url" mapstructure:"url"`
-	Interface string `json:"interface" mapstructure:"interface"`
-	Enabled   bool   `json:"enabled" mapstructure:"enabled"`
-	RegionID  string `json:"region_id" mapstructure:"region_id"`
-	Region    string `json:"region" mapstructure:"region"`
-	ServiceID string `json:"service_id" mapstructure:"service_id"`
+	ID        string                  `json:"id" mapstructure:"id"`
+	Url       string                  `json:"url" mapstructure:"url"`
+	Interface enums.EndpointInterface `json:"interface" mapstructure:"interface"`
+	Enabled   bool                    `json:"enabled" mapstructure:"enabled"`
+	RegionID  string                  `json:"region_id" mapstructure:"region_id"`
+	Region    string                  `json:"region" mapstructure:"region"`
+	ServiceID string                  `json:"service_id" mapstructure:"service_id"`
 }
 
 func ExtractEndpoint(result gophercloud.Result) (endpoint *EndpointModel, err error) {
