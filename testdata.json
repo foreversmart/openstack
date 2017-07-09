@@ -21,7 +21,7 @@
         "project_id": "803d363c5c4649b591fd74b96a8c30f5"
     },
     "token": {
-        "id": "gAAAAABZYbEzJISJLKAqTfd33HzcGYr6dAd3pVfrqSXgiB9ZHezHnmeSrOHTxNgnecK-8BvMaflImiwOalJqBXfaSLodnu1Fp9HYHYsuj-0uvPhU37rqbXp8-G8Pwwvz70ukAxgo1Tq6MwnR0QTnJmbIljpXv8d0M4Hu7KxktfkheVeccLmgkrU"
+        "id": "gAAAAABZYc5WzAh-S3rU6JdqOfpGRDSAZE3rOS2LCJsEvD6WO2gUi5B87qj2ZCfDMthtL2SlAsefblhdxKeqcBPgt-jy2EWaDKpj4K9hCn6bN1WwNkAMEUUqHpibhiLHJtPpdcRPY-1teF3BEOZPvktuECRz3m7tOuF_Rk6Zp2qi41_2PMWUVFQ"
     },
     "v2": {
         "scoped": {
@@ -476,6 +476,83 @@
                 "description": "Testing region for kirk"
             }
         },
-        "DELETE /regions/:id": {}
+        "DELETE /regions/:id": {},
+        "GET /groups": {
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/groups",
+                "previous": null,
+                "next": null
+            },
+            "groups": [
+                {
+                    "domain_id": "default",
+                    "description": "Admin privileges group.",
+                    "id": "c87522b7c09247429d80e6b89fcbec4b",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/groups/c87522b7c09247429d80e6b89fcbec4b"
+                    },
+                    "name": "admin"
+                }
+            ]
+        },
+        "POST /groups": {
+            "group": {
+                "domain_id": "default",
+                "description": "",
+                "id": "acf3a97b0f884d40878a0ceb43d88390",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/groups/acf3a97b0f884d40878a0ceb43d88390"
+                },
+                "name": "testing group"
+            }
+        },
+        "GET /groups/:id": {
+            "group": {
+                "id": "acf3a97b0f884d40878a0ceb43d88390",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/groups/acf3a97b0f884d40878a0ceb43d88390"
+                },
+                "domain_id": "default",
+                "name": "testing group",
+                "description": ""
+            }
+        },
+        "PATCH /groups/:id": {
+            "group": {
+                "domain_id": "default",
+                "description": "testing group description",
+                "id": "acf3a97b0f884d40878a0ceb43d88390",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/groups/acf3a97b0f884d40878a0ceb43d88390"
+                },
+                "name": "testing group"
+            }
+        },
+        "DELETE /groups/:id": {},
+        "GET /groups/:id/users": {
+            "users": [
+                {
+                    "name": "testing kirk",
+                    "links": {
+                        "self": "http://api.ecloud.com:35357/v3/users/d98fba22c3f04b6eb1c0639a30c2ff48"
+                    },
+                    "domain_id": "default",
+                    "enabled": true,
+                    "options": {},
+                    "default_project_id": "29041f5248d44c0c938d1677def87bc6",
+                    "id": "d98fba22c3f04b6eb1c0639a30c2ff48",
+                    "email": "kirk@api.testing",
+                    "password_expires_at": null
+                }
+            ],
+            "links": {
+                "self": "http://api.ecloud.com:35357/v3/groups/acf3a97b0f884d40878a0ceb43d88390/users",
+                "previous": null,
+                "next": null
+            }
+        },
+        "PUT /groups/:id/users/:id": {},
+        "HEAD /groups/:id/users/:id": {},
+        "DELETE /groups/:id/users/:id": {}
     }
 }

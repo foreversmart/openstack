@@ -23,20 +23,18 @@ For example:
 The example would return a list of users whose password expired before the timestamp (2016-12-08T22:02:00Z).
 */
 type ListGroupUserOpts struct {
-	GroupID           string  `json:"group_id"`
 	PasswordExpiresAt *string `json:"password_expires_at"`
 }
 
-func (opts ListGroupUserOpts) IsValid() bool {
-	if opts.GroupID == "" {
-		return false
-	}
-
+func (opts *ListGroupUserOpts) IsValid() bool {
 	return true
 }
 
-func (opts ListGroupUserOpts) ToQuery() (options url.Values) {
+func (opts *ListGroupUserOpts) ToQuery() (options url.Values) {
 	options = url.Values{}
+	if opts == nil {
+		return
+	}
 
 	if opts.PasswordExpiresAt != nil {
 		options.Add("password_expires_at", *opts.PasswordExpiresAt)
@@ -45,13 +43,12 @@ func (opts ListGroupUserOpts) ToQuery() (options url.Values) {
 	return
 }
 
-type BaseGroupUserOpts struct {
-	UserID  string `json:"user_id"`
-	GroupID string `json:"group_id"`
+type CreateGroupUserOpts struct {
+	UserID string `json:"user_id"`
 }
 
-func (opts *BaseGroupUserOpts) IsValid() bool {
-	if opts.UserID == "" || opts.GroupID == "" {
+func (opts *CreateGroupUserOpts) IsValid() bool {
+	if opts.UserID == "" {
 		return false
 	}
 

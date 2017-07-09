@@ -76,7 +76,7 @@ func Test_Show_Project(t *testing.T) {
 func Test_Update_Project(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-	projectID := apiv3.APIString("GET /projects/:id.project.id")
+	projectID := apiv3.APIString("POST /projects.project.id")
 
 	mitm.MockRequest("PATCH", apiv3.MockAdminURL("/v3/projects/"+projectID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("PATCH /projects/:id"))
 	// mitm.Pause()
@@ -100,7 +100,7 @@ func Test_Update_Project(t *testing.T) {
 func Test_Delete_Project(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-	projectID := apiv3.APIString("GET /projects/:id.project.id")
+	projectID := apiv3.APIString("POST /projects/:id.project.id")
 
 	mitm.MockRequest("DELETE", apiv3.MockAdminURL("/v3/projects/"+projectID)).WithResponse(http.StatusNoContent, jsonheader, apiv3.APIString("DELETE /projects/:id"))
 	//mitm.Pause()

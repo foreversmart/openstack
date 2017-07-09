@@ -14,8 +14,8 @@ type Grouper interface {
 }
 
 type GroupUser interface {
-	All(opts options.ListGroupUserOpts) (users []*models.UserModel, err error)
-	Create(opts options.BaseGroupUserOpts) (err error) // add user to a group
-	HasUser(opts options.BaseGroupUserOpts) (exist bool, err error)
-	Delete(opts options.BaseGroupUserOpts) (err error)
+	All(groupID string, opts options.ListGroupUserOpts) (users []*models.UserModel, err error)
+	Create(groupID string, opts options.CreateGroupUserOpts) (err error) // add user to a group
+	HasUser(groupID, userID string) (ok bool)
+	Delete(groupID, userID string) (err error)
 }

@@ -9,8 +9,11 @@ type ListGroupOpts struct {
 	Name     *string `json:"name"`
 }
 
-func (opts ListGroupOpts) ToQuery() (options url.Values) {
+func (opts *ListGroupOpts) ToQuery() (options url.Values) {
 	options = url.Values{}
+	if opts == nil {
+		return
+	}
 
 	if opts.Name != nil {
 		options.Add("name", *opts.Name)
