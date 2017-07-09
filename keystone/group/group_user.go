@@ -1,7 +1,6 @@
 package group
 
 import (
-	"io"
 	"net/http"
 
 	"github.com/kirk-enterprise/openstack/lib/errors"
@@ -64,13 +63,8 @@ func (groupUser *GroupUser) Create(groupID string, opts options.CreateGroupUserO
 
 	var result gophercloud.Result
 	_, result.Err = client.Put(client.ServiceURL(GroupUrl, groupID, GroupUserUrl, opts.UserID), nil, &result.Body, &gophercloud.RequestOpts{
-		OkCodes: []int{204, 200},
+		OkCodes: []int{200},
 	})
-
-	// NOTE: gophercloud response issue with 204
-	if result.Err == io.EOF {
-		result.Err = nil
-	}
 
 	return result.Err
 }
@@ -113,11 +107,6 @@ func (groupUser *GroupUser) Delete(groupID, userID string) (err error) {
 	_, err = client.Delete(client.ServiceURL(GroupUrl, groupID, GroupUserUrl, userID), &gophercloud.RequestOpts{
 		OkCodes: []int{204},
 	})
-
-	// NOTE: gophercloud response issue with 204
-	if err == io.EOF {
-		err = nil
-	}
 
 	return err
 }

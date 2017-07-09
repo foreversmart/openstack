@@ -35,7 +35,7 @@ func Test_Create_GUser(t *testing.T) {
 	groupID := apiv3.APIString("POST /groups.group.id")
 	userID := apiv3.APIString("POST /users.user.id")
 
-	mitm.MockRequest("PUT", apiv3.MockAdminURL("/v3/groups/"+groupID+"/users/"+userID)).WithResponse(http.StatusNoContent, jsonheader, apiv3.APIString("PUT /groups/:id/users/:id"))
+	mitm.MockRequest("PUT", apiv3.MockAdminURL("/v3/groups/"+groupID+"/users/"+userID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("PUT /groups/:id/users/:id"))
 	// mitm.Pause()
 
 	assertion := assert.New(t)

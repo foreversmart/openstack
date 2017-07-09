@@ -1,8 +1,6 @@
 package user
 
 import (
-	"io"
-
 	"github.com/kirk-enterprise/openstack/lib/errors"
 	"github.com/kirk-enterprise/openstack/lib/ifaces"
 	"github.com/kirk-enterprise/openstack/lib/models"
@@ -111,16 +109,9 @@ func (user *User) ChangePasswd(userID string, opts options.ChangeUserPasswordOpt
 		return
 	}
 
-	var result gophercloud.Result
-
-	_, err = client.Post(client.ServiceURL(UsersUrl, userID, PasswordUrl), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
+	_, err = client.Post(client.ServiceURL(UsersUrl, userID, PasswordUrl), opts.ToPayload(), nil, &gophercloud.RequestOpts{
 		OkCodes: []int{204},
 	})
-
-	// NOTE: gophercloud request issue for 204 response.
-	if err == io.EOF {
-		err = nil
-	}
 
 	return
 }
