@@ -210,6 +210,72 @@
                 "next": null
             }
         },
+        "GET /auth/tokens": {
+           "token": {
+                "is_domain": false,
+                "methods": [
+                    "password"
+                ],
+                "roles": [
+                    {
+                        "id": "f1e75d0b191e4a909f45fd57668f4e48",
+                        "name": "admin"
+                    }
+                ],
+                "expires_at": "2017-07-08T10:55:14.000000Z",
+                "project": {
+                    "domain": {
+                        "id": "default",
+                        "name": "Default"
+                    },
+                    "id": "fcfeddf071284e4a8c54760d4bf67c29",
+                    "name": "admin"
+                },
+                "catalog": [
+                    {
+                        "endpoints": [
+                            {
+                                "region_id": "RegionOne",
+                                "url": "mitm://api.ecloud.com:35357/v3",
+                                "region": "RegionOne",
+                                "interface": "admin",
+                                "id": "416a8465b7e54312a4b07a2c51595ee2"
+                            },
+                            {
+                                "region_id": "RegionOne",
+                                "url": "mitm://api.ecloud.com:5000/v3",
+                                "region": "RegionOne",
+                                "interface": "public",
+                                "id": "ad9d692c9cfc4bfc9e9f0b6c3b91e80f"
+                            },
+                            {
+                                "region_id": "RegionOne",
+                                "url": "mitm://api.ecloud.com:5000/v3",
+                                "region": "RegionOne",
+                                "interface": "internal",
+                                "id": "f08fb7f958014fa3a230263eb39fec62"
+                            }
+                        ],
+                        "type": "identity",
+                        "id": "2d8f8e19de1142769420837f9d9e3b49",
+                        "name": "keystone"
+                    }
+                ],
+                "user": {
+                    "password_expires_at": null,
+                    "domain": {
+                        "id": "default",
+                        "name": "Default"
+                    },
+                    "id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+                    "name": "admin"
+                },
+                "audit_ids": [
+                    "AVAtPP-nR7iYERNmXTD2-A"
+                ],
+                "issued_at": "2017-07-08T09:55:14.000000Z"
+            }
+        },
         "GET /domains/:id": {
             "domain": {
                 "id": "default",

@@ -11,7 +11,7 @@ const (
 	V3 = "v3"
 )
 
-type AuthSuccessFunc func(tokenID, catalog string, expiredAt time.Time) error
+type AuthSuccessFunc func(tokenID string, expiredAt time.Time, result gophercloud.Result) error
 
 type AuthOptions struct {
 	*gophercloud.AuthOptions

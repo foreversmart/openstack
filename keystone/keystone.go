@@ -1,6 +1,7 @@
 package keystone
 
 import (
+	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/auth"
 	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/credential"
 	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/domain"
 	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/endpoint"
@@ -84,4 +85,8 @@ func (ks *Keystone) NewService() ifaces.Servicer {
 
 func (ks *Keystone) NewUser() ifaces.User {
 	return user.New(ks.client)
+}
+
+func (ks *Keystone) NewAuther() ifaces.Auther {
+	return auth.New(ks.client)
 }
