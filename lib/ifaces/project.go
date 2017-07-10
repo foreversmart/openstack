@@ -1,8 +1,8 @@
 package ifaces
 
 import (
-	"github.com/kirk-enterprise/openstack/lib/models"
-	"github.com/kirk-enterprise/openstack/lib/options"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/models"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
 )
 
 type Projecter interface {

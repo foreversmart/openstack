@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/dolab/gogo"
-	"github.com/kirk-enterprise/openstack/lib/auth"
-	"github.com/kirk-enterprise/openstack/lib/errors"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/auth"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/errors"
 	"github.com/rackspace/gophercloud"
 	"github.com/rackspace/gophercloud/openstack"
 )

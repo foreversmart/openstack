@@ -1,6 +1,6 @@
 package role
 
-import "github.com/kirk-enterprise/openstack/lib/ifaces"
+import "github.com/kirk-enterprise/openstack-golang-sdk/lib/ifaces"
 
 type DomainUserRole struct {
 	*AbstractRole

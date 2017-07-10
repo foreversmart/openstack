@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/kirk-enterprise/openstack/lib/auth"
-	"github.com/kirk-enterprise/openstack/lib/testdata"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/auth"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/testdata"
 )
 
 var (

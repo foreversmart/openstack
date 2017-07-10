@@ -1,17 +1,17 @@
 package keystone
 
 import (
-	"github.com/kirk-enterprise/openstack/keystone/credential"
-	"github.com/kirk-enterprise/openstack/keystone/domain"
-	"github.com/kirk-enterprise/openstack/keystone/endpoint"
-	"github.com/kirk-enterprise/openstack/keystone/group"
-	"github.com/kirk-enterprise/openstack/keystone/policy"
-	"github.com/kirk-enterprise/openstack/keystone/project"
-	"github.com/kirk-enterprise/openstack/keystone/region"
-	"github.com/kirk-enterprise/openstack/keystone/role"
-	"github.com/kirk-enterprise/openstack/keystone/service"
-	"github.com/kirk-enterprise/openstack/keystone/user"
-	"github.com/kirk-enterprise/openstack/lib/ifaces"
+	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/credential"
+	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/domain"
+	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/endpoint"
+	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/group"
+	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/policy"
+	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/project"
+	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/region"
+	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/role"
+	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/service"
+	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/user"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/ifaces"
 )
 
 type Keystone struct {

@@ -8,7 +8,7 @@ import (
 
 	"github.com/dolab/httpmitm"
 	"github.com/golib/assert"
-	"github.com/kirk-enterprise/openstack/lib/auth"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/auth"
 	"github.com/rackspace/gophercloud"
 )
 

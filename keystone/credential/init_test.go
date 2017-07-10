@@ -6,10 +6,10 @@ import (
 	"testing"
 
 	"github.com/dolab/httpmitm"
-	"github.com/kirk-enterprise/openstack/internal"
-	"github.com/kirk-enterprise/openstack/lib/auth"
-	"github.com/kirk-enterprise/openstack/lib/ifaces"
-	"github.com/kirk-enterprise/openstack/lib/testdata"
+	"github.com/kirk-enterprise/openstack-golang-sdk/internal"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/auth"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/ifaces"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/testdata"
 	"github.com/rackspace/gophercloud"
 )
 

@@ -3,9 +3,9 @@ package role
 import (
 	"net/http"
 
-	"github.com/kirk-enterprise/openstack/lib/errors"
-	"github.com/kirk-enterprise/openstack/lib/ifaces"
-	"github.com/kirk-enterprise/openstack/lib/models"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/errors"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/ifaces"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/models"
 	"github.com/rackspace/gophercloud"
 )
 

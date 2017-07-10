@@ -3,7 +3,7 @@ package ifaces
 import (
 	"net/http"
 
-	"github.com/kirk-enterprise/openstack/lib/auth"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/auth"
 	"github.com/rackspace/gophercloud"
 )
 

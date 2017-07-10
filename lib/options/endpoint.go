@@ -3,7 +3,7 @@ package options
 import (
 	"net/url"
 
-	"github.com/kirk-enterprise/openstack/lib/enums"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/enums"
 )
 
 type ListEndpointOpts struct {
