@@ -41,9 +41,16 @@ if [ -f "$APPROOT/openstack.go" ]; then
         fi
     else
         if [ ! -d "$APPROOT/src/github.com/kirk-enterprise/openstack" ]; then
-            mkdir -p "$APPROOT/src/github.com/kirk-enterprise"
+            mkdir -p "$APPROOT/src/github.com/kirk-enterprise/openstack"
 
-            ln -s "$APPROOT" "$APPROOT/src/github.com/kirk-enterprise"
+            FileList=`ls $APPROOT/.`
+            for dir in ${FileList};do
+                if [ ${dir} != "src" ];then
+                    if [ -d "$APPROOT/${dir}" ];then
+                        ln -s "$APPROOT/${dir}" "$APPROOT/src/github.com/kirk-enterprise/openstack/${dir}"
+                    fi
+                fi
+            done
         fi
     fi
 fi
