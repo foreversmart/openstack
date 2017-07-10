@@ -6,28 +6,20 @@ import "net/url"
  * used to list volumes by params
  */
 type ListVolumeOpts struct {
-	SortKey *string `json:"sort_key"`
-	SortDir *string `json:"sort_dir"`
-	Limit   *string `json:"limit"`
-	Offset  *string `json:"offset"`
-	Marker  *string `json:"marker"`
+	Sort   *string `json:"sort"`
+	Limit  *string `json:"limit"`
+	Marker *string `json:"marker"`
 }
 
 func (opts *ListVolumeOpts) ToQuery() (options url.Values) {
 	options = url.Values{}
 
 	if opts != nil {
-		if opts.SortKey != nil {
-			options.Add("sort_key", *opts.SortKey)
-		}
-		if opts.SortDir != nil {
-			options.Add("sort_dir", *opts.SortDir)
+		if opts.Sort != nil {
+			options.Add("sort", *opts.Sort)
 		}
 		if opts.Limit != nil {
 			options.Add("limit", *opts.Limit)
-		}
-		if opts.Offset != nil {
-			options.Add("offset", *opts.Offset)
 		}
 		if opts.Marker != nil {
 			options.Add("marker", *opts.Marker)
@@ -96,7 +88,7 @@ func ToVolumeActionAttachMap(instanceId *string, mountPoint *string) (payload ma
 	payload = map[string]interface{}{
 		"os-attach": map[string]interface{}{
 			"instance_uuid": instanceId,
-			"mountpoint": mountPoint,
+			"mountpoint":    mountPoint,
 		},
 	}
 	return
