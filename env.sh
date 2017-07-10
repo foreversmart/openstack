@@ -40,10 +40,17 @@ if [ -f "$APPROOT/openstack.go" ]; then
             cp -r "$APPROOT" "$parent/gopkg/src/github.com/kirk-enterprise"
         fi
     else
-        if [ ! -d "$APPROOT/src/github.com/kirk-enterprise/openstack" ]; then
-            mkdir -p "$APPROOT/src/github.com/kirk-enterprise"
+        if [ ! -d "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk" ]; then
+            mkdir -p "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk"
 
-            ln -s "$APPROOT" "$APPROOT/src/github.com/kirk-enterprise"
+            FileList=`ls $APPROOT/.`
+            for dir in ${FileList};do
+                if [ ${dir} != "src" ];then
+                    if [ -d "$APPROOT/${dir}" ];then
+                        ln -s "$APPROOT/${dir}" "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk/${dir}"
+                    fi
+                fi
+            done
         fi
     fi
 fi
