@@ -8,6 +8,7 @@ import (
 type ShowTokenOpts struct {
 	Nocatalog    *string `json:"nocatalog"`
 	AllowExpired *string `json:"allow_expired"`
+	TokenID      string  `json:"tokenid"`
 }
 
 func (opts *ShowTokenOpts) ToQuery() (options url.Values) {
@@ -27,7 +28,8 @@ func (opts *ShowTokenOpts) ToQuery() (options url.Values) {
 }
 
 type HeadTokenOpts struct {
-	AllowExpired *bool `json:"allow_expired"`
+	AllowExpired *bool  `json:"allow_expired"`
+	TokenID      string `json:"tokenid"`
 }
 
 func (opts *HeadTokenOpts) ToQuery() (options url.Values) {

@@ -9,6 +9,7 @@ import (
 	"github.com/dolab/httpmitm"
 	"github.com/golib/assert"
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/auth"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/models"
 	"github.com/rackspace/gophercloud"
 )
 
@@ -76,6 +77,12 @@ func Test_AuthByPassword_V3(t *testing.T) {
 			DomainName: apiv3.GetString("admin.domain_name"),
 			Username:   apiv3.GetString("admin.username"),
 			Password:   apiv3.GetString("admin.password"),
+		},
+		SuccessFunc: func(tokenid string, expire time.Time, result gophercloud.Result) error {
+			token, err := models.ExtractToken(result)
+			assertion.Nil(err)
+			assertion.Equal(token.User.ID, apiv3.GetString("v3.scoped.token.user.id"))
+			return nil
 		},
 	}
 

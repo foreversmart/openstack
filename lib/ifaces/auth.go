@@ -9,8 +9,8 @@ type Auther interface {
 	AuthScoper
 	AuthCataloger
 
-	Show(opts options.ShowTokenOpts) (token *models.TokenModel, err error)
-	HasToken(opts options.HeadTokenOpts) (exist bool)
+	Show(opts *options.ShowTokenOpts) (token *models.TokenModel, err error)
+	HasToken(opts options.HeadTokenOpts) (exist bool, err error)
 	Delete() (err error)
 }
 

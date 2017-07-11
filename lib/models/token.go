@@ -17,13 +17,21 @@ type TokenUserModel struct {
 	PasswordExpiresAt string          `mapstructure:"password_expires_at" json:"password_expires_at"`
 }
 
+type TokenProjectModel struct {
+	Domain UserDomainModel `mapstructure:"domain" json:"domain"`
+	ID     string          `mapstructure:"id" json:"id"`
+	Name   string          `mapstructure:"name" json:"name"`
+}
+
 type TokenModel struct {
-	Methods   []*string       `mapstructure:"methods" json:"methods"`
-	User      *TokenUserModel `mapstructure:"user" json:"user"`
-	Extras    interface{}     `mapstructure:"extras" json:"extras"`
-	AuditIDs  []*string       `mapstructure:"audit_ids" json:"audit_ids"`
-	IssuedAt  string          `mapstructure:"issued_at" json:"issued_at"`
-	ExpiresAt string          `mapstructure:"expires_at" json:"expires_at"`
+	Methods   []*string          `mapstructure:"methods" json:"methods"`
+	User      *TokenUserModel    `mapstructure:"user" json:"user"`
+	Project   *TokenProjectModel `mapstructure:"project" json:"project"`
+	Catalog   []*CatalogModel    `mapstructure:"catalog" json:"catalog"`
+	Extras    interface{}        `mapstructure:"extras" json:"extras"`
+	AuditIDs  []*string          `mapstructure:"audit_ids" json:"audit_ids"`
+	IssuedAt  string             `mapstructure:"issued_at" json:"issued_at"`
+	ExpiresAt string             `mapstructure:"expires_at" json:"expires_at"`
 }
 
 func ExtractToken(result gophercloud.Result) (token *TokenModel, err error) {
