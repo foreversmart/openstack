@@ -13,6 +13,23 @@ const (
 	networkPort = "9696"
 )
 
+func Test_Create_Network(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	mitm.MockRequest("POST", apiv3.MockResourceURLWithPort(networkPort, "/v2.0/networks")).WithResponse(http.StatusCreated, jsonheader, apiv3.APIString("POST /networks"))
+	// mitm.Pause()
+
+	opts := &networks.CreateOpts{
+		Name:     "TestNetwork",
+		TenantID: apiv3.GetString("user.project_id"),
+	}
+	assertion := assert.New(t)
+	network, err := New(openstacker).Create(opts)
+	assertion.Nil(err)
+	assertion.Equal(apiv3.APIString("POST /networks.network.id"), network.ID)
+	assertion.True(network.AdminStateUp)
+}
+
 func Test_All_Network(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
@@ -74,21 +91,4 @@ func Test_Delete_Network(t *testing.T) {
 
 	err := New(openstacker).Delete(networkID)
 	assertion.Nil(err)
-}
-
-func Test_Create_Network(t *testing.T) {
-	mitm := mocker.StubDefaultTransport(t)
-
-	mitm.MockRequest("POST", apiv3.MockResourceURLWithPort(networkPort, "/v2.0/networks")).WithResponse(http.StatusCreated, jsonheader, apiv3.APIString("POST /networks"))
-	// mitm.Pause()
-
-	opts := &networks.CreateOpts{
-		Name:     "TestNetwork",
-		TenantID: apiv3.GetString("user.project_id"),
-	}
-	assertion := assert.New(t)
-	network, err := New(openstacker).Create(opts)
-	assertion.Nil(err)
-	assertion.Equal(apiv3.APIString("POST /networks.network.id"), network.ID)
-	assertion.True(network.AdminStateUp)
 }
