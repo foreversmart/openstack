@@ -45,7 +45,7 @@ if [ -f "$APPROOT/openstack.go" ]; then
 
             files=`ls $APPROOT/.`
             for file in $files; do
-                if [ "$file" != "src/" ] && [ -d "$APPROOT/$file" ]; then
+                if  [ -d "$APPROOT/$file" ] && [ "$file" != "src" ] && [ "$file" != "src/" ] ; then
                     ln -s "$APPROOT/$file" "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk/"
                 fi
 
