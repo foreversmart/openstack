@@ -41,18 +41,9 @@ if [ -f "$APPROOT/openstack.go" ]; then
         fi
     else
         if [ ! -d "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk" ]; then
-            mkdir -p "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk"
+            mkdir -p "$APPROOT/src/github.com/kirk-enterprise"
 
-            files=`ls $APPROOT/.`
-            for file in $files; do
-                if  [ -d "$APPROOT/$file" ] && [ "$file" != "src" ] && [ "$file" != "src/" ] ; then
-                    ln -s "$APPROOT/$file" "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk/"
-                fi
-
-                if [ -f "$APPROOT/$file" ]; then
-                    ln -s "$APPROOT/$file" "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk/"
-                fi
-            done
+            ln -s "$APPROOT" "$APPROOT/src/github.com/kirk-enterprise"
         fi
     fi
 fi
