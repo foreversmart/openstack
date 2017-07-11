@@ -76,16 +76,11 @@ func Test_Create_Volume(t *testing.T) {
 	vos := New(openstacker)
 	assertion := assert.New(t)
 
-	name := "testing volume"
-	desc := "testing create volume"
-	size := 10
-	vtype := "iscsi"
-
 	_, err := vos.Create(&options.CreateVolumeOpts{
-		Name:        &name,
-		Description: &desc,
-		VolumeType:  &vtype,
-		Size:        &size,
+		Name:        options.String("test volume"),
+		Description: options.String("test create volume"),
+		VolumeType:  options.String("iscsi"),
+		Size:        options.Int(10),
 	})
 
 	assertion.Nil(err)
