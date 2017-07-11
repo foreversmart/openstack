@@ -9,8 +9,8 @@ import (
 )
 
 type SubnetModel struct {
-	Id              string           `mapstructure:"id" json:"id"`
-	NetworkId       string           `mapstructure:"network_id" json:"network_id"`
+	ID              string           `mapstructure:"id" json:"id"`
+	NetworkID       string           `mapstructure:"network_id" json:"network_id"`
 	Name            string           `mapstructure:"name"  json:"name"`
 	IpVersion       int              `mapstructure:"ip_version" json:"ip_version"`
 	Cidr            string           `mapstructure:"cidr" json:"cidr"`
@@ -19,11 +19,11 @@ type SubnetModel struct {
 	AllocPools      []AllocationPool `mapstructure:"allocation_pools"  json:"allocation_pools"`
 	HostRoutes      []HostRoute      `mapstructure:"host_routes" json:"host_routes"`
 	EnableDhcp      bool             `mapstructure:"enable_dhcp" json:"enable_dhcp"`
-	TenantId        string           `mapstructure:"tenant_id" json:"tenant_id"`
-	Ipv6RaMode      bool             `json:"ipv6_ra_mode"`
+	TenantID        string           `mapstructure:"tenant_id" json:"tenant_id"`
+	Ipv6RaMode      bool             `mapstructure:"ipv6_ra_mode" json:"ipv6_ra_mode"`
+	Ipv6AddressMode bool             `mapstructure:"ipv6_address_mode" json:"ipv6_address_mode"`
+	CreatedAt       time.Time        `mapstructure:"created_at" json:"created_at"`
 	Shared          bool             `json:"shared"`
-	Ipv6AddressMode bool             `json:"ipv6_address_mode"`
-	CreatedAt       time.Time        `json:"created_at"`
 }
 
 type AllocationPool struct {
