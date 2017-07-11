@@ -5,16 +5,20 @@ import (
 	"os"
 	"testing"
 
+	"fmt"
+	"time"
+
 	"github.com/dolab/httpmitm"
-	"github.com/kirk-enterprise/openstack/internal"
-	"github.com/kirk-enterprise/openstack/lib/auth"
-	"github.com/kirk-enterprise/openstack/lib/ifaces"
-	"github.com/kirk-enterprise/openstack/lib/testdata"
+	"github.com/kirk-enterprise/openstack-golang-sdk/internal"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/auth"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/ifaces"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/testdata"
 	"github.com/rackspace/gophercloud"
 )
 
 var (
 	apiv3 *testdata.TestData
+	apiv2 *testdata.TestData
 
 	mocker      *httpmitm.MitmTransport
 	openstacker ifaces.Openstacker
@@ -24,6 +28,7 @@ var (
 func TestMain(m *testing.M) {
 	// setup dependences
 	apiv3 = testdata.NewWithFilename("../", auth.V3)
+	apiv2 = testdata.NewWithFilename("../", auth.V2)
 
 	mocker = httpmitm.NewMitmTransport().StubDefaultTransport(nil)
 	defer mocker.UnstubDefaultTransport()
@@ -33,7 +38,7 @@ func TestMain(m *testing.M) {
 	jsonheader.Add("X-Subject-Token", apiv3.GetString("token.id"))
 
 	mocker.MockRequest("POST", apiv3.MockAdminURL("/v3/auth/tokens")).WithResponse(201, jsonheader, apiv3.APIString("scoped"))
-	mocker.Pause()
+	// mocker.Pause()
 
 	openstacker = internal.New(apiv3.GetString("admin.endpoint"))
 
@@ -43,6 +48,10 @@ func TestMain(m *testing.M) {
 			DomainName: apiv3.GetString("admin.domain_name"),
 			Username:   apiv3.GetString("admin.username"),
 			Password:   apiv3.GetString("admin.password"),
+		},
+		SuccessFunc: func(tokenID string, catalog string, expiredAt time.Time) error {
+			fmt.Printf("New token: %v \n", tokenID)
+			return nil
 		},
 	})
 	if err != nil {
