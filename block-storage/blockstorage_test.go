@@ -13,4 +13,5 @@ func Test_BlockStorage(t *testing.T) {
 	bs := New(nil)
 	assertion.NotNil(bs)
 	assertion.Implements((*ifaces.Volumer)(nil), bs.NewVolumer())
+	assertion.Implements((*ifaces.Snapshoter)(nil), bs.NewSnapshoter())
 }

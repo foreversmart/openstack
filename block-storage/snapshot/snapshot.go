@@ -75,7 +75,7 @@ func (s *Snapshot) Show(id string) (snapshot *models.SnapshotModel, err error) {
 
 	var result gophercloud.Result
 	_, result.Err = client.Get(client.ServiceURL(SnapshotUrl, id), &result.Body, &gophercloud.RequestOpts{
-		OkCodes: []int{202},
+		OkCodes: []int{200},
 	})
 	return models.ExtractSnapshot(result)
 }

@@ -1,6 +1,7 @@
 package blockstorage
 
 import (
+	"github.com/kirk-enterprise/openstack-golang-sdk/block-storage/snapshot"
 	"github.com/kirk-enterprise/openstack-golang-sdk/block-storage/volume"
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/ifaces"
 )
