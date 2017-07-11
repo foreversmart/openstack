@@ -10,36 +10,37 @@ import (
 )
 
 const (
-	NetworkPort = "9696"
+	networkPort = "9696"
 )
 
 func Test_All_Network(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(NetworkPort, "v2.0/networks")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /networks")).AnyTimes()
+	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(networkPort, "v2.0/networks")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /networks")).AnyTimes()
 	// mitm.Pause()
 
 	networks, err := New(openstacker).All()
 	assertion := assert.New(t)
 	assertion.Nil(err)
 	assertion.Equal(1, len(networks))
-	assertion.Equal(networks[0].Id, apiv3.APIString("GET /networks.networks.0.id"))
+	assertion.Equal(apiv3.APIString("GET /networks.networks.0.id"), networks[0].ID)
 }
 
 func Test_AllByParams_Network(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(NetworkPort, "v2.0/networks")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /networks")).AnyTimes()
+	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(networkPort, "v2.0/networks")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /networks"))
 	// mitm.Pause()
 
+	id := apiv3.APIString("GET /networks.networks.0.tenant_id")
 	networks, err := New(openstacker).AllByParams(&options.NetworkQueryOpt{
-		ProjectId: apiv3.APIString("GET /networks.networks.0.tenant_id"),
+		ProjectId: &id,
 	})
 
 	assertion := assert.New(t)
 	assertion.Nil(err)
 	assertion.Equal(1, len(networks))
-	assertion.Equal(networks[0].Id, apiv3.APIString("GET /networks.networks.0.id"))
+	assertion.Equal(apiv3.APIString("GET /networks.networks.0.id"), networks[0].ID)
 }
 
 func Test_Show_Network(t *testing.T) {
@@ -47,15 +48,18 @@ func Test_Show_Network(t *testing.T) {
 
 	networkID := apiv3.APIString("GET /networks/:id.network.id")
 
-	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(NetworkPort, "/v2.0/networks/"+networkID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /networks/:id"))
+	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(networkPort, "/v2.0/networks/"+networkID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /networks/:id"))
 	// mitm.Pause()
 
 	assertion := assert.New(t)
 
 	network, err := New(openstacker).Show(networkID)
 	assertion.Nil(err)
-	assertion.Equal(networkID, network.Id)
+	assertion.Equal(networkID, network.ID)
+	assertion.Equal(apiv3.APIString("GET /networks/:id.network.name"), network.Name)
+	assertion.Equal(apiv3.APIString("GET /networks/:id.network.tenant_id"), network.TenantID)
 	assertion.True(network.AdminStateUp)
+	assertion.False(network.Shared)
 }
 
 func Test_Delete_Network(t *testing.T) {
@@ -63,7 +67,7 @@ func Test_Delete_Network(t *testing.T) {
 
 	networkID := apiv3.APIString("GET /networks/:id.network.id")
 
-	mitm.MockRequest("DELETE", apiv3.MockResourceURLWithPort(NetworkPort, "/v2.0/networks/"+networkID)).WithResponse(http.StatusNoContent, jsonheader, apiv3.APIString("DELETE /networks/:id"))
+	mitm.MockRequest("DELETE", apiv3.MockResourceURLWithPort(networkPort, "/v2.0/networks/"+networkID)).WithResponse(http.StatusNoContent, jsonheader, apiv3.APIString("DELETE /networks/:id"))
 	//mitm.Pause()
 
 	assertion := assert.New(t)
@@ -75,7 +79,7 @@ func Test_Delete_Network(t *testing.T) {
 func Test_Create_Network(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-	mitm.MockRequest("POST", apiv3.MockResourceURLWithPort(NetworkPort, "/v2.0/networks")).WithResponse(http.StatusCreated, jsonheader, apiv3.APIString("POST /networks"))
+	mitm.MockRequest("POST", apiv3.MockResourceURLWithPort(networkPort, "/v2.0/networks")).WithResponse(http.StatusCreated, jsonheader, apiv3.APIString("POST /networks"))
 	// mitm.Pause()
 
 	opts := &networks.CreateOpts{
@@ -85,6 +89,6 @@ func Test_Create_Network(t *testing.T) {
 	assertion := assert.New(t)
 	network, err := New(openstacker).Create(opts)
 	assertion.Nil(err)
-	assertion.Equal(network.Id, apiv3.APIString("POST /networks.network.id"))
-	assertion.True(network.AdminStateUp, apiv3.APIString("POST /networks.network.admin_state_up"))
+	assertion.Equal(apiv3.APIString("POST /networks.network.id"), network.ID)
+	assertion.True(network.AdminStateUp)
 }
