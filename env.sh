@@ -31,10 +31,10 @@ export PATH
 
 # mock development && test envs
 if [ -f "$APPROOT/openstack.go" ]; then
-    if [ "$1" == "travis" ]; then
+    if [ "$1" = "travis" ]; then
         parent=$(cd $APPROOT/../; pwd)
 
-        if [ ! -d "$parent/gopkg/src/github.com/kirk-enterprise/openstack" ]; then
+        if [ ! -d "$parent/gopkg/src/github.com/kirk-enterprise/openstack-golang-sdk" ]; then
             mkdir -p "$parent/gopkg/src/github.com/kirk-enterprise"
 
             cp -r "$APPROOT" "$parent/gopkg/src/github.com/kirk-enterprise"
@@ -43,12 +43,14 @@ if [ -f "$APPROOT/openstack.go" ]; then
         if [ ! -d "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk" ]; then
             mkdir -p "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk"
 
-            FileList=`ls $APPROOT/.`
-            for dir in ${FileList};do
-                if [ ${dir} != "src" ];then
-                    if [ -d "$APPROOT/${dir}" ];then
-                        ln -s "$APPROOT/${dir}" "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk/${dir}"
-                    fi
+            files=`ls $APPROOT/.`
+            for file in $files; do
+                if  [ -d "$APPROOT/$file" ] && [ "$file" != "src" ] && [ "$file" != "src/" ] ; then
+                    ln -s "$APPROOT/$file" "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk/"
+                fi
+
+                if [ -f "$APPROOT/$file" ]; then
+                    ln -s "$APPROOT/$file" "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk/"
                 fi
             done
         fi
