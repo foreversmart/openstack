@@ -131,7 +131,6 @@ func (td *TestData) ApiSet(key, content string, force bool) (err error) {
 	versionData := data[td.Version()]
 	mapdata, ok := versionData.(map[string]interface{})
 	if !ok {
-		// TODO handle assertion error
 		return fmt.Errorf("cant assertion version data %s to map data", td.Version())
 
 	}
