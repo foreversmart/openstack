@@ -9,11 +9,11 @@ import (
 )
 
 type NetworkModel struct {
-	Id           string    `mapstructure:"id" json:"id"`
+	ID           string    `mapstructure:"id" json:"id"`
 	Name         string    `mapstructure:"name" json:"name"`
 	Subnets      []string  `mapstructure:"subnets" json:"subnets"`
 	Status       string    `mapstructure:"status" json:"status"`
-	TenantId     string    `mapstructure:"tenant_id" json:"tenant_id"`
+	TenantID     string    `mapstructure:"tenant_id" json:"tenant_id"`
 	Shared       bool      `mapstructure:"shared" json:"shared"`
 	AdminStateUp bool      `mapstructure:"admin_state_up" json:"admin_state_up"`
 	External     bool      `json:"router:external"`
@@ -58,11 +58,11 @@ func ExtractNetworksByPage(page pagination.Page) (networks []*NetworkModel, err 
 }
 
 type NetworkIpAvailabilitiesModel struct {
-	NetworkId            string                      `json:"network_id"`
+	NetworkID            string                      `json:"network_id"`
 	NetworkName          string                      `json:"network_name"`
 	SubnetIpAvailability []SubnetIpAvailabilityModel `json:"subnet_ip_availability"` //A list of dictionaries showing subnet IP availability. It contains information for every subnet associated to the network.
-	ProjectId            string                      `json:"project_id"`
-	TenantId             string                      `json:"tenant_id"`
+	ProjectID            string                      `json:"project_id"`
+	TenantID             string                      `json:"tenant_id"`
 	TotalIps             float64                     `json:"total_ips"` //The total number of IP addresses in a network.
 	UsedIps              float64                     `json:"used_ips"`  //The number of used IP addresses of all subnets in a network.
 }
@@ -70,7 +70,7 @@ type NetworkIpAvailabilitiesModel struct {
 type SubnetIpAvailabilityModel struct {
 	Cidr        string  `json:"cidr"`
 	IpVersion   int64   `json:"ip_version"`
-	SubnetId    string  `json:"subnet_id"`
+	SubnetID    string  `json:"subnet_id"`
 	subnet_name string  `json:"subnet_name"`
 	total_ips   float64 `json:"total_ips"`
 	used_ips    float64 `json:"used_ips"`
