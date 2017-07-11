@@ -1,242 +1,244 @@
 {
-    "endpoint": "mitm://api.testing/v2.0",
-    "admin": {
-        "endpoint": "mitm://api.testing/v2.0/admin",
-        "username": "admin",
-        "password": "password",
-        "emails": [
-            "admin@api.testing"
-        ]
-    },
-    "user": {
-        "endpoint": "mitm://api.testing/v2.0/user",
-        "username": "user",
-        "password": "password",
-        "emails": [
-            "user@api.testing"
-        ]
-    },
-    "services": [
-        {
-            "id": "ce941aa395bcc953a705bc47c538fff8",
-            "type": "compute",
-            "name": "nova",
-            "endpoint": "mitm://api.testing/v2.0/compute"
-        },
-        {
-            "id": "f81aa395bccce94953a705bc47c538ff",
-            "type": "network",
-            "name": "neutron",
-            "endpoint": "mitm://api.testing/v2.0/network"
-        }
-    ],
-    "v2": {
-        "catalog": {
-            "scoped": {
-                "access": {
-                    "token": {
-                        "issued_at": "2017-06-22T06:54:29.000000Z",
-                        "expires": "2017-06-22T07:54:29.000000Z",
-                        "id": "fb09c046263445fda6732e922e319698",
-                        "tenant": {
-                            "description": "for testing",
-                            "enabled": true,
-                            "id": "63397e0193f04dc4b2165490669ed4a1",
-                            "name": "testing"
-                        },
-                        "audit_ids": [
-                            "oKhX6cZzRgqQ_JZkpIvkyg"
-                        ]
-                    },
-                    "serviceCatalog": [
-                        {
-                            "endpoints": [
-                                {
-                                    "adminURL": "mitm://api.testing/v2.0/network",
-                                    "region": "RegionOne",
-                                    "internalURL": "mitm://api.testing/v2.0/network",
-                                    "id": "58037b7153b64994b5575f1dc5b8ea89",
-                                    "publicURL": "mitm://api.testing/v2.0/network"
-                                }
-                            ],
-                            "endpoints_links": [],
-                            "type": "network",
-                            "name": "neutron"
-                        },
-                        {
-                            "endpoints": [
-                                {
-                                    "adminURL": "mitm://api.testing/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
-                                    "region": "RegionOne",
-                                    "internalURL": "mitm://api.testing/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
-                                    "id": "5f9eb7c6701a499b9461853126f23c17",
-                                    "publicURL": "mitm://api.testing/v2.1/compute/63397e0193f04dc4b2165490669ed4a1"
-                                }
-                            ],
-                            "endpoints_links": [],
-                            "type": "compute",
-                            "name": "nova"
-                        },
-                        {
-                            "endpoints": [
-                                {
-                                    "adminURL": "mitm://api.testing/v3/admin",
-                                    "region": "RegionOne",
-                                    "internalURL": "mitm://api.testing/v3/identity",
-                                    "id": "2171a51cbce646ae807fb2f07263f61d",
-                                    "publicURL": "mitm://api.testing/v3/identity"
-                                }
-                            ],
-                            "endpoints_links": [],
-                            "type": "identity",
-                            "name": "keystone"
-                        }
-                    ],
-                    "user": {
-                        "username": "testing",
-                        "roles_links": [],
-                        "id": "668d5ce711f04629a35f4787cc5a1704",
-                        "roles": [
-                            {
-                                "name": "admin"
-                            }
-                        ],
-                        "name": "testing"
-                    },
-                    "metadata": {
-                        "is_admin": 0,
-                        "roles": [
-                            "e14b42707c1f448298e1846623a00f59"
-                        ]
-                    }
-                }
-            }
-        }
-    },
-    "v3": {
-        "catalog": {
-            "scoped": {
-                "token": {
-                    "is_domain": false,
-                    "methods": [
-                        "password"
-                    ],
-                    "roles": [
-                        {
-                            "id": "e14b42707c1f448298e1846623a00f59",
-                            "name": "admin"
-                        }
-                    ],
-                    "expires_at": "2017-06-22T07:48:30.000000Z",
-                    "project": {
-                        "domain": {
-                            "id": "default",
-                            "name": "Default"
-                        },
-                        "id": "63397e0193f04dc4b2165490669ed4a1",
-                        "name": "testing"
-                    },
-                    "catalog": [
-                        {
-                            "endpoints": [
-                                {
-                                    "url": "mitm://api.testing/v2.1/network",
-                                    "interface": "admin",
-                                    "region": "RegionOne",
-                                    "region_id": "RegionOne",
-                                    "id": "58037b7153b64994b5575f1dc5b8ea89"
-                                },
-                                {
-                                    "url": "mitm://api.testing/v2.1/network",
-                                    "interface": "public",
-                                    "region": "RegionOne",
-                                    "region_id": "RegionOne",
-                                    "id": "712719d7c5974d819d89f522c0a9f3d8"
-                                },
-                                {
-                                    "url": "mitm://api.testing/v2.1/network",
-                                    "interface": "internal",
-                                    "region": "RegionOne",
-                                    "region_id": "RegionOne",
-                                    "id": "7ecb85a9aeab490d98b235b34fd774e5"
-                                }
-                            ],
-                            "type": "network",
-                            "id": "2a4d649b2ef945d3b87618dd7415a9cc",
-                            "name": "neutron"
-                        },
-                        {
-                            "endpoints": [
-                                {
-                                    "url": "mitm://api.testing/v3/identity",
-                                    "interface": "public",
-                                    "region": "RegionOne",
-                                    "region_id": "RegionOne",
-                                    "id": "2171a51cbce646ae807fb2f07263f61d"
-                                },
-                                {
-                                    "url": "mitm://api.testing/v3/identity",
-                                    "interface": "internal",
-                                    "region": "RegionOne",
-                                    "region_id": "RegionOne",
-                                    "id": "895c905520b344b085e875f2b19642d1"
-                                },
-                                {
-                                    "url": "mitm://api.testing/v3/admin",
-                                    "interface": "admin",
-                                    "region": "RegionOne",
-                                    "region_id": "RegionOne",
-                                    "id": "d777934344e4447a951f178efb04dd75"
-                                }
-                            ],
-                            "type": "identity",
-                            "id": "c44834db161f43d68888db189bb83926",
-                            "name": "keystone"
-                        },
-                        {
-                            "endpoints": [
-                                {
-                                    "url": "mitm://api.testing/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
-                                    "interface": "internal",
-                                    "region": "RegionOne",
-                                    "region_id": "RegionOne",
-                                    "id": "5f9eb7c6701a499b9461853126f23c17"
-                                },
-                                {
-                                    "url": "mitm://api.testing/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
-                                    "interface": "admin",
-                                    "region": "RegionOne",
-                                    "region_id": "RegionOne",
-                                    "id": "9d514c0194d44572a2a4a4dbbd92ef59"
-                                },
-                                {
-                                    "url": "mitm://api.testing/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
-                                    "interface": "public",
-                                    "region": "RegionOne",
-                                    "region_id": "RegionOne",
-                                    "id": "b28c2732db7440a69a7543c852f94475"
-                                }
-                            ],
-                            "type": "compute",
-                            "id": "dc067b8e3d514173a3037292c6d4de40",
-                            "name": "nova"
-                        }
-                    ],
-                    "user": {
-                        "domain": {
-                            "id": "default",
-                            "name": "Default"
-                        },
-                        "id": "668d5ce711f04629a35f4787cc5a1704",
-                        "name": "testing",
-                        "password_expires_at": null
-                    },
-                    "audit_ids": [
-                        "iM8WUc5MT4mGtgD58kZiZA"
-                    ],
-                    "issued_at": "2017-06-22T06:48:30.000000Z"
-                }
-            }
-        }
-    }
+	"admin": {
+		"emails": [
+			"admin@api.testing"
+		],
+		"endpoint": "mitm://api.testing/v2.0/admin",
+		"password": "password",
+		"username": "admin"
+	},
+	"endpoint": "mitm://api.testing/v2.0",
+	"services": [
+		{
+			"endpoint": "mitm://api.testing/v2.0/compute",
+			"id": "ce941aa395bcc953a705bc47c538fff8",
+			"name": "nova",
+			"type": "compute"
+		},
+		{
+			"endpoint": "mitm://api.testing/v2.0/network",
+			"id": "f81aa395bccce94953a705bc47c538ff",
+			"name": "neutron",
+			"type": "network"
+		}
+	],
+	"test_key": "test_value",
+	"user": {
+		"emails": [
+			"user@api.testing"
+		],
+		"endpoint": "mitm://api.testing/v2.0/user",
+		"password": "password",
+		"username": "user"
+	},
+	"v2": {
+		"catalog": {
+			"scoped": {
+				"access": {
+					"metadata": {
+						"is_admin": 0,
+						"roles": [
+							"e14b42707c1f448298e1846623a00f59"
+						]
+					},
+					"serviceCatalog": [
+						{
+							"endpoints": [
+								{
+									"adminURL": "mitm://api.testing/v2.0/network",
+									"id": "58037b7153b64994b5575f1dc5b8ea89",
+									"internalURL": "mitm://api.testing/v2.0/network",
+									"publicURL": "mitm://api.testing/v2.0/network",
+									"region": "RegionOne"
+								}
+							],
+							"endpoints_links": [],
+							"name": "neutron",
+							"type": "network"
+						},
+						{
+							"endpoints": [
+								{
+									"adminURL": "mitm://api.testing/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
+									"id": "5f9eb7c6701a499b9461853126f23c17",
+									"internalURL": "mitm://api.testing/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
+									"publicURL": "mitm://api.testing/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
+									"region": "RegionOne"
+								}
+							],
+							"endpoints_links": [],
+							"name": "nova",
+							"type": "compute"
+						},
+						{
+							"endpoints": [
+								{
+									"adminURL": "mitm://api.testing/v3/admin",
+									"id": "2171a51cbce646ae807fb2f07263f61d",
+									"internalURL": "mitm://api.testing/v3/identity",
+									"publicURL": "mitm://api.testing/v3/identity",
+									"region": "RegionOne"
+								}
+							],
+							"endpoints_links": [],
+							"name": "keystone",
+							"type": "identity"
+						}
+					],
+					"token": {
+						"audit_ids": [
+							"oKhX6cZzRgqQ_JZkpIvkyg"
+						],
+						"expires": "2017-06-22T07:54:29.000000Z",
+						"id": "fb09c046263445fda6732e922e319698",
+						"issued_at": "2017-06-22T06:54:29.000000Z",
+						"tenant": {
+							"description": "for testing",
+							"enabled": true,
+							"id": "63397e0193f04dc4b2165490669ed4a1",
+							"name": "testing"
+						}
+					},
+					"user": {
+						"id": "668d5ce711f04629a35f4787cc5a1704",
+						"name": "testing",
+						"roles": [
+							{
+								"name": "admin"
+							}
+						],
+						"roles_links": [],
+						"username": "testing"
+					}
+				}
+			}
+		},
+		"test_key": "test_value"
+	},
+	"v3": {
+		"catalog": {
+			"scoped": {
+				"token": {
+					"audit_ids": [
+						"iM8WUc5MT4mGtgD58kZiZA"
+					],
+					"catalog": [
+						{
+							"endpoints": [
+								{
+									"id": "58037b7153b64994b5575f1dc5b8ea89",
+									"interface": "admin",
+									"region": "RegionOne",
+									"region_id": "RegionOne",
+									"url": "mitm://api.testing/v2.1/network"
+								},
+								{
+									"id": "712719d7c5974d819d89f522c0a9f3d8",
+									"interface": "public",
+									"region": "RegionOne",
+									"region_id": "RegionOne",
+									"url": "mitm://api.testing/v2.1/network"
+								},
+								{
+									"id": "7ecb85a9aeab490d98b235b34fd774e5",
+									"interface": "internal",
+									"region": "RegionOne",
+									"region_id": "RegionOne",
+									"url": "mitm://api.testing/v2.1/network"
+								}
+							],
+							"id": "2a4d649b2ef945d3b87618dd7415a9cc",
+							"name": "neutron",
+							"type": "network"
+						},
+						{
+							"endpoints": [
+								{
+									"id": "2171a51cbce646ae807fb2f07263f61d",
+									"interface": "public",
+									"region": "RegionOne",
+									"region_id": "RegionOne",
+									"url": "mitm://api.testing/v3/identity"
+								},
+								{
+									"id": "895c905520b344b085e875f2b19642d1",
+									"interface": "internal",
+									"region": "RegionOne",
+									"region_id": "RegionOne",
+									"url": "mitm://api.testing/v3/identity"
+								},
+								{
+									"id": "d777934344e4447a951f178efb04dd75",
+									"interface": "admin",
+									"region": "RegionOne",
+									"region_id": "RegionOne",
+									"url": "mitm://api.testing/v3/admin"
+								}
+							],
+							"id": "c44834db161f43d68888db189bb83926",
+							"name": "keystone",
+							"type": "identity"
+						},
+						{
+							"endpoints": [
+								{
+									"id": "5f9eb7c6701a499b9461853126f23c17",
+									"interface": "internal",
+									"region": "RegionOne",
+									"region_id": "RegionOne",
+									"url": "mitm://api.testing/v2.1/compute/63397e0193f04dc4b2165490669ed4a1"
+								},
+								{
+									"id": "9d514c0194d44572a2a4a4dbbd92ef59",
+									"interface": "admin",
+									"region": "RegionOne",
+									"region_id": "RegionOne",
+									"url": "mitm://api.testing/v2.1/compute/63397e0193f04dc4b2165490669ed4a1"
+								},
+								{
+									"id": "b28c2732db7440a69a7543c852f94475",
+									"interface": "public",
+									"region": "RegionOne",
+									"region_id": "RegionOne",
+									"url": "mitm://api.testing/v2.1/compute/63397e0193f04dc4b2165490669ed4a1"
+								}
+							],
+							"id": "dc067b8e3d514173a3037292c6d4de40",
+							"name": "nova",
+							"type": "compute"
+						}
+					],
+					"expires_at": "2017-06-22T07:48:30.000000Z",
+					"is_domain": false,
+					"issued_at": "2017-06-22T06:48:30.000000Z",
+					"methods": [
+						"password"
+					],
+					"project": {
+						"domain": {
+							"id": "default",
+							"name": "Default"
+						},
+						"id": "63397e0193f04dc4b2165490669ed4a1",
+						"name": "testing"
+					},
+					"roles": [
+						{
+							"id": "e14b42707c1f448298e1846623a00f59",
+							"name": "admin"
+						}
+					],
+					"user": {
+						"domain": {
+							"id": "default",
+							"name": "Default"
+						},
+						"id": "668d5ce711f04629a35f4787cc5a1704",
+						"name": "testing",
+						"password_expires_at": null
+					}
+				}
+			}
+		}
+	}
 }

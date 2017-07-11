@@ -122,7 +122,7 @@ func (td *TestData) ApiSet(key, content string, force bool) (err error) {
 		}
 	}
 
-	var data map[string]interface{}
+	var data MapData
 	err = json.Unmarshal(td.Data(), &data)
 	if err != nil {
 		return
@@ -161,7 +161,7 @@ func (td *TestData) Set(key, content string, force bool) (err error) {
 		}
 	}
 
-	var data map[string]interface{}
+	var data MapData
 	err = json.Unmarshal(td.Data(), &data)
 	if err != nil {
 		return
