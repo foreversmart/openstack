@@ -138,7 +138,7 @@ func (td *TestData) ApiSet(key, content string, force bool) (err error) {
 	mapdata[key] = content
 
 	// pretty json output
-	td.data, err = json.MarshalIndent(data, "", "\t")
+	td.data, err = json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		return
 	}
