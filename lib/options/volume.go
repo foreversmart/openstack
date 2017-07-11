@@ -83,22 +83,3 @@ func ToVolumeActionResizeMap(newSize *int) (payload map[string]interface{}) {
 	}
 	return
 }
-
-func ToVolumeActionAttachMap(instanceId *string, mountPoint *string) (payload map[string]interface{}) {
-	payload = map[string]interface{}{
-		"os-attach": map[string]interface{}{
-			"instance_uuid": instanceId,
-			"mountpoint":    mountPoint,
-		},
-	}
-	return
-}
-
-func ToVolumeActionDetachMap(attachmentId *string) (payload map[string]interface{}) {
-	payload = map[string]interface{}{
-		"os-detach": map[string]interface{}{
-			"attachment_id": attachmentId,
-		},
-	}
-	return
-}

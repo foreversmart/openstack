@@ -58,38 +58,3 @@ func ExtractVolumesFromBody(body interface{}) ([]*VolumeModel, error) {
 	err := mapstructure.Decode(body, &response)
 	return response.Volumes, err
 }
-
-type VolumeSnapshotModel struct {
-	ID          string `json:"id" mapstructure:"id"`
-	Status      string `json:"status" mapstructure:"status"`
-	Name        string `json:"name" mapstructure:"name"`
-	Description string `json:"description" mapstructure:"description"`
-	VolumeID    string `json:"volume_id" mapstructure:"volume_id"`
-	VolumeName  string `json:"volume_name" mapstructure:"volume_name"`
-	Size        int    `json:"size" mapstructure:"size"`
-	CreatedAt   string `json:"created_at" mapstructure:"created_at"`
-}
-
-func ExtractSnapshot(r gophercloud.Result) (*VolumeSnapshotModel, error) {
-	if r.Err != nil {
-		return nil, r.Err
-	}
-
-	var response struct {
-		Snapshots *VolumeSnapshotModel `mapstructure:"snapshot"`
-	}
-	err := mapstructure.Decode(r.Body, &response)
-	return response.Snapshots, err
-}
-
-func ExtractSnapshots(r gophercloud.Result) ([]*VolumeSnapshotModel, error) {
-	if r.Err != nil {
-		return nil, r.Err
-	}
-
-	var response struct {
-		Snapshots []*VolumeSnapshotModel `mapstructure:"snapshots"`
-	}
-	err := mapstructure.Decode(r.Body, &response)
-	return response.Snapshots, err
-}
