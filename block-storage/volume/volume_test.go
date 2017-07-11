@@ -16,7 +16,7 @@ func Test_All_Volume(t *testing.T) {
 	jsonheader := http.Header{}
 	jsonheader.Add("Content-Type", "application/json")
 
-	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/fcfeddf071284e4a8c54760d4bf67c29/volumes")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes"))
+	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+apiv2.GetString("admin.project_id")+"/volumes/detail")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes"))
 	// mitm.Pause()
 
 	assertion := assert.New(t)
@@ -43,7 +43,7 @@ func Test_All_Volume_By_Params(t *testing.T) {
 	jsonheader := http.Header{}
 	jsonheader.Add("Content-Type", "application/json")
 
-	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/fcfeddf071284e4a8c54760d4bf67c29/volumes")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes"))
+	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+apiv2.GetString("admin.project_id")+"/volumes")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes"))
 	// mitm.Pause()
 
 	assertion := assert.New(t)
@@ -62,4 +62,31 @@ func Test_All_Volume_By_Params(t *testing.T) {
 	assertion.Equal(apiv2.APIString("GET /volumes.volumes.0.bootable"), volumes[0].Bootable)
 	assertion.Equal(apiv2.APIString("GET /volumes.volumes.0.created_at"), volumes[0].CreatedAt)
 	assertion.Equal(apiv2.APIString("GET /volumes.volumes.0.attachments.0.id"), volumes[0].Attachments[0].ID)
+}
+
+func Test_Create_Volume(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	jsonheader := http.Header{}
+	jsonheader.Add("Content-Type", "application/json")
+
+	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+apiv2.GetString("admin.project_id")+"/volumes")).WithResponse(http.StatusAccepted, jsonheader, apiv2.APIString("POST /volumes"))
+	//mitm.Pause()
+
+	vos := New(openstacker)
+	assertion := assert.New(t)
+
+	name := "testing volume"
+	desc := "testing create volume"
+	size := 10
+	vtype := "iscsi"
+
+	_, err := vos.Create(&options.CreateVolumeOpts{
+		Name:        &name,
+		Description: &desc,
+		VolumeType:  &vtype,
+		Size:        &size,
+	})
+
+	assertion.Nil(err)
 }

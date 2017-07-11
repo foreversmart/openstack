@@ -21,7 +21,7 @@
         "project_id": "803d363c5c4649b591fd74b96a8c30f5"
     },
     "token": {
-        "id": "gAAAAABZYfz63DE93KQK9hQBVo82HPKfRX7TBntt5IIPt1qgKnLLXOt4SRjETr3gg32VSLcMssar3k_rD5z23aEsNOsprNDDPHu0du8-MZdds6rJDw6oXWFj6VtDcZcVnVOR0SvkoV8o5zYdVfLdkS1gGpCUo6bB5mLCVeX8wt-qDe8XuQxPwaA"
+        "id": "gAAAAABZZKx5CzLj1h0TFePh7JWXyYbBWiM9P7gm3SVwkYtgPkCU7V7G2BY4EMd6rfmbGFV7PCzh0OqrfoenbkDg40-n6q-2Y77zNeFYUJ-5f-0-1UUL7mnKZ4Biq0o8x1gX-Xwu62AYMfBdywi3LrIHKFZ7TAYQvLf8Lm4cnbrNsyUudLHx1NI"
     },
     "v2": {
         "scoped": {
@@ -190,6 +190,28 @@
                     "volume_type": "lvmdriver-1"
                 }
             ]
+        },
+        "POST /volumes": {
+            "volume": {
+                "size": 10,
+                "availability_zone": null,
+                "source_volid": null,
+                "description": null,
+                "multiattach ": false,
+                "snapshot_id": null,
+                "name": null,
+                "imageRef": null,
+                "volume_type": null,
+                "metadata": {},
+                "source_replica": null,
+                "consistencygroup_id": null
+            },
+            "OS-SCH-HNT:scheduler_hints": {
+                "same_host": [
+                    "a0cf03a5-d921-4877-bb5c-86d26cf818e1",
+                    "8c19174f-4220-44f0-824a-cd1eeef10287"
+                ]
+            }
         }
     },
     "v3": {

@@ -37,7 +37,7 @@ type CreateVolumeOpts struct {
 	Description *string `json:"description"`
 	VolumeType  *string `json:"volume_type"`
 	Size        *int    `json:"size"`
-	SnapshotId  *string `json:"snapshot_id"` // create volume from a snapshot
+	SnapshotID  *string `json:"snapshot_id"` // create volume from a snapshot
 }
 
 func (opts *CreateVolumeOpts) IsValid() bool {
