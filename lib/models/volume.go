@@ -44,11 +44,7 @@ func ExtractVolumes(r gophercloud.Result) ([]*VolumeModel, error) {
 		return nil, r.Err
 	}
 
-	var response struct {
-		Volumes []*VolumeModel `mapstructure:"volumes" json:"volumes"`
-	}
-	err := mapstructure.Decode(r.Body, &response)
-	return response.Volumes, err
+	return ExtractVolumesFromBody(r.Body)
 }
 
 func ExtractVolumesFromBody(body interface{}) ([]*VolumeModel, error) {

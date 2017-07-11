@@ -20,3 +20,7 @@ func New(client ifaces.Openstacker) *BlockStorage {
 func (bs *BlockStorage) NewVolumer() ifaces.Volumer {
 	return volume.New(bs.client)
 }
+
+func (bs *BlockStorage) NewSnapshoter() ifaces.Snapshoter {
+	return snapshot.New(bs.client)
+}

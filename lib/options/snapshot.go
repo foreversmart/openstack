@@ -11,8 +11,14 @@ func (opts *CreateSnapshotOpts) IsValid() bool {
 	return opts.VolumeID != nil && opts.Name != nil
 }
 
-type ListSnapshotOpts struct {
-	ProjectId *string `json:"tenant_id"`
+func (opts *CreateSnapshotOpts) ToPayload() (payload interface{}) {
+	type request struct {
+		Snapshot *CreateSnapshotOpts `json:"snapshot"`
+	}
+
+	return request{
+		Snapshot: opts,
+	}
 }
 
 type UpdateSnapshotOpts struct {

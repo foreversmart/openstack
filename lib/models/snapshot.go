@@ -27,14 +27,18 @@ func ExtractSnapshot(r gophercloud.Result) (*SnapshotModel, error) {
 	return response.Snapshots, err
 }
 
+func ExtractSnapshotsFromBody(body interface{}) ([]*SnapshotModel, error) {
+	var resp struct {
+		Snapshots []*SnapshotModel `mapstructure:"snapshots"`
+	}
+
+	err := mapstructure.Decode(body, &resp)
+	return resp.Snapshots, err
+}
+
 func ExtractSnapshots(r gophercloud.Result) ([]*SnapshotModel, error) {
 	if r.Err != nil {
 		return nil, r.Err
 	}
-
-	var response struct {
-		Snapshots []*SnapshotModel `mapstructure:"snapshots"`
-	}
-	err := mapstructure.Decode(r.Body, &response)
-	return response.Snapshots, err
+	return ExtractSnapshotsFromBody(r.Body)
 }

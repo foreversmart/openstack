@@ -256,7 +256,61 @@
             }
         },
         "DELETE /volumes/:id": {},
-        "POST /volumes/:id/resize": {}
+        "POST /volumes/:id/resize": {},
+        "GET /snapshots": {
+            "snapshots": [{
+                "status": "available",
+                "metadata": {
+                    "name": "test"
+                },
+                "name": "test-volume-snapshot",
+                "volume_id": "173f7b48-c4c1-4e70-9acc-086b39073506",
+                "created_at": "2015-11-29T02:25:51.000000",
+                "size": 1,
+                "id": "b1323cda-8e4b-41c1-afc5-2fc791809c8c",
+                "description": "volume snapshot"
+            }]
+        },
+        "GET /snapshots/:id": {
+            "snapshot": {
+                "status": "available",
+                "os-extended-snapshot-attributes:progress": "100%",
+                "description": "Daily backup",
+                "created_at": "2013-02-25T04:13:17.000000",
+                "metadata": {},
+                "volume_id": "5aa119a8-d25b-45a7-8d1b-88e127885635",
+                "os-extended-snapshot-attributes:project_id": "0c2eba2c5af04d3f9e9d0d410b371fde",
+                "size": 1,
+                "id": "2bb856e1-b3d8-4432-a858-09e4ce939389",
+                "name": "snap-001"
+            }
+        },
+        "POST /snapshots": {
+            "snapshot": {
+                "status": "available",
+                "os-extended-snapshot-attributes:progress": "100%",
+                "description": "Daily backup",
+                "created_at": "2013-02-25T04:13:17.000000",
+                "metadata": {},
+                "volume_id": "5aa119a8-d25b-45a7-8d1b-88e127885635",
+                "os-extended-snapshot-attributes:project_id": "0c2eba2c5af04d3f9e9d0d410b371fde",
+                "size": 1,
+                "id": "2bb856e1-b3d8-4432-a858-09e4ce939389",
+                "name": "snap-001"
+            }
+        },
+        "PUT /snapshots/:id": {
+            "snapshot": {
+                "created_at": "2013-02-20T08:11:34.000000",
+                "description": "This is yet, another snapshot",
+                "name": "snap-002",
+                "id": "4b502fcb-1f26-45f8-9fe5-3b9a0a52eaf2",
+                "size": 1,
+                "status": "available",
+                "volume_id": "2402b902-0b7a-458c-9c07-7435a826f794"
+            }
+        },
+        "DELETE /snapshots/:id": {}
     },
     "v3": {
         "unscoped": {
