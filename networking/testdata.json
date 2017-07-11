@@ -4,7 +4,7 @@
         "endpoint": "mitm://api.ecloud.com:35357",
         "domain_name": "default",
         "username": "admin",
-        "password": "aLH35KFFBOdkcB13w@",
+        "password": "admin password",
         "emails": [
             "admin@ecloud.com"
         ],
@@ -14,14 +14,14 @@
         "endpoint": "mitm://api.ecloud.com:5000",
         "domain_name": "default",
         "username": "demo",
-        "password": "71WM#R$Lr&yNq^02%f",
+        "password": "user password",
         "emails": [
             "user@ecloud.com"
         ],
         "project_id": "803d363c5c4649b591fd74b96a8c30f5"
     },
     "token": {
-        "id": "gAAAAABZZJYSH1KJjsORFTh-IC5vlw7V-BkPZFqTx7H567c8Dz89XXfOkkl8VbLAB1UZ0Io6TtQSkqcr2w1IgiggdD9SvocQ9bRneSLwACzPWJGSpFq6EBF2eFQGY4KMOzp9e-6y2q73JmjY9DjA_lhhwt7yExXwq0Zo3OmXq4nxUcpc9eDb-TY"
+        "id": "token ID"
     },
     "v2": {
         "scoped": {
