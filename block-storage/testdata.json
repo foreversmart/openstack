@@ -20,8 +20,12 @@
         ],
         "project_id": "803d363c5c4649b591fd74b96a8c30f5"
     },
+    "volume": {
+        "id": "3e2e8000-481d-4d9d-a202-86245e8234e9",
+        "snapshot_id": "7d33d5d5-8220-44e9-b783-cdc3773da00e"
+    },
     "token": {
-        "id": "gAAAAABZZKx5CzLj1h0TFePh7JWXyYbBWiM9P7gm3SVwkYtgPkCU7V7G2BY4EMd6rfmbGFV7PCzh0OqrfoenbkDg40-n6q-2Y77zNeFYUJ-5f-0-1UUL7mnKZ4Biq0o8x1gX-Xwu62AYMfBdywi3LrIHKFZ7TAYQvLf8Lm4cnbrNsyUudLHx1NI"
+        "id": "gAAAAABZZLfR1PRaN2tkjJd4tuvzKpJhSdzhrz_XltBb1pSNsTTAuasx2AqApmxFdYcrGWc4YNduEStJw8m8ph1M9nK6HotjkcMmJzZi3dumtfihhgnbOtnePzOA6eGLGklfnX2etgNknk4PkmTBRvorA_vB_FehpUrFevxVktfpxtohREZ-Dzw"
     },
     "v2": {
         "scoped": {
@@ -212,7 +216,47 @@
                     "8c19174f-4220-44f0-824a-cd1eeef10287"
                 ]
             }
-        }
+        },
+        "GET /volumes/:id": {
+            "volume": {
+                "status": "available",
+                "attachments": [],
+                "links": [{
+                        "href": "http://localhost:8776/v2/0c2eba2c5af04d3f9e9d0d410b371fde/volumes/5aa119a8-d25b-45a7-8d1b-88e127885635",
+                        "rel": "self"
+                    },
+                    {
+                        "href": "http://localhost:8776/0c2eba2c5af04d3f9e9d0d410b371fde/volumes/5aa119a8-d25b-45a7-8d1b-88e127885635",
+                        "rel": "bookmark"
+                    }
+                ],
+                "availability_zone": "nova",
+                "bootable": "false",
+                "os-vol-host-attr:host": "ip-10-168-107-25",
+                "source_volid": null,
+                "snapshot_id": null,
+                "id": "5aa119a8-d25b-45a7-8d1b-88e127885635",
+                "description": "Super volume.",
+                "name": "vol-002",
+                "created_at": "2013-02-25T02:40:21.000000",
+                "volume_type": "None",
+                "os-vol-tenant-attr:tenant_id": "0c2eba2c5af04d3f9e9d0d410b371fde",
+                "size": 1,
+                "os-volume-replication:driver_data": null,
+                "os-volume-replication:extended_status": null,
+                "metadata": {
+                    "contents": "not junk"
+                }
+            }
+        },
+        "PUT /volumes/:id": {
+            "volume": {
+                "name": "vol-003",
+                "description": "This is yet, another volume."
+            }
+        },
+        "DELETE /volumes/:id": {},
+        "POST /volumes/:id/resize": {}
     },
     "v3": {
         "unscoped": {

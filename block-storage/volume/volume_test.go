@@ -16,7 +16,7 @@ func Test_All_Volume(t *testing.T) {
 	jsonheader := http.Header{}
 	jsonheader.Add("Content-Type", "application/json")
 
-	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+apiv2.GetString("admin.project_id")+"/volumes/detail")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes"))
+	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/detail")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes"))
 	// mitm.Pause()
 
 	assertion := assert.New(t)
@@ -43,7 +43,7 @@ func Test_All_Volume_By_Params(t *testing.T) {
 	jsonheader := http.Header{}
 	jsonheader.Add("Content-Type", "application/json")
 
-	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+apiv2.GetString("admin.project_id")+"/volumes")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes"))
+	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes"))
 	// mitm.Pause()
 
 	assertion := assert.New(t)
@@ -70,18 +70,81 @@ func Test_Create_Volume(t *testing.T) {
 	jsonheader := http.Header{}
 	jsonheader.Add("Content-Type", "application/json")
 
-	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+apiv2.GetString("admin.project_id")+"/volumes")).WithResponse(http.StatusAccepted, jsonheader, apiv2.APIString("POST /volumes"))
+	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes")).WithResponse(http.StatusAccepted, jsonheader, apiv2.APIString("POST /volumes"))
 	//mitm.Pause()
 
-	vos := New(openstacker)
 	assertion := assert.New(t)
 
-	_, err := vos.Create(&options.CreateVolumeOpts{
+	_, err := New(openstacker).Create(&options.CreateVolumeOpts{
 		Name:        options.String("test volume"),
 		Description: options.String("test create volume"),
 		VolumeType:  options.String("iscsi"),
 		Size:        options.Int(10),
 	})
 
+	assertion.Nil(err)
+}
+
+// TODO 不成功
+func Test_Show_Volume(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	jsonheader := http.Header{}
+	jsonheader.Add("Content-Type", "application/json")
+
+	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId)).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes/:id"))
+	// fmt.Printf("$$ *%v* \n", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId))
+
+	assertion := assert.New(t)
+
+	volume, err := New(openstacker).Show(testVolumeId)
+	assertion.Nil(err)
+	assertion.NotNil(volume)
+}
+
+func Test_Delete_Volume(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	jsonheader := http.Header{}
+	jsonheader.Add("Content-Type", "application/json")
+
+	mitm.MockRequest("DELETE", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId)).WithResponse(http.StatusAccepted, nil, apiv2.APIString("DELETE /volumes/:id"))
+	//mitm.Pause()
+
+	assertion := assert.New(t)
+
+	err := New(openstacker).Delete(testVolumeId)
+	assertion.Nil(err)
+}
+
+func Test_Resize_Volume(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	jsonheader := http.Header{}
+	jsonheader.Add("Content-Type", "application/json")
+	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId+"/action")).WithResponse(http.StatusAccepted, nil, apiv2.APIString("POST /volumes/:id/resize"))
+	//mitm.Pause()
+
+	assertion := assert.New(t)
+
+	err := New(openstacker).Resize(testVolumeId, 12)
+	assertion.Nil(err)
+}
+
+func Test_Update_Volume(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	jsonheader := http.Header{}
+	jsonheader.Add("Content-Type", "application/json")
+
+	mitm.MockRequest("PUT", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId)).WithResponse(http.StatusOK, nil, apiv2.APIString("PUT /volumes/:id"))
+	//mitm.Pause()
+
+	assertion := assert.New(t)
+
+	err := New(openstacker).Update(testVolumeId, &options.UpdateVolumeOpts{
+		Name:        options.String("update volume name"),
+		Description: options.String("update volume desc"),
+	})
 	assertion.Nil(err)
 }
