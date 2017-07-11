@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 
+	"fmt"
 	"github.com/buger/jsonparser"
 	tokens2 "github.com/rackspace/gophercloud/openstack/identity/v2/tokens"
 	tokens3 "github.com/rackspace/gophercloud/openstack/identity/v3/tokens"
@@ -105,6 +106,75 @@ func (td *TestData) Get(key string) ([]byte, error) {
 	}
 
 	return data, nil
+}
+
+func (td *TestData) ApiSet(key, content string, force bool) (err error) {
+
+	// not force to rewrite key result when key exist
+	if !force {
+		res, err := td.API(key)
+		if err != nil {
+			return err
+		}
+
+		if len(res) > 0 {
+			return nil
+		}
+	}
+
+	var data MapData
+	err = json.Unmarshal(td.Data(), &data)
+	if err != nil {
+		return
+	}
+
+	versionData := data[td.Version()]
+	mapdata, ok := versionData.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("cant assertion version data %s to map data", td.Version())
+
+	}
+
+	mapdata[key] = content
+
+	// pretty json output
+	td.data, err = json.MarshalIndent(data, "", "    ")
+	if err != nil {
+		return
+	}
+
+	return ioutil.WriteFile(td.filename, td.data, 0666)
+}
+
+func (td *TestData) Set(key, content string, force bool) (err error) {
+
+	// not force to rewrite key result when key exist
+	if !force {
+		res, err := td.Get(key)
+		if err != nil {
+			return err
+		}
+
+		if len(res) > 0 {
+			return nil
+		}
+	}
+
+	var data MapData
+	err = json.Unmarshal(td.Data(), &data)
+	if err != nil {
+		return
+	}
+
+	data[key] = content
+
+	// pretty json output
+	td.data, err = json.MarshalIndent(data, "", "    ")
+	if err != nil {
+		return
+	}
+
+	return ioutil.WriteFile(td.filename, td.data, 0666)
 }
 
 func (td *TestData) GetString(key string) string {

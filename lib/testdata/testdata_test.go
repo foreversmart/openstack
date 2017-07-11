@@ -39,6 +39,56 @@ func Test_TestData_Get(t *testing.T) {
 	})
 }
 
+func Test_TestData_Set(t *testing.T) {
+	assertion := assert.New(t)
+	key, value := "test_key", "test_value"
+
+	td := New("v2")
+
+	// clean
+	err := td.Set(key, "", true)
+	assertion.Nil(err)
+	res := td.GetString(key)
+	assertion.Equal("", res)
+
+	// reset force
+	err = td.Set(key, value, true)
+	assertion.Nil(err)
+	res = td.GetString(key)
+	assertion.Equal(value, res)
+
+	// reset not force
+	err = td.Set(key, "test_value2", false)
+	assertion.Nil(err)
+	res = td.GetString(key)
+	assertion.Equal(value, res)
+}
+
+func Test_TestData_ApiSet(t *testing.T) {
+	assertion := assert.New(t)
+	key, value := "test_key", "test_value"
+
+	td := New("v2")
+
+	// clean
+	err := td.ApiSet(key, "", true)
+	assertion.Nil(err)
+	res := td.APIString(key)
+	assertion.Equal("", res)
+
+	// reset force
+	err = td.ApiSet(key, value, true)
+	assertion.Nil(err)
+	res = td.APIString(key)
+	assertion.Equal(value, res)
+
+	// reset not force
+	err = td.ApiSet(key, "test_value2", false)
+	assertion.Nil(err)
+	res = td.APIString(key)
+	assertion.Equal(value, res)
+}
+
 func Test_TestData_API(t *testing.T) {
 	assertion := assert.New(t)
 
