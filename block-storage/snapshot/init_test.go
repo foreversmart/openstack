@@ -5,9 +5,6 @@ import (
 	"os"
 	"testing"
 
-	"fmt"
-	"time"
-
 	"github.com/dolab/httpmitm"
 	"github.com/kirk-enterprise/openstack-golang-sdk/internal"
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/auth"
@@ -44,7 +41,7 @@ func TestMain(m *testing.M) {
 	jsonheader.Add("Content-Type", "application/json")
 	jsonheader.Add("X-Subject-Token", apiv3.GetString("token.id"))
 
-	mocker.MockRequest("POST", apiv3.MockAdminURL("/v3/auth/tokens")).WithResponse(201, jsonheader, apiv3.APIString("scoped"))
+	mocker.MockRequest("POST", apiv3.MockAdminURL("/v3/auth/tokens")).WithResponse(http.StatusCreated, jsonheader, apiv3.APIString("scoped"))
 	// mocker.Pause()
 
 	openstacker = internal.New(apiv3.GetString("admin.endpoint"))
@@ -56,10 +53,10 @@ func TestMain(m *testing.M) {
 			Username:   apiv3.GetString("admin.username"),
 			Password:   apiv3.GetString("admin.password"),
 		},
-		SuccessFunc: func(tokenID string, catalog string, expiredAt time.Time) error {
-			fmt.Printf("New token: %v \n", tokenID)
-			return nil
-		},
+		// SuccessFunc: func(tokenID string, catalog string, expiredAt time.Time) error {
+		// 	fmt.Printf("New token: %v \n", tokenID)
+		// 	return nil
+		// },
 	})
 	if err != nil {
 		panic(err.Error())

@@ -85,21 +85,29 @@ func Test_Create_Volume(t *testing.T) {
 	assertion.Nil(err)
 }
 
-// TODO 不成功
 func Test_Show_Volume(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
 	jsonheader := http.Header{}
 	jsonheader.Add("Content-Type", "application/json")
 
-	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId)).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes/:id"))
-	// fmt.Printf("$$ *%v* \n", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId))
+	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId)).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes/:id"))
 
 	assertion := assert.New(t)
 
 	volume, err := New(openstacker).Show(testVolumeId)
 	assertion.Nil(err)
 	assertion.NotNil(volume)
+
+	assertion.Equal(apiv2.APIString("GET /volumes/:id.volume.id"), volume.ID)
+	assertion.Equal(apiv2.APIString("GET /volumes/:id.volume.name"), volume.Name)
+	assertion.Equal(apiv2.APIString("GET /volumes/:id.volume.size"), strconv.Itoa(volume.Size))
+	assertion.Equal(apiv2.APIString("GET /volumes/:id.volume.status"), volume.Status)
+	assertion.Equal(apiv2.APIString("GET /volumes/:id.volume.description"), volume.Description)
+	assertion.Equal(apiv2.APIString("GET /volumes/:id.volume.volume_type"), volume.VolumeType)
+	assertion.Empty(volume.SnapshotID)
+	assertion.Equal(apiv2.APIString("GET /volumes/:id.volume.bootable"), volume.Bootable)
+	assertion.Equal(apiv2.APIString("GET /volumes/:id.volume.created_at"), volume.CreatedAt)
 }
 
 func Test_Delete_Volume(t *testing.T) {
