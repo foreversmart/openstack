@@ -16,9 +16,8 @@ type NetworkModel struct {
 	TenantID     string    `mapstructure:"tenant_id" json:"tenant_id"`
 	Shared       bool      `mapstructure:"shared" json:"shared"`
 	AdminStateUp bool      `mapstructure:"admin_state_up" json:"admin_state_up"`
-	External     bool      `json:"router:external"`
-	RateLimit    int       `json:"rate_limit"`
-	CreatedAt    time.Time `json:"created_at"`
+	CreatedAt    time.Time `mapstructure:"created_at" json:"created_at"`
+	External     bool      `mapstructure:"router:external"  json:"router:external"`
 }
 
 func ExtractNetwork(result gophercloud.Result) (network *NetworkModel, err error) {
