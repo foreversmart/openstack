@@ -171,18 +171,6 @@
                 }
             }
         },
-        "POST /credentials": {
-            "credential": {
-                "blob": "",
-                "id": "06aa5d720a3d42aa9329e7c0f3383603",
-                "links": {
-                    "self": "http://api.ecloud.com:35357/v3/credentials/06aa5d720a3d42aa9329e7c0f3383603"
-                },
-                "project_id": "29041f5248d44c0c938d1677def87bc6",
-                "type": "kirk",
-                "user_id": "d98fba22c3f04b6eb1c0639a30c2ff48"
-            }
-        },
         "GET /credentials": {
             "credentials": [
                 {
@@ -202,10 +190,9 @@
                 "self": "http://api.ecloud.com:35357/v3/credentials"
             }
         },
-        "DELETE /credentials/:id": {},
-        "PATCH /credentials/:id": {
+        "POST /credentials": {
             "credential": {
-                "blob": "{\"user\":{\"id\":123321},\"access_key\":{\"id\":\"ak\",\"secret\":\"sk\"}}",
+                "blob": "",
                 "id": "06aa5d720a3d42aa9329e7c0f3383603",
                 "links": {
                     "self": "http://api.ecloud.com:35357/v3/credentials/06aa5d720a3d42aa9329e7c0f3383603"
@@ -215,6 +202,7 @@
                 "user_id": "d98fba22c3f04b6eb1c0639a30c2ff48"
             }
         },
+        "DELETE /credentials/:id": {},
         "GET /credentials/:id": {
             "credential": {
                 "blob": "",
@@ -227,15 +215,16 @@
                 "user_id": "d98fba22c3f04b6eb1c0639a30c2ff48"
             }
         },
-        "POST /domains": {
-            "domain": {
-                "description": "The domain for tesing",
-                "enabled": true,
-                "id": "f8d184f66fee4bef83d558fd55fc9514",
+        "PATCH /credentials/:id": {
+            "credential": {
+                "blob": "{\"user\":{\"id\":123321},\"access_key\":{\"id\":\"ak\",\"secret\":\"sk\"}}",
+                "id": "06aa5d720a3d42aa9329e7c0f3383603",
                 "links": {
-                    "self": "http://api.ecloud.com:35357/v3/domains/f8d184f66fee4bef83d558fd55fc9514"
+                    "self": "http://api.ecloud.com:35357/v3/credentials/06aa5d720a3d42aa9329e7c0f3383603"
                 },
-                "name": "testing domain"
+                "project_id": "29041f5248d44c0c938d1677def87bc6",
+                "type": "kirk",
+                "user_id": "d98fba22c3f04b6eb1c0639a30c2ff48"
             }
         },
         "GET /domains": {
@@ -265,6 +254,18 @@
                 "self": "http://api.ecloud.com:35357/v3/domains"
             }
         },
+        "POST /domains": {
+            "domain": {
+                "description": "The domain for tesing",
+                "enabled": true,
+                "id": "f8d184f66fee4bef83d558fd55fc9514",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/domains/f8d184f66fee4bef83d558fd55fc9514"
+                },
+                "name": "testing domain"
+            }
+        },
+        "DELETE /domains/:id": {},
         "GET /domains/:id": {
             "domain": {
                 "description": "The default domain",
@@ -276,7 +277,6 @@
                 "name": "Default"
             }
         },
-        "DELETE /domains/:id": {},
         "PATCH /domains/:id": {
             "domain": {
                 "description": "The domain for tesing",
@@ -323,6 +323,7 @@
                 "url": "http://api.ecloud.com:8989/kirk"
             }
         },
+        "DELETE /endpoints/:id": {},
         "GET /endpoints/:id": {
             "endpoint": {
                 "enabled": false,
@@ -337,7 +338,6 @@
                 "url": "http://api.ecloud.com:8989/kirk"
             }
         },
-        "DELETE /endpoints/:id": {},
         "PATCH /endpoints/:id": {
             "endpoint": {
                 "enabled": true,
@@ -350,17 +350,6 @@
                 "region_id": "RegionOne",
                 "service_id": "9688464c0f1d430ab22944416338251f",
                 "url": "http://api.ecloud.com:8989/kirk"
-            }
-        },
-        "POST /groups": {
-            "group": {
-                "description": "",
-                "domain_id": "default",
-                "id": "acf3a97b0f884d40878a0ceb43d88390",
-                "links": {
-                    "self": "http://api.ecloud.com:35357/v3/groups/acf3a97b0f884d40878a0ceb43d88390"
-                },
-                "name": "testing group"
             }
         },
         "GET /groups": {
@@ -381,9 +370,9 @@
                 "self": "http://api.ecloud.com:35357/v3/groups"
             }
         },
-        "PATCH /groups/:id": {
+        "POST /groups": {
             "group": {
-                "description": "testing group description",
+                "description": "",
                 "domain_id": "default",
                 "id": "acf3a97b0f884d40878a0ceb43d88390",
                 "links": {
@@ -396,6 +385,17 @@
         "GET /groups/:id": {
             "group": {
                 "description": "",
+                "domain_id": "default",
+                "id": "acf3a97b0f884d40878a0ceb43d88390",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/groups/acf3a97b0f884d40878a0ceb43d88390"
+                },
+                "name": "testing group"
+            }
+        },
+        "PATCH /groups/:id": {
+            "group": {
+                "description": "testing group description",
                 "domain_id": "default",
                 "id": "acf3a97b0f884d40878a0ceb43d88390",
                 "links": {
@@ -426,8 +426,8 @@
                 }
             ]
         },
-        "HEAD /groups/:id/users/:id": {},
         "DELETE /groups/:id/users/:id": {},
+        "HEAD /groups/:id/users/:id": {},
         "PUT /groups/:id/users/:id": {},
         "GET /policies": {
             "links": {
@@ -457,16 +457,6 @@
             }
         },
         "DELETE /policies/:id": {},
-        "PATCH /policies/:id": {
-            "policy": {
-                "blob": "{\"user\":{\"id\":123321},\"access_key\":{\"id\":\"ak\",\"secret\":\"sk\"}}",
-                "id": "d0203b8928fe434cb563cba11190f1f4",
-                "links": {
-                    "self": "http://api.ecloud.com:35357/v3/policies/d0203b8928fe434cb563cba11190f1f4"
-                },
-                "type": ""
-            }
-        },
         "GET /policies/:id": {
             "policy": {
                 "blob": "{}",
@@ -475,6 +465,16 @@
                     "self": "http://api.ecloud.com:35357/v3/policies/d0203b8928fe434cb563cba11190f1f4"
                 },
                 "type": "application/json"
+            }
+        },
+        "PATCH /policies/:id": {
+            "policy": {
+                "blob": "{\"user\":{\"id\":123321},\"access_key\":{\"id\":\"ak\",\"secret\":\"sk\"}}",
+                "id": "d0203b8928fe434cb563cba11190f1f4",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/policies/d0203b8928fe434cb563cba11190f1f4"
+                },
+                "type": ""
             }
         },
         "GET /projects": {
@@ -512,6 +512,7 @@
                 "parent_id": "default"
             }
         },
+        "DELETE /projects/:id": {},
         "GET /projects/:id": {
             "project": {
                 "description": "",
@@ -541,7 +542,6 @@
                 "parent_id": "default"
             }
         },
-        "DELETE /projects/:id": {},
         "GET /projects/:id/users/:id/roles": {
             "links": {
                 "next": null,
@@ -559,9 +559,9 @@
                 }
             ]
         },
-        "PUT /projects/:id/users/:id/roles/:id": {},
         "DELETE /projects/:id/users/:id/roles/:id": {},
         "HEAD /projects/:id/users/:id/roles/:id": {},
+        "PUT /projects/:id/users/:id/roles/:id": {},
         "GET /regions": {
             "links": {
                 "next": null,
@@ -590,16 +590,6 @@
             }
         },
         "DELETE /regions/:id": {},
-        "PATCH /regions/:id": {
-            "region": {
-                "description": "Testing region for kirk",
-                "id": "TestingRegion",
-                "links": {
-                    "self": "http://api.ecloud.com:35357/v3/regions/TestingRegion"
-                },
-                "parent_region_id": null
-            }
-        },
         "GET /regions/:id": {
             "region": {
                 "description": "",
@@ -610,14 +600,14 @@
                 "parent_region_id": null
             }
         },
-        "POST /roles": {
-            "role": {
-                "domain_id": null,
-                "id": "110342312f8f4c4b9350f35b86e48d08",
+        "PATCH /regions/:id": {
+            "region": {
+                "description": "Testing region for kirk",
+                "id": "TestingRegion",
                 "links": {
-                    "self": "http://api.ecloud.com:35357/v3/roles/110342312f8f4c4b9350f35b86e48d08"
+                    "self": "http://api.ecloud.com:35357/v3/regions/TestingRegion"
                 },
-                "name": "KirkAdmin"
+                "parent_region_id": null
             }
         },
         "GET /roles": {
@@ -652,6 +642,16 @@
                     "name": "admin"
                 }
             ]
+        },
+        "POST /roles": {
+            "role": {
+                "domain_id": null,
+                "id": "110342312f8f4c4b9350f35b86e48d08",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/roles/110342312f8f4c4b9350f35b86e48d08"
+                },
+                "name": "KirkAdmin"
+            }
         },
         "DELETE /roles/:id": {},
         "GET /roles/:id": {
@@ -706,18 +706,6 @@
             }
         },
         "DELETE /services/:id": {},
-        "PATCH /services/:id": {
-            "service": {
-                "description": "Kirk custom service",
-                "enabled": true,
-                "id": "9688464c0f1d430ab22944416338251f",
-                "links": {
-                    "self": "http://api.ecloud.com:35357/v3/services/9688464c0f1d430ab22944416338251f"
-                },
-                "name": "testing service",
-                "type": "kirk"
-            }
-        },
         "GET /services/:id": {
             "service": {
                 "description": "Kirk custom service",
@@ -730,17 +718,16 @@
                 "type": "kirk"
             }
         },
-        "POST /users": {
-            "user": {
-                "domain_id": "default",
+        "PATCH /services/:id": {
+            "service": {
+                "description": "Kirk custom service",
                 "enabled": true,
-                "id": "d98fba22c3f04b6eb1c0639a30c2ff48",
+                "id": "9688464c0f1d430ab22944416338251f",
                 "links": {
-                    "self": "http://api.ecloud.com:35357/v3/users/d98fba22c3f04b6eb1c0639a30c2ff48"
+                    "self": "http://api.ecloud.com:35357/v3/services/9688464c0f1d430ab22944416338251f"
                 },
-                "name": "testing kirk",
-                "options": {},
-                "password_expires_at": null
+                "name": "testing service",
+                "type": "kirk"
             }
         },
         "GET /users": {
@@ -765,16 +752,10 @@
                 }
             ]
         },
-        "DELETE /users/:id": {},
-        "PATCH /users/:id": {
+        "POST /users": {
             "user": {
-                "default_project_id": "29041f5248d44c0c938d1677def87bc6",
                 "domain_id": "default",
-                "email": "kirk@api.testing",
                 "enabled": true,
-                "extra": {
-                    "email": "kirk@api.testing"
-                },
                 "id": "d98fba22c3f04b6eb1c0639a30c2ff48",
                 "links": {
                     "self": "http://api.ecloud.com:35357/v3/users/d98fba22c3f04b6eb1c0639a30c2ff48"
@@ -784,10 +765,29 @@
                 "password_expires_at": null
             }
         },
+        "DELETE /users/:id": {},
         "GET /users/:id": {
             "user": {
                 "domain_id": "default",
                 "enabled": true,
+                "id": "d98fba22c3f04b6eb1c0639a30c2ff48",
+                "links": {
+                    "self": "http://api.ecloud.com:35357/v3/users/d98fba22c3f04b6eb1c0639a30c2ff48"
+                },
+                "name": "testing kirk",
+                "options": {},
+                "password_expires_at": null
+            }
+        },
+        "PATCH /users/:id": {
+            "user": {
+                "default_project_id": "29041f5248d44c0c938d1677def87bc6",
+                "domain_id": "default",
+                "email": "kirk@api.testing",
+                "enabled": true,
+                "extra": {
+                    "email": "kirk@api.testing"
+                },
                 "id": "d98fba22c3f04b6eb1c0639a30c2ff48",
                 "links": {
                     "self": "http://api.ecloud.com:35357/v3/users/d98fba22c3f04b6eb1c0639a30c2ff48"

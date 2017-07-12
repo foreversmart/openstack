@@ -35,6 +35,12 @@ func (m MapData) MarshalJSON() ([]byte, error) {
 				arr[i], arr[j] = arr[j], arr[i]
 				arrOrigin[i], arrOrigin[j] = arrOrigin[j], arrOrigin[i]
 			}
+
+			// sort key equal compare origin key
+			if (strings.Compare(arr[i], arr[j]) == 0) && (strings.Compare(arrOrigin[i], arrOrigin[j]) > 0) {
+				arr[i], arr[j] = arr[j], arr[i]
+				arrOrigin[i], arrOrigin[j] = arrOrigin[j], arrOrigin[i]
+			}
 		}
 	}
 
