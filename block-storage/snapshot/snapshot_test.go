@@ -10,6 +10,27 @@ import (
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
 )
 
+func Test_Create_Snapshot(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	jsonheader := http.Header{}
+	jsonheader.Add("Content-Type", "application/json")
+
+	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/snapshots")).WithResponse(http.StatusAccepted, jsonheader, apiv2.APIString("POST /snapshots"))
+	// mitm.Pause()
+
+	assertion := assert.New(t)
+
+	_, err := New(openstacker).Create(options.CreateSnapshotOpts{
+		VolumeID:    options.String(testVolumeId),
+		Name:        options.String("test snapshot"),
+		Description: options.String("test create snapshot"),
+		Force:       options.Bool(false),
+	})
+
+	assertion.Nil(err)
+}
+
 func Test_All_Snapshot(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
@@ -56,27 +77,6 @@ func Test_Show_Snapshot(t *testing.T) {
 	assertion.Equal(apiv2.APIString("GET /snapshots/:id.snapshot.name"), snapshot.Name)
 	assertion.Equal(apiv2.APIString("GET /snapshots/:id.snapshot.size"), strconv.Itoa(snapshot.Size))
 	assertion.Equal(apiv2.APIString("GET /snapshots/:id.snapshot.volume_id"), snapshot.VolumeID)
-}
-
-func Test_Create_Snapshot(t *testing.T) {
-	mitm := mocker.StubDefaultTransport(t)
-
-	jsonheader := http.Header{}
-	jsonheader.Add("Content-Type", "application/json")
-
-	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/snapshots")).WithResponse(http.StatusAccepted, jsonheader, apiv2.APIString("POST /snapshots"))
-	// mitm.Pause()
-
-	assertion := assert.New(t)
-
-	_, err := New(openstacker).Create(options.CreateSnapshotOpts{
-		VolumeID:    options.String(testVolumeId),
-		Name:        options.String("test snapshot"),
-		Description: options.String("test create snapshot"),
-		Force:       options.Bool(false),
-	})
-
-	assertion.Nil(err)
 }
 
 func Test_Update_Snapshot(t *testing.T) {

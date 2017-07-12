@@ -10,6 +10,27 @@ import (
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
 )
 
+func Test_Create_Volume(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	jsonheader := http.Header{}
+	jsonheader.Add("Content-Type", "application/json")
+
+	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes")).WithResponse(http.StatusAccepted, jsonheader, apiv2.APIString("POST /volumes"))
+	//mitm.Pause()
+
+	assertion := assert.New(t)
+
+	_, err := New(openstacker).Create(&options.CreateVolumeOpts{
+		Name:        options.String("test volume"),
+		Description: options.String("test create volume"),
+		VolumeType:  options.String("iscsi"),
+		Size:        options.Int(10),
+	})
+
+	assertion.Nil(err)
+}
+
 func Test_All_Volume(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
@@ -64,27 +85,6 @@ func Test_All_Volume_By_Params(t *testing.T) {
 	assertion.Equal(apiv2.APIString("GET /volumes.volumes.0.attachments.0.id"), volumes[0].Attachments[0].ID)
 }
 
-func Test_Create_Volume(t *testing.T) {
-	mitm := mocker.StubDefaultTransport(t)
-
-	jsonheader := http.Header{}
-	jsonheader.Add("Content-Type", "application/json")
-
-	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes")).WithResponse(http.StatusAccepted, jsonheader, apiv2.APIString("POST /volumes"))
-	//mitm.Pause()
-
-	assertion := assert.New(t)
-
-	_, err := New(openstacker).Create(&options.CreateVolumeOpts{
-		Name:        options.String("test volume"),
-		Description: options.String("test create volume"),
-		VolumeType:  options.String("iscsi"),
-		Size:        options.Int(10),
-	})
-
-	assertion.Nil(err)
-}
-
 func Test_Show_Volume(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
@@ -108,21 +108,6 @@ func Test_Show_Volume(t *testing.T) {
 	assertion.Empty(volume.SnapshotID)
 	assertion.Equal(apiv2.APIString("GET /volumes/:id.volume.bootable"), volume.Bootable)
 	assertion.Equal(apiv2.APIString("GET /volumes/:id.volume.created_at"), volume.CreatedAt)
-}
-
-func Test_Delete_Volume(t *testing.T) {
-	mitm := mocker.StubDefaultTransport(t)
-
-	jsonheader := http.Header{}
-	jsonheader.Add("Content-Type", "application/json")
-
-	mitm.MockRequest("DELETE", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId)).WithResponse(http.StatusAccepted, nil, apiv2.APIString("DELETE /volumes/:id"))
-	//mitm.Pause()
-
-	assertion := assert.New(t)
-
-	err := New(openstacker).Delete(testVolumeId)
-	assertion.Nil(err)
 }
 
 func Test_Resize_Volume(t *testing.T) {
@@ -154,5 +139,20 @@ func Test_Update_Volume(t *testing.T) {
 		Name:        options.String("update volume name"),
 		Description: options.String("update volume desc"),
 	})
+	assertion.Nil(err)
+}
+
+func Test_Delete_Volume(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	jsonheader := http.Header{}
+	jsonheader.Add("Content-Type", "application/json")
+
+	mitm.MockRequest("DELETE", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId)).WithResponse(http.StatusAccepted, nil, apiv2.APIString("DELETE /volumes/:id"))
+	//mitm.Pause()
+
+	assertion := assert.New(t)
+
+	err := New(openstacker).Delete(testVolumeId)
 	assertion.Nil(err)
 }
