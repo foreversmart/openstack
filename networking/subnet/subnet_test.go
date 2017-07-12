@@ -6,7 +6,6 @@ import (
 
 	"github.com/golib/assert"
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
-	"github.com/rackspace/gophercloud/openstack/networking/v2/subnets"
 )
 
 const (
@@ -22,12 +21,12 @@ func Test_Create_Subnet(t *testing.T) {
 	testTenantID := apiv3.APIString("POST /subnets.subnet.project_id")
 	testNetworkID := apiv3.APIString("POST /subnets.subnet.network_id")
 
-	opts := &subnets.CreateOpts{
-		Name:      "testSubnet",
+	opts := &options.CreateSubnetOpts{
+		Name:      options.String("testSubnet"),
 		IPVersion: 4,
-		CIDR:      "172.30.248.0/22",
-		TenantID:  testTenantID,
-		NetworkID: testNetworkID,
+		CIDR:      options.String("172.30.248.0/22"),
+		TenantID:  options.String(testTenantID),
+		NetworkID: options.String(testNetworkID),
 	}
 
 	assertion := assert.New(t)

@@ -25,14 +25,22 @@ func New(client ifaces.Openstacker) *Subnet {
 	}
 }
 
-func (n *Subnet) Create(opts *subnets.CreateOpts) (subnet *models.SubnetModel, err error) {
+func (n *Subnet) Create(opts *options.CreateSubnetOpts) (subnet *models.SubnetModel, err error) {
+	if !opts.IsValid() {
+		return nil, errors.ErrInvalidParams
+	}
+
 	client, err := n.Client.NetworkClient()
 	if err != nil {
 		return subnet, err
 	}
 
-	result := subnets.Create(client, opts)
-	return models.ExtractSubnet(result.Result)
+	var res gophercloud.Result
+	_, res.Err = client.Post(client.ServiceURL(SubnetUrl), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
+		OkCodes: []int{201},
+	})
+
+	return models.ExtractSubnet(res)
 }
 
 func (n *Subnet) All() (subnetInfos []*models.SubnetModel, err error) {
@@ -40,6 +48,10 @@ func (n *Subnet) All() (subnetInfos []*models.SubnetModel, err error) {
 }
 
 func (n *Subnet) AllByParams(opts *options.ListSubnetOpts) (subnetInfos []*models.SubnetModel, err error) {
+	if !opts.IsValid() {
+		return nil, errors.ErrInvalidParams
+	}
+
 	client, err := n.Client.NetworkClient()
 	if err != nil {
 		return nil, err
@@ -68,6 +80,10 @@ func (n *Subnet) Show(id string) (info *models.SubnetModel, err error) {
 }
 
 func (n *Subnet) Update(id string, opts *options.UpdateSubnetOpts) (groupInfo *models.SubnetModel, err error) {
+	if id == "" || !opts.IsValid() {
+		return nil, errors.ErrInvalidParams
+	}
+
 	client, err := n.Client.NetworkClient()
 	if err != nil {
 		return

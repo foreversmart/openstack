@@ -7,6 +7,37 @@ import (
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/models"
 )
 
+// CreateOpts represents the attributes used when creating a new subnet.
+type CreateSubnetOpts struct {
+	// Required
+	NetworkID *string
+	CIDR      *string
+	// Optional
+	Name            *string
+	TenantID        *string
+	AllocationPools []*models.AllocationPool
+	GatewayIP       *string
+	NoGateway       bool
+	IPVersion       int
+	EnableDHCP      *bool
+	DNSNameservers  []*string
+	HostRoutes      []*models.HostRoute
+}
+
+func (opts *CreateSubnetOpts) IsValid() bool {
+	return opts.NetworkID != nil && opts.CIDR != nil
+}
+
+func (opts *CreateSubnetOpts) ToPayload() interface{} {
+	type request struct {
+		Subnet *CreateSubnetOpts `json:"subnet"`
+	}
+
+	return request{
+		Subnet: opts,
+	}
+}
+
 type UpdateSubnetOpts struct {
 	Name           *string                  `json:"name"`
 	EnableDHCP     *bool                    `json:"enable_dhcp"`
@@ -15,6 +46,10 @@ type UpdateSubnetOpts struct {
 	HostRoutes     []*models.HostRoute      `json:"host_routes"`
 	GatewayIP      *string                  `json:"gateway_ip"`
 	Description    *string                  `json:"description"`
+}
+
+func (opts *UpdateSubnetOpts) IsValid() bool {
+	return true
 }
 
 func (opts *UpdateSubnetOpts) ToPayload() interface{} {
