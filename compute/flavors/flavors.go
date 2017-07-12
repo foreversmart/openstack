@@ -6,6 +6,7 @@ import (
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/models"
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
 	"github.com/rackspace/gophercloud"
+	"qbox.us/gogo/lib/evm/platform"
 )
 
 const (
@@ -28,6 +29,11 @@ func (f *Flavors) All() (flavors []*models.FlavorModel, err error) {
 	return f.AllByParams(nil)
 }
 func (f *Flavors) AllByParams(opts *options.ListFlavorsOpts) (flavors []*models.FlavorModel, err error) {
+	if !opts.IsValid() {
+		err = errors.ErrInvalidParams
+		return
+	}
+
 	client, err := f.Client.AdminIdentityClientV3()
 	if err != nil {
 		return
@@ -44,10 +50,15 @@ func (f *Flavors) AllByParams(opts *options.ListFlavorsOpts) (flavors []*models.
 }
 
 func (f *Flavors) Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorModel, err error) {
-	client, err := f.Client.AdminIdentityClientV3()
+
+	client, err := f.Client.ComputerClient()
 
 	if err != nil {
 		return
+	}
+
+	if !opts.IsValid() {
+		return nil, platform.ErrInvalidParams
 	}
 
 	var result gophercloud.Result
@@ -61,8 +72,13 @@ func (f *Flavors) Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorM
 
 func (f *Flavors) Show(flavorID string) (flavor *models.FlavorModel, err error) {
 	client, err := f.Client.AdminIdentityClientV3()
+
 	if err != nil {
 		return
+	}
+
+	if flavorID == "" {
+		return nil, errors.ErrInvalidParams
 	}
 
 	var result gophercloud.Result
@@ -80,6 +96,7 @@ func (f *Flavors) Delete(flavorID string) (err error) {
 	}
 
 	client, err := f.Client.AdminIdentityClientV3()
+
 	if err != nil {
 		return
 	}

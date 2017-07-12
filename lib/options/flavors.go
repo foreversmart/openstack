@@ -7,61 +7,67 @@ import (
 
 type ListFlavorsOpts struct {
 	// Sorts by a flavor attribute, Optional
-	SortKey *string `sort_key`
+	SortKey *string `json:sort_key`
 
 	// Sort direction. A valid value is asc (ascending) or desc (descending).
 	// Default is asc, Optional
-	SortDir *string `sort_dir`
+	SortDir *string `json:sort_dir`
 
 	// Requests a page size of items, Optional
-	Limit int `limit`
+	Limit int `json:limit`
 
 	// The ID of the last-seen item, Optional
-	Maker *string `maker`
+	Maker *string `json:maker`
 
 	// Filters the response by a minimum disk space, in GiB.
 	// For example, 100. Optional
-	MinDisk *string `min_disk`
+	MinDisk *string `json:min_disk`
 
 	// Filters the response by a minimum RAM, in MB.
 	// For example, 512.Optional
-	MinRam *string `min_ram`
+	MinRam *string `json:min_ram`
 
 	// Filters the flavor list by only public flavors. Optional
-	IsPublic bool `is_public`
+	IsPublic bool `json:is_public`
+}
+
+func (opts *ListFlavorsOpts) IsValid() bool {
+	return true
 }
 
 func (opts *ListFlavorsOpts) ToQuery() (param url.Values) {
 	param = url.Values{}
 
-	if opts != nil {
-		if opts.SortKey != nil {
-			param.Add("sort_key", *opts.SortKey)
-		}
-		if opts.SortDir != nil {
-			param.Add("sort_dir", *opts.SortDir)
-		}
+	if opts == nil {
+		return
+	}
 
-		if opts.Limit > 0 {
-			param.Add("limit", strconv.Itoa(opts.Limit))
-		}
+	if opts.SortKey != nil {
+		param.Add("sort_key", *opts.SortKey)
+	}
+	if opts.SortDir != nil {
+		param.Add("sort_dir", *opts.SortDir)
+	}
 
-		if opts.Maker != nil {
-			param.Add("maker", *opts.Maker)
-		}
+	if opts.Limit > 0 {
+		param.Add("limit", strconv.Itoa(opts.Limit))
+	}
 
-		if opts.MinDisk != nil {
-			param.Add("min_disk", *opts.MinDisk)
-		}
-		if opts.MinRam != nil {
-			param.Add("min_ram", *opts.MinRam)
-		}
-		if opts.IsPublic {
-			param.Add("is_public", "true")
-		} else if !opts.IsPublic {
-			param.Add("is_public", "false")
-		}
+	if opts.Maker != nil {
+		param.Add("maker", *opts.Maker)
+	}
 
+	if opts.MinDisk != nil {
+		param.Add("min_disk", *opts.MinDisk)
+	}
+	if opts.MinRam != nil {
+		param.Add("min_ram", *opts.MinRam)
+	}
+
+	if opts.IsPublic {
+		param.Add("is_public", "true")
+	} else {
+		param.Add("is_public", "false")
 	}
 
 	return param
@@ -69,23 +75,34 @@ func (opts *ListFlavorsOpts) ToQuery() (param url.Values) {
 
 type CreateFlavorOpts struct {
 	// The display name of a flavor.
-	Name *string `name`
+	Name *string `json:"name,omitempty"`
 
 	// The ID of the flavor, Optional.
-	ID *string `id`
+	ID *string `json:"id,omitempty"`
 
 	// The amount of RAM a flavor has, MB.
-	Ram *int `ram`
+	Ram int `json:"ram,omitempty"`
 
 	// The size of the root disk that will be created, GB.
-	Disk *int `disk`
+	Disk int `json:"disk,omitempty"`
 
 	// The size of a dedicated swap disk that will be allocated, MB.
 	// Optional
-	Swap float64 `swap`
+	Swap float64 `json:"swap,vcpus"`
 
 	// The receive / transmit factor, It defaults to 1.0.
-	RxtxFactor float64 `json:"rxtx_factor"`
+	// RxtxFactor float64 `json:"rxtx_factor,omitempty`
+
+	//The number of virtual CPUs that will be allocated to the server.
+	Vcpus int `json:"vcpus,vcpus"`
+}
+
+func (opts *CreateFlavorOpts) IsValid() bool {
+	if opts.Name == nil || opts.Ram < 0 || opts.Disk < 0 || opts.Vcpus < 0 {
+		return false
+	}
+
+	return true
 }
 
 func (opts *CreateFlavorOpts) ToPayLoad() interface{} {
