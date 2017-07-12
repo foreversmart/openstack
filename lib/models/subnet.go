@@ -9,14 +9,15 @@ type SubnetModel struct {
 	ID              string           `mapstructure:"id" json:"id"`
 	NetworkID       string           `mapstructure:"network_id" json:"network_id"`
 	Name            string           `mapstructure:"name"  json:"name"`
-	IpVersion       int              `mapstructure:"ip_version" json:"ip_version"`
-	Cidr            string           `mapstructure:"cidr" json:"cidr"`
-	GatewayIp       string           `mapstructure:"gateway_ip" json:"gateway_ip"`
-	DnsNameservers  []string         `mapstructure:"dns_nameservers" json:"dns_nameservers"`
+	IPVersion       int              `mapstructure:"ip_version" json:"ip_version"`
+	CIDR            string           `mapstructure:"cidr" json:"cidr"`
+	GatewayIP       string           `mapstructure:"gateway_ip" json:"gateway_ip"`
+	DNSNameservers  []string         `mapstructure:"dns_nameservers" json:"dns_nameservers"`
 	AllocPools      []AllocationPool `mapstructure:"allocation_pools"  json:"allocation_pools"`
 	HostRoutes      []HostRoute      `mapstructure:"host_routes" json:"host_routes"`
-	EnableDhcp      bool             `mapstructure:"enable_dhcp" json:"enable_dhcp"`
+	EnableDHCP      bool             `mapstructure:"enable_dhcp" json:"enable_dhcp"`
 	TenantID        string           `mapstructure:"tenant_id" json:"tenant_id"`
+	ProjectID       string           `mapstructure:"project_id" json:"project_id"`
 	Ipv6RaMode      bool             `mapstructure:"ipv6_ra_mode" json:"ipv6_ra_mode"`
 	Ipv6AddressMode bool             `mapstructure:"ipv6_address_mode" json:"ipv6_address_mode"`
 	CreatedAt       string           `mapstructure:"created_at" json:"created_at"`
