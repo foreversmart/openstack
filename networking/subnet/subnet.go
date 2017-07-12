@@ -39,18 +39,18 @@ func (n *Subnet) All() (subnetInfos []*models.SubnetModel, err error) {
 	return n.AllByParams(nil)
 }
 
-func (n *Subnet) AllByParams(opts *subnets.ListOpts) (subnetInfos []*models.SubnetModel, err error) {
+func (n *Subnet) AllByParams(opts *options.ListSubnetOpts) (subnetInfos []*models.SubnetModel, err error) {
 	client, err := n.Client.NetworkClient()
 	if err != nil {
 		return nil, err
 	}
 
-	page, err := subnets.List(client, opts).AllPages()
-	if err != nil {
-		return
-	}
+	var result gophercloud.Result
+	_, result.Err = client.Get(client.ServiceURL(SubnetUrl)+"?"+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
+		OkCodes: []int{200},
+	})
 
-	return models.ExtractSubnetsByBody(page.GetBody())
+	return models.ExtractSubnets(result)
 }
 
 func (n *Subnet) Show(id string) (info *models.SubnetModel, err error) {
