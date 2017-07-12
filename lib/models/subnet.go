@@ -34,25 +34,30 @@ type HostRoute struct {
 	NextHop         string `mapstructure:"nexthop" json:"nexthop"`
 }
 
-func ExtractSubnet(result gophercloud.Result) (subnet *SubnetModel, err error) {
-	if result.Err != nil {
-		err = result.Err
-		return
+func ExtractSubnet(r gophercloud.Result) (subnet *SubnetModel, err error) {
+	if r.Err != nil {
+		return nil, r.Err
 	}
 
-	var response struct {
+	var resp struct {
 		Subnet *SubnetModel `mapstructure:"subnet" json:"subnet"`
 	}
 
-	err = mapstructure.Decode(result.Body, &response)
-	return response.Subnet, err
+	err = mapstructure.Decode(r.Body, &resp)
+	if err == nil {
+		subnet = resp.Subnet
+	}
+	return
 }
 
 func ExtractSubnetsByBody(body interface{}) (networks []*SubnetModel, err error) {
-	var response struct {
+	var resp struct {
 		NetworkInfos []*SubnetModel `mapstructure:"subnets" json:"subnets"`
 	}
 
-	err = mapstructure.Decode(body, &response)
-	return response.NetworkInfos, err
+	err = mapstructure.Decode(body, &resp)
+	if err == nil {
+		networks = resp.NetworkInfos
+	}
+	return
 }
