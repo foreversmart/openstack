@@ -10,15 +10,16 @@ import (
 
 func Test_All_Domain(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
-
+	//mitm.SetRessponseSetter(apiv3)
 	mitm.MockRequest("GET", apiv3.MockAdminURL("/v3/domains")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /domains"))
-	// mitm.Pause()
+	//mitm.ResponseSave("GET /domains", true)
+	//mitm.Pause()
 
 	assertion := assert.New(t)
 
 	domains, err := New(openstacker).All(options.ListDomainOpts{})
 	assertion.Nil(err)
-	assertion.EqualValues(1, len(domains))
+	assertion.EqualValues(2, len(domains))
 	assertion.Equal(apiv3.APIString("GET /domains.domains.0.id"), domains[0].ID)
 	assertion.True(domains[0].Enabled)
 }
