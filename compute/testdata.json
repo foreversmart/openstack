@@ -1,0 +1,213 @@
+{
+    "endpoint": "mitm://api.ecloud.com",
+    "admin": {
+        "endpoint": "mitm://api.ecloud.com:35357",
+        "domain_name": "default",
+        "username": "admin",
+        "password": "admin",
+        "emails": [
+            "admin@ecloud.com"
+        ],
+        "project_id": "fcfeddf071284e4a8c54760d4bf67c29"
+    },
+    "user": {
+        "endpoint": "mitm://api.ecloud.com:5000",
+        "domain_name": "default",
+        "username": "demo",
+        "password": "71WM#R$Lr&yNq^02%f",
+        "emails": [
+            "user@ecloud.com"
+        ],
+        "project_id": "803d363c5c4649b591fd74b96a8c30f5"
+    },
+    "token": {
+        "id": "gAAAAABZZf17CRuw__OJ21xpfgdKKwGF-ObQMH3z5oF6vrJ5-A-QDptDeds8_Jh_DIIl1U-z8PleIH2dLoO8N16B5x5IYQtCQFSV_cp93pBAIxBktTN7u6y4g4C3681uCpHSSmJL0i1v6nyfl9c7o_yYqBfWnTYFcoAuBPNQwrgrA0ga4oq_kgc"
+    },
+    "v3": {
+        "unscoped": {
+            "token": {
+                "issued_at": "2017-07-08T09:13:28.000000Z",
+                "audit_ids": [
+                    "B1-BRSkTT5Cd_Oga63mgiQ"
+                ],
+                "methods": [
+                    "password"
+                ],
+                "expires_at": "2017-07-08T10:13:28.000000Z",
+                "user": {
+                    "password_expires_at": null,
+                    "domain": {
+                        "id": "default",
+                        "name": "Default"
+                    },
+                    "id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+                    "name": "admin"
+                }
+            }
+        },
+        "scoped": {
+            "token": {
+                "is_domain": false,
+                "methods": [
+                    "password"
+                ],
+                "roles": [
+                    {
+                        "id": "f1e75d0b191e4a909f45fd57668f4e48",
+                        "name": "admin"
+                    }
+                ],
+                "expires_at": "2017-07-08T10:55:14.000000Z",
+                "project": {
+                    "domain": {
+                        "id": "default",
+                        "name": "Default"
+                    },
+                    "id": "fcfeddf071284e4a8c54760d4bf67c29",
+                    "name": "admin"
+                },
+                "catalog": [
+                    {
+                        "endpoints": [
+                            {
+                                "region_id": "RegionOne",
+                                "url": "mitm://api.ecloud.com:35357/v3",
+                                "region": "RegionOne",
+                                "interface": "admin",
+                                "id": "416a8465b7e54312a4b07a2c51595ee2"
+                            },
+                            {
+                                "region_id": "RegionOne",
+                                "url": "mitm://api.ecloud.com:5000/v3",
+                                "region": "RegionOne",
+                                "interface": "public",
+                                "id": "ad9d692c9cfc4bfc9e9f0b6c3b91e80f"
+                            },
+                            {
+                                "region_id": "RegionOne",
+                                "url": "mitm://api.ecloud.com:5000/v3",
+                                "region": "RegionOne",
+                                "interface": "internal",
+                                "id": "f08fb7f958014fa3a230263eb39fec62"
+                            }
+                        ],
+                        "type": "identity",
+                        "id": "2d8f8e19de1142769420837f9d9e3b49",
+                        "name": "keystone"
+                    },
+                    {
+                        "endpoints": [
+                            {
+                                "region_id": "RegionOne",
+                                "url": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
+                                "region": "RegionOne",
+                                "interface": "admin",
+                                "id": "0b5868e38a254df4a2119a21fa2abea0"
+                            },
+                            {
+                                "region_id": "RegionOne",
+                                "url": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
+                                "region": "RegionOne",
+                                "interface": "internal",
+                                "id": "3ba3a7c69a0a4eaba21cc42ea789cb19"
+                            },
+                            {
+                                "region_id": "RegionOne",
+                                "url": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
+                                "region": "RegionOne",
+                                "interface": "public",
+                                "id": "4fe20af3817542d8b3d875e0e64c90a0"
+                            }
+                        ],
+                        "type": "compute",
+                        "id": "1d2c9ad6c8d94632ba4262c3ff56d84f",
+                        "name": "nova"
+                    }
+                ],
+                "user": {
+                    "password_expires_at": null,
+                    "domain": {
+                        "id": "default",
+                        "name": "Default"
+                    },
+                    "id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+                    "name": "admin"
+                },
+                "audit_ids": [
+                    "AVAtPP-nR7iYERNmXTD2-A"
+                ],
+                "issued_at": "2017-07-08T09:55:14.000000Z"
+            }
+        },
+        "GET /servers": {
+            "servers": [
+                {
+                    "OS-EXT-STS:task_state": null,
+                    "addresses": {
+                        "public": [
+                            {
+                                "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:bf:e4:36",
+                                "version": 4,
+                                "addr": "172.24.4.14",
+                                "OS-EXT-IPS:type": "fixed"
+                            }
+                        ]
+                    },
+                    "links": [
+                        {
+                            "href": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/cb84edb5-3c26-43e3-95eb-4f83b7e3ad26",
+                            "rel": "self"
+                        },
+                        {
+                            "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/servers/cb84edb5-3c26-43e3-95eb-4f83b7e3ad26",
+                            "rel": "bookmark"
+                        }
+                    ],
+                    "image": "",
+                    "OS-EXT-STS:vm_state": "active",
+                    "OS-EXT-SRV-ATTR:instance_name": "instance-00000001",
+                    "OS-SRV-USG:launched_at": "2017-07-11T10:15:55.000000",
+                    "flavor": {
+                        "id": "1",
+                        "links": [
+                            {
+                                "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/flavors/1",
+                                "rel": "bookmark"
+                            }
+                        ]
+                    },
+                    "id": "cb84edb5-3c26-43e3-95eb-4f83b7e3ad26",
+                    "security_groups": [
+                        {
+                            "name": "default"
+                        }
+                    ],
+                    "user_id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+                    "OS-DCF:diskConfig": "AUTO",
+                    "accessIPv4": "",
+                    "accessIPv6": "",
+                    "progress": 0,
+                    "OS-EXT-STS:power_state": 1,
+                    "OS-EXT-AZ:availability_zone": "nova",
+                    "metadata": {},
+                    "status": "ACTIVE",
+                    "updated": "2017-07-11T10:15:55Z",
+                    "hostId": "8188f7ddfad3f424a37a872b4f4a0297ca0eebf87c32950349658392",
+                    "OS-EXT-SRV-ATTR:host": "api.qiniu.com",
+                    "OS-SRV-USG:terminated_at": null,
+                    "key_name": "test",
+                    "OS-EXT-SRV-ATTR:hypervisor_hostname": "api.qiniu.com",
+                    "name": "test",
+                    "created": "2017-07-11T10:15:35Z",
+                    "tenant_id": "fcfeddf071284e4a8c54760d4bf67c29",
+                    "os-extended-volumes:volumes_attached": [
+                        {
+                            "id": "41f90a80-6560-4505-92ec-34459b112d27"
+                        }
+                    ],
+                    "config_drive": ""
+                }
+            ]
+        }
+    }
+}

@@ -12,3 +12,7 @@ func (os *Openstack) IdentityClient() (client *gophercloud.ServiceClient, err er
 func (os *Openstack) IdentityClientV3() (client *gophercloud.ServiceClient, err error) {
 	return openstack.NewIdentityV3(os.client), nil
 }
+
+func (os *Openstack) ComputeClient() (client *gophercloud.ServiceClient, err error) {
+	return openstack.NewComputeV2(os.client, gophercloud.EndpointOpts{})
+}
