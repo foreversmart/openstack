@@ -6,13 +6,13 @@ import (
 )
 
 type SnapshotModel struct {
-	ID          string `json:"id" mapstructure:"id"`
-	Status      string `json:"status" mapstructure:"status"`
-	Name        string `json:"name" mapstructure:"name"`
-	Description string `json:"description" mapstructure:"description"`
-	VolumeID    string `json:"volume_id" mapstructure:"volume_id"`
-	Size        int    `json:"size" mapstructure:"size"`
-	CreatedAt   string `json:"created_at" mapstructure:"created_at"`
+	ID          string `mapstructure:"id" json:"id"`
+	Status      string `mapstructure:"status" json:"status"`
+	Name        string `mapstructure:"name" json:"name"`
+	Description string `mapstructure:"description" json:"description"`
+	VolumeID    string `mapstructure:"volume_id" json:"volume_id"`
+	Size        int    `mapstructure:"size" json:"size"`
+	CreatedAt   string `mapstructure:"created_at" json:"created_at"`
 }
 
 func ExtractSnapshot(r gophercloud.Result) (*SnapshotModel, error) {
@@ -27,7 +27,7 @@ func ExtractSnapshot(r gophercloud.Result) (*SnapshotModel, error) {
 	return response.Snapshots, err
 }
 
-func ExtractSnapshotsFromBody(body interface{}) ([]*SnapshotModel, error) {
+func ExtractSnapshotsByBody(body interface{}) ([]*SnapshotModel, error) {
 	var resp struct {
 		Snapshots []*SnapshotModel `mapstructure:"snapshots"`
 	}
@@ -40,5 +40,5 @@ func ExtractSnapshots(r gophercloud.Result) ([]*SnapshotModel, error) {
 	if r.Err != nil {
 		return nil, r.Err
 	}
-	return ExtractSnapshotsFromBody(r.Body)
+	return ExtractSnapshotsByBody(r.Body)
 }

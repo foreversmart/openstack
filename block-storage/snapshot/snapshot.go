@@ -59,7 +59,7 @@ func (s *Snapshot) All() (snapshotModels []*models.SnapshotModel, err error) {
 	if err != nil {
 		return nil, err
 	}
-	return models.ExtractSnapshotsFromBody(page.GetBody())
+	return models.ExtractSnapshotsByBody(page.GetBody())
 }
 
 func (s *Snapshot) Show(id string) (snapshot *models.SnapshotModel, err error) {

@@ -74,7 +74,7 @@ func (v *Volume) All() (volumeInfos []*models.VolumeModel, err error) {
 		return nil, err
 	}
 
-	return models.ExtractVolumesFromBody(page.GetBody())
+	return models.ExtractVolumesByBody(page.GetBody())
 }
 
 func (v *Volume) AllByParams(opts *options.ListVolumeOpts) (volumes []*models.VolumeModel, err error) {

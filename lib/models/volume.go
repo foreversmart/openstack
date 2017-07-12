@@ -6,25 +6,25 @@ import (
 )
 
 type VolumeModel struct {
-	ID          string              `json:"id" mapstructure:"id"`
-	Name        string              `json:"name" mapstructure:"name"`
-	Size        int                 `json:"size" mapstructure:"size"`
-	Status      string              `json:"status" mapstructure:"status"`
-	Description string              `json:"description" mapstructure:"description"`
-	VolumeType  string              `json:"volume_type" mapstructure:"volume_type"`
-	SnapshotID  string              `json:"snapshot_id" mapstructure:"snapshot_id"`
-	Bootable    string              `json:"bootable" mapstructure:"bootable"`
-	Attachments []*VolumeAttachment `json:"-" mapstructure:"attachments"` //挂载的虚拟机id
-	CreatedAt   string              `json:"created_at" mapstructure:"created_at"`
+	ID          string              `mapstructure:"id" json:"id"`
+	Name        string              `mapstructure:"name" json:"name"`
+	Size        int                 `mapstructure:"size" json:"size"`
+	Status      string              `mapstructure:"status" json:"status"`
+	Description string              `mapstructure:"description" json:"description"`
+	VolumeType  string              `mapstructure:"volume_type" json:"volume_type"`
+	SnapshotID  string              `mapstructure:"snapshot_id" json:"snapshot_id"`
+	Bootable    string              `mapstructure:"bootable" json:"bootable"`
+	Attachments []*VolumeAttachment `mapstructure:"attachments" json:"attachements"`
+	CreatedAt   string              `mapstructure:"created_at" json:"created_at"`
 }
 
 type VolumeAttachment struct {
-	ID           string `json:"id" mapstructure:"id"`
-	ServerID     string `json:"server_id" mapstructure:"server_id"`
-	AttachmentID string `json:"attachment_id" mapstructure:"attachment_id"`
-	HostName     string `json:"host_name" mapstructure:"host_name"`
-	VolumeID     string `json:"volume_id" mapstructure:"volume_id"`
-	Device       string `json:"device" mapstructure:"device"`
+	ID           string `mapstructure:"id" json:"id"`
+	ServerID     string `mapstructure:"server_id" json:"server_id"`
+	AttachmentID string `mapstructure:"attachment_id" json:"attachment_id"`
+	HostName     string `mapstructure:"host_name" json:"host_name"`
+	VolumeID     string `mapstructure:"volume_id" json:"volume_id"`
+	Device       string `mapstructure:"device" json:"device"`
 }
 
 func ExtractVolume(r gophercloud.Result) (*VolumeModel, error) {
@@ -44,12 +44,12 @@ func ExtractVolumes(r gophercloud.Result) ([]*VolumeModel, error) {
 		return nil, r.Err
 	}
 
-	return ExtractVolumesFromBody(r.Body)
+	return ExtractVolumesByBody(r.Body)
 }
 
-func ExtractVolumesFromBody(body interface{}) ([]*VolumeModel, error) {
+func ExtractVolumesByBody(body interface{}) ([]*VolumeModel, error) {
 	var response struct {
-		Volumes []*VolumeModel `mapstructure:"volumes" json:"volumes"`
+		Volumes []*VolumeModel `mapstructure:"volumes"`
 	}
 	err := mapstructure.Decode(body, &response)
 	return response.Volumes, err
