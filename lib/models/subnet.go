@@ -51,6 +51,14 @@ func ExtractSubnet(r gophercloud.Result) (subnet *SubnetModel, err error) {
 	return
 }
 
+func ExtractSubnets(r gophercloud.Result) (subnet []*SubnetModel, err error) {
+	if r.Err != nil {
+		return nil, r.Err
+	}
+
+	return ExtractSubnetsByBody(r.Body)
+}
+
 func ExtractSubnetsByBody(body interface{}) (networks []*SubnetModel, err error) {
 	var resp struct {
 		NetworkInfos []*SubnetModel `mapstructure:"subnets" json:"subnets"`
