@@ -28,7 +28,7 @@ func (n *Network) Create(opts *networks.CreateOpts) (network *models.NetworkMode
 	}
 
 	result := networks.Create(client, opts)
-	return models.ExtractNetworkByResult(result.Result)
+	return models.ExtractNetwork(result.Result)
 }
 
 func (n *Network) All() (infos []*models.NetworkModel, err error) {
@@ -60,7 +60,7 @@ func (n *Network) Show(id string) (info *models.NetworkModel, err error) {
 	}
 
 	result := networks.Get(client, id)
-	return models.ExtractNetworkByResult(result.Result)
+	return models.ExtractNetwork(result.Result)
 }
 
 func (n *Network) Delete(id string) error {
