@@ -234,6 +234,18 @@ func (td *TestData) MockResourceURL(subpath string) string {
 	return "http://" + endpoint + subpath
 }
 
+func (td *TestData) MockResourceURLWithPort(port, subpath string) string {
+	endpoint := td.GetString("endpoint") + ":" + port
+	endpoint = strings.TrimPrefix(endpoint, "mitm://")
+	endpoint = strings.TrimSuffix(endpoint, "/")
+
+	if subpath[0] != '/' {
+		subpath = "/" + subpath
+	}
+
+	return "http://" + endpoint + subpath
+}
+
 func (td *TestData) MockResourceURLWithSSL(path string) string {
 	absurl := td.MockResourceURL(path)
 
