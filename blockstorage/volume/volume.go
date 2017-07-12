@@ -51,6 +51,11 @@ func (v *Volume) All() (volumeInfos []*models.VolumeModel, err error) {
 }
 
 func (v *Volume) AllByParams(opts *options.ListVolumeOpts) (volumes []*models.VolumeModel, err error) {
+	if !opts.IsValid() {
+		err = errors.ErrInvalidParams
+		return
+	}
+
 	client, err := v.Client.VolumeClient()
 	if err != nil {
 		return

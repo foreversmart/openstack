@@ -14,6 +14,10 @@ type ListVolumeOpts struct {
 	Marker *string `json:"marker"`
 }
 
+func (opts *ListVolumeOpts) IsValid() bool {
+	return true
+}
+
 func (opts *ListVolumeOpts) ToQuery() url.Values {
 	options := url.Values{}
 
