@@ -32,20 +32,10 @@ func (n *Network) Create(opts *networks.CreateOpts) (network *models.NetworkMode
 }
 
 func (n *Network) All() (infos []*models.NetworkModel, err error) {
-	client, err := n.Client.NetworkClient()
-	if err != nil {
-		return
-	}
-
-	page, err := networks.List(client, networks.ListOpts{}).AllPages()
-	if err != nil {
-		return
-	}
-
-	return models.ExtractNetworksByPage(page)
+	return n.AllByParams(nil)
 }
 
-func (n *Network) AllByParams(opts *options.NetworkQueryOpt) (infos []*models.NetworkModel, err error) {
+func (n *Network) AllByParams(opts *options.ListNetworkOpt) (infos []*models.NetworkModel, err error) {
 	client, err := n.Client.NetworkClient()
 	if err != nil {
 		return
@@ -55,10 +45,6 @@ func (n *Network) AllByParams(opts *options.NetworkQueryOpt) (infos []*models.Ne
 	_, result.Err = client.Get(client.ServiceURL("networks")+"?"+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200, 201},
 	})
-	if result.Err != nil {
-		err = result.Err
-		return
-	}
 
 	return models.ExtractNetworks(result)
 }

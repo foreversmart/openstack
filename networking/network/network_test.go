@@ -50,7 +50,7 @@ func Test_AllByParams_Network(t *testing.T) {
 	// mitm.Pause()
 
 	id := apiv3.APIString("GET /networks.networks.0.tenant_id")
-	networks, err := New(openstacker).AllByParams(&options.NetworkQueryOpt{
+	networks, err := New(openstacker).AllByParams(&options.ListNetworkOpt{
 		ProjectId: &id,
 	})
 
