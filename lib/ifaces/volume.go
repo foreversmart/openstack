@@ -12,5 +12,6 @@ type Volumer interface {
 	Show(id string) (volume *models.VolumeModel, err error)
 	Update(id string, opts *options.UpdateVolumeOpts) (volume *models.VolumeModel, err error)
 	Resize(id string, opts *options.ResizeVolumeOpts) error
+	Reset(id string, opts *options.ResetVolumeOpts) error
 	Delete(id string) error
 }

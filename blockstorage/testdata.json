@@ -291,7 +291,7 @@
             }
         },
         "DELETE /volumes/:id": {},
-        "POST /volumes/:id/resize": {},
+        "POST /volumes/:id/action": {},
         "GET /snapshots": {
             "snapshots": [{
                 "status": "available",

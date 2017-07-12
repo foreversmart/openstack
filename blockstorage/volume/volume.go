@@ -101,6 +101,24 @@ func (v *Volume) Resize(id string, opts *options.ResizeVolumeOpts) error {
 	return err
 }
 
+func (v *Volume) Reset(id string, opts *options.ResetVolumeOpts) error {
+	if id == "" || !opts.IsValid() {
+		return errors.ErrInvalidParams
+	}
+
+	client, err := v.Client.VolumeClient()
+	if err != nil {
+		return err
+	}
+
+	// the response body is nil
+	_, err = client.Post(client.ServiceURL(VolumesUrl, id, ActionUrl), opts.ToPayload(), nil, &gophercloud.RequestOpts{
+		OkCodes: []int{202},
+	})
+
+	return err
+}
+
 func (v *Volume) Update(id string, opts *options.UpdateVolumeOpts) (volume *models.VolumeModel, err error) {
 	if id == "" || !opts.IsValid() {
 		err = errors.ErrInvalidParams

@@ -109,13 +109,29 @@ func Test_Show_Volume(t *testing.T) {
 func Test_Resize_Volume(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId+"/action")).WithResponse(http.StatusAccepted, nil, apiv2.APIString("POST /volumes/:id/resize"))
+	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId+"/action")).WithResponse(http.StatusAccepted, nil, apiv2.APIString("POST /volumes/:id/action"))
 	//mitm.Pause()
 
 	assertion := assert.New(t)
 
 	err := New(openstacker).Resize(testVolumeId, &options.ResizeVolumeOpts{
 		Size: options.Int(12),
+	})
+	assertion.Nil(err)
+}
+
+func Test_Reset_Volume(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId+"/action")).WithResponse(http.StatusAccepted, nil, apiv2.APIString("POST /volumes/:id/action"))
+	//mitm.Pause()
+
+	assertion := assert.New(t)
+
+	err := New(openstacker).Reset(testVolumeId, &options.ResetVolumeOpts{
+		Status:          options.String("available"),
+		AttachStatus:    options.String("detached"),
+		MigrationStatus: options.String("migrating"),
 	})
 	assertion.Nil(err)
 }

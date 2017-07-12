@@ -97,3 +97,29 @@ func (opts *ResizeVolumeOpts) ToPayload() interface{} {
 		},
 	}
 }
+
+/**
+ * used to reset volume action
+ */
+type ResetVolumeOpts struct {
+	Status          *string
+	AttachStatus    *string
+	MigrationStatus *string
+}
+
+func (opts *ResetVolumeOpts) IsValid() bool {
+	return opts != nil &&
+		opts.Status != nil &&
+		opts.AttachStatus != nil &&
+		opts.MigrationStatus != nil
+}
+
+func (opts *ResetVolumeOpts) ToPayload() interface{} {
+	return map[string]interface{}{
+		"os-reset_status": map[string]interface{}{
+			"status":           opts.Status,
+			"attach_status":    opts.AttachStatus,
+			"migration_status": opts.MigrationStatus,
+		},
+	}
+}
