@@ -55,10 +55,10 @@ func (m MapData) MarshalJSON() ([]byte, error) {
 		// marshal value
 
 		var val []byte
-		mapdata, ok := m[arrOrigin[i]].(MapData)
+		mapdata, ok := m[arrOrigin[i]].(map[string]interface{})
 		if ok {
 			// if map data recursive marshal sorted map
-			val, err = json.Marshal(mapdata)
+			val, err = json.Marshal(MapData(mapdata))
 		} else {
 			val, err = json.Marshal(m[arrOrigin[i]])
 		}
