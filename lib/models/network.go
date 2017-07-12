@@ -5,7 +5,6 @@ import (
 
 	"github.com/mitchellh/mapstructure"
 	"github.com/rackspace/gophercloud"
-	"github.com/rackspace/gophercloud/pagination"
 )
 
 type NetworkModel struct {
@@ -22,20 +21,7 @@ type NetworkModel struct {
 	CreatedAt    time.Time `json:"created_at"`
 }
 
-func ExtractNetworks(result gophercloud.Result) (networks []*NetworkModel, err error) {
-	if result.Err != nil {
-		return nil, result.Err
-	}
-
-	var resp struct {
-		Networks []*NetworkModel `mapstructure:"networks"`
-	}
-
-	err = mapstructure.Decode(result.Body, &resp)
-	return resp.Networks, err
-}
-
-func ExtractNetworkByResult(result gophercloud.Result) (network *NetworkModel, err error) {
+func ExtractNetwork(result gophercloud.Result) (network *NetworkModel, err error) {
 	if result.Err != nil {
 		err = result.Err
 		return
@@ -49,13 +35,24 @@ func ExtractNetworkByResult(result gophercloud.Result) (network *NetworkModel, e
 	return response.Network, err
 }
 
-func ExtractNetworksByPage(page pagination.Page) (networks []*NetworkModel, err error) {
-	var response struct {
+func ExtractNetworks(r gophercloud.Result) (networks []*NetworkModel, err error) {
+	if r.Err != nil {
+		return nil, r.Err
+	}
+
+	return ExtractNetworksByBody(r.Body)
+}
+
+func ExtractNetworksByBody(body interface{}) (networks []*NetworkModel, err error) {
+	var resp struct {
 		NetworkInfos []*NetworkModel `mapstructure:"networks"`
 	}
 
-	err = mapstructure.Decode(page.GetBody(), &response)
-	return response.NetworkInfos, err
+	err = mapstructure.Decode(body, &resp)
+	if err == nil {
+		networks = resp.NetworkInfos
+	}
+	return
 }
 
 type NetworkIpAvailabilitiesModel struct {
@@ -69,10 +66,10 @@ type NetworkIpAvailabilitiesModel struct {
 }
 
 type SubnetIpAvailabilityModel struct {
-	Cidr        string  `json:"cidr"`
-	IpVersion   int64   `json:"ip_version"`
-	SubnetID    string  `json:"subnet_id"`
-	subnet_name string  `json:"subnet_name"`
-	total_ips   float64 `json:"total_ips"`
-	used_ips    float64 `json:"used_ips"`
+	Cidr       string  `json:"cidr"`
+	IpVersion  int64   `json:"ip_version"`
+	SubnetID   string  `json:"subnet_id"`
+	SubnetName string  `json:"subnet_name"`
+	TotalIps   float64 `json:"total_ips"`
+	UsedIps    float64 `json:"used_ips"`
 }
