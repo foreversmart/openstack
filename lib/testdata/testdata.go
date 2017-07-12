@@ -109,6 +109,13 @@ func (td *TestData) Get(key string) ([]byte, error) {
 	return data, nil
 }
 
+func (td *TestData) ResponseSet(mark, data string, force bool) {
+	err := td.ApiSet(mark, data, force)
+	if err != nil {
+		panic(err)
+	}
+}
+
 func (td *TestData) ApiSet(key, content string, force bool) (err error) {
 
 	// not force to rewrite key result when key exist
@@ -136,7 +143,13 @@ func (td *TestData) ApiSet(key, content string, force bool) (err error) {
 
 	}
 
-	mapdata[key] = content
+	var contentData MapData
+	err = json.Unmarshal([]byte(content), &contentData)
+	if err != nil {
+		return err
+	}
+
+	mapdata[key] = contentData
 
 	// pretty json output
 	td.data, err = json.MarshalIndent(data, "", "    ")
@@ -179,6 +192,7 @@ func (td *TestData) Set(key, content string, force bool) (err error) {
 }
 
 func (td *TestData) GetString(key string) string {
+
 	data, err := td.Get(key)
 	if err != nil {
 		panic(err.Error())
