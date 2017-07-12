@@ -9,10 +9,8 @@ import (
 	"github.com/rackspace/gophercloud/openstack/networking/v2/subnets"
 )
 
-var (
-	cidr           = "172.30.248.0/22"
-	networkPort    = "9696"
-	testSubnetName = "testSubnet"
+const (
+	networkPort = "9696"
 )
 
 func Test_Create_Subnet(t *testing.T) {
@@ -25,9 +23,9 @@ func Test_Create_Subnet(t *testing.T) {
 	testNetworkID := apiv3.APIString("POST /subnets.subnet.network_id")
 
 	opts := &subnets.CreateOpts{
-		Name:      testSubnetName,
+		Name:      "testSubnet",
 		IPVersion: 4,
-		CIDR:      cidr,
+		CIDR:      "172.30.248.0/22",
 		TenantID:  testTenantID,
 		NetworkID: testNetworkID,
 	}
