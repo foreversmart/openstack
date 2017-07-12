@@ -1,11 +1,8 @@
 package models
 
 import (
-	"time"
-
 	"github.com/mitchellh/mapstructure"
 	"github.com/rackspace/gophercloud"
-	"github.com/rackspace/gophercloud/pagination"
 )
 
 type SubnetModel struct {
@@ -22,8 +19,7 @@ type SubnetModel struct {
 	TenantID        string           `mapstructure:"tenant_id" json:"tenant_id"`
 	Ipv6RaMode      bool             `mapstructure:"ipv6_ra_mode" json:"ipv6_ra_mode"`
 	Ipv6AddressMode bool             `mapstructure:"ipv6_address_mode" json:"ipv6_address_mode"`
-	CreatedAt       time.Time        `mapstructure:"created_at" json:"created_at"`
-	Shared          bool             `json:"shared"`
+	CreatedAt       string           `mapstructure:"created_at" json:"created_at"`
 }
 
 type AllocationPool struct {
@@ -38,7 +34,7 @@ type HostRoute struct {
 	NextHop         string `mapstructure:"nexthop" json:"nexthop"`
 }
 
-func ExtractSubnetByResult(result gophercloud.Result) (subnet *SubnetModel, err error) {
+func ExtractSubnet(result gophercloud.Result) (subnet *SubnetModel, err error) {
 	if result.Err != nil {
 		err = result.Err
 		return
@@ -52,11 +48,11 @@ func ExtractSubnetByResult(result gophercloud.Result) (subnet *SubnetModel, err 
 	return response.Subnet, err
 }
 
-func ExtractSubnetsByPage(page pagination.Page) (networks []*SubnetModel, err error) {
+func ExtractSubnetsByBody(body interface{}) (networks []*SubnetModel, err error) {
 	var response struct {
 		NetworkInfos []*SubnetModel `mapstructure:"subnets" json:"subnets"`
 	}
 
-	err = mapstructure.Decode(page.GetBody(), &response)
+	err = mapstructure.Decode(body, &response)
 	return response.NetworkInfos, err
 }
