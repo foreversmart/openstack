@@ -80,12 +80,20 @@ func (opts *UpdateVolumeOpts) ToPayload() interface{} {
 }
 
 /**
- * used to build volume action request body
+ * used to resize volume action
  */
-func ToVolumeActionResizeMap(newSize *int) map[string]interface{} {
+type ResizeVolumeOpts struct {
+	Size *int
+}
+
+func (opts *ResizeVolumeOpts) IsValid() bool {
+	return opts != nil && opts.Size != nil && *opts.Size > 0
+}
+
+func (opts *ResizeVolumeOpts) ToPayload() interface{} {
 	return map[string]interface{}{
 		"os-extend": map[string]interface{}{
-			"new_size": newSize,
+			"new_size": opts.Size,
 		},
 	}
 }

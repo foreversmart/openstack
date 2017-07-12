@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"fmt"
+
 	"github.com/buger/jsonparser"
 	tokens2 "github.com/rackspace/gophercloud/openstack/identity/v2/tokens"
 	tokens3 "github.com/rackspace/gophercloud/openstack/identity/v3/tokens"
@@ -245,17 +246,7 @@ func (td *TestData) MockResourceURLWithPort(port, subpath string) string {
 
 	return "http://" + endpoint + subpath
 }
-func (td *TestData) MockResourceURLWithPort(port, subpath string) string {
-	endpoint := td.GetString("endpoint") + ":" + port
-	endpoint = strings.TrimPrefix(endpoint, "mitm://")
-	endpoint = strings.TrimSuffix(endpoint, "/")
 
-	if subpath[0] != '/' {
-		subpath = "/" + subpath
-	}
-
-	return "http://" + endpoint + subpath
-}
 func (td *TestData) MockResourceURLWithSSL(path string) string {
 	absurl := td.MockResourceURL(path)
 

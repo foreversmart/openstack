@@ -43,9 +43,7 @@ func (v *Volume) Create(opts *options.CreateVolumeOpts) (volume *models.VolumeMo
 		OkCodes: []int{202},
 	})
 
-	volume, err = models.ExtractVolume(res)
-
-	return
+	return models.ExtractVolume(res)
 }
 
 func (v *Volume) All() (volumeInfos []*models.VolumeModel, err error) {
@@ -63,8 +61,7 @@ func (v *Volume) AllByParams(opts *options.ListVolumeOpts) (volumes []*models.Vo
 		OkCodes: []int{200},
 	})
 
-	volumes, err = models.ExtractVolumes(result)
-	return
+	return models.ExtractVolumes(result)
 }
 
 func (v *Volume) Show(id string) (volume *models.VolumeModel, err error) {
@@ -86,8 +83,8 @@ func (v *Volume) Show(id string) (volume *models.VolumeModel, err error) {
 	return models.ExtractVolume(result)
 }
 
-func (v *Volume) Resize(id string, newSize int) error {
-	if id == "" || newSize <= 0 {
+func (v *Volume) Resize(id string, opts *options.ResizeVolumeOpts) error {
+	if id == "" || !opts.IsValid() {
 		return errors.ErrInvalidParams
 	}
 
@@ -96,10 +93,8 @@ func (v *Volume) Resize(id string, newSize int) error {
 		return err
 	}
 
-	reqBody := options.ToVolumeActionResizeMap(&newSize)
-
 	// the response body is nil
-	_, err = client.Post(client.ServiceURL(VolumesUrl, id, ActionUrl), reqBody, nil, &gophercloud.RequestOpts{
+	_, err = client.Post(client.ServiceURL(VolumesUrl, id, ActionUrl), opts.ToPayload(), nil, &gophercloud.RequestOpts{
 		OkCodes: []int{202},
 	})
 
@@ -122,9 +117,7 @@ func (v *Volume) Update(id string, opts *options.UpdateVolumeOpts) (volume *mode
 		OkCodes: []int{200},
 	})
 
-	volume, err = models.ExtractVolume(res)
-
-	return
+	return models.ExtractVolume(res)
 }
 
 func (v *Volume) Delete(id string) error {

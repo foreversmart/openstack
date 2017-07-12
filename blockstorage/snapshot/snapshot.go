@@ -42,9 +42,7 @@ func (s *Snapshot) Create(opts options.CreateSnapshotOpts) (snapshot *models.Sna
 		OkCodes: []int{202},
 	})
 
-	snapshot, err = models.ExtractSnapshot(res)
-
-	return
+	return models.ExtractSnapshot(res)
 }
 
 func (s *Snapshot) All() (snapshotModels []*models.SnapshotModel, err error) {
@@ -58,8 +56,7 @@ func (s *Snapshot) All() (snapshotModels []*models.SnapshotModel, err error) {
 		OkCodes: []int{200},
 	})
 
-	snapshotModels, err = models.ExtractSnapshots(result)
-	return
+	return models.ExtractSnapshots(result)
 }
 
 func (s *Snapshot) Show(id string) (snapshot *models.SnapshotModel, err error) {
@@ -96,9 +93,7 @@ func (s *Snapshot) Update(id string, opts *options.UpdateSnapshotOpts) (snapshot
 		OkCodes: []int{200},
 	})
 
-	snapshot, err = models.ExtractSnapshot(res)
-
-	return
+	return models.ExtractSnapshot(res)
 }
 
 func (s *Snapshot) Delete(id string) error {

@@ -1,7 +1,6 @@
 package volume
 
 import (
-	"fmt"
 	"net/http"
 	"testing"
 
@@ -92,7 +91,6 @@ func Test_Show_Volume(t *testing.T) {
 
 	assertion := assert.New(t)
 
-	fmt.Printf("$$$%v***\n", testVolumeId)
 	volume, err := New(openstacker).Show(testVolumeId)
 	assertion.Nil(err)
 	assertion.NotNil(volume)
@@ -116,7 +114,9 @@ func Test_Resize_Volume(t *testing.T) {
 
 	assertion := assert.New(t)
 
-	err := New(openstacker).Resize(testVolumeId, 12)
+	err := New(openstacker).Resize(testVolumeId, &options.ResizeVolumeOpts{
+		Size: options.Int(12),
+	})
 	assertion.Nil(err)
 }
 
