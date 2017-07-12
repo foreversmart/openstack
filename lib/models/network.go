@@ -1,23 +1,21 @@
 package models
 
 import (
-	"time"
-
 	"github.com/mitchellh/mapstructure"
 	"github.com/rackspace/gophercloud"
 )
 
 type NetworkModel struct {
-	ID           string    `mapstructure:"id" json:"id"`
-	Name         string    `mapstructure:"name" json:"name"`
-	Subnets      []string  `mapstructure:"subnets" json:"subnets"`
-	Status       string    `mapstructure:"status" json:"status"`
-	ProjectID    string    `mapstructure:"project_id" json:"project_id"`
-	TenantID     string    `mapstructure:"tenant_id" json:"tenant_id"`
-	Shared       bool      `mapstructure:"shared" json:"shared"`
-	AdminStateUp bool      `mapstructure:"admin_state_up" json:"admin_state_up"`
-	CreatedAt    time.Time `mapstructure:"created_at" json:"created_at"`
-	External     bool      `mapstructure:"router:external"  json:"router:external"`
+	ID           string   `mapstructure:"id" json:"id"`
+	Name         string   `mapstructure:"name" json:"name"`
+	Subnets      []string `mapstructure:"subnets" json:"subnets"`
+	Status       string   `mapstructure:"status" json:"status"`
+	ProjectID    string   `mapstructure:"project_id" json:"project_id"`
+	TenantID     string   `mapstructure:"tenant_id" json:"tenant_id"`
+	Shared       bool     `mapstructure:"shared" json:"shared"`
+	AdminStateUp bool     `mapstructure:"admin_state_up" json:"admin_state_up"`
+	CreatedAt    string   `mapstructure:"created_at" json:"created_at"`
+	External     bool     `mapstructure:"router:external"  json:"router:external"`
 }
 
 func ExtractNetwork(result gophercloud.Result) (network *NetworkModel, err error) {
