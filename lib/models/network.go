@@ -13,6 +13,7 @@ type NetworkModel struct {
 	Name         string    `mapstructure:"name" json:"name"`
 	Subnets      []string  `mapstructure:"subnets" json:"subnets"`
 	Status       string    `mapstructure:"status" json:"status"`
+	ProjectID    string    `mapstructure:"project_id" json:"project_id"`
 	TenantID     string    `mapstructure:"tenant_id" json:"tenant_id"`
 	Shared       bool      `mapstructure:"shared" json:"shared"`
 	AdminStateUp bool      `mapstructure:"admin_state_up" json:"admin_state_up"`
