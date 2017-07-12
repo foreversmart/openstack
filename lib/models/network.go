@@ -18,18 +18,20 @@ type NetworkModel struct {
 	External     bool     `mapstructure:"router:external"  json:"router:external"`
 }
 
-func ExtractNetwork(result gophercloud.Result) (network *NetworkModel, err error) {
-	if result.Err != nil {
-		err = result.Err
-		return
+func ExtractNetwork(r gophercloud.Result) (network *NetworkModel, err error) {
+	if r.Err != nil {
+		return nil, r.Err
 	}
 
-	var response struct {
+	var resp struct {
 		Network *NetworkModel `mapstructure:"network"`
 	}
 
-	err = mapstructure.Decode(result.Body, &response)
-	return response.Network, err
+	err = mapstructure.Decode(r.Body, &resp)
+	if err == nil {
+		network = resp.Network
+	}
+	return
 }
 
 func ExtractNetworks(r gophercloud.Result) (networks []*NetworkModel, err error) {
