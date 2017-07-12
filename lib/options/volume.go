@@ -11,8 +11,8 @@ type ListVolumeOpts struct {
 	Marker *string `json:"marker"`
 }
 
-func (opts *ListVolumeOpts) ToQuery() (options url.Values) {
-	options = url.Values{}
+func (opts *ListVolumeOpts) ToQuery() url.Values {
+	options := url.Values{}
 
 	if opts != nil {
 		if opts.Sort != nil {
@@ -26,7 +26,7 @@ func (opts *ListVolumeOpts) ToQuery() (options url.Values) {
 		}
 	}
 
-	return
+	return options
 }
 
 /**
@@ -75,11 +75,10 @@ func (opts *UpdateVolumeOpts) ToPayload() interface{} {
 /**
  * used to build volume action request body
  */
-func ToVolumeActionResizeMap(newSize *int) (payload map[string]interface{}) {
-	payload = map[string]interface{}{
+func ToVolumeActionResizeMap(newSize *int) map[string]interface{} {
+	return map[string]interface{}{
 		"os-extend": map[string]interface{}{
 			"new_size": newSize,
 		},
 	}
-	return
 }

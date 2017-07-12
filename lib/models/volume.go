@@ -27,30 +27,38 @@ type VolumeAttachment struct {
 	Device       string `mapstructure:"device" json:"device"`
 }
 
-func ExtractVolume(r gophercloud.Result) (*VolumeModel, error) {
+func ExtractVolume(r gophercloud.Result) (volume *VolumeModel, err error) {
 	if r.Err != nil {
-		return nil, r.Err
+		err = r.Err
+		return
 	}
 
 	var response struct {
 		Volume *VolumeModel `mapstructure:"volume"`
 	}
-	err := mapstructure.Decode(r.Body, &response)
-	return response.Volume, err
+
+	err = mapstructure.Decode(r.Body, &response)
+	volume = response.Volume
+
+	return
 }
 
-func ExtractVolumes(r gophercloud.Result) ([]*VolumeModel, error) {
+func ExtractVolumes(r gophercloud.Result) (volumes []*VolumeModel, err error) {
 	if r.Err != nil {
-		return nil, r.Err
+		err = r.Err
+		return
 	}
 
 	return ExtractVolumesByBody(r.Body)
 }
 
-func ExtractVolumesByBody(body interface{}) ([]*VolumeModel, error) {
+func ExtractVolumesByBody(body interface{}) (volumes []*VolumeModel, err error) {
 	var response struct {
 		Volumes []*VolumeModel `mapstructure:"volumes"`
 	}
-	err := mapstructure.Decode(body, &response)
-	return response.Volumes, err
+
+	err = mapstructure.Decode(body, &response)
+	volumes = response.Volumes
+
+	return
 }

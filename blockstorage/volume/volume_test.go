@@ -135,11 +135,13 @@ func Test_Update_Volume(t *testing.T) {
 
 	assertion := assert.New(t)
 
-	err := New(openstacker).Update(testVolumeId, &options.UpdateVolumeOpts{
+	volume, err := New(openstacker).Update(testVolumeId, &options.UpdateVolumeOpts{
 		Name:        options.String("update volume name"),
 		Description: options.String("update volume desc"),
 	})
 	assertion.Nil(err)
+
+	assertion.Equal(apiv2.APIString("PUT /volumes/:id.volume.id"), volume.ID)
 }
 
 func Test_Delete_Volume(t *testing.T) {

@@ -90,11 +90,13 @@ func Test_Update_Snapshot(t *testing.T) {
 
 	assertion := assert.New(t)
 
-	err := New(openstacker).Update(testSnapshotId, &options.UpdateSnapshotOpts{
+	snapshot, err := New(openstacker).Update(testSnapshotId, &options.UpdateSnapshotOpts{
 		Name:        options.String("updated name"),
 		Description: options.String("test update name"),
 	})
 	assertion.Nil(err)
+	assertion.NotNil(snapshot)
+	assertion.Equal(apiv2.APIString("PUT /snapshots/:id.snapshot.id"), snapshot.ID)
 }
 
 func Test_Delete_Snapshot(t *testing.T) {

@@ -11,7 +11,7 @@ func (opts *CreateSnapshotOpts) IsValid() bool {
 	return opts.VolumeID != nil && opts.Name != nil
 }
 
-func (opts *CreateSnapshotOpts) ToPayload() (payload interface{}) {
+func (opts *CreateSnapshotOpts) ToPayload() interface{} {
 	type request struct {
 		Snapshot *CreateSnapshotOpts `json:"snapshot"`
 	}
@@ -26,7 +26,7 @@ type UpdateSnapshotOpts struct {
 	Description *string `json:"description"`
 }
 
-func (opts *UpdateSnapshotOpts) ToPayload() (payload interface{}) {
+func (opts *UpdateSnapshotOpts) ToPayload() interface{} {
 	type request struct {
 		Snapshot *UpdateSnapshotOpts `json:"snapshot"`
 	}

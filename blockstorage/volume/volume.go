@@ -26,7 +26,7 @@ func New(client ifaces.Openstacker) *Volume {
 	}
 }
 
-func (v *Volume) Create(param *options.CreateVolumeOpts) (id string, err error) {
+func (v *Volume) Create(param *options.CreateVolumeOpts) (volume *models.VolumeModel, err error) {
 	client, err := v.Client.VolumeClient()
 	if err != nil {
 		return
@@ -37,30 +37,14 @@ func (v *Volume) Create(param *options.CreateVolumeOpts) (id string, err error) 
 		return
 	}
 
-	// snapshot'volume type should be same as volume type
-	opts := volumes.CreateOpts{}
-	if param.Name != nil {
-		opts.Name = *param.Name
-	}
-	if param.Description != nil {
-		opts.Description = *param.Description
-	}
-	if param.Size != nil {
-		opts.Size = *param.Size
-	}
-	if param.SnapshotID != nil {
-		opts.SnapshotID = *param.SnapshotID
-	}
-	if param.VolumeType != nil {
-		opts.VolumeType = *param.VolumeType
-	}
+	var res gophercloud.Result
+	_, res.Err = client.Post(client.ServiceURL(VolumesUrl), param.ToPayload(), &res.Body, &gophercloud.RequestOpts{
+		OkCodes: []int{202},
+	})
 
-	volumeInfo, err := volumes.Create(client, opts).Extract()
-	if err != nil {
-		return "", err
-	}
+	volume, err = models.ExtractVolume(res)
 
-	return volumeInfo.ID, err
+	return
 }
 
 func (v *Volume) All() (volumeInfos []*models.VolumeModel, err error) {
@@ -92,20 +76,22 @@ func (v *Volume) AllByParams(opts *options.ListVolumeOpts) (volumes []*models.Vo
 	return
 }
 
-func (v *Volume) Show(id string) (*models.VolumeModel, error) {
+func (v *Volume) Show(id string) (volume *models.VolumeModel, err error) {
 	if id == "" {
-		return nil, errors.ErrInvalidParams
+		err = errors.ErrInvalidParams
+		return
 	}
 
 	client, err := v.Client.VolumeClient()
 	if err != nil {
-		return nil, err
+		return
 	}
 
 	var result gophercloud.Result
 	_, result.Err = client.Get(client.ServiceURL(VolumesUrl, id), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
+
 	return models.ExtractVolume(result)
 }
 
@@ -129,27 +115,25 @@ func (v *Volume) Resize(id string, newSize int) error {
 	return err
 }
 
-func (v *Volume) Update(id string, param *options.UpdateVolumeOpts) error {
+func (v *Volume) Update(id string, param *options.UpdateVolumeOpts) (volume *models.VolumeModel, err error) {
 	if id == "" || param == nil {
-		return errors.ErrInvalidParams
+		err = errors.ErrInvalidParams
+		return
 	}
 
 	client, err := v.Client.VolumeClient()
 	if err != nil {
-		return err
+		return
 	}
 
-	opts := volumes.UpdateOpts{}
-	if param.Name != nil {
-		opts.Name = *param.Name
-	}
-	if param.Description != nil {
-		opts.Description = *param.Description
-	}
+	var res gophercloud.Result
+	_, res.Err = client.Put(client.ServiceURL(VolumesUrl, id), param.ToPayload(), &res.Body, &gophercloud.RequestOpts{
+		OkCodes: []int{200},
+	})
 
-	_, err = volumes.Update(client, id, opts).Extract()
+	volume, err = models.ExtractVolume(res)
 
-	return err
+	return
 }
 
 func (v *Volume) Delete(id string) error {

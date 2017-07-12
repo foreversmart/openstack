@@ -25,7 +25,7 @@ func New(client ifaces.Openstacker) *Snapshot {
 	}
 }
 
-func (s *Snapshot) Create(opts options.CreateSnapshotOpts) (id string, err error) {
+func (s *Snapshot) Create(opts options.CreateSnapshotOpts) (snapshot *models.SnapshotModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
@@ -33,7 +33,7 @@ func (s *Snapshot) Create(opts options.CreateSnapshotOpts) (id string, err error
 
 	client, err := s.Client.VolumeClient()
 	if err != nil {
-		return id, err
+		return
 	}
 
 	var res gophercloud.Result
@@ -41,12 +41,9 @@ func (s *Snapshot) Create(opts options.CreateSnapshotOpts) (id string, err error
 		OkCodes: []int{202},
 	})
 
-	snapshot, err := models.ExtractSnapshot(res)
-	if err != nil {
-		return id, err
-	}
+	snapshot, err = models.ExtractSnapshot(res)
 
-	return snapshot.ID, err
+	return
 }
 
 func (s *Snapshot) All() (snapshotModels []*models.SnapshotModel, err error) {
@@ -80,14 +77,15 @@ func (s *Snapshot) Show(id string) (snapshot *models.SnapshotModel, err error) {
 	return models.ExtractSnapshot(result)
 }
 
-func (s *Snapshot) Update(snapshotID string, opts *options.UpdateSnapshotOpts) error {
+func (s *Snapshot) Update(snapshotID string, opts *options.UpdateSnapshotOpts) (snapshot *models.SnapshotModel, err error) {
 	if snapshotID == "" || opts == nil {
-		return errors.ErrInvalidParams
+		err = errors.ErrInvalidParams
+		return
 	}
 
 	client, err := s.Client.VolumeClient()
 	if err != nil {
-		return err
+		return
 	}
 
 	var res gophercloud.Result
@@ -95,7 +93,9 @@ func (s *Snapshot) Update(snapshotID string, opts *options.UpdateSnapshotOpts) e
 		OkCodes: []int{200},
 	})
 
-	return res.Err
+	snapshot, err = models.ExtractSnapshot(res)
+
+	return
 }
 
 func (s *Snapshot) Delete(id string) error {

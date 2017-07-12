@@ -15,30 +15,34 @@ type SnapshotModel struct {
 	CreatedAt   string `mapstructure:"created_at" json:"created_at"`
 }
 
-func ExtractSnapshot(r gophercloud.Result) (*SnapshotModel, error) {
+func ExtractSnapshot(r gophercloud.Result) (snapshot *SnapshotModel, err error) {
 	if r.Err != nil {
-		return nil, r.Err
+		err = r.Err
+		return
 	}
 
 	var response struct {
-		Snapshots *SnapshotModel `mapstructure:"snapshot"`
+		Snapshot *SnapshotModel `mapstructure:"snapshot"`
 	}
-	err := mapstructure.Decode(r.Body, &response)
-	return response.Snapshots, err
+	err = mapstructure.Decode(r.Body, &response)
+	snapshot = response.Snapshot
+	return
 }
 
-func ExtractSnapshotsByBody(body interface{}) ([]*SnapshotModel, error) {
+func ExtractSnapshotsByBody(body interface{}) (snapshots []*SnapshotModel, err error) {
 	var resp struct {
 		Snapshots []*SnapshotModel `mapstructure:"snapshots"`
 	}
 
-	err := mapstructure.Decode(body, &resp)
-	return resp.Snapshots, err
+	err = mapstructure.Decode(body, &resp)
+	snapshots = resp.Snapshots
+	return
 }
 
-func ExtractSnapshots(r gophercloud.Result) ([]*SnapshotModel, error) {
+func ExtractSnapshots(r gophercloud.Result) (snapshots []*SnapshotModel, err error) {
 	if r.Err != nil {
-		return nil, r.Err
+		err = r.Err
+		return
 	}
 	return ExtractSnapshotsByBody(r.Body)
 }
