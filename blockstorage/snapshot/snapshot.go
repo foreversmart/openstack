@@ -10,7 +10,8 @@ import (
 )
 
 const (
-	SnapshotUrl = "snapshots"
+	SnapshotUrl       = "snapshots"
+	SnapshotDetailUrl = "snapshots/detail"
 )
 
 type Snapshot struct {
@@ -52,11 +53,13 @@ func (s *Snapshot) All() (snapshotModels []*models.SnapshotModel, err error) {
 		return
 	}
 
-	page, err := snapshots.List(client, snapshots.ListOpts{}).AllPages()
-	if err != nil {
-		return nil, err
-	}
-	return models.ExtractSnapshotsByBody(page.GetBody())
+	var result gophercloud.Result
+	_, result.Err = client.Get(client.ServiceURL(SnapshotDetailUrl), &result.Body, &gophercloud.RequestOpts{
+		OkCodes: []int{200},
+	})
+
+	snapshotModels, err = models.ExtractSnapshots(result)
+	return
 }
 
 func (s *Snapshot) Show(id string) (snapshot *models.SnapshotModel, err error) {

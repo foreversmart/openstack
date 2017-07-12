@@ -64,12 +64,14 @@ func Test_All_Volume_By_Params(t *testing.T) {
 	jsonheader := http.Header{}
 	jsonheader.Add("Content-Type", "application/json")
 
-	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes"))
+	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/detail?limit=10")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes"))
 	// mitm.Pause()
 
 	assertion := assert.New(t)
 
-	volumes, err := New(openstacker).AllByParams(&options.ListVolumeOpts{})
+	volumes, err := New(openstacker).AllByParams(&options.ListVolumeOpts{
+		Limit: options.Int(10),
+	})
 	assertion.Nil(err)
 	assertion.NotNil(volumes)
 	assertion.EqualValues(2, len(volumes))

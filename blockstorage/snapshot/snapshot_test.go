@@ -37,7 +37,7 @@ func Test_All_Snapshot(t *testing.T) {
 	jsonheader := http.Header{}
 	jsonheader.Add("Content-Type", "application/json")
 
-	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/snapshots")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /snapshots"))
+	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/snapshots/detail")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /snapshots"))
 	//mitm.Pause()
 
 	assertion := assert.New(t)

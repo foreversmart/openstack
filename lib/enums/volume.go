@@ -3,14 +3,14 @@ package enums
 type VolumeActionType string
 
 const (
-	Extend VolumeActionType = "extend"
-	Attach VolumeActionType = "attach"
-	Detach VolumeActionType = "detach"
+	VolumeActionExtend VolumeActionType = "extend"
+	VolumeActionAttach VolumeActionType = "attach"
+	VolumeActionDetach VolumeActionType = "detach"
 )
 
 func (v VolumeActionType) IsValid() bool {
 	switch v {
-	case Extend, Attach, Detach:
+	case VolumeActionExtend, VolumeActionAttach, VolumeActionDetach:
 		return true
 	}
 

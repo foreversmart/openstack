@@ -10,8 +10,9 @@ import (
 )
 
 const (
-	VolumesUrl = "volumes"
-	ActionUrl  = "action"
+	VolumesUrl       = "volumes"
+	VolumesDetailUrl = "volumes/detail"
+	ActionUrl        = "action"
 )
 
 type Volume struct {
@@ -48,17 +49,7 @@ func (v *Volume) Create(param *options.CreateVolumeOpts) (volume *models.VolumeM
 }
 
 func (v *Volume) All() (volumeInfos []*models.VolumeModel, err error) {
-	client, err := v.Client.VolumeClient()
-	if err != nil {
-		return nil, err
-	}
-
-	page, err := volumes.List(client, volumes.ListOpts{}).AllPages()
-	if err != nil {
-		return nil, err
-	}
-
-	return models.ExtractVolumesByBody(page.GetBody())
+	return v.AllByParams(nil)
 }
 
 func (v *Volume) AllByParams(opts *options.ListVolumeOpts) (volumes []*models.VolumeModel, err error) {
@@ -68,7 +59,7 @@ func (v *Volume) AllByParams(opts *options.ListVolumeOpts) (volumes []*models.Vo
 	}
 
 	var result gophercloud.Result
-	_, result.Err = client.Get(client.ServiceURL(VolumesUrl)+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
+	_, result.Err = client.Get(client.ServiceURL(VolumesDetailUrl)+"?"+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 

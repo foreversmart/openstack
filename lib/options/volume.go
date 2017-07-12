@@ -1,13 +1,16 @@
 package options
 
-import "net/url"
+import (
+	"net/url"
+	"strconv"
+)
 
 /**
  * used to list volumes by params
  */
 type ListVolumeOpts struct {
 	Sort   *string `json:"sort"`
-	Limit  *string `json:"limit"`
+	Limit  *int    `json:"limit"`
 	Marker *string `json:"marker"`
 }
 
@@ -19,7 +22,7 @@ func (opts *ListVolumeOpts) ToQuery() url.Values {
 			options.Add("sort", *opts.Sort)
 		}
 		if opts.Limit != nil {
-			options.Add("limit", *opts.Limit)
+			options.Add("limit", strconv.Itoa(*opts.Limit))
 		}
 		if opts.Marker != nil {
 			options.Add("marker", *opts.Marker)
@@ -41,7 +44,7 @@ type CreateVolumeOpts struct {
 }
 
 func (opts *CreateVolumeOpts) IsValid() bool {
-	return opts.Size != nil
+	return opts.Size != nil && *opts.Size > 0
 }
 
 func (opts *CreateVolumeOpts) ToPayload() interface{} {
