@@ -7,25 +7,51 @@ import (
 	"strconv"
 
 	"github.com/golib/assert"
+	"github.com/kirk-enterprise/openstack-golang-sdk/blockstorage/volume"
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
+)
+
+var (
+	testSnapshotId string
+	testVolumeId   string
 )
 
 func Test_Create_Snapshot(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/snapshots")).WithResponse(http.StatusAccepted, jsonheader, apiv2.APIString("POST /snapshots"))
-	// mitm.Pause()
+	// create volume first
+	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes")).WithResponse(http.StatusAccepted, jsonheader, apiv2.APIString("POST /volumes"))
+	//mitm.Pause()
 
 	assertion := assert.New(t)
 
-	_, err := New(openstacker).Create(options.CreateSnapshotOpts{
+	volume, err := volume.New(openstacker).Create(&options.CreateVolumeOpts{
+		Name:        options.String("test volume"),
+		Description: options.String("test create volume"),
+		VolumeType:  options.String("iscsi"),
+		Size:        options.Int(10),
+	})
+	testVolumeId = volume.ID
+
+	assertion.Nil(err)
+	assertion.NotNil(volume)
+
+	// test create snapshot
+	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/snapshots")).WithResponse(http.StatusAccepted, jsonheader, apiv2.APIString("POST /snapshots"))
+	// mitm.Pause()
+
+	snapshot, err := New(openstacker).Create(options.CreateSnapshotOpts{
 		VolumeID:    options.String(testVolumeId),
 		Name:        options.String("test snapshot"),
 		Description: options.String("test create snapshot"),
 		Force:       options.Bool(false),
 	})
 
+	testSnapshotId = snapshot.ID
+
 	assertion.Nil(err)
+	assertion.NotNil(snapshot)
+	assertion.Equal(apiv2.APIString("POST /snapshots.snapshot.id"), snapshot.ID)
 }
 
 func Test_All_Snapshot(t *testing.T) {

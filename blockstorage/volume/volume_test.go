@@ -1,6 +1,7 @@
 package volume
 
 import (
+	"fmt"
 	"net/http"
 	"testing"
 
@@ -8,6 +9,10 @@ import (
 
 	"github.com/golib/assert"
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
+)
+
+var (
+	testVolumeId string
 )
 
 func Test_Create_Volume(t *testing.T) {
@@ -18,14 +23,16 @@ func Test_Create_Volume(t *testing.T) {
 
 	assertion := assert.New(t)
 
-	_, err := New(openstacker).Create(&options.CreateVolumeOpts{
+	volume, err := New(openstacker).Create(&options.CreateVolumeOpts{
 		Name:        options.String("test volume"),
 		Description: options.String("test create volume"),
 		VolumeType:  options.String("iscsi"),
 		Size:        options.Int(10),
 	})
+	testVolumeId = volume.ID
 
 	assertion.Nil(err)
+	assertion.NotNil(volume)
 }
 
 func Test_All_Volume(t *testing.T) {
@@ -85,6 +92,7 @@ func Test_Show_Volume(t *testing.T) {
 
 	assertion := assert.New(t)
 
+	fmt.Printf("$$$%v***\n", testVolumeId)
 	volume, err := New(openstacker).Show(testVolumeId)
 	assertion.Nil(err)
 	assertion.NotNil(volume)

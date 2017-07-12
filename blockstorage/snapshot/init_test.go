@@ -14,9 +14,7 @@ import (
 )
 
 var (
-	testVolumeId   string
-	testSnapshotId string
-	testProjectId  string
+	testProjectId string
 
 	apiv3 *testdata.TestData
 	apiv2 *testdata.TestData
@@ -30,8 +28,6 @@ func TestMain(m *testing.M) {
 	// setup dependences
 	apiv3 = testdata.NewWithFilename("../", auth.V3)
 	apiv2 = testdata.NewWithFilename("../", auth.V2)
-	testVolumeId = apiv3.GetString("volume.id")
-	testSnapshotId = apiv3.GetString("volume.snapshot_id")
 	testProjectId = apiv3.GetString("admin.project_id")
 
 	mocker = httpmitm.NewMitmTransport().StubDefaultTransport(nil)
