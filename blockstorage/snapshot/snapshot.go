@@ -80,8 +80,8 @@ func (s *Snapshot) Show(id string) (snapshot *models.SnapshotModel, err error) {
 	return models.ExtractSnapshot(result)
 }
 
-func (s *Snapshot) Update(snapshotID string, opts *options.UpdateSnapshotOpts) (snapshot *models.SnapshotModel, err error) {
-	if snapshotID == "" || opts == nil {
+func (s *Snapshot) Update(id string, opts *options.UpdateSnapshotOpts) (snapshot *models.SnapshotModel, err error) {
+	if id == "" || !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
 	}
@@ -92,7 +92,7 @@ func (s *Snapshot) Update(snapshotID string, opts *options.UpdateSnapshotOpts) (
 	}
 
 	var res gophercloud.Result
-	_, res.Err = client.Put(client.ServiceURL(SnapshotUrl, snapshotID), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
+	_, res.Err = client.Put(client.ServiceURL(SnapshotUrl, id), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 

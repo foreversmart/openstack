@@ -27,19 +27,19 @@ func New(client ifaces.Openstacker) *Volume {
 	}
 }
 
-func (v *Volume) Create(param *options.CreateVolumeOpts) (volume *models.VolumeModel, err error) {
+func (v *Volume) Create(opts *options.CreateVolumeOpts) (volume *models.VolumeModel, err error) {
+	if !opts.IsValid() {
+		err = errors.ErrInvalidParams
+		return
+	}
+
 	client, err := v.Client.VolumeClient()
 	if err != nil {
 		return
 	}
 
-	if !param.IsValid() {
-		err = errors.ErrInvalidParams
-		return
-	}
-
 	var res gophercloud.Result
-	_, res.Err = client.Post(client.ServiceURL(VolumesUrl), param.ToPayload(), &res.Body, &gophercloud.RequestOpts{
+	_, res.Err = client.Post(client.ServiceURL(VolumesUrl), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{202},
 	})
 
@@ -87,7 +87,7 @@ func (v *Volume) Show(id string) (volume *models.VolumeModel, err error) {
 }
 
 func (v *Volume) Resize(id string, newSize int) error {
-	if id == "" {
+	if id == "" || newSize <= 0 {
 		return errors.ErrInvalidParams
 	}
 
@@ -106,8 +106,8 @@ func (v *Volume) Resize(id string, newSize int) error {
 	return err
 }
 
-func (v *Volume) Update(id string, param *options.UpdateVolumeOpts) (volume *models.VolumeModel, err error) {
-	if id == "" || param == nil {
+func (v *Volume) Update(id string, opts *options.UpdateVolumeOpts) (volume *models.VolumeModel, err error) {
+	if id == "" || !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
 	}
@@ -118,7 +118,7 @@ func (v *Volume) Update(id string, param *options.UpdateVolumeOpts) (volume *mod
 	}
 
 	var res gophercloud.Result
-	_, res.Err = client.Put(client.ServiceURL(VolumesUrl, id), param.ToPayload(), &res.Body, &gophercloud.RequestOpts{
+	_, res.Err = client.Put(client.ServiceURL(VolumesUrl, id), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 

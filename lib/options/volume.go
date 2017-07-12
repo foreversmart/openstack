@@ -44,7 +44,7 @@ type CreateVolumeOpts struct {
 }
 
 func (opts *CreateVolumeOpts) IsValid() bool {
-	return opts.Size != nil && *opts.Size > 0
+	return opts != nil && opts.Size != nil && *opts.Size > 0
 }
 
 func (opts *CreateVolumeOpts) ToPayload() interface{} {
@@ -63,6 +63,10 @@ func (opts *CreateVolumeOpts) ToPayload() interface{} {
 type UpdateVolumeOpts struct {
 	Name        *string `json:"name"`
 	Description *string `json:"description"`
+}
+
+func (opts *UpdateVolumeOpts) IsValid() bool {
+	return opts != nil
 }
 
 func (opts *UpdateVolumeOpts) ToPayload() interface{} {

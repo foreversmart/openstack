@@ -13,9 +13,6 @@ import (
 func Test_Create_Snapshot(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-	jsonheader := http.Header{}
-	jsonheader.Add("Content-Type", "application/json")
-
 	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/snapshots")).WithResponse(http.StatusAccepted, jsonheader, apiv2.APIString("POST /snapshots"))
 	// mitm.Pause()
 
@@ -33,9 +30,6 @@ func Test_Create_Snapshot(t *testing.T) {
 
 func Test_All_Snapshot(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
-
-	jsonheader := http.Header{}
-	jsonheader.Add("Content-Type", "application/json")
 
 	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/snapshots/detail")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /snapshots"))
 	//mitm.Pause()
@@ -58,9 +52,6 @@ func Test_All_Snapshot(t *testing.T) {
 func Test_Show_Snapshot(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-	jsonheader := http.Header{}
-	jsonheader.Add("Content-Type", "application/json")
-
 	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/snapshots/"+testSnapshotId)).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /snapshots/:id"))
 	//mitm.Pause()
 
@@ -82,9 +73,6 @@ func Test_Show_Snapshot(t *testing.T) {
 func Test_Update_Snapshot(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-	jsonheader := http.Header{}
-	jsonheader.Add("Content-Type", "application/json")
-
 	mitm.MockRequest("PUT", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/snapshots/"+testSnapshotId)).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("PUT /snapshots/:id"))
 	//mitm.Pause()
 
@@ -101,9 +89,6 @@ func Test_Update_Snapshot(t *testing.T) {
 
 func Test_Delete_Snapshot(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
-
-	jsonheader := http.Header{}
-	jsonheader.Add("Content-Type", "application/json")
 
 	mitm.MockRequest("DELETE", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/snapshots/"+testSnapshotId)).WithResponse(http.StatusAccepted, jsonheader, apiv2.APIString("DELETE /snapshots/:id"))
 	//mitm.Pause()

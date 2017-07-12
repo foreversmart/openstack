@@ -8,7 +8,7 @@ type CreateSnapshotOpts struct {
 }
 
 func (opts *CreateSnapshotOpts) IsValid() bool {
-	return opts.VolumeID != nil && opts.Name != nil
+	return opts != nil && opts.VolumeID != nil && opts.Name != nil
 }
 
 func (opts *CreateSnapshotOpts) ToPayload() interface{} {
@@ -24,6 +24,10 @@ func (opts *CreateSnapshotOpts) ToPayload() interface{} {
 type UpdateSnapshotOpts struct {
 	Name        *string `json:"name"`
 	Description *string `json:"description"`
+}
+
+func (opts *UpdateSnapshotOpts) IsValid() bool {
+	return opts != nil
 }
 
 func (opts *UpdateSnapshotOpts) ToPayload() interface{} {
