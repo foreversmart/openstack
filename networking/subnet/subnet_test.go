@@ -40,7 +40,7 @@ func Test_Create_Subnet(t *testing.T) {
 func Test_All_Subnet(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(networkPort, "v2.0/subnets")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /subnets")).AnyTimes()
+	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(networkPort, "v2.0/subnets")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /subnets"))
 	// mitm.Pause()
 
 	subnets, err := New(openstacker).AllByParams(&options.ListSubnetOpts{})
