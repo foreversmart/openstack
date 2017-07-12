@@ -4,10 +4,14 @@ if [ "$APPROOT" = "" ]; then
     export APPROOT=$(pwd)
 fi
 
+if [ "$APPGOPATH" = "" ]; then
+    export APPGOPATH=$(dirname $(pwd))/gopkg
+fi
+
 # adjust GOPATH
 case ":$GOPATH:" in
-    *":$APPROOT:"*) :;;
-    *) GOPATH=$APPROOT:$GOPATH;;
+    *":$APPGOPATH:"*) :;;
+    *) GOPATH=$APPGOPATH:$GOPATH;;
 esac
 export GOPATH
 
@@ -40,10 +44,10 @@ if [ -f "$APPROOT/openstack.go" ]; then
             cp -r "$APPROOT" "$parent/gopkg/src/github.com/kirk-enterprise"
         fi
     else
-        if [ ! -d "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk" ]; then
-            mkdir -p "$APPROOT/src/github.com/kirk-enterprise"
+        if [ ! -d "$APPGOPATH/src/github.com/kirk-enterprise/openstack-golang-sdk" ]; then
+            mkdir -p "$APPGOPATH/src/github.com/kirk-enterprise"
 
-            ln -s "$APPROOT" "$APPROOT/src/github.com/kirk-enterprise"
+            ln -s "$APPROOT" "$APPGOPATH/src/github.com/kirk-enterprise"
         fi
     fi
 fi
