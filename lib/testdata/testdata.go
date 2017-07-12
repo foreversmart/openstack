@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"fmt"
+
 	"github.com/buger/jsonparser"
 	tokens2 "github.com/rackspace/gophercloud/openstack/identity/v2/tokens"
 	tokens3 "github.com/rackspace/gophercloud/openstack/identity/v3/tokens"
