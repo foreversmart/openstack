@@ -23,7 +23,7 @@ func Test_Create_Subnet(t *testing.T) {
 
 	opts := &options.CreateSubnetOpts{
 		Name:      options.String("testSubnet"),
-		IPVersion: 4,
+		IPVersion: options.Int(4),
 		CIDR:      options.String("172.30.248.0/22"),
 		TenantID:  options.String(testTenantID),
 		NetworkID: options.String(testNetworkID),
