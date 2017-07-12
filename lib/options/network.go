@@ -2,12 +2,12 @@ package options
 
 import "net/url"
 
-type NetworkQueryOpt struct {
+type ListNetworkOpt struct {
 	AllTenants *string `json:"all_tenants"`
 	ProjectId  *string `json:"project_id"`
 }
 
-func (opts *NetworkQueryOpt) ToQuery() (options url.Values) {
+func (opts *ListNetworkOpt) ToQuery() (options url.Values) {
 	options = url.Values{}
 	if opts == nil {
 		return
