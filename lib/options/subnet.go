@@ -10,21 +10,23 @@ import (
 // CreateOpts represents the attributes used when creating a new subnet.
 type CreateSubnetOpts struct {
 	// Required
-	NetworkID *string
-	CIDR      *string
+	NetworkID *string `json:"network_id"`
+	CIDR      *string `json:"cidr"`
 	// Optional
-	Name            *string
-	TenantID        *string
-	AllocationPools []*models.AllocationPool
-	GatewayIP       *string
-	NoGateway       bool
-	IPVersion       int
-	EnableDHCP      *bool
-	DNSNameservers  []*string
-	HostRoutes      []*models.HostRoute
+	Name            *string                  `json:"name"`
+	TenantID        *string                  `json:"tenant_id"`
+	AllocationPools []*models.AllocationPool `json:"allocation_pools "`
+	GatewayIP       *string                  `json:"gateway_ip"`
+	IPVersion       *int                     `json:"ip_version"`
+	EnableDHCP      *bool                    `json:"enable_dhcp"`
+	DNSNameservers  []*string                `json:"dns_nameservers "`
+	HostRoutes      []*models.HostRoute      `json:"host_routes"`
 }
 
 func (opts *CreateSubnetOpts) IsValid() bool {
+	if opts == nil {
+		return false
+	}
 	return opts.NetworkID != nil && opts.CIDR != nil
 }
 
