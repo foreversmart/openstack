@@ -49,7 +49,6 @@ func (f *Flavors) AllByParams(opts *options.ListFlavorsOpts) (flavors []*models.
 }
 
 func (f *Flavors) Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorModel, err error) {
-
 	if !opts.IsValid() {
 		return nil, errors.ErrInvalidParams
 	}
@@ -68,7 +67,6 @@ func (f *Flavors) Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorM
 }
 
 func (f *Flavors) Show(id string) (flavor *models.FlavorModel, err error) {
-
 	if id == "" {
 		return nil, errors.ErrInvalidParams
 	}
