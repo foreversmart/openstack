@@ -50,14 +50,13 @@ func (f *Flavors) AllByParams(opts *options.ListFlavorsOpts) (flavors []*models.
 
 func (f *Flavors) Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorModel, err error) {
 
-	client, err := f.Client.ComputerClient()
-
-	if err != nil {
-		return
-	}
-
 	if !opts.IsValid() {
 		return nil, errors.ErrInvalidParams
+	}
+
+	client, err := f.Client.ComputerClient()
+	if err != nil {
+		return
 	}
 
 	var result gophercloud.Result
@@ -69,14 +68,14 @@ func (f *Flavors) Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorM
 }
 
 func (f *Flavors) Show(id string) (flavor *models.FlavorModel, err error) {
-	client, err := f.Client.ComputerClient()
-
-	if err != nil {
-		return
-	}
 
 	if id == "" {
 		return nil, errors.ErrInvalidParams
+	}
+
+	client, err := f.Client.ComputerClient()
+	if err != nil {
+		return
 	}
 
 	var result gophercloud.Result
