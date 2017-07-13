@@ -77,16 +77,16 @@ func (opts *ListPortOpts) ToQuery() (options url.Values) {
 }
 
 type CreatePortOpts struct {
-	NetworkID           *string              `json:"network_id"`
-	Name                *string              `json:"name"`
-	AdminStateUp        *bool                `json:"admin_state_up"`
-	MACAddress          *string              `json:"mac_address"`
-	FixedIPs            interface{}          `json:"fixed_ips"`
-	DeviceID            *string              `json:"device_id"`
-	DeviceOwner         *string              `json:"device_owner"`
-	TenantID            *string              `json:"tenant_id"`
-	SecurityGroups      []*string            `json:"security_groups"`
-	AllowedAddressPairs []models.AddressPair `json:"allowed_address_pairs "`
+	NetworkID           *string               `json:"network_id"`
+	Name                *string               `json:"name"`
+	AdminStateUp        *bool                 `json:"admin_state_up"`
+	MACAddress          *string               `json:"mac_address"`
+	FixedIPs            interface{}           `json:"fixed_ips"`
+	DeviceID            *string               `json:"device_id"`
+	DeviceOwner         *string               `json:"device_owner"`
+	TenantID            *string               `json:"tenant_id"`
+	SecurityGroups      []*string             `json:"security_groups"`
+	AllowedAddressPairs []*models.AddressPair `json:"allowed_address_pairs "`
 }
 
 func (opts *CreatePortOpts) IsValid() bool {
