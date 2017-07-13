@@ -4,7 +4,7 @@
         "endpoint": "mitm://api.ecloud.com:35357",
         "domain_name": "default",
         "username": "admin",
-        "password": "admin",
+        "password": "aLH35KFFBOdkcB13w@",
         "emails": [
             "admin@ecloud.com"
         ],
@@ -21,7 +21,7 @@
         "project_id": "803d363c5c4649b591fd74b96a8c30f5"
     },
     "token": {
-        "id": "gAAAAABZZf17CRuw__OJ21xpfgdKKwGF-ObQMH3z5oF6vrJ5-A-QDptDeds8_Jh_DIIl1U-z8PleIH2dLoO8N16B5x5IYQtCQFSV_cp93pBAIxBktTN7u6y4g4C3681uCpHSSmJL0i1v6nyfl9c7o_yYqBfWnTYFcoAuBPNQwrgrA0ga4oq_kgc"
+        "id": "gAAAAABZZzPTeQAfoUeUNXkW_5kV9DpDVB-oTEpobgEYpJiZTvxfMTKyWU9oMLEphuRcA_ClaRLSEEczAndsNJt692CkQx-I9k2_c9ARvbzaXoDVns-0RJ1EJ4k0hXosiMNSC7WXGAO5Is4dW3lSUL958YqZFCd7EzwCyoun2G11v1XHPzntFTA"
     },
     "v3": {
         "unscoped": {
@@ -139,6 +139,11 @@
                 "issued_at": "2017-07-08T09:55:14.000000Z"
             }
         },
+        "POST /servers": {
+            "server": {
+                "id": "bf826d60-e9a0-4eb8-b444-b26a1e13e527"
+            }
+        },
         "GET /servers": {
             "servers": [
                 {
@@ -208,6 +213,120 @@
                     "config_drive": ""
                 }
             ]
-        }
+        },
+        "GET /servers/:id": {
+            "server": {
+                "OS-EXT-STS:task_state": null,
+                "addresses": {
+                    "public": [
+                        {
+                            "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:df:6c:e2",
+                            "version": 4,
+                            "addr": "172.24.4.7",
+                            "OS-EXT-IPS:type": "fixed"
+                        }
+                    ]
+                },
+                "links": [
+                    {
+                        "href": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+                        "rel": "self"
+                    },
+                    {
+                        "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+                        "rel": "bookmark"
+                    }
+                ],
+                "image": "",
+                "OS-EXT-STS:vm_state": "active",
+                "OS-EXT-SRV-ATTR:instance_name": "instance-00000002",
+                "OS-SRV-USG:launched_at": "2017-07-13T08:52:09.000000",
+                "flavor": {
+                    "id": "2bedc68b-3249-4ed9-83f7-fd0f201970cc",
+                    "links": [
+                        {
+                            "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/flavors/2bedc68b-3249-4ed9-83f7-fd0f201970cc",
+                            "rel": "bookmark"
+                        }
+                    ]
+                },
+                "id": "bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+                "security_groups": [
+                    {
+                        "name": "default"
+                    }
+                ],
+                "user_id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+                "OS-DCF:diskConfig": "AUTO",
+                "accessIPv4": "172.24.4.14",
+                "accessIPv6": "80fe::",
+                "progress": 0,
+                "OS-EXT-STS:power_state": 1,
+                "OS-EXT-AZ:availability_zone": "nova",
+                "metadata": {},
+                "status": "ACTIVE",
+                "updated": "2017-07-13T08:57:57Z",
+                "hostId": "8188f7ddfad3f424a37a872b4f4a0297ca0eebf87c32950349658392",
+                "OS-EXT-SRV-ATTR:host": "api.qiniu.com",
+                "OS-SRV-USG:terminated_at": null,
+                "key_name": "test",
+                "OS-EXT-SRV-ATTR:hypervisor_hostname": "api.qiniu.com",
+                "name": "TestModifyServer",
+                "created": "2017-07-13T08:51:38Z",
+                "tenant_id": "fcfeddf071284e4a8c54760d4bf67c29",
+                "os-extended-volumes:volumes_attached": [
+                    {
+                        "id": "8ae39911-130c-441d-9e1b-49cc86a264c4"
+                    }
+                ],
+                "config_drive": ""
+            }
+        },
+        "PUT /servers/:id": {
+            "server": {
+                "status": "ACTIVE",
+                "updated": "2017-07-13T08:52:09Z",
+                "hostId": "8188f7ddfad3f424a37a872b4f4a0297ca0eebf87c32950349658392",
+                "user_id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+                "name": "TestModifyServer",
+                "links": [
+                    {
+                        "href": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+                        "rel": "self"
+                    },
+                    {
+                        "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+                        "rel": "bookmark"
+                    }
+                ],
+                "created": "2017-07-13T08:51:38Z",
+                "tenant_id": "fcfeddf071284e4a8c54760d4bf67c29",
+                "image": "",
+                "OS-DCF:diskConfig": "AUTO",
+                "addresses": {
+                    "public": [
+                        {
+                            "version": 4,
+                            "addr": "172.24.4.7"
+                        }
+                    ]
+                },
+                "accessIPv4": "172.24.4.14",
+                "accessIPv6": "80fe::",
+                "progress": 0,
+                "flavor": {
+                    "id": "2bedc68b-3249-4ed9-83f7-fd0f201970cc",
+                    "links": [
+                        {
+                            "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/flavors/2bedc68b-3249-4ed9-83f7-fd0f201970cc",
+                            "rel": "bookmark"
+                        }
+                    ]
+                },
+                "id": "bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+                "metadata": {}
+            }
+        },
+        "DELETE /servers/:id": {}
     }
 }
