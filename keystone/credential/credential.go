@@ -89,7 +89,7 @@ func (cred *Credential) Update(id string, opts options.UpdateCredentialOpts) (cr
 
 	var result gophercloud.Result
 
-	_, err = client.Patch(client.ServiceURL(CredentialUrl, id), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
+	_, err = client.Put(client.ServiceURL(CredentialUrl, id), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 
