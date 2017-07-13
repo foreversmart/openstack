@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/golib/assert"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
 	"github.com/qbox/openstack-golang-sdk/lib/options"
-	"github.com/rackspace/gophercloud/openstack/networking/v2/networks"
 )
 
 const (
@@ -19,9 +19,9 @@ func Test_Create_Network(t *testing.T) {
 	mitm.MockRequest("POST", apiv3.MockResourceURLWithPort(networkPort, "/v2.0/networks")).WithResponse(http.StatusCreated, jsonheader, apiv3.APIString("POST /networks"))
 	// mitm.Pause()
 
-	opts := &networks.CreateOpts{
-		Name:     "TestNetwork",
-		TenantID: apiv3.GetString("user.project_id"),
+	opts := &options.CreateNetworkOpts{
+		Name:     options.String("TestNetwork"),
+		TenantID: options.String(apiv3.GetString("user.project_id")),
 	}
 	assertion := assert.New(t)
 	network, err := New(openstacker).Create(opts)
