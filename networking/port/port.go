@@ -83,6 +83,24 @@ func (p *Port) Show(id string) (port *models.PortModel, err error) {
 	return models.ExtractPort(result)
 }
 
+func (p *Port) Update(id string, opts *options.UpdatePortOpts) (info *models.PortModel, err error) {
+	if id == "" || !opts.IsValid() {
+		return nil, errors.ErrInvalidParams
+	}
+
+	client, err := p.Client.NetworkClient()
+	if err != nil {
+		return
+	}
+
+	var result gophercloud.Result
+	_, err = client.Put(client.ServiceURL(PortsUrl, id), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
+		OkCodes: []int{200},
+	})
+
+	return models.ExtractPort(result)
+}
+
 func (p *Port) Delete(id string) error {
 	if id == "" {
 		return platform.ErrInvalidParams

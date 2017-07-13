@@ -66,6 +66,22 @@ func Test_Show_Port(t *testing.T) {
 	assertion.Equal(apiv3.APIString("GET /ports/:id.port.status"), port.Status)
 }
 
+func Test_Update_Port(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	portID := apiv3.APIString("GET /ports/:id.port.id")
+	mitm.MockRequest("PUT", apiv3.MockResourceURLWithPort(networkPort, "/v2.0/ports/"+portID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("PUT /ports/:id"))
+
+	port, err := New(openstacker).Update(portID, &options.UpdatePortOpts{
+		Name: options.String("updated port"),
+	})
+
+	assertion := assert.New(t)
+	assertion.Nil(err)
+	assertion.NotNil(port)
+	assertion.Equal(apiv3.APIString("PUT /ports/:id.port.device_id"), port.DeviceID)
+}
+
 func Test_Delete_Port(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
