@@ -1,7 +1,6 @@
 package servers
 
 import (
-	"fmt"
 	"net/http"
 	"testing"
 
@@ -14,9 +13,8 @@ const computerPort = "8774"
 func Test_All_Servers(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-	fmt.Println("---->>>", apiv3.MockResourceURLWithPort(computerPort, "v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/detail?"))
 	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(computerPort, "v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/detail?")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /servers"))
-	//mitm.Pause()
+	// mitm.Pause()
 
 	assertion := assert.New(t)
 
@@ -36,7 +34,7 @@ func Test_Show_Servers(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
 	serverID := apiv3.APIString("POST /servers.server.id")
-	fmt.Println("url>>>>>>", apiv3.MockResourceURLWithPort(computerPort, "v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/"+serverID))
+
 	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(computerPort, "v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/"+serverID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /servers/:id"))
 	//mitm.Pause()
 
@@ -55,9 +53,9 @@ func Test_Update_Servers(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
 	serverID := apiv3.APIString("POST /servers.server.id")
-	//serverID := "cb84edb5-3c26-43e3-95eb-4f83b7e3ad26"
-	mitm.MockRequest("PUT", apiv3.MockAdminURL("/v3/servers/"+serverID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("PUT /servers/:id"))
-	mitm.Pause()
+
+	mitm.MockRequest("PUT", apiv3.MockResourceURLWithPort(computerPort, "v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/"+serverID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("PUT /servers/:id"))
+	//mitm.Pause()
 
 	assertion := assert.New(t)
 
@@ -85,7 +83,7 @@ func Test_Delete_Servers(t *testing.T) {
 
 	serverID := apiv3.APIString("POST /servers.server.id")
 
-	mitm.MockRequest("DELETE", apiv3.MockAdminURL("/v3/servers/"+serverID)).WithResponse(http.StatusNoContent, jsonheader, apiv3.APIString("DELETE /servers/:id"))
+	mitm.MockRequest("DELETE", apiv3.MockResourceURLWithPort(computerPort, "v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/"+serverID)).WithResponse(http.StatusNoContent, jsonheader, apiv3.APIString("DELETE /servers/:id"))
 	//mitm.Pause()
 
 	assertion := assert.New(t)
