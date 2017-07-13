@@ -7,6 +7,10 @@ type ListNetworkOpt struct {
 	ProjectId  *string `json:"project_id"`
 }
 
+func (opts *ListNetworkOpt) IsValid() bool {
+	return true
+}
+
 func (opts *ListNetworkOpt) ToQuery() (options url.Values) {
 	options = url.Values{}
 	if opts == nil {
