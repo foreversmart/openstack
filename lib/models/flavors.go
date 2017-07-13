@@ -7,25 +7,25 @@ import (
 
 type FlavorModel struct {
 	//The ID of the flavor.
-	ID string `json:"id" mapstructure:"id"`
+	ID string `mapstructure:"id" json:"id"`
 
 	//The display name of a flavor.
-	Name string `json:"name" mapstructure:"name"`
+	Name string `mapstructure:"name" json:"name"`
 
 	//The amount of RAM a flavor has, MB.
-	Ram int `json:"ram" mapstructure:"ram"`
+	Ram int `mapstructure:"ram" json:"ram"`
 
 	//The size of the root disk that will be created, GB.
-	Disk int `json:"disk" mapstructure:"disk"`
+	Disk int `mapstructure:"disk" json:"disk"`
 
 	//The number of virtual CPUs.
-	Vcpus int `json:"vcpus" mapstructure:"vcpus"`
+	Vcpus int `mapstructure:"vcpus" json:"vcpus"`
 
 	//The size of a dedicated swap disk, GB
-	Swap string `json:"swap" mapstructure:"swap"`
+	Swap string `mapstructure:"swap" json:"swap"`
 
 	// The receive / transmit factor, It defaults to 1.0.
-	RxtxFactor float64 `json:"rxtx_factor" mapstructure:"rxtx_factor"`
+	RxtxFactor float64 `mapstructure:"rxtx_factor" json:"rxtx_factor"`
 }
 
 func ExtractFlavors(result gophercloud.Result) (flavors []*FlavorModel, err error) {

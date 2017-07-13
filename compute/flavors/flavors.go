@@ -34,7 +34,7 @@ func (f *Flavors) AllByParams(opts *options.ListFlavorsOpts) (flavors []*models.
 		return
 	}
 
-	client, err := f.Client.AdminIdentityClientV3()
+	client, err := f.Client.ComputerClient()
 	if err != nil {
 		return
 	}
@@ -62,7 +62,6 @@ func (f *Flavors) Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorM
 	}
 
 	var result gophercloud.Result
-
 	_, result.Err = client.Post(client.ServiceURL(FlavorUrl), opts.ToPayLoad(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
@@ -70,38 +69,37 @@ func (f *Flavors) Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorM
 	return models.ExtractFlavor(result)
 }
 
-func (f *Flavors) Show(flavorID string) (flavor *models.FlavorModel, err error) {
-	client, err := f.Client.AdminIdentityClientV3()
+func (f *Flavors) Show(id string) (flavor *models.FlavorModel, err error) {
+	client, err := f.Client.ComputerClient()
 
 	if err != nil {
 		return
 	}
 
-	if flavorID == "" {
+	if id == "" {
 		return nil, errors.ErrInvalidParams
 	}
 
 	var result gophercloud.Result
-
-	_, result.Err = client.Get(client.ServiceURL(FlavorUrl, flavorID), &result.Body, &gophercloud.RequestOpts{
+	_, result.Err = client.Get(client.ServiceURL(FlavorUrl, id), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 
 	return models.ExtractFlavor(result)
 }
 
-func (f *Flavors) Delete(flavorID string) (err error) {
-	if flavorID == "" {
+func (f *Flavors) Delete(id string) (err error) {
+	if id == "" {
 		return errors.ErrInvalidParams
 	}
 
-	client, err := f.Client.AdminIdentityClientV3()
+	client, err := f.Client.ComputerClient()
 
 	if err != nil {
 		return
 	}
 
-	_, err = client.Delete(client.ServiceURL(FlavorUrl, flavorID), &gophercloud.RequestOpts{
+	_, err = client.Delete(client.ServiceURL(FlavorUrl, id), &gophercloud.RequestOpts{
 		OkCodes: []int{202},
 	})
 
