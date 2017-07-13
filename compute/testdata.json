@@ -180,33 +180,21 @@
                         "endpoints": [
                             {
                                 "region_id": "RegionOne",
-<<<<<<< HEAD
                                 "url": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
-=======
-                                "url": "mitm://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
->>>>>>> add flavor create test case
                                 "region": "RegionOne",
                                 "interface": "admin",
                                 "id": "0b5868e38a254df4a2119a21fa2abea0"
                             },
                             {
                                 "region_id": "RegionOne",
-<<<<<<< HEAD
                                 "url": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
-=======
-                                "url": "mitm://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
->>>>>>> add flavor create test case
                                 "region": "RegionOne",
                                 "interface": "internal",
                                 "id": "3ba3a7c69a0a4eaba21cc42ea789cb19"
                             },
                             {
                                 "region_id": "RegionOne",
-<<<<<<< HEAD
                                 "url": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
-=======
-                                "url": "mitm://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
->>>>>>> add flavor create test case
                                 "region": "RegionOne",
                                 "interface": "public",
                                 "id": "4fe20af3817542d8b3d875e0e64c90a0"
@@ -232,7 +220,7 @@
                 "issued_at": "2017-07-08T09:55:14.000000Z"
             }
         },
-<<<<<<< HEAD
+
         "GET /servers": {
             "servers": [
                 {
@@ -302,7 +290,7 @@
                     "config_drive": ""
                 }
             ]
-=======
+        },
         "POST /flavors": {
             "flavor": {
                 "OS-FLV-DISABLED:disabled": false,
@@ -326,9 +314,7 @@
                 "rxtx_factor": 2.0,
                 "vcpus": 2
             }
-<<<<<<< HEAD
->>>>>>> add flavor create test case
-=======
+
         },
         "GET /flavors": {
             "flavors": [
@@ -465,7 +451,7 @@
                     "rxtx_factor": 1.0
                 }
             ]
->>>>>>> add flavors All testcase
+
         }
     }
 }
