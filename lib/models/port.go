@@ -38,7 +38,7 @@ type PortModel struct {
 }
 
 type IP struct {
-	SubnetID  string `mapstructure:"subnet_id" json:"subnet_id"`
+	SubnetID  string `mapstructure:"subnet_id" json:"subnet_id,omitempty"`
 	IPAddress string `mapstructure:"ip_address" json:"ip_address,omitempty"`
 }
 
