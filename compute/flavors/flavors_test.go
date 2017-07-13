@@ -48,3 +48,37 @@ func Test_All_Flavors(t *testing.T) {
 	assertion.Empty(flavors[0].Swap)
 
 }
+
+func Test_Show_Flavors(t *testing.T) {
+
+	mitm := mocker.StubDefaultTransport(t)
+	flavorID := apiv3.APIString("GET /flavors/:id.flavor.id")
+
+	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort("8774", "/v2.1/fcfeddf071284e4a8c54760d4bf67c29/flavors/"+flavorID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /flavors/:id"))
+	// mitm.Pause()
+
+	assertion := assert.New(t)
+
+	flavor, err := New(openstacker).Show(flavorID)
+	assertion.Nil(err)
+
+	assertion.Equal(apiv3.APIString("GET /flavors/:id.flavor.id"), flavor.ID)
+	assertion.Equal(apiv3.APIString("GET /flavors/:id.flavor.name"), flavor.Name)
+	assertion.Empty(flavor.Swap)
+
+}
+
+func Test_Delete_Flavors(t *testing.T) {
+
+	mitm := mocker.StubDefaultTransport(t)
+
+	flavorID := apiv3.APIString("GET /flavors/:id.flavor.id")
+
+	mitm.MockRequest("DELETE", apiv3.MockResourceURLWithPort("8774", "/v2.1/fcfeddf071284e4a8c54760d4bf67c29/flavors/"+flavorID)).WithResponse(http.StatusAccepted, jsonheader, apiv3.APIString("DELETE /flavors/:id"))
+	// mitm.Pause()
+
+	assertion := assert.New(t)
+
+	err := New(openstacker).Delete(flavorID)
+	assertion.Nil(err)
+}
