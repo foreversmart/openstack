@@ -6,7 +6,6 @@ import (
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/models"
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
 	"github.com/rackspace/gophercloud"
-	"qbox.us/gogo/lib/evm/platform"
 )
 
 const (
@@ -58,7 +57,7 @@ func (f *Flavors) Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorM
 	}
 
 	if !opts.IsValid() {
-		return nil, platform.ErrInvalidParams
+		return nil, errors.ErrInvalidParams
 	}
 
 	var result gophercloud.Result
