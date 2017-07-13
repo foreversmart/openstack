@@ -7,7 +7,6 @@ import (
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
 	"github.com/rackspace/gophercloud"
 	"github.com/rackspace/gophercloud/openstack/networking/v2/ports"
-	"qbox.us/gogo/lib/evm/platform"
 )
 
 type Port struct {
@@ -67,7 +66,7 @@ func (p *Port) AllByParams(opts *options.ListPortOpts) (infos []*models.PortMode
 
 func (p *Port) Show(id string) (port *models.PortModel, err error) {
 	if id == "" {
-		return port, platform.ErrInvalidParams
+		return port, errors.ErrInvalidParams
 	}
 
 	client, err := p.Client.NetworkClient()
@@ -103,7 +102,7 @@ func (p *Port) Update(id string, opts *options.UpdatePortOpts) (info *models.Por
 
 func (p *Port) Delete(id string) error {
 	if id == "" {
-		return platform.ErrInvalidParams
+		return errors.ErrInvalidParams
 	}
 
 	client, err := p.Client.NetworkClient()
