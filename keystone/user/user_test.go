@@ -38,10 +38,12 @@ func Test_Create_User(t *testing.T) {
 
 	assertion := assert.New(t)
 
+	domainid := "default"
+	enable := true
 	opts := options.CreateUserOpts{
-		DomainID: "default",
+		DomainID: &domainid,
 		Name:     "testing kirk",
-		Enabled:  true,
+		Enabled:  &enable,
 	}
 
 	user, err := New(openstacker).Create(opts)
@@ -50,7 +52,7 @@ func Test_Create_User(t *testing.T) {
 	assertion.Equal(opts.Name, user.Name)
 	assertion.Empty(user.Email)
 	assertion.True(user.Enabled)
-	assertion.Equal(opts.DomainID, user.DomainID)
+	assertion.Equal(*opts.DomainID, user.DomainID)
 	assertion.Empty(user.DefaultProjectID)
 	assertion.Empty(user.PasswordExpiresAt)
 }

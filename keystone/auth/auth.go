@@ -11,7 +11,7 @@ import (
 const (
 	AuthUrl    = "auth"
 	TokenUrl   = "tokens"
-	CatelogUrl = "catalog"
+	CatalogUrl = "catalog"
 	ProjectUrl = "projects"
 	DomainUrl  = "domains"
 )
@@ -44,7 +44,7 @@ func (auth *Auth) Show(opts *options.ShowTokenOpts) (token *models.TokenModel, e
 	return models.ExtractToken(result)
 }
 
-func (auth *Auth) HasToken(opts options.HeadTokenOpts) (exist bool, err error) {
+func (auth *Auth) HasToken(opts *options.HeadTokenOpts) (exist bool, err error) {
 	return false, errors.ErrNotImplemented
 }
 

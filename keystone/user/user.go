@@ -37,6 +37,9 @@ func (user *User) AllByParams(opts *options.ListUserOpts) (users []*models.UserM
 	if err != nil {
 		return
 	}
+	if !opts.Valid() {
+		return nil, errors.ErrInvalidParams
+	}
 
 	var result gophercloud.Result
 
@@ -51,6 +54,9 @@ func (user *User) Create(opts options.CreateUserOpts) (info *models.UserModel, e
 	client, err := user.Client.AdminIdentityClientV3()
 	if err != nil {
 		return
+	}
+	if !opts.Valid() {
+		return nil, errors.ErrInvalidParams
 	}
 
 	var result gophercloud.Result
@@ -85,6 +91,9 @@ func (user *User) Update(userID string, opts options.UpdateUserOpts) (userInfo *
 	if userID == "" {
 		return nil, errors.ErrInvalidParams
 	}
+	if !opts.Valid() {
+		return nil, errors.ErrInvalidParams
+	}
 
 	client, err := user.Client.AdminIdentityClientV3()
 	if err != nil {
@@ -104,6 +113,9 @@ func (user *User) ChangePasswd(userID string, opts options.ChangeUserPasswordOpt
 		return errors.ErrInvalidParams
 	}
 
+	if !opts.Valid() {
+		return errors.ErrInvalidParams
+	}
 	client, err := user.Client.AdminIdentityClientV3()
 	if err != nil {
 		return

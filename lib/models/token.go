@@ -10,6 +10,11 @@ type UserDomainModel struct {
 	Name string `mapstructure:"name" json:"name"`
 }
 
+type TokenRoleModel struct {
+	ID   string `mapstructure:"id" json:"id"`
+	Name string `mapstructure:"name" json:"name"`
+}
+
 type TokenUserModel struct {
 	Domain            UserDomainModel `mapstructure:"domain" json:"domain"`
 	ID                string          `mapstructure:"id" json:"id"`
@@ -26,7 +31,8 @@ type TokenProjectModel struct {
 type TokenModel struct {
 	Methods   []*string          `mapstructure:"methods" json:"methods"`
 	User      *TokenUserModel    `mapstructure:"user" json:"user"`
-	Project   *TokenProjectModel `mapstructure:"project" json:"project"`
+	Roles     []*TokenRoleModel  `mapstructure:"roles" json:"roles"`     // scoped
+	Project   *TokenProjectModel `mapstructure:"project" json:"project"` // scoped
 	Catalog   []*CatalogModel    `mapstructure:"catalog" json:"catalog"`
 	Extras    interface{}        `mapstructure:"extras" json:"extras"`
 	AuditIDs  []*string          `mapstructure:"audit_ids" json:"audit_ids"`
