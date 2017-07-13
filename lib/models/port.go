@@ -3,7 +3,6 @@ package models
 import (
 	"github.com/mitchellh/mapstructure"
 	"github.com/rackspace/gophercloud"
-	"github.com/rackspace/gophercloud/openstack/networking/v2/ports"
 )
 
 type PortModel struct {
@@ -46,18 +45,6 @@ type IP struct {
 type AddressPair struct {
 	IPAddress  string `mapstructure:"ip_address" json:"ip_address,omitempty"`
 	MACAddress string `mapstructure:"mac_address" json:"mac_address,omitempty"`
-}
-
-func ConvertToGophercloudAddrPairs(addrPairs []*AddressPair) []ports.AddressPair {
-	res := make([]ports.AddressPair, len(addrPairs))
-	for index, value := range addrPairs {
-		res[index] = ports.AddressPair{
-			IPAddress:  value.IPAddress,
-			MACAddress: value.MACAddress,
-		}
-	}
-
-	return res
 }
 
 func ExtractPortsByBody(body interface{}) (ports []*PortModel, err error) {
