@@ -34,6 +34,9 @@ type OpenstackClienter interface {
 	// user clients
 	IdentityClient() (client *gophercloud.ServiceClient, err error)
 	IdentityClientV3() (client *gophercloud.ServiceClient, err error)
+  
+  // compute clients
+	ComputeClient() (client *gophercloud.ServiceClient, err error)
 
 	// network clients
 	NetworkClient() (client *gophercloud.ServiceClient, err error)
