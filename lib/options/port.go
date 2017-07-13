@@ -117,29 +117,12 @@ func (opts *UpdatePortOpts) IsValid() bool {
 	return true
 }
 
-func (opts *UpdatePortOpts) ToQuery() (options url.Values) {
-    if opts == nil {
-        return
-    }
+func (opts *UpdatePortOpts) ToPayload() interface{} {
+	type request struct {
+		Port *UpdatePortOpts `json:"port"`
+	}
 
-    options = url.Values{}
-
-    if opts.Name != nil {
-        options.Add("name", *opts.Name)
-    }
-    if opts.AdminStateUp != nil {
-        options.Add("admin_state_up", *opts.AdminStateUp)
-    }
-    if opts.DeviceID != nil {
-        options.Add("fixed_ips", *opts.DeviceID)
-    }
-    if opts.DeviceOwner != nil {
-        options.Add("deivce_id", *opts.DeviceOwner)
-    }
-   
-    if opts. != nil {
-        options.Add("security_groups", *opts.)
-    }
-
-    return
+	return request{
+		Port: opts,
+	}
 }
