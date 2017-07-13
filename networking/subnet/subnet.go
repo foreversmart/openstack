@@ -79,7 +79,7 @@ func (n *Subnet) Show(id string) (info *models.SubnetModel, err error) {
 	return models.ExtractSubnet(result.Result)
 }
 
-func (n *Subnet) Update(id string, opts *options.UpdateSubnetOpts) (groupInfo *models.SubnetModel, err error) {
+func (n *Subnet) Update(id string, opts *options.UpdateSubnetOpts) (info *models.SubnetModel, err error) {
 	if id == "" || !opts.IsValid() {
 		return nil, errors.ErrInvalidParams
 	}
