@@ -13,4 +13,6 @@ func Test_Networking(t *testing.T) {
 	n := New(nil)
 	assertion.NotNil(n)
 	assertion.Implements((*ifaces.FloatingIPer)(nil), n.NewFloatingIPer())
+	assertion.Implements((*ifaces.Networker)(nil), n.NewNetworker())
+	assertion.Implements((*ifaces.Subneter)(nil), n.NewSubneter())
 }

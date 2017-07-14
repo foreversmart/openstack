@@ -3,6 +3,8 @@ package networking
 import (
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/ifaces"
 	"github.com/kirk-enterprise/openstack-golang-sdk/networking/floatingip"
+	"github.com/kirk-enterprise/openstack-golang-sdk/networking/network"
+	"github.com/kirk-enterprise/openstack-golang-sdk/networking/subnet"
 )
 
 type Networking struct {
@@ -19,4 +21,12 @@ func New(client ifaces.Openstacker) *Networking {
 
 func (n *Networking) NewFloatingIPer() ifaces.FloatingIPer {
 	return floatingip.New(n.client)
+}
+
+func (n *Networking) NewNetworker() ifaces.Networker {
+	return network.New(n.client)
+}
+
+func (n *Networking) NewSubneter() ifaces.Subneter {
+	return subnet.New(n.client)
 }
