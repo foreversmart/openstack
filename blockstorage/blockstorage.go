@@ -1,9 +1,9 @@
 package blockstorage
 
 import (
-	"github.com/kirk-enterprise/openstack-golang-sdk/blockstorage/snapshot"
-	"github.com/kirk-enterprise/openstack-golang-sdk/blockstorage/volume"
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/ifaces"
+	"github.com/qbox/openstack-golang-sdk/blockstorage/snapshot"
+	"github.com/qbox/openstack-golang-sdk/blockstorage/volume"
+	"github.com/qbox/openstack-golang-sdk/lib/ifaces"
 )
 
 type BlockStorage struct {

@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/golib/assert"
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/enums"
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
+	"github.com/qbox/openstack-golang-sdk/lib/enums"
+	"github.com/qbox/openstack-golang-sdk/lib/options"
 )
 
 func Test_All_Endpoint(t *testing.T) {

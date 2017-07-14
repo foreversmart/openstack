@@ -1,8 +1,8 @@
 package openstack
 
 import (
-	"github.com/kirk-enterprise/openstack-golang-sdk/internal"
-	"github.com/kirk-enterprise/openstack-golang-sdk/keystone"
+	"github.com/qbox/openstack-golang-sdk/internal"
+	"github.com/qbox/openstack-golang-sdk/keystone"
 )
 
 type Openstack struct {

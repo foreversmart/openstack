@@ -34,16 +34,16 @@ if [ -f "$APPROOT/openstack.go" ]; then
     if [ "$1" = "travis" ]; then
         parent=$(cd $APPROOT/../; pwd)
 
-        if [ ! -d "$parent/gopkg/src/github.com/kirk-enterprise/openstack-golang-sdk" ]; then
-            mkdir -p "$parent/gopkg/src/github.com/kirk-enterprise"
+        if [ ! -d "$parent/gopkg/src/github.com/qbox/openstack-golang-sdk" ]; then
+            mkdir -p "$parent/gopkg/src/github.com/qbox"
 
-            cp -r "$APPROOT" "$parent/gopkg/src/github.com/kirk-enterprise"
+            cp -r "$APPROOT" "$parent/gopkg/src/github.com/qbox"
         fi
     else
-        if [ ! -d "$APPROOT/src/github.com/kirk-enterprise/openstack-golang-sdk" ]; then
-            mkdir -p "$APPROOT/src/github.com/kirk-enterprise"
+        if [ ! -d "$APPROOT/src/github.com/qbox/openstack-golang-sdk" ]; then
+            mkdir -p "$APPROOT/src/github.com/qbox"
 
-            ln -s "$APPROOT" "$APPROOT/src/github.com/kirk-enterprise"
+            ln -s "$APPROOT" "$APPROOT/src/github.com/qbox"
         fi
     fi
 fi

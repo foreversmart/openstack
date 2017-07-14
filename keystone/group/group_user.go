@@ -3,10 +3,10 @@ package group
 import (
 	"net/http"
 
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/errors"
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/ifaces"
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/models"
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
+	"github.com/qbox/openstack-golang-sdk/lib/errors"
+	"github.com/qbox/openstack-golang-sdk/lib/ifaces"
+	"github.com/qbox/openstack-golang-sdk/lib/models"
+	"github.com/qbox/openstack-golang-sdk/lib/options"
 	"github.com/rackspace/gophercloud"
 )
 

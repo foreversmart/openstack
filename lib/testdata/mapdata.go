@@ -13,7 +13,7 @@ func (m MapData) MarshalJSON() ([]byte, error) {
 	arr := make([]string, len(m))
 
 	count := 0
-	for key, _ := range m {
+	for key := range m {
 		items := strings.SplitN(key, " ", 2)
 
 		sortKey := items[0]
@@ -41,7 +41,7 @@ func (m MapData) MarshalJSON() ([]byte, error) {
 	var buf bytes.Buffer
 
 	buf.WriteString("{")
-	for i, _ := range arr {
+	for i := range arr {
 		if i != 0 {
 			buf.WriteString(",")
 		}

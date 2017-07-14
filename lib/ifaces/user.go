@@ -1,7 +1,7 @@
 package ifaces
 
-import "github.com/kirk-enterprise/openstack-golang-sdk/lib/models"
-import "github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
+import "github.com/qbox/openstack-golang-sdk/lib/models"
+import "github.com/qbox/openstack-golang-sdk/lib/options"
 
 type User interface {
 	UserGrouper

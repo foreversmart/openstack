@@ -8,8 +8,8 @@ import (
 
 	"github.com/dolab/httpmitm"
 	"github.com/golib/assert"
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/auth"
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/models"
+	"github.com/qbox/openstack-golang-sdk/lib/auth"
+	"github.com/qbox/openstack-golang-sdk/lib/models"
 	"github.com/rackspace/gophercloud"
 )
 
