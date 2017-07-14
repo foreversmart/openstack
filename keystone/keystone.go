@@ -1,18 +1,18 @@
 package keystone
 
 import (
-	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/auth"
-	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/credential"
-	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/domain"
-	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/endpoint"
-	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/group"
-	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/policy"
-	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/project"
-	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/region"
-	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/role"
-	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/service"
-	"github.com/kirk-enterprise/openstack-golang-sdk/keystone/user"
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/ifaces"
+	"github.com/qbox/openstack-golang-sdk/keystone/auth"
+	"github.com/qbox/openstack-golang-sdk/keystone/credential"
+	"github.com/qbox/openstack-golang-sdk/keystone/domain"
+	"github.com/qbox/openstack-golang-sdk/keystone/endpoint"
+	"github.com/qbox/openstack-golang-sdk/keystone/group"
+	"github.com/qbox/openstack-golang-sdk/keystone/policy"
+	"github.com/qbox/openstack-golang-sdk/keystone/project"
+	"github.com/qbox/openstack-golang-sdk/keystone/region"
+	"github.com/qbox/openstack-golang-sdk/keystone/role"
+	"github.com/qbox/openstack-golang-sdk/keystone/service"
+	"github.com/qbox/openstack-golang-sdk/keystone/user"
+	"github.com/qbox/openstack-golang-sdk/lib/ifaces"
 )
 
 type Keystone struct {

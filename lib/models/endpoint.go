@@ -1,8 +1,8 @@
 package models
 
 import (
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/enums"
 	"github.com/mitchellh/mapstructure"
+	"github.com/qbox/openstack-golang-sdk/lib/enums"
 	"github.com/rackspace/gophercloud"
 )
 

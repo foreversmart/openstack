@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/golib/assert"
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/ifaces"
+	"github.com/qbox/openstack-golang-sdk/lib/ifaces"
 )
 
 func Test_BlockStorage(t *testing.T) {

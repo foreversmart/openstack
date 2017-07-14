@@ -3,7 +3,7 @@ package ifaces
 import (
 	"net/http"
 
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/auth"
+	"github.com/qbox/openstack-golang-sdk/lib/auth"
 	"github.com/rackspace/gophercloud"
 )
 
@@ -34,8 +34,8 @@ type OpenstackClienter interface {
 	// user clients
 	IdentityClient() (client *gophercloud.ServiceClient, err error)
 	IdentityClientV3() (client *gophercloud.ServiceClient, err error)
-  
-  // compute clients
+
+	// compute clients
 	ComputeClient() (client *gophercloud.ServiceClient, err error)
 
 	// network clients
