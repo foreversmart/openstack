@@ -42,4 +42,7 @@ type OpenstackClienter interface {
 	NetworkClient() (client *gophercloud.ServiceClient, err error)
 	// volume client
 	VolumeClient() (client *gophercloud.ServiceClient, err error)
+
+	//compute clients
+	ComputerClient() (client *gophercloud.ServiceClient, err error)
 }
