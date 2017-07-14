@@ -88,12 +88,12 @@ func ExtractServer(result gophercloud.Result) (serverInfo *ServersModel, err err
 	}
 
 	var response struct {
-		server *ServersModel `mapstructure:"server" json:"server"`
+		Server *ServersModel `mapstructure:"server" json:"server"`
 	}
 
 	err = mapstructure.Decode(result.Body, &response)
 	if err == nil {
-		serverInfo = response.server
+		serverInfo = response.Server
 	}
 
 	return

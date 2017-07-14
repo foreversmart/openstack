@@ -14,6 +14,8 @@ import (
 )
 
 var (
+	testProjectId string
+
 	apiv3 *testdata.TestData
 
 	mocker      *httpmitm.MitmTransport
@@ -24,6 +26,7 @@ var (
 func TestMain(m *testing.M) {
 	// setup dependences
 	apiv3 = testdata.NewWithFilename("../", auth.V3)
+	testProjectId = apiv3.GetString("admin.project_id")
 
 	mocker = httpmitm.NewMitmTransport().StubDefaultTransport(nil)
 	defer mocker.UnstubDefaultTransport()
