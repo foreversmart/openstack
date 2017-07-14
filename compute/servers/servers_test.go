@@ -13,11 +13,7 @@ const computerPort = "8774"
 func Test_All_Servers(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-<<<<<<< HEAD
 	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(computerPort, "v2.1/"+testProjectId+"/servers/detail?")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /servers"))
-=======
-	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(computerPort, "v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/detail?")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /servers"))
->>>>>>> f2652b397e6938e367ab7d9fc4a671d06c27001c
 	// mitm.Pause()
 
 	assertion := assert.New(t)

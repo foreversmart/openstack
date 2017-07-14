@@ -23,35 +23,8 @@ func New(client ifaces.Openstacker) *Servers {
 		Client: client,
 	}
 }
-<<<<<<< HEAD
 
 func (ser *Servers) Create(opts options.CreateServersOpts) (server *models.ServersModel, err error) {
-=======
-
-func (ser *Servers) Create(opts options.CreateServersOpts) (server *models.ServersModel, err error) {
-	client, err := ser.Client.ComputeClient()
-	if err != nil {
-		return
-	}
-
-	var result gophercloud.Result
-
-	_, err = client.Post(client.ServiceURL(ServersUrl), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
-		OkCodes: []int{201},
-	})
-
-	return models.ExtractServer(result)
-}
-
-func (ser *Servers) All() (servers []*models.ServersModel, err error) {
-	return ser.AllByParams(nil)
-}
-
-func (ser *Servers) AllByParams(opts *options.ListServersOpts) (Serverss []*models.ServersModel, err error) {
-	if !opts.IsValid() {
-		err = errors.ErrInvalidParams
-		return
-	}
 	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return
@@ -113,7 +86,7 @@ func (ser *Servers) Update(id string, opts options.UpdateServersOpts) (server *m
 		err = errors.ErrInvalidParams
 		return
 	}
-	
+
 	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return
