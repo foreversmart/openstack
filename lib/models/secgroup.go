@@ -6,11 +6,11 @@ import (
 )
 
 type SecurityGroupModel struct {
-	ID          string `json:"id" mapstructure:"id"`
-	TenantID    string `json:"tenant_id" mapstructure:"tenant_id"`
-	ProjectID   string `json:"project_id" mapstructure:"project_id"`
-	Name        string `json:"name" mapstructure:"name"`
-	Description string `json:"description" mapstructure:"description"`
+	ID          string `mapstructure:"id" json:"id"`
+	TenantID    string `mapstructure:"tenant_id" json:"tenant_id"`
+	ProjectID   string `mapstructure:"project_id" json:"project_id"`
+	Name        string `mapstructure:"name" json:"name"`
+	Description string `mapstructure:"description" json:"description"`
 	// Rules       []*SecurityRuleModel `json:"security_group_rules" mapstructure:"security_group_rules"`"
 }
 
@@ -20,7 +20,7 @@ func ExtractSecurityGroups(result gophercloud.Result) (securitygroups []*Securit
 	}
 
 	var response struct {
-		SecurityGroups []*SecurityGroupModel `mapstructure:"security_groups" json:"security_groups"`
+		SecurityGroups []*SecurityGroupModel `mapstructure:"security_groups"`
 	}
 
 	err = mapstructure.Decode(result.Body, &response)
@@ -37,7 +37,7 @@ func ExtractSecurityGroup(result gophercloud.Result) (securitygroup *SecurityGro
 	}
 
 	var response struct {
-		SecurityGroup *SecurityGroupModel `mapstructure:"security_group" json:"security_group"`
+		SecurityGroup *SecurityGroupModel `mapstructure:"security_group"`
 	}
 
 	err = mapstructure.Decode(result.Body, &response)
