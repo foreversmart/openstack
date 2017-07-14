@@ -7,28 +7,28 @@ import (
 
 type ListFlavorsOpts struct {
 	// Sorts by a flavor attribute, Optional
-	SortKey *string `json:sort_key`
+	SortKey *string `json:"sort_key,omitempty"`
 
 	// Sort direction. A valid value is asc (ascending) or desc (descending).
 	// Default is asc, Optional
-	SortDir *string `json:sort_dir`
+	SortDir *string `json:"sort_dir,omitempty"`
 
 	// Requests a page size of items, Optional
-	Limit *int `json:limit`
+	Limit *int `json:"limit,omitempty"`
 
 	// The ID of the last-seen item, Optional
-	Maker *string `json:maker`
+	Maker *string `json:"maker,omitempty"`
 
 	// Filters the response by a minimum disk space, in GiB.
 	// For example, 100. Optional
-	MinDisk *string `json:min_disk`
+	MinDisk *string `json:"min_disk,omitempty"`
 
 	// Filters the response by a minimum RAM, in MB.
 	// For example, 512.Optional
-	MinRam *string `json:min_ram`
+	MinRam *string `json:"min_ram,omitempty"`
 
 	// Filters the flavor list by only public flavors. Optional
-	IsPublic *bool `json:is_public`
+	IsPublic *bool `json:"is_public,omitempty"`
 }
 
 func (opts *ListFlavorsOpts) IsValid() bool {
