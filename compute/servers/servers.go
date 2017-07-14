@@ -25,6 +25,11 @@ func New(client ifaces.Openstacker) *Servers {
 }
 
 func (ser *Servers) Create(opts options.CreateServersOpts) (server *models.ServersModel, err error) {
+	if !opts.IsValid() {
+		err = errors.ErrInvalidParams
+		return
+	}
+
 	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return
@@ -81,6 +86,11 @@ func (ser *Servers) Show(id string) (server *models.ServersModel, err error) {
 }
 
 func (ser *Servers) Update(id string, opts options.UpdateServersOpts) (server *models.ServersModel, err error) {
+	if !opts.IsValid() {
+		err = errors.ErrInvalidParams
+		return
+	}
+
 	if id == "" {
 		return nil, errors.ErrInvalidParams
 	}

@@ -229,7 +229,7 @@ func (opts *ListServersOpts) ToQuery() (options url.Values) {
 }
 
 // Network is used within CreateOpts to control a new server's network attachments.
-type Network struct {
+type ServerNetworkOpts struct {
 	// UUID of a nova-network to attach to the newly provisioned server.
 	// Required unless Port is provided.
 	UUID string `json:"uuid"`
@@ -243,12 +243,12 @@ type Network struct {
 }
 
 // Personality is an array of files that are injected into the server at launch.
-type Personality []*File
+type ServerPersonalityOpts []*ServerFileOpts
 
 // File is used within CreateOpts and RebuildOpts to inject a file into the server at launch.
 // File implements the json.Marshaler interface, so when a Create or Rebuild operation is requested,
 // json.Marshal will call File's MarshalJSON method.
-type File struct {
+type ServerFileOpts struct {
 	// Path of the file
 	Path string
 	// Contents of the file. Maximum content size is 255 bytes.
@@ -256,7 +256,7 @@ type File struct {
 }
 
 // MarshalJSON marshals the escaped file, base64 encoding the contents.
-func (f *File) MarshalJSON() ([]byte, error) {
+func (f *ServerFileOpts) MarshalJSON() ([]byte, error) {
 	file := struct {
 		Path     string `json:"path"`
 		Contents string `json:"contents"`
@@ -270,65 +270,69 @@ func (f *File) MarshalJSON() ([]byte, error) {
 // CreateOpts specifies server creation parameters.
 type CreateServersOpts struct {
 	// Name [required] is the name to assign to the newly launched server.
-	Name string `json:"name"`
+	Name *string `json:"name"`
 
 	// ImageRef [optional; required if ImageName is not provided] is the ID or full
 	// URL to the image that contains the server's OS and initial state.
 	// Also optional if using the boot-from-volume extension.
-	ImageRef string `json:"imageRef"`
+	ImageRef *string `json:"imageRef"`
 
 	// FlavorRef [optional; required if FlavorName is not provided] is the ID or
 	// full URL to the flavor that describes the server's specs.
-	FlavorRef string `json:"flavorRef"`
+	FlavorRef *string `json:"flavorRef"`
 
 	// SecurityGroups [optional] lists the names of the security groups to which this server should belong.
-	SecurityGroups []string `json:"security_groups"`
+	SecurityGroups []*string `json:"security_groups"`
 
 	// UserData [optional] contains configuration information or scripts to use upon launch.
 	// Create will base64-encode it for you.
-	UserData []byte `json:"user_data"`
+	UserData []*byte `json:"user_data"`
 
 	// AvailabilityZone [optional] in which to launch the server.
-	AvailabilityZone string `json:"availability_zone"`
+	AvailabilityZone *string `json:"availability_zone"`
 
 	// Networks [optional] dictates how this server will be attached to available networks.
 	// By default, the server will be attached to all isolated networks for the tenant.
-	Networks []Network `json:"networks"`
+	Networks []*ServerNetworkOpts `json:"networks"`
 
 	// Metadata [optional] contains key-value pairs (up to 255 bytes each) to attach to the server.
 	Metadata map[string]string `json:"metadata"`
 
 	// Personality [optional] includes files to inject into the server at launch.
 	// Create will base64-encode file contents for you.
-	Personality Personality `json:"personality"`
+	Personality *ServerPersonalityOpts `json:"personality"`
 
 	// ConfigDrive [optional] enables metadata injection through a configuration drive.
-	ConfigDrive bool `json:"config_drive"`
+	ConfigDrive *bool `json:"config_drive"`
 
 	// KeyName [optional] Key pair name.
-	KeyName bool `json:"key_name"`
+	KeyName *bool `json:"key_name"`
 
 	// AdminPass [optional] sets the root user password. If not set, a randomly-generated
 	// password will be created and returned in the response.
-	AdminPass string `json:"adminPass"`
+	AdminPass *string `json:"adminPass"`
 
 	// AccessIPv4 [optional ] specifies an IPv4 address for the instance.
-	AccessIPv4 string `json:"accessIPv4"`
+	AccessIPv4 *string `json:"accessIPv4"`
 
 	// AccessIPv6 [optional] specifies an IPv6 address for the instance.
-	AccessIPv6 string `json:"accessIPv6"`
+	AccessIPv6 *string `json:"accessIPv6"`
 
 	//Controls how the API partitions the disk when you create, rebuild, or resize servers.
-	OSDcfDiskConfig string `json:"OS-DCF:diskConfig"`
+	OSDcfDiskConfig *string `json:"OS-DCF:diskConfig"`
+}
+
+func (opts *CreateServersOpts) IsValid() bool {
+	return opts != nil && opts.Name != nil && (opts.FlavorRef != nil || opts.ImageRef != nil)
 }
 
 func (opts *CreateServersOpts) ToPayload() interface{} {
 	type payload struct {
-		Servers *CreateServersOpts `json:"server"`
+		Server *CreateServersOpts `json:"server"`
 	}
 
 	return payload{
-		Servers: opts,
+		Server: opts,
 	}
 }
 
@@ -336,24 +340,28 @@ type UpdateServersOpts struct {
 	// Name [optional] changes the displayed name of the server.
 	// The server host name will *not* change.
 	// Server names are not constrained to be unique, even within the same tenant.
-	Name string `json:"name"`
+	Name *string `json:"name"`
 
 	// AccessIPv4 [optional] provides a new IPv4 address for the instance.
-	AccessIPv4 string `json:"accessIPv4"`
+	AccessIPv4 *string `json:"accessIPv4"`
 
 	// AccessIPv6 [optional] provides a new IPv6 address for the instance.
-	AccessIPv6 string `json:"accessIPv6"`
+	AccessIPv6 *string `json:"accessIPv6"`
 
 	//Controls how the API partitions the disk when you create, rebuild, or resize servers.
-	OSDcfDiskConfig string `json:"OS-DCF:diskConfig"`
+	OSDcfDiskConfig *string `json:"OS-DCF:diskConfig"`
+}
+
+func (opts *UpdateServersOpts) IsValid() bool {
+	return opts != nil && opts.Name != nil && opts.AccessIPv4 != nil && opts.AccessIPv6 != nil && opts.OSDcfDiskConfig != nil
 }
 
 func (opts *UpdateServersOpts) ToPayload() interface{} {
 	type payload struct {
-		Servers *UpdateServersOpts `json:"server"`
+		Server *UpdateServersOpts `json:"server"`
 	}
 
 	return payload{
-		Servers: opts,
+		Server: opts,
 	}
 }

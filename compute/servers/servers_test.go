@@ -13,7 +13,7 @@ const computerPort = "8774"
 func Test_All_Servers(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
-	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(computerPort, "v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/detail?")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /servers"))
+	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(computerPort, "v2.1/"+testProjectId+"/servers/detail?")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /servers"))
 	// mitm.Pause()
 
 	assertion := assert.New(t)
@@ -35,7 +35,7 @@ func Test_Show_Servers(t *testing.T) {
 
 	serverID := apiv3.APIString("POST /servers.server.id")
 
-	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(computerPort, "v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/"+serverID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /servers/:id"))
+	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort(computerPort, "v2.1/"+testProjectId+"/servers/"+serverID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /servers/:id"))
 	//mitm.Pause()
 
 	assertion := assert.New(t)
@@ -54,7 +54,7 @@ func Test_Update_Servers(t *testing.T) {
 
 	serverID := apiv3.APIString("POST /servers.server.id")
 
-	mitm.MockRequest("PUT", apiv3.MockResourceURLWithPort(computerPort, "v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/"+serverID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("PUT /servers/:id"))
+	mitm.MockRequest("PUT", apiv3.MockResourceURLWithPort(computerPort, "v2.1/"+testProjectId+"/servers/"+serverID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("PUT /servers/:id"))
 	//mitm.Pause()
 
 	assertion := assert.New(t)
@@ -64,10 +64,10 @@ func Test_Update_Servers(t *testing.T) {
 	config := "AUTO"
 	ipv6 := "80fe::"
 	opts := options.UpdateServersOpts{
-		Name:            name,
-		AccessIPv4:      ipv4,
-		AccessIPv6:      ipv6,
-		OSDcfDiskConfig: config,
+		Name:            &name,
+		AccessIPv4:      &ipv4,
+		AccessIPv6:      &ipv6,
+		OSDcfDiskConfig: &config,
 	}
 
 	server, err := New(openstacker).Update(serverID, opts)
@@ -83,7 +83,7 @@ func Test_Delete_Servers(t *testing.T) {
 
 	serverID := apiv3.APIString("POST /servers.server.id")
 
-	mitm.MockRequest("DELETE", apiv3.MockResourceURLWithPort(computerPort, "v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/"+serverID)).WithResponse(http.StatusNoContent, jsonheader, apiv3.APIString("DELETE /servers/:id"))
+	mitm.MockRequest("DELETE", apiv3.MockResourceURLWithPort(computerPort, "v2.1/"+testProjectId+"/servers/"+serverID)).WithResponse(http.StatusNoContent, jsonheader, apiv3.APIString("DELETE /servers/:id"))
 	//mitm.Pause()
 
 	assertion := assert.New(t)
