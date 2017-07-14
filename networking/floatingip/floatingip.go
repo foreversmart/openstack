@@ -18,7 +18,7 @@ type FloatingIP struct {
 	_ bool
 }
 
-func New(client ifaces.Openstacker) *Volume {
+func New(client ifaces.Openstacker) *FloatingIP {
 	return &FloatingIP{
 		Client: client,
 	}
@@ -30,7 +30,7 @@ func (f *FloatingIP) Create(opts *options.CreateFloatingIPOpts) (ip *models.Floa
 		return
 	}
 
-	client, err := v.Client.NetworkClient()
+	client, err := f.Client.NetworkClient()
 	if err != nil {
 		return
 	}
@@ -44,13 +44,13 @@ func (f *FloatingIP) Create(opts *options.CreateFloatingIPOpts) (ip *models.Floa
 }
 
 func (f *FloatingIP) All() (ips []*models.FloatingIPModel, err error) {
-	client, err := v.Client.NetworkClient()
+	client, err := f.Client.NetworkClient()
 	if err != nil {
 		return
 	}
 
 	var res gophercloud.Result
-	_, res.Err = client.GET(client.ServiceURL(FloatingIPUrl), &res.Body, &gophercloud.RequestOpts{
+	_, res.Err = client.Get(client.ServiceURL(FloatingIPUrl), &res.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 
@@ -63,13 +63,13 @@ func (f *FloatingIP) Show(id string) (ip *models.FloatingIPModel, err error) {
 		return
 	}
 
-	client, err := v.Client.NetworkClient()
+	client, err := f.Client.NetworkClient()
 	if err != nil {
 		return
 	}
 
 	var res gophercloud.Result
-	_, res.Err = client.GET(client.ServiceURL(FloatingIPUrl, id), &res.Body, &gophercloud.RequestOpts{
+	_, res.Err = client.Get(client.ServiceURL(FloatingIPUrl, id), &res.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 
@@ -82,13 +82,13 @@ func (f *FloatingIP) Update(id string, opts *options.UpdateFloatingIPOpts) (ip *
 		return
 	}
 
-	client, err := v.Client.NetworkClient()
+	client, err := f.Client.NetworkClient()
 	if err != nil {
 		return
 	}
 
 	var res gophercloud.Result
-	_, res.Err = client.PUT(client.ServiceURL(FloatingIPUrl, id), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
+	_, res.Err = client.Put(client.ServiceURL(FloatingIPUrl, id), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 
@@ -97,19 +97,17 @@ func (f *FloatingIP) Update(id string, opts *options.UpdateFloatingIPOpts) (ip *
 
 func (f *FloatingIP) Delete(id string) error {
 	if id == "" {
-		err = errors.ErrInvalidParams
-		return
+		return errors.ErrInvalidParams
 	}
 
-	client, err := v.Client.NetworkClient()
+	client, err := f.Client.NetworkClient()
 	if err != nil {
-		return
+		return err
 	}
 
-	var res gophercloud.Result
-	_, res.Err = client.DELETE(client.ServiceURL(FloatingIPUrl, id), &res.Body, &gophercloud.RequestOpts{
+	_, err = client.Delete(client.ServiceURL(FloatingIPUrl, id), &gophercloud.RequestOpts{
 		OkCodes: []int{204},
 	})
 
-	return res.Err
+	return err
 }
