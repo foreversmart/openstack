@@ -1,10 +1,10 @@
 package networking
 
 import (
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/ifaces"
-	"github.com/kirk-enterprise/openstack-golang-sdk/networking/floatingip"
-	"github.com/kirk-enterprise/openstack-golang-sdk/networking/network"
-	"github.com/kirk-enterprise/openstack-golang-sdk/networking/subnet"
+	"github.com/qbox/openstack-golang-sdk/lib/ifaces"
+	"github.com/qbox/openstack-golang-sdk/networking/floatingip"
+	"github.com/qbox/openstack-golang-sdk/networking/network"
+	"github.com/qbox/openstack-golang-sdk/networking/subnet"
 )
 
 type Networking struct {

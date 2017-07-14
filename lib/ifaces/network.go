@@ -1,8 +1,8 @@
 package ifaces
 
 import (
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/models"
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
+	"github.com/qbox/openstack-golang-sdk/lib/models"
+	"github.com/qbox/openstack-golang-sdk/lib/options"
 	"github.com/rackspace/gophercloud/openstack/networking/v2/networks"
 )
 
