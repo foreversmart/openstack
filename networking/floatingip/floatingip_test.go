@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/golib/assert"
+	"github.com/kirk-enterprise/openstack-golang-sdk/lib/models"
 	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
 )
 
@@ -36,17 +37,7 @@ func Test_Create_FloatingIP(t *testing.T) {
 	assertion.Nil(err)
 	assertion.NotNil(ip)
 
-	assertion.Equal(apiv2.APIString("POST /floatingips.floatingip.id"), ip.ID)
-	assertion.Equal(apiv2.APIString("POST /floatingips.floatingip.status"), ip.Status)
-	assertion.Equal(apiv2.APIString("POST /floatingips.floatingip.router_id"), ip.RouterID)
-	assertion.Equal(apiv2.APIString("POST /floatingips.floatingip.project_id"), ip.ProjectID)
-	assertion.Equal(apiv2.APIString("POST /floatingips.floatingip.tenant_id"), ip.TenantID)
-	assertion.Equal(apiv2.APIString("POST /floatingips.floatingip.port_id"), ip.PortID)
-	assertion.Equal(apiv2.APIString("POST /floatingips.floatingip.floating_ip_address"), ip.FloatingIP)
-	assertion.Equal(apiv2.APIString("POST /floatingips.floatingip.fixed_ip_address"), ip.FixedIP)
-	assertion.Equal(apiv2.APIString("POST /floatingips.floatingip.description"), ip.Description)
-	assertion.Equal(apiv2.APIString("POST /floatingips.floatingip.created_at"), ip.CreatedAt)
-	assertion.Equal(apiv2.APIString("POST /floatingips.floatingip.updated_at"), ip.UpdatedAt)
+	assertModel(assertion, "POST /floatingips.floatingip", ip)
 }
 
 func Test_All_FloatingIP(t *testing.T) {
@@ -61,17 +52,8 @@ func Test_All_FloatingIP(t *testing.T) {
 	assertion.Nil(err)
 	assertion.NotNil(ips)
 	assertion.EqualValues(2, len(ips))
-	assertion.Equal(apiv2.APIString("GET /floatingips.floatingips.0.id"), ips[0].ID)
-	assertion.Equal(apiv2.APIString("GET /floatingips.floatingips.0.status"), ips[0].Status)
-	assertion.Equal(apiv2.APIString("GET /floatingips.floatingips.0.router_id"), ips[0].RouterID)
-	assertion.Equal(apiv2.APIString("GET /floatingips.floatingips.0.project_id"), ips[0].ProjectID)
-	assertion.Equal(apiv2.APIString("GET /floatingips.floatingips.0.tenant_id"), ips[0].TenantID)
-	assertion.Equal(apiv2.APIString("GET /floatingips.floatingips.0.port_id"), ips[0].PortID)
-	assertion.Equal(apiv2.APIString("GET /floatingips.floatingips.0.floating_ip_address"), ips[0].FloatingIP)
-	assertion.Equal(apiv2.APIString("GET /floatingips.floatingips.0.fixed_ip_address"), ips[0].FixedIP)
-	assertion.Equal(apiv2.APIString("GET /floatingips.floatingips.0.description"), ips[0].Description)
-	assertion.Equal(apiv2.APIString("GET /floatingips.floatingips.0.created_at"), ips[0].CreatedAt)
-	assertion.Equal(apiv2.APIString("GET /floatingips.floatingips.0.updated_at"), ips[0].UpdatedAt)
+
+	assertModel(assertion, "GET /floatingips.floatingips.0", ips[0])
 }
 
 func Test_Show_FloatingIP(t *testing.T) {
@@ -85,17 +67,7 @@ func Test_Show_FloatingIP(t *testing.T) {
 	assertion.Nil(err)
 	assertion.NotNil(ip)
 
-	assertion.Equal(apiv2.APIString("GET /floatingips/:id.floatingip.id"), ip.ID)
-	assertion.Equal(apiv2.APIString("GET /floatingips/:id.floatingip.status"), ip.Status)
-	assertion.Equal(apiv2.APIString("GET /floatingips/:id.floatingip.router_id"), ip.RouterID)
-	assertion.Equal(apiv2.APIString("GET /floatingips/:id.floatingip.project_id"), ip.ProjectID)
-	assertion.Equal(apiv2.APIString("GET /floatingips/:id.floatingip.tenant_id"), ip.TenantID)
-	assertion.Equal(apiv2.APIString("GET /floatingips/:id.floatingip.port_id"), ip.PortID)
-	assertion.Equal(apiv2.APIString("GET /floatingips/:id.floatingip.floating_ip_address"), ip.FloatingIP)
-	assertion.Equal(apiv2.APIString("GET /floatingips/:id.floatingip.fixed_ip_address"), ip.FixedIP)
-	assertion.Equal(apiv2.APIString("GET /floatingips/:id.floatingip.description"), ip.Description)
-	assertion.Equal(apiv2.APIString("GET /floatingips/:id.floatingip.created_at"), ip.CreatedAt)
-	assertion.Equal(apiv2.APIString("GET /floatingips/:id.floatingip.updated_at"), ip.UpdatedAt)
+	assertModel(assertion, "GET /floatingips/:id.floatingip", ip)
 }
 
 func Test_Update_FloatingIP(t *testing.T) {
@@ -112,17 +84,7 @@ func Test_Update_FloatingIP(t *testing.T) {
 	assertion.Nil(err)
 	assertion.NotNil(ip)
 
-	assertion.Equal(apiv2.APIString("PUT /floatingips/:id.floatingip.id"), ip.ID)
-	assertion.Equal(apiv2.APIString("PUT /floatingips/:id.floatingip.status"), ip.Status)
-	assertion.Equal(apiv2.APIString("PUT /floatingips/:id.floatingip.router_id"), ip.RouterID)
-	assertion.Equal(apiv2.APIString("PUT /floatingips/:id.floatingip.project_id"), ip.ProjectID)
-	assertion.Equal(apiv2.APIString("PUT /floatingips/:id.floatingip.tenant_id"), ip.TenantID)
-	assertion.Equal(apiv2.APIString("PUT /floatingips/:id.floatingip.port_id"), ip.PortID)
-	assertion.Equal(apiv2.APIString("PUT /floatingips/:id.floatingip.floating_ip_address"), ip.FloatingIP)
-	assertion.Equal(apiv2.APIString("PUT /floatingips/:id.floatingip.fixed_ip_address"), ip.FixedIP)
-	assertion.Equal(apiv2.APIString("PUT /floatingips/:id.floatingip.description"), ip.Description)
-	assertion.Equal(apiv2.APIString("PUT /floatingips/:id.floatingip.created_at"), ip.CreatedAt)
-	assertion.Equal(apiv2.APIString("PUT /floatingips/:id.floatingip.updated_at"), ip.UpdatedAt)
+	assertModel(assertion, "PUT /floatingips/:id.floatingip", ip)
 }
 
 func Test_Delete_FloatingIP(t *testing.T) {
@@ -135,4 +97,18 @@ func Test_Delete_FloatingIP(t *testing.T) {
 
 	err := New(openstacker).Delete(testFloatingipID)
 	assertion.Nil(err)
+}
+
+func assertModel(assertion *assert.Assertions, pathPrefix string, ip *models.FloatingIPModel) {
+	assertion.Equal(apiv2.APIString(pathPrefix+".id"), ip.ID)
+	assertion.Equal(apiv2.APIString(pathPrefix+".status"), ip.Status)
+	assertion.Equal(apiv2.APIString(pathPrefix+".router_id"), ip.RouterID)
+	assertion.Equal(apiv2.APIString(pathPrefix+".project_id"), ip.ProjectID)
+	assertion.Equal(apiv2.APIString(pathPrefix+".tenant_id"), ip.TenantID)
+	assertion.Equal(apiv2.APIString(pathPrefix+".port_id"), ip.PortID)
+	assertion.Equal(apiv2.APIString(pathPrefix+".floating_ip_address"), ip.FloatingIP)
+	assertion.Equal(apiv2.APIString(pathPrefix+".fixed_ip_address"), ip.FixedIP)
+	assertion.Equal(apiv2.APIString(pathPrefix+".description"), ip.Description)
+	assertion.Equal(apiv2.APIString(pathPrefix+".created_at"), ip.CreatedAt)
+	assertion.Equal(apiv2.APIString(pathPrefix+".updated_at"), ip.UpdatedAt)
 }
