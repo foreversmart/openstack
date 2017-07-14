@@ -6,9 +6,9 @@ import (
 )
 
 type FloatingIPer interface {
-	Create(opts *options.CreateFloatingIPOpts) (volume *models.FloatingIPModel, err error)
+	Create(opts *options.CreateFloatingIPOpts) (ip *models.FloatingIPModel, err error)
 	All() (ips []*models.FloatingIPModel, err error)
-	Show(id string) (volume *models.FloatingIPModel, err error)
-	Update(id string, opts *options.UpdateFloatingIPOpts) (volume *models.FloatingIPModel, err error)
+	Show(id string) (ip *models.FloatingIPModel, err error)
+	Update(id string, opts *options.UpdateFloatingIPOpts) (ip *models.FloatingIPModel, err error)
 	Delete(id string) error
 }
