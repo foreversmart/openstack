@@ -36,3 +36,13 @@ func (os *Openstack) VolumeClient() (client *gophercloud.ServiceClient, err erro
 	client = os.ServiceClient(endpoint)
 	return
 }
+
+func (os *Openstack) ComputerClient() (client *gophercloud.ServiceClient, err error) {
+	opts := gophercloud.EndpointOpts{
+		Type:         "compute",
+		Name:         "nova",
+		Availability: gophercloud.AvailabilityPublic,
+	}
+
+	return openstack.NewComputeV2(os.ProviderClient(), opts)
+}
