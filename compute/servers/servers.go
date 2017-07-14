@@ -25,6 +25,11 @@ func New(client ifaces.Openstacker) *Servers {
 }
 
 func (ser *Servers) Create(opts options.CreateServersOpts) (server *models.ServersModel, err error) {
+	if !opts.IsValid() {
+		err = errors.ErrInvalidParams
+		return
+	}
+
 	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return
