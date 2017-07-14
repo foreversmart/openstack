@@ -16,11 +16,14 @@ func Test_Create_Flavors(t *testing.T) {
 	assertion := assert.New(t)
 
 	flavorName := "test_flavor"
+	ram := 1024
+	disk := 10
+	vcpus := 2
 	opts := options.CreateFlavorOpts{
 		Name:  &flavorName,
-		Ram:   1024,
-		Disk:  10,
-		Vcpus: 2,
+		Ram:   &ram,
+		Disk:  &disk,
+		Vcpus: &vcpus,
 	}
 
 	flavor, err := New(openstacker).Create(&opts)
@@ -35,7 +38,7 @@ func Test_All_Flavors(t *testing.T) {
 
 	mitm := mocker.StubDefaultTransport(t)
 
-	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort("8774", "/v2.1/fcfeddf071284e4a8c54760d4bf67c29/flavors/detail")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /flavors"))
+	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort("8774", "/v2.1/"+testProjectId+"/flavors/detail")).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /flavors"))
 	// mitm.Pause()
 
 	assertion := assert.New(t)
@@ -54,7 +57,7 @@ func Test_Show_Flavors(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 	flavorID := apiv3.APIString("GET /flavors/:id.flavor.id")
 
-	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort("8774", "/v2.1/fcfeddf071284e4a8c54760d4bf67c29/flavors/"+flavorID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /flavors/:id"))
+	mitm.MockRequest("GET", apiv3.MockResourceURLWithPort("8774", "/v2.1/"+testProjectId+"/flavors/"+flavorID)).WithResponse(http.StatusOK, jsonheader, apiv3.APIString("GET /flavors/:id"))
 	// mitm.Pause()
 
 	assertion := assert.New(t)
@@ -74,7 +77,7 @@ func Test_Delete_Flavors(t *testing.T) {
 
 	flavorID := apiv3.APIString("GET /flavors/:id.flavor.id")
 
-	mitm.MockRequest("DELETE", apiv3.MockResourceURLWithPort("8774", "/v2.1/fcfeddf071284e4a8c54760d4bf67c29/flavors/"+flavorID)).WithResponse(http.StatusAccepted, jsonheader, apiv3.APIString("DELETE /flavors/:id"))
+	mitm.MockRequest("DELETE", apiv3.MockResourceURLWithPort("8774", "/v2.1/"+testProjectId+"/flavors/"+flavorID)).WithResponse(http.StatusAccepted, jsonheader, apiv3.APIString("DELETE /flavors/:id"))
 	// mitm.Pause()
 
 	assertion := assert.New(t)
