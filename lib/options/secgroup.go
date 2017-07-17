@@ -43,7 +43,7 @@ func (opts *CreateSecurityGroupOpts) IsValid() bool {
 	return opts != nil && opts.TenantID != nil && opts.ProjectID != nil && opts.Name != nil
 }
 
-func (opts *CreateSecurityGroupOpts) ToPayLoad() interface{} {
+func (opts *CreateSecurityGroupOpts) ToPayload() interface{} {
 	type payload struct {
 		SecurityGroup *CreateSecurityGroupOpts `json:"security_group"`
 	}
@@ -75,7 +75,7 @@ func (opts *ShowSecurityGroupOpts) ToQuery() (param url.Values) {
 	if opts.Verbose != nil {
 		if *opts.Verbose {
 			param.Add("verbose", "true")
-		} else if !*opts.Verbose {
+		} else {
 			param.Add("verbose", "false")
 		}
 	}
@@ -99,7 +99,7 @@ func (opts *UpdateSecurityGroupOpts) IsValid() bool {
 	return opts != nil && opts.Name != nil
 }
 
-func (opts *UpdateSecurityGroupOpts) ToPayLoad() interface{} {
+func (opts *UpdateSecurityGroupOpts) ToPayload() interface{} {
 	type payload struct {
 		SecurityGroup *UpdateSecurityGroupOpts `json:"security_group"`
 	}

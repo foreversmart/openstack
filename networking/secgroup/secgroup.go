@@ -58,7 +58,7 @@ func (s *SecurityGroups) Create(opts *options.CreateSecurityGroupOpts) (security
 	}
 
 	var result gophercloud.Result
-	_, result.Err = client.Post(client.ServiceURL(SecGroupUrl), opts.ToPayLoad(), &result.Body, &gophercloud.RequestOpts{
+	_, result.Err = client.Post(client.ServiceURL(SecGroupUrl), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{201},
 	})
 
@@ -96,7 +96,7 @@ func (s *SecurityGroups) Update(id string, opts *options.UpdateSecurityGroupOpts
 
 	var result gophercloud.Result
 
-	_, result.Err = client.Put(client.ServiceURL(SecGroupUrl, id), opts.ToPayLoad(), &result.Body, &gophercloud.RequestOpts{
+	_, result.Err = client.Put(client.ServiceURL(SecGroupUrl, id), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 
