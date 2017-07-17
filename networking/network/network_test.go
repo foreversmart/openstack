@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/golib/assert"
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/options"
 	"github.com/qbox/openstack-golang-sdk/lib/options"
 )
 

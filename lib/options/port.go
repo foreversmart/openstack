@@ -4,7 +4,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/kirk-enterprise/openstack-golang-sdk/lib/models"
+	"github.com/qbox/openstack-golang-sdk/lib/models"
 )
 
 type ListPortOpts struct {
