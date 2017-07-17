@@ -43,7 +43,7 @@ func (user *User) AllByParams(opts *options.ListUserOpts) (users []*models.UserM
 
 	var result gophercloud.Result
 
-	_, result.Err = client.Get(client.ServiceURL(UsersUrl)+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
+	_, result.Err = client.Get(client.ServiceURL(UsersUrl)+"?"+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 
