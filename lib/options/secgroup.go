@@ -52,3 +52,59 @@ func (opts *CreateSecurityGroupOpts) ToPayLoad() interface{} {
 		SecurityGroup: opts,
 	}
 }
+
+type ShowSecurityGroupOpts struct {
+	// Show detailed information, Optional
+	Verbose *bool `json:"verbose,omitempty"`
+
+	// The fields that you want the server to return, Optional
+	Fields *string `json:"string,omitempty"`
+}
+
+func (opts *ShowSecurityGroupOpts) IsValid() bool {
+	return true
+}
+
+func (opts *ShowSecurityGroupOpts) ToQuery() (param url.Values) {
+	param = url.Values{}
+
+	if opts == nil {
+		return
+	}
+
+	if opts.Verbose != nil {
+		if *opts.Verbose {
+			param.Add("verbose", "true")
+		} else if !*opts.Verbose {
+			param.Add("verbose", "false")
+		}
+	}
+
+	if opts.Fields != nil {
+		param.Add("fields", *opts.Fields)
+	}
+
+	return param
+}
+
+type UpdateSecurityGroupOpts struct {
+	//Human-readable name of the resource.
+	Name *string `json:"name,omitempty"`
+
+	// A human-readable description for the resource, Optional
+	Description *string `json:"description,omitempty"`
+}
+
+func (opts *UpdateSecurityGroupOpts) IsValid() bool {
+	return opts != nil && opts.Name != nil
+}
+
+func (opts *UpdateSecurityGroupOpts) ToPayLoad() interface{} {
+	type payload struct {
+		SecurityGroup *UpdateSecurityGroupOpts `json:"security_group"`
+	}
+
+	return payload{
+		SecurityGroup: opts,
+	}
+}

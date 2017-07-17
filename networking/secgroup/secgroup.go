@@ -64,3 +64,58 @@ func (s *SecurityGroups) Create(opts *options.CreateSecurityGroupOpts) (security
 
 	return models.ExtractSecurityGroup(result)
 }
+
+func (s *SecurityGroups) Show(id string, opts *options.ShowSecurityGroupOpts) (securitygroup *models.SecurityGroupModel, err error) {
+	if id == "" || !opts.IsValid() {
+		return nil, errors.ErrInvalidParams
+	}
+
+	client, err := s.Client.NetworkClient()
+	if err != nil {
+		return
+	}
+
+	var result gophercloud.Result
+
+	_, result.Err = client.Get(client.ServiceURL(SecGroupUrl, id)+"?"+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
+		OkCodes: []int{200},
+	})
+
+	return models.ExtractSecurityGroup(result)
+}
+
+func (s *SecurityGroups) Update(id string, opts *options.UpdateSecurityGroupOpts) (securitygroup *models.SecurityGroupModel, err error) {
+	if id == "" || !opts.IsValid() {
+		return nil, errors.ErrInvalidParams
+	}
+
+	client, err := s.Client.NetworkClient()
+	if err != nil {
+		return
+	}
+
+	var result gophercloud.Result
+
+	_, result.Err = client.Put(client.ServiceURL(SecGroupUrl, id), opts.ToPayLoad(), &result.Body, &gophercloud.RequestOpts{
+		OkCodes: []int{200},
+	})
+
+	return models.ExtractSecurityGroup(result)
+}
+
+func (s *SecurityGroups) Delete(id string) (err error) {
+	if id == "" {
+		return errors.ErrInvalidParams
+	}
+
+	client, err := s.Client.NetworkClient()
+	if err != nil {
+		return
+	}
+
+	_, err = client.Delete(client.ServiceURL(SecGroupUrl, id), &gophercloud.RequestOpts{
+		OkCodes: []int{204},
+	})
+
+	return err
+}
