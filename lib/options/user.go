@@ -13,6 +13,10 @@ type ListUserOpts struct {
 	ProtocolID        *string `json:"protocol_id"`
 }
 
+func (opts *ListUserOpts) Valid() bool {
+	return true
+}
+
 func (opts *ListUserOpts) ToQuery() (options url.Values) {
 	options = url.Values{}
 
@@ -51,10 +55,15 @@ func (opts *ListUserOpts) ToQuery() (options url.Values) {
 
 type CreateUserOpts struct {
 	Name             string  `json:"name"`
-	Password         *string `json:"password"`
-	DomainID         string  `json:"domain_id"`
-	DefaultProjectID *string `json:"default_project_id"`
-	Enabled          bool    `json:"enabled"`
+	Password         *string `json:"password,omitempty"`
+	Email            *string `json:"email,omitempty"`
+	DomainID         *string `json:"domain_id,omitempty"`
+	DefaultProjectID *string `json:"default_project_id,omitempty"`
+	Enabled          *bool   `json:"enabled,omitempty"`
+}
+
+func (opts *CreateUserOpts) Valid() bool {
+	return len(opts.Name) > 0
 }
 
 func (opts *CreateUserOpts) ToPayload() interface{} {
@@ -76,6 +85,10 @@ type UpdateUserOpts struct {
 	DefaultProjectID *string `json:"default_project_id,omitempty"`
 }
 
+func (opts *UpdateUserOpts) Valid() bool {
+	return true
+}
+
 func (opts *UpdateUserOpts) ToPayload() interface{} {
 	type payload struct {
 		User *UpdateUserOpts `json:"user"`
@@ -89,6 +102,10 @@ func (opts *UpdateUserOpts) ToPayload() interface{} {
 type ChangeUserPasswordOpts struct {
 	OriginalPassword string `json:"original_password"`
 	Password         string `json:"password"`
+}
+
+func (opts *ChangeUserPasswordOpts) Valid() bool {
+	return true
 }
 
 func (opts *ChangeUserPasswordOpts) ToPayload() interface{} {
