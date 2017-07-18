@@ -8,15 +8,15 @@ import (
 )
 
 type ListPortOpts struct {
-	Status       *string `json:"status"`
+	ID           *string `json:"id"`
 	Name         *string `json:"name"`
-	AdminStateUp *bool   `json:"admin_state_up"`
 	NetworkID    *string `json:"network_id"`
 	TenantID     *string `json:"tenant_id"`
-	DeviceOwner  *string `json:"device_owner"`
-	MACAddress   *string `json:"mac_address"`
-	ID           *string `json:"id"`
+	AdminStateUp *bool   `json:"admin_state_up"`
 	DeviceID     *string `json:"device_id"`
+	DeviceOwner  *string `json:"device_owner"`
+	Status       *string `json:"status"`
+	MACAddress   *string `json:"mac_address"`
 	Limit        *int    `json:"limit"`
 	Marker       *string `json:"marker"`
 	SortKey      *string `json:"sort_key"`
@@ -77,14 +77,14 @@ func (opts *ListPortOpts) ToQuery() (options url.Values) {
 }
 
 type CreatePortOpts struct {
-	NetworkID           *string               `json:"network_id"`
 	Name                *string               `json:"name"`
+	NetworkID           *string               `json:"network_id"`
+	TenantID            *string               `json:"tenant_id"`
 	AdminStateUp        *bool                 `json:"admin_state_up"`
-	MACAddress          *string               `json:"mac_address"`
-	FixedIPs            interface{}           `json:"fixed_ips"`
 	DeviceID            *string               `json:"device_id"`
 	DeviceOwner         *string               `json:"device_owner"`
-	TenantID            *string               `json:"tenant_id"`
+	MACAddress          *string               `json:"mac_address"`
+	FixedIPs            interface{}           `json:"fixed_ips"`
 	SecurityGroups      []*string             `json:"security_groups"`
 	AllowedAddressPairs []*models.AddressPair `json:"allowed_address_pairs "`
 }
@@ -105,10 +105,10 @@ func (opts *CreatePortOpts) ToPayload() interface{} {
 
 type UpdatePortOpts struct {
 	Name                *string               `json:"name"`
-	AdminStateUp        *bool                 `json:"admin_state_up"`
 	FixedIPs            interface{}           `json:"fixed_ips"`
 	DeviceID            *string               `json:"deivce_id"`
 	DeviceOwner         *string               `json:"device_owner"`
+	AdminStateUp        *bool                 `json:"admin_state_up"`
 	SecurityGroups      []*string             `json:"security_groups"`
 	AllowedAddressPairs []*models.AddressPair `json:"allowed_address_pairs "`
 }
