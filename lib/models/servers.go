@@ -1,8 +1,11 @@
 package models
 
 import (
+	"encoding/json"
+
 	"github.com/mitchellh/mapstructure"
 	"github.com/rackspace/gophercloud"
+	"github.com/rackspace/gophercloud/openstack/networking/v2/ports"
 )
 
 type ServersModel struct {
@@ -115,4 +118,55 @@ func ExtractServers(result gophercloud.Result) (serverInfo []*ServersModel, err 
 	}
 
 	return
+}
+
+type AttachPortModel struct {
+	// UUID for the port.
+	PortId string `mapstructure:"port_id" json:"port_id"`
+
+	// Network that this port is associated with.
+	NetworkID string `mapstructure:"net_id" json:"net_id"`
+
+	PortState string `mapstructure:"port_state" json:"port_state"`
+
+	// Mac address to use on this port.
+	MacAddr string `mapstructure:"mac_addr" json:"mac_addr"`
+
+	// Specifies IP addresses for the port thus associating the port itself with
+	FixedIPs []ports.IP `mapstructure:"fixed_ips" json:"fixed_ips"`
+}
+
+func ExtractAttachPorts(r gophercloud.Result) ([]*AttachPortModel, error) {
+	if r.Err != nil {
+		return nil, r.Err
+	}
+
+	var res struct {
+		AttachPorts []*AttachPortModel `mapstructure:"interfaceAttachments"`
+	}
+
+	err := mapstructure.Decode(r.Body, &res)
+
+	return res.AttachPorts, err
+}
+
+type OpenVNCResult struct {
+	Console struct {
+		Type string `json:"type"`
+		URL  string `json:"url"`
+	} `json:"console"`
+}
+
+func ExtractOpenVNCResult(body interface{}) (result *OpenVNCResult, err error) {
+	b, err := json.Marshal(body)
+	if err != nil {
+		return
+	}
+
+	err = json.Unmarshal(b, &result)
+	return
+}
+
+func (result *OpenVNCResult) URL() string {
+	return result.Console.URL + "&path=v1.0/websocket/websockify"
 }

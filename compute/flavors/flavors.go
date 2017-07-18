@@ -27,6 +27,7 @@ func New(client ifaces.Openstacker) *Flavors {
 func (f *Flavors) All() (flavors []*models.FlavorModel, err error) {
 	return f.AllByParams(nil)
 }
+
 func (f *Flavors) AllByParams(opts *options.ListFlavorsOpts) (flavors []*models.FlavorModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
