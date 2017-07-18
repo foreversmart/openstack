@@ -558,6 +558,87 @@
                 "description": "my security group"
             }
         },
-        "DELETE /security-groups/:id":{}
+        "DELETE /security-groups/:id":{},
+        "POST /ports": {
+            "port": {
+                "binding:host_id": "4df8d9ff-6f6f-438f-90a1-ef660d4586ad",
+                "binding:profile": {
+                    "local_link_information": [
+                        {
+                            "port_id": "Ethernet3/1",
+                            "switch_id": "0a:1b:2c:3d:4e:5f",
+                            "switch_info": "switch1"
+                        }
+                    ]
+                },
+                "binding:vnic_type": "baremetal",
+                "device_id": "d90a13da-be41-461f-9f99-1dbcf438fdf2",
+                "device_owner": "baremetal:none"
+            }
+        },
+        "GET /ports/:id": {
+            "port": {
+                "admin_state_up": true,
+                "allowed_address_pairs": [],
+                "created_at": "2016-03-08T20:19:41",
+                "data_plane_status": "ACTIVE",
+                "description": "",
+                "device_id": "5e3898d7-11be-483e-9732-b2f5eccd2b2e",
+                "device_owner": "network:router_interface",
+                "extra_dhcp_opts": [],
+                "fixed_ips": [
+                    {
+                        "ip_address": "10.0.0.1",
+                        "subnet_id": "a0304c3a-4f08-4c43-88af-d796509c97d2"
+                    }
+                ],
+                "id": "46d4bfb9-b26e-41f3-bd2e-e6dcc1ccedb2",
+                "mac_address": "fa:16:3e:23:fd:d7",
+                "name": "",
+                "network_id": "a87cc70a-3e15-4acf-8205-9b711a3531b7",
+                "port_security_enabled": false,
+                "project_id": "7e02058126cc4950b75f9970368ba177",
+                "security_groups": [],
+                "status": "ACTIVE",
+                "tenant_id": "7e02058126cc4950b75f9970368ba177",
+                "updated_at": "2016-03-08T20:19:41"
+            }
+        },
+        "GET /ports": {
+            "ports": [
+                {
+                    "admin_state_up": true,
+                    "allowed_address_pairs": [],
+                    "data_plane_status": null,
+                    "description": "",
+                    "device_id": "9ae135f4-b6e0-4dad-9e91-3c223e385824",
+                    "device_owner": "network:router_gateway",
+                    "extra_dhcp_opts": [],
+                    "fixed_ips": [
+                        {
+                            "ip_address": "172.24.4.2",
+                            "subnet_id": "008ba151-0b8c-4a67-98b5-0d2b87666062"
+                        }
+                    ],
+                    "id": "d80b1a3b-4fc1-49f3-952e-1e2ab7081d8b",
+                    "mac_address": "fa:16:3e:58:42:ed",
+                    "name": "",
+                    "network_id": "70c1db1f-b701-45bd-96e0-a313ee3430b3",
+                    "project_id": "",
+                    "security_groups": [],
+                    "status": "ACTIVE",
+                    "tenant_id": ""
+                }
+            ]
+        },
+        "DELETE /ports/:id": {},
+        "PUT /ports/:id": {
+            "port": {
+                "binding:host_id": "test_for_port_update_host",
+                "device_id": "d90a13da-be41-461f-9f99-1dbcf438fdf2",
+                "data_plane_status": "DOWN",
+                "device_owner": "compute:nova"
+            }
+        }
     }
 }

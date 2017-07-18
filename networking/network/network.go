@@ -21,14 +21,26 @@ func New(client ifaces.Openstacker) *Network {
 	}
 }
 
-func (n *Network) Create(opts *networks.CreateOpts) (network *models.NetworkModel, err error) {
+const (
+	NetworkUrl = "networks"
+)
+
+func (n *Network) Create(opts *options.CreateNetworkOpts) (network *models.NetworkModel, err error) {
+	if !opts.IsValid() {
+		return nil, errors.ErrInvalidParams
+	}
+
 	client, err := n.Client.NetworkClient()
 	if err != nil {
 		return network, err
 	}
 
-	result := networks.Create(client, opts)
-	return models.ExtractNetwork(result.Result)
+	var res gophercloud.Result
+	_, res.Err = client.Post(client.ServiceURL(NetworkUrl), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
+		OkCodes: []int{201},
+	})
+
+	return models.ExtractNetwork(res)
 }
 
 func (n *Network) All() (infos []*models.NetworkModel, err error) {
@@ -42,7 +54,7 @@ func (n *Network) AllByParams(opts *options.ListNetworkOpt) (infos []*models.Net
 	}
 
 	var result gophercloud.Result
-	_, result.Err = client.Get(client.ServiceURL("networks")+"?"+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
+	_, result.Err = client.Get(client.ServiceURL(NetworkUrl)+"?"+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200, 201},
 	})
 
