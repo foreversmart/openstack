@@ -80,7 +80,7 @@ type ListServersOpts struct {
 	Limit *int `json:"limit"`
 
 	// Bool to show all tenants
-	AllTenants *bool `json:"all_tenants"`
+	AllTenants *int `json:"all_tenants"`
 }
 
 func (opts *ListServersOpts) IsValid() bool {
@@ -220,8 +220,8 @@ func (opts *ListServersOpts) ToQuery() (options url.Values) {
 		if opts.Limit != nil {
 			options.Add("limit", strconv.Itoa(*opts.Limit))
 		}
-		if opts.AllTenants != nil && *opts.AllTenants == true {
-			options.Add("all_tenants", "true")
+		if opts.AllTenants != nil {
+			options.Add("all_tenants", strconv.Itoa(*opts.AllTenants))
 		}
 	}
 
