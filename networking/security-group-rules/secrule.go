@@ -16,7 +16,7 @@ type Secrule struct {
 }
 
 const (
-	SecruleUrl = "security-group-rules"
+	SecRuleUrl = "security-group-rules"
 )
 
 func New(client ifaces.Openstacker) *Secrule {
@@ -36,7 +36,7 @@ func (s *Secrule) Create(opts *options.CreateSecruleOpts) (secrule *models.SecGr
 	}
 
 	var res gophercloud.Result
-	_, res.Err = client.Post(client.ServiceURL(SecruleUrl), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
+	_, res.Err = client.Post(client.ServiceURL(SecRuleUrl), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{201},
 	})
 
@@ -58,7 +58,7 @@ func (s *Secrule) AllByParams(opts *options.ListSecRuleOpts) (secruleInfos []*mo
 	}
 
 	var result gophercloud.Result
-	_, result.Err = client.Get(client.ServiceURL(SecruleUrl)+"?"+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
+	_, result.Err = client.Get(client.ServiceURL(SecRuleUrl)+"?"+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 
@@ -77,7 +77,7 @@ func (s *Secrule) Show(id string) (rule *models.SecGroupRuleModel, err error) {
 
 	var result gophercloud.Result
 	_, result.Err = client.Get(client.ServiceURL(SecRuleUrl, id), &result.Body, &gophercloud.RequestOpts{
-		OkCodes: []int{200, 201},
+		OkCodes: []int{200},
 	})
 
 	return models.ExtractSecRule(result)
