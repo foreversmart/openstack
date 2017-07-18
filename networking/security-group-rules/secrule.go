@@ -30,7 +30,7 @@ func (s *Secrule) Create(opts *options.CreateSecruleOpts) (secrule *models.SecGr
 		return nil, errors.ErrInvalidParams
 	}
 
-	client, err := n.Client.NetworkClient()
+	client, err := s.Client.NetworkClient()
 	if err != nil {
 		return
 	}
@@ -40,7 +40,7 @@ func (s *Secrule) Create(opts *options.CreateSecruleOpts) (secrule *models.SecGr
 		OkCodes: []int{201},
 	})
 
-	return models.ExtractSecRules(res)
+	return models.ExtractSecRule(res)
 }
 
 func (s *Secrule) All() (secruleInfos []*models.SecGroupRuleModel, err error) {
@@ -52,7 +52,7 @@ func (s *Secrule) AllByParams(opts *options.ListSecRuleOpts) (secruleInfos []*mo
 		return nil, errors.ErrInvalidParams
 	}
 
-	client, err := n.Client.NetworkClient()
+	client, err := s.Client.NetworkClient()
 	if err != nil {
 		return nil, err
 	}
