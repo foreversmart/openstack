@@ -45,25 +45,25 @@ func (i ImageVisibility) IsValid() bool {
 }
 
 type ImageModel struct {
-	ID         string   `json:"id" mapstructure:"id"`
-	Name       string   `json:"name" mapstructure:"name"`
-	Status     string   `json:"status" mapstructure:"status"`
-	Visibility string   `json:"visibility" mapstructure:"visibility"`
-	Size       int      `json:"size" mapstructure:"size"`
-	Tags       []string `json:"tags" mapstructure:"tags"`
-	Self       string   `json:"self" mapstructure:"self"`
-	File       string   `json:"file" mapstructure:"file"`
-	Schema     string   `json:"schema" mapstructure:"schema"`
+	ID         string   `mapstructure:"id" json:"id"`
+	Name       string   `mapstructure:"name" json:"name"`
+	Status     string   `mapstructure:"status" json:"status"`
+	Visibility string   `mapstructure:"visibility" json:"visibility"`
+	Size       int      `mapstructure:"size" json:"size"`
+	Tags       []string `mapstructure:"tags" json:"tags"`
+	Self       string   `mapstructure:"self" json:"self"`
+	File       string   `mapstructure:"file" json:"file"`
+	Schema     string   `mapstructure:"schema" json:"schema"`
 
 	// DiskFormat is the format of the disk.
 	// If set, valid values are ami, ari, aki, vhd, vmdk, raw, qcow2, vdi, and iso.
-	DiskFormat string `json:"disk_format" mapstructure:"disk_format"`
+	DiskFormat string `mapstructure:"disk_format" json:"disk_format"`
 	// MinDiskGigabytes is the amount of disk space in GB that is required to boot the image.
-	MinDisk int `json:"min_disk" mapstructure:"min_disk"`
+	MinDisk int `mapstructure:"min_disk" json:"min_disk"`
 	// MinRAMMegabytes [optional] is the amount of RAM in MB that is required to boot the image.
-	MinRAM    int    `json:"min_ram" mapstructure:"min_ram"`
-	UpdatedAt string `json:"updated_at" mapstructure:"updated_at"`
-	CreatedAt string `json:"created_at" mapstructure:"created_at"`
+	MinRAM    int    `mapstructure:"min_ram" json:"min_ram"`
+	UpdatedAt string `mapstructure:"updated_at" json:"updated_at"`
+	CreatedAt string `mapstructure:"created_at" json:"created_at"`
 }
 
 func ExtractImages(result gophercloud.Result) (images []*ImageModel, err error) {
