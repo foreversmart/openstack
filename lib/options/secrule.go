@@ -18,7 +18,7 @@ type CreateSecruleOpts struct {
 }
 
 func (opts *CreateSecruleOpts) IsValid() bool {
-	return opts != nil && opts.Direction != nil && opts.RemoteIPPrefix != nil
+	return opts != nil && opts.SecGroupID != nil && opts.Direction != nil && opts.RemoteIPPrefix != nil
 }
 
 func (opts *CreateSecruleOpts) ToPayload() interface{} {
