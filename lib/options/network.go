@@ -29,10 +29,10 @@ func (opts *ListNetworkOpt) ToQuery() (options url.Values) {
 }
 
 type CreateNetworkOpts struct {
-	AdminStateUp *bool   `json:"admin_state_up"`
 	Name         *string `json:"name"`
-	Shared       *bool   `json:"shared"`
 	TenantID     *string `json:"tenant_id"`
+	Shared       *bool   `json:"shared"`
+	AdminStateUp *bool   `json:"admin_state_up"`
 }
 
 func (opts *CreateNetworkOpts) ToPayload() interface{} {
