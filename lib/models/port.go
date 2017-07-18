@@ -47,18 +47,6 @@ type AddressPair struct {
 	MACAddress string `mapstructure:"mac_address" json:"mac_address,omitempty"`
 }
 
-func ExtractPortsByBody(body interface{}) (ports []*PortModel, err error) {
-	var resp struct {
-		Ports []*PortModel `mapstructure:"ports"`
-	}
-
-	err = mapstructure.Decode(body, &resp)
-	if err == nil {
-		ports = resp.Ports
-	}
-	return
-}
-
 func ExtractPort(r gophercloud.Result) (port *PortModel, err error) {
 	if r.Err != nil {
 		return nil, r.Err
@@ -75,18 +63,22 @@ func ExtractPort(r gophercloud.Result) (port *PortModel, err error) {
 	return resp.Port, err
 }
 
+func ExtractPortsByBody(body interface{}) (ports []*PortModel, err error) {
+	var resp struct {
+		Ports []*PortModel `mapstructure:"ports"`
+	}
+
+	err = mapstructure.Decode(body, &resp)
+	if err == nil {
+		ports = resp.Ports
+	}
+	return
+}
+
 func ExtractPorts(r gophercloud.Result) (port []*PortModel, err error) {
 	if r.Err != nil {
 		return nil, r.Err
 	}
 
-	var resp struct {
-		Ports []*PortModel `mapstructure:"ports"`
-	}
-
-	err = mapstructure.Decode(r.Body, &resp)
-	if err == nil {
-		port = resp.Ports
-	}
-	return resp.Ports, err
+	return ExtractPortsByBody(r.Body)
 }
