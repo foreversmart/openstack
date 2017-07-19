@@ -56,6 +56,14 @@ func String(v string) *string {
 	return &v
 }
 
+func StringList(strs []string) (res []*string) {
+	res = make([]*string, len(strs))
+	for i, v := range strs {
+		res[i] = &v
+	}
+	return
+}
+
 func Byte(v byte) *byte {
 	return &v
 }
