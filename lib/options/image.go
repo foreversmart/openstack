@@ -123,7 +123,7 @@ func (opts *UpdateImagesOpts) IsValid() bool {
 	return opts != nil
 }
 
-func (opts *UpdateImagesOpts) ToPayload() interface{} {
+func (opts *UpdateImagesOpts) ToPatches() images.UpdateOpts {
 	payload := make(images.UpdateOpts, 0, 2)
 	if opts.Name != nil {
 		payload = append(payload, images.ReplaceImageName{

@@ -1,7 +1,9 @@
 package images
 
 import (
+	"io/ioutil"
 	"net/http"
+	"strings"
 	"testing"
 
 	"github.com/golib/assert"
@@ -37,64 +39,109 @@ func Test_Create_Images(t *testing.T) {
 	testImageId = image.ID
 }
 
-// func Test_All_Images(t *testing.T) {
-// 	mitm := mocker.StubDefaultTransport(t)
+func Test_All_Images(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
 
-// 	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort(networkPort, "/v2.0/floatingips")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /floatingips"))
-// 	// mitm.Pause()
+	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort(imagePort, "/v2/images")).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /images"))
+	// mitm.Pause()
 
-// 	assertion := assert.New(t)
+	assertion := assert.New(t)
 
-// 	ips, err := New(openstacker).All()
-// 	assertion.Nil(err)
-// 	assertion.NotNil(ips)
-// 	assertion.EqualValues(2, len(ips))
+	images, err := New(openstacker).All()
+	assertion.Nil(err)
+	assertion.NotNil(images)
+	assertion.EqualValues(2, len(images))
 
-// 	assertModel(assertion, "GET /floatingips.floatingips.0", ips[0])
-// }
+	assertModel(assertion, "GET /images.images.0", images[0])
+}
 
-// func Test_Show_Images(t *testing.T) {
-// 	mitm := mocker.StubDefaultTransport(t)
+func Test_Show_Images(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
 
-// 	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort(networkPort, "/v2.0/floatingips/"+testFloatingipID)).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /floatingips/:id"))
+	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort(imagePort, "/v2/images/"+testImageId)).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /images/:id"))
 
-// 	assertion := assert.New(t)
+	assertion := assert.New(t)
 
-// 	ip, err := New(openstacker).Show(testFloatingipID)
-// 	assertion.Nil(err)
-// 	assertion.NotNil(ip)
+	image, err := New(openstacker).Show(testImageId)
+	assertion.Nil(err)
+	assertion.NotNil(image)
 
-// 	assertModel(assertion, "GET /floatingips/:id.floatingip", ip)
-// }
+	assertModel(assertion, "GET /images/:id", image)
+}
 
-// func Test_Update_Images(t *testing.T) {
-// 	mitm := mocker.StubDefaultTransport(t)
+func Test_Update_Images(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
 
-// 	mitm.MockRequest("PUT", apiv2.MockResourceURLWithPort(networkPort, "/v2.0/floatingips/"+testFloatingipID)).WithResponse(http.StatusOK, nil, apiv2.APIString("PUT /floatingips/:id"))
-// 	//mitm.Pause()
+	mitm.MockRequest("PATCH", apiv2.MockResourceURLWithPort(imagePort, "/v2/images/"+testImageId)).WithResponse(http.StatusOK, nil, apiv2.APIString("PATCH /images/:id"))
+	//mitm.Pause()
 
-// 	assertion := assert.New(t)
+	assertion := assert.New(t)
 
-// 	ip, err := New(openstacker).Update(testFloatingipID, &options.UpdateFloatingIPOpts{
-// 		Description: options.String("update floatingip desc"),
-// 	})
-// 	assertion.Nil(err)
-// 	assertion.NotNil(ip)
+	tags := []string{"tag1", "tag2"}
 
-// 	assertModel(assertion, "PUT /floatingips/:id.floatingip", ip)
-// }
+	image, err := New(openstacker).Update(testImageId, &options.UpdateImagesOpts{
+		Name: options.String("updatename"),
+		Tags: &tags,
+	})
+	assertion.Nil(err)
+	assertion.NotNil(image)
 
-// func Test_Delete_Images(t *testing.T) {
-// 	mitm := mocker.StubDefaultTransport(t)
+	assertModel(assertion, "PATCH /images/:id", image)
+}
 
-// 	mitm.MockRequest("DELETE", apiv2.MockResourceURLWithPort(networkPort, "/v2.0/floatingips/"+testFloatingipID)).WithResponse(http.StatusNoContent, nil, apiv2.APIString("DELETE /floatingips/:id"))
-// 	//mitm.Pause()
+func Test_Delete_Images(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
 
-// 	assertion := assert.New(t)
+	mitm.MockRequest("DELETE", apiv2.MockResourceURLWithPort(imagePort, "/v2/images/"+testImageId)).WithResponse(http.StatusNoContent, nil, apiv2.APIString("DELETE /images/:id"))
+	//mitm.Pause()
 
-// 	err := New(openstacker).Delete(testFloatingipID)
-// 	assertion.Nil(err)
-// }
+	assertion := assert.New(t)
+
+	err := New(openstacker).Delete(testImageId)
+	assertion.Nil(err)
+}
+
+func Test_Upload_Image(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	jsonheader := http.Header{}
+	jsonheader.Add("Content-Type", "application/json")
+
+	mitm.MockRequest(http.MethodPut, apiv2.MockResourceURLWithPort(imagePort, "/v2/images/"+testImageId+"/file")).WithResponse(http.StatusNoContent, jsonheader, "")
+	//mitm.Pause()
+
+	i := New(openstacker)
+	assertion := assert.New(t)
+
+	data := strings.NewReader("test")
+	err := i.Upload(testImageId, data)
+
+	assertion.Nil(err)
+}
+
+func Test_Download_Image(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	jsonheader := http.Header{}
+	jsonheader.Add("Content-Type", "application/json")
+	jsonheader.Add("Content-Md5", "sdlfjladmxllckvk")
+	jsonheader.Add("Content-Length", "28")
+
+	imageBody := "test-image"
+	mitm.MockRequest(http.MethodGet, apiv2.MockResourceURLWithPort(imagePort, "/v2/images/"+testImageId+"/file")).WithResponse(http.StatusOK, jsonheader, imageBody)
+	//mitm.Pause()
+
+	i := New(openstacker)
+	assertion := assert.New(t)
+
+	data, err := i.Download(testImageId)
+	assertion.Nil(err)
+
+	body, err := ioutil.ReadAll(data)
+
+	assertion.Nil(err)
+	assertion.Equal(imageBody, string(body))
+}
 
 func assertModel(assertion *assert.Assertions, pathPrefix string, image *models.ImageModel) {
 	assertion.Equal(apiv2.APIString(pathPrefix+".id"), image.ID)
@@ -106,5 +153,4 @@ func assertModel(assertion *assert.Assertions, pathPrefix string, image *models.
 	assertion.Equal(apiv2.APIString(pathPrefix+".schema"), image.Schema)
 	assertion.Equal(apiv2.APIString(pathPrefix+".disk_format"), image.DiskFormat)
 	assertion.Equal(apiv2.APIString(pathPrefix+".created_at"), image.CreatedAt)
-
 }

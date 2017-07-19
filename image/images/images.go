@@ -101,13 +101,8 @@ func (i *Images) Update(id string, opts *options.UpdateImagesOpts) (imageModel *
 		return
 	}
 
-	var result gophercloud.Result
-
-	_, err = client.Patch(client.ServiceURL(ImagesUrl, id), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
-		OkCodes: []int{200},
-	})
-
-	return models.ExtractImage(result)
+	res := imageservice.Update(client, id, opts.ToPatches())
+	return models.ExtractImage(res.Result)
 }
 
 func (i *Images) Delete(id string) error {
