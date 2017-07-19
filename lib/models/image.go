@@ -5,45 +5,6 @@ import (
 	"github.com/rackspace/gophercloud"
 )
 
-type ImageType string
-type ImageVisibility string
-
-const (
-	// image type
-	ImageTypeSnapshot ImageType = "snapshot"
-	ImageTypeNormal   ImageType = "normal"
-	ImageTypeAll      ImageType = "all"
-
-	// image visibility
-	ImageVisibilityPublic  ImageVisibility = "public"
-	ImageVisibilityShared  ImageVisibility = "shared"
-	ImageVisibilityPrivate ImageVisibility = "private"
-	ImageVisibilityAll     ImageVisibility = "all"
-
-	WindowsImageLabel = "Windows"
-
-	OsTypeTagMark   string = "os_type:"
-	OsFamilyTagMark string = "os_family:"
-)
-
-func (i ImageType) IsValid() bool {
-	switch i {
-	case ImageTypeSnapshot, ImageTypeNormal, ImageTypeAll:
-		return true
-	}
-
-	return false
-}
-
-func (i ImageVisibility) IsValid() bool {
-	switch i {
-	case ImageVisibilityPublic, ImageVisibilityPrivate, ImageVisibilityShared, ImageVisibilityAll:
-		return true
-	}
-
-	return false
-}
-
 type ImageModel struct {
 	ID         string   `mapstructure:"id" json:"id"`
 	Name       string   `mapstructure:"name" json:"name"`

@@ -3,6 +3,8 @@ package options
 import (
 	"net/url"
 	"strconv"
+
+	"github.com/rackspace/gophercloud/openstack/imageservice/v2/images"
 )
 
 /**
@@ -87,7 +89,7 @@ func (opts *ListImagesOpts) ToQuery() (options url.Values) {
 }
 
 /**
- * used to create volume
+ * used to create image
  */
 type CreateImagesOpts struct {
 	ID              *string   `json:"id"`
@@ -107,4 +109,33 @@ func (opts *CreateImagesOpts) IsValid() bool {
 
 func (opts *CreateImagesOpts) ToPayload() interface{} {
 	return opts
+}
+
+/**
+ * used to update image
+ */
+type UpdateImagesOpts struct {
+	Name *string   `json:"name"`
+	Tags *[]string `json:"tags"`
+}
+
+func (opts *UpdateImagesOpts) IsValid() bool {
+	return opts != nil
+}
+
+func (opts *UpdateImagesOpts) ToPayload() interface{} {
+	payload := make(images.UpdateOpts, 0, 2)
+	if opts.Name != nil {
+		payload = append(payload, images.ReplaceImageName{
+			NewName: *opts.Name,
+		})
+	}
+
+	if len(*opts.Tags) > 0 {
+		payload = append(payload, images.ReplaceImageTags{
+			NewTags: *opts.Tags,
+		})
+	}
+
+	return payload
 }
