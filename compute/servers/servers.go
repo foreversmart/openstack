@@ -487,8 +487,62 @@ func (ser *Servers) ModifyFlavor(id, flavorID string) error {
 }
 
 // TODO: after finish image package to do this then
-func (ser *Servers) Rebuild(id, imageID string) error {
-	return errors.ErrNotImplemented
+func (ser *Servers) Rebuild(id, imageID string) (serverModel *models.ServersModel, err error) {
+	if id == "" || imageID == "" {
+		err = errors.ErrInvalidParams
+		return
+	}
+
+	client, err := ser.Client.ComputerClient()
+	if err != nil {
+		return
+	}
+
+	vm, err := ser.Show(id)
+	if err != nil {
+		return
+	}
+
+	// // fetch base image id
+	// baseImageId := imageID
+	// imager := images.New(ser.Client)
+	// image, err := imager.Show(imageID)
+	// if err != nil {
+	// 	return err
+	// }
+
+	// if image.BaseImageID != "" {
+	// 	baseImageId = image.BaseImageId
+	// }
+	// 这块逻辑应该实现在controller层
+
+	opts := options.RebuildServerOpts{
+		Name:    vm.Name,
+		ImageID: imageID,
+		Metadata: map[string]string{
+			"hypervisor_type": "qemu",
+		},
+	}
+
+	res := servers.Rebuild(client, id, opts)
+	if res.Err != nil {
+		err = res.Err
+		return
+	}
+
+	return models.ExtractServer(res.Result)
+
+	// // update server base image id metadata
+	// metaDataOpts := params.UpdateMetadataOpts{
+	// 	Metadata: map[string]string{
+	// 		"base_image_id": baseImageId,
+	// 		"admin_pass":    res.AdminPass,
+	// 	},
+	// }
+
+	// err = servers.UpdateMetadata(client, id, metaDataOpts).Err
+	// return
+	// 这段逻辑应该实现在controller层
 }
 
 func (ser *Servers) Vnc(id string) (vncURL string, err error) {

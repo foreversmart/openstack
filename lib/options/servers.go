@@ -245,7 +245,7 @@ type ServerNetworkOpts struct {
 // Personality is an array of files that are injected into the server at launch.
 type ServerPersonalityOpts []*ServerFileOpts
 
-// File is used within CreateOpts and RebuildOpts to inject a file into the server at launch.
+// File is used within CreateOpts and RebuildServerOpts to inject a file into the server at launch.
 // File implements the json.Marshaler interface, so when a Create or Rebuild operation is requested,
 // json.Marshal will call File's MarshalJSON method.
 type ServerFileOpts struct {
@@ -364,4 +364,36 @@ func (opts *UpdateServersOpts) ToPayload() interface{} {
 	return payload{
 		Server: opts,
 	}
+}
+
+// RebuildServerOpts represents the configuration options used in a server rebuild
+// operation
+type RebuildServerOpts struct {
+	// Required. The ID of the image you want your server to be provisioned on
+	ImageID string
+
+	// Name to set the server to
+	Name string
+
+	// Metadata [optional] contains key-value pairs (up to 255 bytes each) to attach to the server.
+	Metadata map[string]string
+}
+
+// ToServerRebuildMap formats a RebuildServerOpts struct into a map for use in JSON
+func (opts RebuildServerOpts) ToServerRebuildMap() (map[string]interface{}, error) {
+	var err error
+	server := make(map[string]interface{})
+
+	if err != nil {
+		return server, err
+	}
+
+	server["name"] = opts.Name
+	server["imageRef"] = opts.ImageID
+
+	if opts.Metadata != nil {
+		server["metadata"] = opts.Metadata
+	}
+
+	return map[string]interface{}{"rebuild": server}, nil
 }
