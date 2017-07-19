@@ -1,6 +1,8 @@
 package models
 
 import (
+	"io"
+
 	"github.com/mitchellh/mapstructure"
 	"github.com/rackspace/gophercloud"
 )
@@ -54,4 +56,12 @@ func ExtractImage(res gophercloud.Result) (image *ImageModel, err error) {
 	err = mapstructure.Decode(res.Body, &image)
 
 	return
+}
+
+type ImageReadSeeker struct {
+	io.Reader
+}
+
+func (i ImageReadSeeker) Seek(offset int64, whence int) (int64, error) {
+	return 0, nil
 }

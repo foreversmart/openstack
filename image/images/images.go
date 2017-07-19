@@ -123,14 +123,6 @@ func (i *Images) Delete(id string) error {
 	return images.Delete(client, id).Err
 }
 
-type ImageReadSeeker struct {
-	io.Reader
-}
-
-func (i ImageReadSeeker) Seek(offset int64, whence int) (int64, error) {
-	return 0, nil
-}
-
 func (i *Images) Upload(id string, data io.Reader) error {
 	if id == "" {
 		return errors.ErrInvalidParams
@@ -141,7 +133,7 @@ func (i *Images) Upload(id string, data io.Reader) error {
 		return err
 	}
 
-	body := &ImageReadSeeker{
+	body := &models.ImageReadSeeker{
 		Reader: data,
 	}
 
