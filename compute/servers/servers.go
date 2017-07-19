@@ -45,7 +45,7 @@ func (ser *Servers) Create(opts options.CreateServersOpts) (server *models.Serve
 	var result gophercloud.Result
 
 	_, err = client.Post(client.ServiceURL(ServersUrl), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
-		OkCodes: []int{201},
+		OkCodes: []int{202},
 	})
 
 	return models.ExtractServer(result)

@@ -10,6 +10,27 @@ import (
 
 const computerPort = "8774"
 
+func Test_Create_Server(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	mitm.MockRequest(http.MethodPost, apiv3.MockResourceURLWithPort(computerPort, "v2.1/"+testProjectId+"/servers")).WithResponse(http.StatusAccepted, jsonheader, apiv3.APIString("POST /servers"))
+	// mitm.Pause()
+
+	assertion := assert.New(t)
+
+	server, err := New(openstacker).Create(options.CreateServersOpts{
+		Name:      options.String("newvm"),
+		ImageRef:  options.String("70a599e0-31e7-49b7-b260-868f441e862b"),
+		FlavorRef: options.String("1"),
+	})
+
+	assertion.Nil(err)
+	assertion.NotNil(server)
+
+	assertion.Equal(apiv3.APIString("POST /servers.server.id"), server.ID)
+	assertion.Equal(apiv3.APIString("POST /servers.server.admin_pass"), server.AdminPass)
+}
+
 func Test_All_Servers(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
@@ -89,5 +110,39 @@ func Test_Delete_Servers(t *testing.T) {
 	assertion := assert.New(t)
 
 	err := New(openstacker).Delete(serverID)
+	assertion.Nil(err)
+}
+
+func Test_ChangeAdminPassword(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	serverID := apiv3.APIString("POST /servers.server.id")
+
+	mitm.MockRequest(http.MethodPost, apiv3.MockResourceURLWithPort(computerPort, "v2.1/"+testProjectId+"/servers/"+serverID+"/action")).WithResponse(http.StatusAccepted, jsonheader, "")
+	//mitm.Pause()
+
+	assertion := assert.New(t)
+
+	err := New(openstacker).ChangeAdminPassword(serverID, "newpass")
+	assertion.Nil(err)
+}
+
+func Test_Start_Stop_Reboot_Shutdown_Server(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	serverID := apiv3.APIString("POST /servers.server.id")
+
+	mitm.MockRequest(http.MethodPost, apiv3.MockResourceURLWithPort(computerPort, "v2.1/"+testProjectId+"/servers/"+serverID+"/action")).WithResponse(http.StatusAccepted, jsonheader, "").AnyTimes()
+	//mitm.Pause()
+
+	assertion := assert.New(t)
+
+	err := New(openstacker).Start(serverID)
+	assertion.Nil(err)
+	err = New(openstacker).Stop(serverID)
+	assertion.Nil(err)
+	err = New(openstacker).Reboot(serverID)
+	assertion.Nil(err)
+	err = New(openstacker).Shutdown(serverID)
 	assertion.Nil(err)
 }
