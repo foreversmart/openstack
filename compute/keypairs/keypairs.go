@@ -1,4 +1,4 @@
-package volume
+package keypairs
 
 import (
 	"github.com/qbox/openstack-golang-sdk/lib/errors"
@@ -25,7 +25,7 @@ func New(client ifaces.Openstacker) *Keypairs {
 	}
 }
 
-func (k *Keypairs) Create(opts *options.CreateKeypairOpt) (keypair *models.KeypairModel, err error) {
+func (k *Keypairs) Create(opts *options.CreateKeypairOpts) (keypair *models.KeypairModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
@@ -48,7 +48,7 @@ func (f *Keypairs) All() (KeypairModels []*models.KeypairModel, err error) {
 	return f.AllByParams(nil)
 }
 
-func (f *Keypairs) AllByParams(opts *options.ListKeypairOpt) (keypairModels []*models.KeypairModel, err error) {
+func (f *Keypairs) AllByParams(opts *options.ListKeypairOpts) (keypairModels []*models.KeypairModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return

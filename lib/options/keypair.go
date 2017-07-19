@@ -2,17 +2,17 @@ package options
 
 import "net/url"
 
-type ListKeypairOpt struct {
+type ListKeypairOpts struct {
 	UserID *string `json:"user_id"`
 	Limit  *string `json:"limit"`
 	Marker *string `json:"marker"`
 }
 
-func (opts *ListKeypairOpt) IsValid() bool {
+func (opts *ListKeypairOpts) IsValid() bool {
 	return true
 }
 
-func (opts *ListKeypairOpt) ToQuery() (options url.Values) {
+func (opts *ListKeypairOpts) ToQuery() (options url.Values) {
 	options = url.Values{}
 	if opts == nil {
 		return
@@ -50,6 +50,6 @@ func (opts *CreateKeypairOpts) ToPayload() interface{} {
 	}
 }
 
-func (opts *CreateNetworkOpts) IsValid() bool {
+func (opts *CreateKeypairOpts) IsValid() bool {
 	return opts != nil && opts.Name != nil
 }

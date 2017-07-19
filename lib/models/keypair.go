@@ -6,15 +6,15 @@ import (
 )
 
 type KeypairModel struct {
-	ID          *string `json:"id"`
-	Name        *string `json:"name"`
-	Deleted     *bool   `json:"deleted"`
-	DeletedAt   *string `json:"deleted_at"`
-	Fingerprint *string `json:"fingerprint"`
-	PublicKey   *string `json:"public_key"`
-	UpdatedAt   *string `json:"updated_at"`
-	UserId      *string `json:"user_id"`
-	Type        *string `json:"type"`
+	// ID          string `mapstructure:"id" json:"id"`
+	Name string `mapstructure:"name" json:"name"`
+	// Deleted     bool   `mapstructure:"deleted" json:"deleted"`
+	// DeletedAt   string `mapstructure:"deleted_at" json:"deleted_at"`
+	Fingerprint string `mapstructure:"fingerprint" json:"fingerprint"`
+	PublicKey   string `mapstructure:"public_key" json:"public_key"`
+	UpdatedAt   string `mapstructure:"updated_at" json:"updated_at"`
+	UserId      string `mapstructure:"user_id" json:"user_id"`
+	Type        string `mapstructure:"type" json:"type"`
 }
 
 func ExtractKeypair(r gophercloud.Result) (keypair *KeypairModel, err error) {
@@ -27,9 +27,8 @@ func ExtractKeypair(r gophercloud.Result) (keypair *KeypairModel, err error) {
 	}
 
 	err = mapstructure.Decode(r.Body, &resp)
-	if err == nil {
-		keypair = resp.Keypair
-	}
+	keypair = resp.Keypair
+
 	return
 }
 
@@ -54,7 +53,7 @@ func ExtractKeypairsByBody(body interface{}) (keypairs []*KeypairModel, err erro
 	err = mapstructure.Decode(body, &resp)
 
 	if err == nil {
-		keypairs = make([]*KeypairModel, 1)
+		keypairs = make([]*KeypairModel, 0)
 		for _, kw := range resp.Keypairs {
 			keypairs = append(keypairs, kw.Keypair)
 		}
