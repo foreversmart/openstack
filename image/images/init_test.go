@@ -50,6 +50,10 @@ func TestMain(m *testing.M) {
 			Username:   apiv3.GetString("admin.username"),
 			Password:   apiv3.GetString("admin.password"),
 		},
+		// SuccessFunc: func(tokenID string, expiredAt time.Time, result gophercloud.Result) error {
+		// 	fmt.Printf("New token: %v \n", tokenID)
+		// 	return nil
+		// },
 	})
 	if err != nil {
 		panic(err.Error())
