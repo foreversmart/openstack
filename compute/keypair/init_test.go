@@ -1,4 +1,4 @@
-package keypairs
+package keypair
 
 import (
 	"net/http"

@@ -50,13 +50,13 @@ func ExtractFlavor(result gophercloud.Result) (flavor *FlavorModel, err error) {
 		return nil, result.Err
 	}
 	var response struct {
-		Flavor *FlavorModel `mapstructure:"flavor" json:"flavor"`
+		Flavors *FlavorModel `mapstructure:"flavor" json:"flavor"`
 	}
 
 	err = mapstructure.Decode(result.Body, &response)
 
 	if err == nil {
-		flavor = response.Flavor
+		flavor = response.Flavors
 	}
 
 	return

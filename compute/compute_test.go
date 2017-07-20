@@ -14,4 +14,5 @@ func Test_Compute(t *testing.T) {
 	assertion.NotNil(cmp)
 	assertion.Implements((*ifaces.Server)(nil), cmp.NewServer())
 	assertion.Implements((*ifaces.Flavor)(nil), cmp.NewFlavor())
+	assertion.Implements((*ifaces.Keypair)(nil), cmp.NewKeypair())
 }
