@@ -3,25 +3,41 @@ package options
 import "net/url"
 
 type ListSecurityGroupsOpts struct {
-	Fields *string `json:"fields,omitempty"`
+	Fields     *string `json:"fields"`
+	AllTenants *string `json:"all_tenants"`
+	TenantID   *string `json:"tenant_id"`
+	Limit      *string `json:"limit"`
+	Marker     *string `json:"marker"`
 }
 
 func (opts *ListSecurityGroupsOpts) IsValid() bool {
 	return true
 }
 
-func (opts *ListSecurityGroupsOpts) ToQuery() (param url.Values) {
-	param = url.Values{}
+func (opts *ListSecurityGroupsOpts) ToQuery() (options url.Values) {
+	options = url.Values{}
 
 	if opts == nil {
 		return
 	}
 
 	if opts.Fields != nil {
-		param.Add("fields", *opts.Fields)
+		options.Add("fields", *opts.Fields)
+	}
+	if opts.AllTenants != nil {
+		options.Add("all_tenants", *opts.AllTenants)
+	}
+	if opts.TenantID != nil {
+		options.Add("tenant_id", *opts.TenantID)
+	}
+	if opts.Limit != nil {
+		options.Add("limit", *opts.Limit)
+	}
+	if opts.Marker != nil {
+		options.Add("marker", *opts.Marker)
 	}
 
-	return param
+	return
 }
 
 type CreateSecurityGroupOpts struct {
