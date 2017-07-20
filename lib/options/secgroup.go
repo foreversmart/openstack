@@ -41,11 +41,8 @@ func (opts *ListSecurityGroupsOpts) ToQuery() (options url.Values) {
 }
 
 type CreateSecurityGroupOpts struct {
-	//The ID of the project.
-	TenantID *string `json:"tenant_id,omitempty"`
-
 	// The ID of the project.
-	ProjectID *string `json:"project_id,omitempty"`
+	ProjectID *string `json:"tenant_id,omitempty"`
 
 	// Human-readable name of the resource.
 	Name *string `json:"name,omitempty"`
@@ -56,7 +53,7 @@ type CreateSecurityGroupOpts struct {
 }
 
 func (opts *CreateSecurityGroupOpts) IsValid() bool {
-	return opts != nil && opts.TenantID != nil && opts.ProjectID != nil && opts.Name != nil
+	return opts != nil && opts.Name != nil
 }
 
 func (opts *CreateSecurityGroupOpts) ToPayload() interface{} {

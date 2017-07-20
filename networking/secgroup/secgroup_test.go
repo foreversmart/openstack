@@ -19,7 +19,6 @@ func Test_Create_SecurityGroup(t *testing.T) {
 	projectID := apiv3.APIString("POST /security-groups.security_group.project_id")
 	opts := options.CreateSecurityGroupOpts{
 		Name:      &name,
-		TenantID:  &projectID,
 		ProjectID: &projectID,
 	}
 
