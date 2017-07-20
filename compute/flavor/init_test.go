@@ -1,4 +1,4 @@
-package flavors
+package flavor
 
 import (
 	"net/http"

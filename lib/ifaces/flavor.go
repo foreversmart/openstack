@@ -5,7 +5,7 @@ import (
 	"github.com/qbox/openstack-golang-sdk/lib/options"
 )
 
-type Flavorer interface {
+type Flavor interface {
 	All() (flavors []*models.FlavorModel, err error)
 	AllByParams(opts *options.ListFlavorsOpts) (flavors []*models.FlavorModel, err error)
 	Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorModel, err error)
