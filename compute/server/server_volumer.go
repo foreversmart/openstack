@@ -1,6 +1,13 @@
 package server
 
-import "github.com/qbox/openstack-golang-sdk/lib/ifaces"
+import (
+	"github.com/qbox/openstack-golang-sdk/lib/errors"
+	"github.com/qbox/openstack-golang-sdk/lib/ifaces"
+	"github.com/qbox/openstack-golang-sdk/lib/models"
+	"github.com/rackspace/gophercloud"
+	"github.com/rackspace/gophercloud/openstack/compute/v2/extensions/volumeattach"
+	"github.com/rackspace/gophercloud/pagination"
+)
 
 type ServerVolumer struct {
 	Client ifaces.Openstacker
@@ -14,57 +21,92 @@ func NewServerVolumer(client ifaces.Openstacker) *ServerVolumer {
 	}
 }
 
-// func (ser *Servers) MountVolume(id, volumeID string) error {
-// 	if id == "" || volumeID == "" {
-// 		return errors.ErrInvalidParams
-// 	}
+func (sv *ServerVolumer) All(id string) (volumeModels []*models.AttachVolumeModel, err error) {
+	if id == "" {
+		err = errors.ErrInvalidParams
+		return
+	}
 
-// 	client, err := ser.Client.ComputeClient()
-// 	if err != nil {
-// 		return err
-// 	}
+	client, err := sv.Client.ComputeClient()
+	if err != nil {
+		return
+	}
 
-// 	opts := volumeattach.CreateOpts{
-// 		VolumeID: volumeID,
-// 	}
+	var res gophercloud.Result
 
-// 	return volumeattach.Create(client, id, opts).Err
-// }
+	_, res.Err = client.Get(client.ServiceURL(ServersUrl, id, VolumeUrl), &res.Body, &gophercloud.RequestOpts{
+		OkCodes: []int{200},
+	})
 
-// func (ser *Servers) UnmountVolume(id, volumeID string) error {
-// 	if id == "" || volumeID == "" {
-// 		return errors.ErrInvalidParams
-// 	}
+	volumeModels, err = models.ExtractAttachVolumes(res)
 
-// 	var volumeAttachID string
+	return
+}
 
-// 	client, err := ser.Client.ComputeClient()
-// 	if err != nil {
-// 		return err
-// 	}
+func (sv *ServerVolumer) Mount(id, volumeID string) (volume *models.AttachVolumeModel, err error) {
+	if id == "" || volumeID == "" {
+		err = errors.ErrInvalidParams
+		return
+	}
 
-// 	pager := volumeattach.List(client, id)
-// 	err = pager.EachPage(func(page pagination.Page) (bool, error) {
-// 		vaList, err := volumeattach.ExtractVolumeAttachments(page)
+	client, err := sv.Client.ComputeClient()
+	if err != nil {
+		return
+	}
 
-// 		for _, value := range vaList {
-// 			if value.VolumeID == volumeID {
-// 				volumeAttachID = value.ID
-// 				return false, err
-// 			}
-// 		}
+	opts := volumeattach.CreateOpts{
+		VolumeID: volumeID,
+	}
 
-// 		return true, err
+	result := volumeattach.Create(client, id, opts)
+	err = result.Err
+	if err != nil {
+		return
+	}
 
-// 	})
+	return models.ExtractAttachVolume(result.Result)
+}
 
-// 	if err != nil {
-// 		return err
-// 	}
+func (sv *ServerVolumer) Unmount(id, volumeID string) error {
+	if id == "" || volumeID == "" {
+		return errors.ErrInvalidParams
+	}
 
-// 	if volumeAttachID == "" {
-// 		return errors.ErrNotFound
-// 	}
+	var volumeAttachID string
 
-// 	return volumeattach.Delete(client, id, volumeAttachID).Err
-// }
+	client, err := sv.Client.ComputeClient()
+	if err != nil {
+		return err
+	}
+
+	pager := volumeattach.List(client, id)
+	err = pager.EachPage(func(page pagination.Page) (bool, error) {
+		vaList, err := volumeattach.ExtractVolumeAttachments(page)
+
+		for _, value := range vaList {
+			if value.VolumeID == volumeID {
+				volumeAttachID = value.ID
+				return false, err
+			}
+		}
+
+		return true, err
+
+	})
+
+	if err != nil {
+		return err
+	}
+
+	if volumeAttachID == "" {
+		return errors.ErrNotFound
+	}
+
+	var res gophercloud.Result
+
+	_, res.Err = client.Delete(client.ServiceURL(ServersUrl, id, VolumeUrl, volumeAttachID), &gophercloud.RequestOpts{
+		OkCodes: []int{202},
+	})
+
+	return res.Err
+}

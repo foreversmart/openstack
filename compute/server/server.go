@@ -11,6 +11,7 @@ import (
 const (
 	ServersUrl   = "servers"
 	InterfaceUrl = "os-interface"
+	VolumeUrl    = "os-volume_attachments"
 	ActionUrl    = "action"
 )
 

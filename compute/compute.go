@@ -39,9 +39,9 @@ func (c *Compute) NewServerPorter() ifaces.ServerPorter {
 	return server.NewServerPorter(c.client)
 }
 
-// func (c *Compute) NewServerVolumer() ifaces.ServerVolumer {
-// 	return server.NewServerVolumer(c.client)
-// }
+func (c *Compute) NewServerVolumer() ifaces.ServerVolumer {
+	return server.NewServerVolumer(c.client)
+}
 
 func (c *Compute) NewFlavor() ifaces.Flavor {
 	return flavor.New(c.client)

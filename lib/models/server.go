@@ -150,6 +150,41 @@ func ExtractAttachPorts(r gophercloud.Result) ([]*AttachPortModel, error) {
 	return res.AttachPorts, err
 }
 
+type AttachVolumeModel struct {
+	ID       string `mapstructure:"id" json:"id"`
+	Device   string `mapstructure:"device" json:"device"`
+	ServerID string `mapstructure:"serverId" json:"serverId"`
+	VolumeID string `mapstructure:"volumeId" json:"volumeId"`
+}
+
+func ExtractAttachVolumes(r gophercloud.Result) ([]*AttachVolumeModel, error) {
+	if r.Err != nil {
+		return nil, r.Err
+	}
+
+	var res struct {
+		AttachVolumes []*AttachVolumeModel `mapstructure:"volumeAttachments"`
+	}
+
+	err := mapstructure.Decode(r.Body, &res)
+
+	return res.AttachVolumes, err
+}
+
+func ExtractAttachVolume(r gophercloud.Result) (*AttachVolumeModel, error) {
+	if r.Err != nil {
+		return nil, r.Err
+	}
+
+	var res struct {
+		AttachVolume *AttachVolumeModel `mapstructure:"volumeAttachment"`
+	}
+
+	err := mapstructure.Decode(r.Body, &res)
+
+	return res.AttachVolume, err
+}
+
 type OpenVNCResult struct {
 	Console struct {
 		Type string `json:"type"`
