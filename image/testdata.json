@@ -1,0 +1,349 @@
+{
+  "endpoint": "mitm://api.ecloud.com",
+  "admin": {
+    "endpoint": "mitm://api.ecloud.com:35357",
+    "domain_name": "default",
+    "username": "admin",
+    "password": "aLH35KFFBOdkcB13w@",
+    "emails": ["admin@ecloud.com"],
+    "project_id": "fcfeddf071284e4a8c54760d4bf67c29"
+  },
+  "user": {
+    "endpoint": "mitm://api.ecloud.com:5000",
+    "domain_name": "default",
+    "username": "demo",
+    "password": "71WM#R$Lr&yNq^02%f",
+    "emails": ["user@ecloud.com"],
+    "project_id": "803d363c5c4649b591fd74b96a8c30f5"
+  },
+  "token": {
+    "id": "gAAAAABZZLfR1PRaN2tkjJd4tuvzKpJhSdzhrz_XltBb1pSNsTTAuasx2AqApmxFdYcrGWc4YNduEStJw8m8ph1M9nK6HotjkcMmJzZi3dumtfihhgnbOtnePzOA6eGLGklfnX2etgNknk4PkmTBRvorA_vB_FehpUrFevxVktfpxtohREZ-Dzw"
+  },
+  "v2": {
+    "scoped": {
+      "access": {
+        "token": {
+          "issued_at": "2017-06-22T06:54:29.000000Z",
+          "expires": "2017-06-22T07:54:29.000000Z",
+          "id": "gAAAAABZYI3IKodjH8PPo-0ijSUnPM8Vf_55D2YUw8RlL5z5Hq_ucyrG_D2SUTiTgjywJ6abw5HjRDcGvQUbH_k0FGF2oOOwSezwYfaSCVAXj8vt-HEvAb9etncPnv3bcNW5t0O7PYC3Tl_YUdGTf6ust5_DR8QhM65NitMvtaJ0GHK3TcM0IfQ",
+          "tenant": {
+            "description": "for testing",
+            "enabled": true,
+            "id": "63397e0193f04dc4b2165490669ed4a1",
+            "name": "testing"
+          },
+          "audit_ids": ["oKhX6cZzRgqQ_JZkpIvkyg"]
+        },
+        "serviceCatalog": [
+          {
+            "endpoints": [
+              {
+                "adminURL": "mitm://api.ecloud.com/v2.0/network",
+                "region": "RegionOne",
+                "internalURL": "mitm://api.ecloud.com/v2.0/network",
+                "id": "58037b7153b64994b5575f1dc5b8ea89",
+                "publicURL": "mitm://api.ecloud.com/v2.0/network"
+              }
+            ],
+            "endpoints_links": [],
+            "type": "network",
+            "name": "neutron"
+          },
+          {
+            "endpoints": [
+              {
+                "adminURL": "mitm://api.ecloud.com/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
+                "region": "RegionOne",
+                "internalURL": "mitm://api.ecloud.com/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
+                "id": "5f9eb7c6701a499b9461853126f23c17",
+                "publicURL": "mitm://api.ecloud.com/v2.1/compute/63397e0193f04dc4b2165490669ed4a1"
+              }
+            ],
+            "endpoints_links": [],
+            "type": "compute",
+            "name": "nova"
+          },
+          {
+            "endpoints": [
+              {
+                "adminURL": "mitm://api.ecloud.com/v3/admin",
+                "region": "RegionOne",
+                "internalURL": "mitm://api.ecloud.com/v3/identity",
+                "id": "2171a51cbce646ae807fb2f07263f61d",
+                "publicURL": "mitm://api.ecloud.com/v3/identity"
+              }
+            ],
+            "endpoints_links": [],
+            "type": "identity",
+            "name": "keystone"
+          }
+        ],
+        "user": {
+          "username": "testing",
+          "roles_links": [],
+          "id": "668d5ce711f04629a35f4787cc5a1704",
+          "roles": [
+            {
+              "name": "admin"
+            }
+          ],
+          "name": "testing"
+        },
+        "metadata": {
+          "is_admin": 0,
+          "roles": ["e14b42707c1f448298e1846623a00f59"]
+        }
+      }
+    },
+    "POST /images": {
+      "status": "queued",
+      "name": "Ubuntu",
+      "tags": [],
+      "container_format": "bare",
+      "created_at": "2015-11-29T22:21:42Z",
+      "size": null,
+      "disk_format": "raw",
+      "updated_at": "2015-11-29T22:21:42Z",
+      "visibility": "private",
+      "locations": [],
+      "self": "/v2/images/b2173dd3-7ad6-4362-baa6-a68bce3565cb",
+      "min_disk": 0,
+      "protected": false,
+      "id": "b2173dd3-7ad6-4362-baa6-a68bce3565cb",
+      "file": "/v2/images/b2173dd3-7ad6-4362-baa6-a68bce3565cb/file",
+      "checksum": null,
+      "owner": "bab7d5c60cd041a0a36f7c4b6e1dd978",
+      "virtual_size": null,
+      "min_ram": 0,
+      "schema": "/v2/schemas/image"
+    },
+    "GET /images": {
+      "images": [
+        {
+          "status": "active",
+          "name": "cirros-0.3.2-x86_64-disk",
+          "tags": [],
+          "container_format": "bare",
+          "created_at": "2014-11-07T17:07:06Z",
+          "disk_format": "qcow2",
+          "updated_at": "2014-11-07T17:19:09Z",
+          "visibility": "public",
+          "self": "/v2/images/1bea47ed-f6a9-463b-b423-14b9cca9ad27",
+          "min_disk": 0,
+          "protected": false,
+          "id": "1bea47ed-f6a9-463b-b423-14b9cca9ad27",
+          "file": "/v2/images/1bea47ed-f6a9-463b-b423-14b9cca9ad27/file",
+          "checksum": "64d7c1cd2b6f60c92c14662941cb7913",
+          "owner": "5ef70662f8b34079a6eddb8da9d75fe8",
+          "size": 13167616,
+          "min_ram": 0,
+          "schema": "/v2/schemas/image",
+          "virtual_size": null
+        },
+        {
+          "status": "active",
+          "name": "F17-x86_64-cfntools",
+          "tags": [],
+          "container_format": "bare",
+          "created_at": "2014-10-30T08:23:39Z",
+          "disk_format": "qcow2",
+          "updated_at": "2014-11-03T16:40:10Z",
+          "visibility": "public",
+          "self": "/v2/images/781b3762-9469-4cec-b58d-3349e5de4e9c",
+          "min_disk": 0,
+          "protected": false,
+          "id": "781b3762-9469-4cec-b58d-3349e5de4e9c",
+          "file": "/v2/images/781b3762-9469-4cec-b58d-3349e5de4e9c/file",
+          "checksum": "afab0f79bac770d61d24b4d0560b5f70",
+          "owner": "5ef70662f8b34079a6eddb8da9d75fe8",
+          "size": 476704768,
+          "min_ram": 0,
+          "schema": "/v2/schemas/image",
+          "virtual_size": null
+        }
+      ],
+      "schema": "/v2/schemas/images",
+      "first": "/v2/images"
+    },
+    "GET /images/:id": {
+      "status": "active",
+      "name": "cirros-0.3.2-x86_64-disk",
+      "tags": [],
+      "container_format": "bare",
+      "created_at": "2014-05-05T17:15:10Z",
+      "disk_format": "qcow2",
+      "updated_at": "2014-05-05T17:15:11Z",
+      "visibility": "public",
+      "self": "/v2/images/1bea47ed-f6a9-463b-b423-14b9cca9ad27",
+      "min_disk": 0,
+      "protected": false,
+      "id": "1bea47ed-f6a9-463b-b423-14b9cca9ad27",
+      "file": "/v2/images/1bea47ed-f6a9-463b-b423-14b9cca9ad27/file",
+      "checksum": "64d7c1cd2b6f60c92c14662941cb7913",
+      "owner": "5ef70662f8b34079a6eddb8da9d75fe8",
+      "size": 13167616,
+      "min_ram": 0,
+      "schema": "/v2/schemas/image",
+      "virtual_size": null
+    },
+    "PATCH /images/:id": {
+      "checksum": "710544e7f0c828b42f51207342622d33",
+      "container_format": "ovf",
+      "created_at": "2016-06-29T16:13:07Z",
+      "disk_format": "vhd",
+      "file": "/v2/images/2b61ed2b-f800-4da0-99ff-396b742b8646/file",
+      "id": "2b61ed2b-f800-4da0-99ff-396b742b8646",
+      "min_disk": 20,
+      "min_ram": 512,
+      "name": "Fedora 17",
+      "owner": "02a7fb2dd4ef434c8a628c511dcbbeb6",
+      "protected": false,
+      "schema": "/v2/schemas/image",
+      "self": "/v2/images/2b61ed2b-f800-4da0-99ff-396b742b8646",
+      "size": 21909,
+      "status": "active",
+      "tags": ["beefy", "fedora"],
+      "updated_at": "2016-07-25T14:48:18Z",
+      "virtual_size": null,
+      "visibility": "private"
+    },
+    "DELETE /images/:id": {}
+  },
+  "v3": {
+    "unscoped": {
+      "token": {
+        "issued_at": "2017-07-08T09:13:28.000000Z",
+        "audit_ids": ["B1-BRSkTT5Cd_Oga63mgiQ"],
+        "methods": ["password"],
+        "expires_at": "2017-07-08T10:13:28.000000Z",
+        "user": {
+          "password_expires_at": null,
+          "domain": {
+            "id": "default",
+            "name": "Default"
+          },
+          "id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+          "name": "admin"
+        }
+      }
+    },
+    "scoped": {
+      "token": {
+        "is_domain": false,
+        "methods": ["password"],
+        "roles": [
+          {
+            "id": "f1e75d0b191e4a909f45fd57668f4e48",
+            "name": "admin"
+          }
+        ],
+        "expires_at": "2017-07-08T10:55:14.000000Z",
+        "project": {
+          "domain": {
+            "id": "default",
+            "name": "Default"
+          },
+          "id": "fcfeddf071284e4a8c54760d4bf67c29",
+          "name": "admin"
+        },
+        "catalog": [
+          {
+            "endpoints": [
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:35357/v3",
+                "region": "RegionOne",
+                "interface": "admin",
+                "id": "416a8465b7e54312a4b07a2c51595ee2"
+              },
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:5000/v3",
+                "region": "RegionOne",
+                "interface": "public",
+                "id": "ad9d692c9cfc4bfc9e9f0b6c3b91e80f"
+              },
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:5000/v3",
+                "region": "RegionOne",
+                "interface": "internal",
+                "id": "f08fb7f958014fa3a230263eb39fec62"
+              }
+            ],
+            "type": "identity",
+            "id": "2d8f8e19de1142769420837f9d9e3b49",
+            "name": "keystone"
+          },
+          {
+            "endpoints": [
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:8776/v2/fcfeddf071284e4a8c54760d4bf67c29",
+                "region": "RegionOne",
+                "interface": "internal",
+                "id": "3bfdd02c17194b8c9707277456ea3013"
+              },
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:8776/v2/fcfeddf071284e4a8c54760d4bf67c29",
+                "region": "RegionOne",
+                "interface": "admin",
+                "id": "3ddf8deea07b482698d2a87f7b07c766"
+              },
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:8776/v2/fcfeddf071284e4a8c54760d4bf67c29",
+                "region": "RegionOne",
+                "interface": "public",
+                "id": "5aae938528204f24a91b80ab46ef5627"
+              }
+            ],
+            "type": "volumev2",
+            "id": "6c7cc249c275466d91cb8c76fb2ce191",
+            "name": "cinderv2"
+          },
+          {
+            "endpoints": [
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:9292",
+                "region": "RegionOne",
+                "interface": "public",
+                "id": "20f8d3ef2c8041bc9299940bff8b5c8b"
+              },
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:9292",
+                "region": "RegionOne",
+                "interface": "admin",
+                "id": "351d04e2700f493da073ff98f2ffe69c"
+              },
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:9292",
+                "region": "RegionOne",
+                "interface": "internal",
+                "id": "a21285c1e083467d9be84c21617df3ec"
+              }
+            ],
+            "type": "image",
+            "id": "c0bf05d892c54888be93adb746150230",
+            "name": "glance"
+          }
+        ],
+        "user": {
+          "password_expires_at": null,
+          "domain": {
+            "id": "default",
+            "name": "Default"
+          },
+          "id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+          "name": "admin"
+        },
+        "audit_ids": ["AVAtPP-nR7iYERNmXTD2-A"],
+        "issued_at": "2017-07-08T09:55:14.000000Z"
+      }
+    }
+  }
+}

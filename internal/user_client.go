@@ -45,3 +45,7 @@ func (os *Openstack) ComputerClient() (client *gophercloud.ServiceClient, err er
 
 	return openstack.NewComputeV2(os.ProviderClient(), opts)
 }
+
+func (os *Openstack) ImageClient() (client *gophercloud.ServiceClient, err error) {
+	return openstack.NewImageServiceV2(os.client, gophercloud.EndpointOpts{})
+}

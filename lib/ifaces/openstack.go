@@ -45,4 +45,7 @@ type OpenstackClienter interface {
 
 	//compute clients
 	ComputerClient() (client *gophercloud.ServiceClient, err error)
+
+	// image clients
+	ImageClient() (client *gophercloud.ServiceClient, err error)
 }
