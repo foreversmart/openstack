@@ -9,6 +9,6 @@ type SecurityGrouper interface {
 	All() ([]*models.SecurityGroupModel, error)
 	AllByParams(opts *options.ListSecurityGroupsOpts) (infos []*models.SecurityGroupModel, err error)
 	Create(opts *options.CreateSecurityGroupOpts) (info *models.SecurityGroupModel, err error)
-	Query(id string) (*models.SecurityGroupModel, error)
+	Show(id string, opts *options.ShowSecurityGroupOpts) (securitygroup *models.SecurityGroupModel, err error)
 	Delete(id string) error
 }
