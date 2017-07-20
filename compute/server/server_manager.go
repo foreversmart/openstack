@@ -1,10 +1,24 @@
 package server
 
+import "github.com/qbox/openstack-golang-sdk/lib/ifaces"
+
 // const (
 // 	ServersUrl   = "servers"
 // 	InterfaceUrl = "os-interface"
 // 	ActionUrl    = "action"
 // )
+
+type ServerManager struct {
+	Client ifaces.Openstacker
+
+	_ bool
+}
+
+func NewServerManager(client ifaces.Openstacker) *ServerManager {
+	return &ServerManager{
+		Client: client,
+	}
+}
 
 // // =============== servers actions ===============
 
