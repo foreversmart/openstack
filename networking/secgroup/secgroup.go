@@ -8,7 +8,7 @@ import (
 	"github.com/rackspace/gophercloud"
 )
 
-type SecurityGroups struct {
+type SecurityGroup struct {
 	Client ifaces.Openstacker
 
 	_ bool
@@ -18,17 +18,17 @@ const (
 	SecGroupUrl = "security-groups"
 )
 
-func New(client ifaces.Openstacker) *SecurityGroups {
-	return &SecurityGroups{
+func New(client ifaces.Openstacker) *SecurityGroup {
+	return &SecurityGroup{
 		Client: client,
 	}
 }
 
-func (s *SecurityGroups) All() (infos []*models.SecurityGroupModel, err error) {
+func (s *SecurityGroup) All() (infos []*models.SecurityGroupModel, err error) {
 	return s.AllByParams(nil)
 }
 
-func (s *SecurityGroups) AllByParams(opts *options.ListSecurityGroupsOpts) (securitygroups []*models.SecurityGroupModel, err error) {
+func (s *SecurityGroup) AllByParams(opts *options.ListSecurityGroupsOpts) (securitygroups []*models.SecurityGroupModel, err error) {
 	if !opts.IsValid() {
 		return nil, errors.ErrInvalidParams
 	}
@@ -46,7 +46,7 @@ func (s *SecurityGroups) AllByParams(opts *options.ListSecurityGroupsOpts) (secu
 	return models.ExtractSecurityGroups(result)
 }
 
-func (s *SecurityGroups) Create(opts *options.CreateSecurityGroupOpts) (securitygroup *models.SecurityGroupModel, err error) {
+func (s *SecurityGroup) Create(opts *options.CreateSecurityGroupOpts) (securitygroup *models.SecurityGroupModel, err error) {
 	if !opts.IsValid() {
 		return nil, errors.ErrInvalidParams
 	}
@@ -64,7 +64,7 @@ func (s *SecurityGroups) Create(opts *options.CreateSecurityGroupOpts) (security
 	return models.ExtractSecurityGroup(result)
 }
 
-func (s *SecurityGroups) Show(id string, opts *options.ShowSecurityGroupOpts) (securitygroup *models.SecurityGroupModel, err error) {
+func (s *SecurityGroup) Show(id string, opts *options.ShowSecurityGroupOpts) (securitygroup *models.SecurityGroupModel, err error) {
 	if id == "" || !opts.IsValid() {
 		return nil, errors.ErrInvalidParams
 	}
@@ -83,7 +83,7 @@ func (s *SecurityGroups) Show(id string, opts *options.ShowSecurityGroupOpts) (s
 	return models.ExtractSecurityGroup(result)
 }
 
-func (s *SecurityGroups) Update(id string, opts *options.UpdateSecurityGroupOpts) (securitygroup *models.SecurityGroupModel, err error) {
+func (s *SecurityGroup) Update(id string, opts *options.UpdateSecurityGroupOpts) (securitygroup *models.SecurityGroupModel, err error) {
 	if id == "" || !opts.IsValid() {
 		return nil, errors.ErrInvalidParams
 	}
@@ -102,7 +102,7 @@ func (s *SecurityGroups) Update(id string, opts *options.UpdateSecurityGroupOpts
 	return models.ExtractSecurityGroup(result)
 }
 
-func (s *SecurityGroups) Delete(id string) (err error) {
+func (s *SecurityGroup) Delete(id string) (err error) {
 	if id == "" {
 		return errors.ErrInvalidParams
 	}
