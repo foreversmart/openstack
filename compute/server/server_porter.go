@@ -1,6 +1,11 @@
 package server
 
-import "github.com/qbox/openstack-golang-sdk/lib/ifaces"
+import (
+	"github.com/qbox/openstack-golang-sdk/lib/errors"
+	"github.com/qbox/openstack-golang-sdk/lib/ifaces"
+	"github.com/qbox/openstack-golang-sdk/lib/models"
+	"github.com/rackspace/gophercloud"
+)
 
 type ServerPorter struct {
 	Client ifaces.Openstacker
@@ -14,65 +19,70 @@ func NewServerPorter(client ifaces.Openstacker) *ServerPorter {
 	}
 }
 
-// func (sm *ServerManager) BindPort(id, portID string) error {
-// 	if id == "" || portID == "" {
-// 		return errors.ErrInvalidParams
-// 	}
+func (sp *ServerPorter) All(id string) (portModels []*models.AttachPortModel, err error) {
+	if id == "" {
+		err = errors.ErrInvalidParams
+		return
+	}
 
-// 	client, err := ser.Client.ComputeClient()
-// 	if err != nil {
-// 		return err
-// 	}
+	client, err := sp.Client.ComputeClient()
+	if err != nil {
+		return
+	}
 
-// 	opts := map[string]interface{}{
-// 		"port_id": portID,
-// 	}
+	var res gophercloud.Result
 
-// 	reqBody := map[string]interface{}{
-// 		"interfaceAttachment": opts,
-// 	}
+	_, res.Err = client.Get(client.ServiceURL(ServersUrl, id, InterfaceUrl), &res.Body, &gophercloud.RequestOpts{
+		OkCodes: []int{200},
+	})
 
-// 	var res gophercloud.Result
+	portModels, err = models.ExtractAttachPorts(res)
 
-// 	_, res.Err = client.Post(client.ServiceURL(ServersUrl, id, InterfaceUrl), reqBody, &res.Body, &gophercloud.RequestOpts{
-// 		OkCodes: []int{200},
-// 	})
+	return
+}
 
-// 	return res.Err
-// }
+func (sp *ServerPorter) Bind(id, portID string) error {
+	if id == "" || portID == "" {
+		return errors.ErrInvalidParams
+	}
 
-// func (ser *Servers) Ports(id string) (portIDs []string, err error) {
-// 	if id == "" {
-// 		err = errors.ErrInvalidParams
-// 		return
-// 	}
+	client, err := sp.Client.ComputeClient()
+	if err != nil {
+		return err
+	}
 
-// 	client, err := ser.Client.ComputeClient()
-// 	if err != nil {
-// 		return
-// 	}
+	opts := map[string]interface{}{
+		"port_id": portID,
+	}
 
-// 	var res gophercloud.Result
+	reqBody := map[string]interface{}{
+		"interfaceAttachment": opts,
+	}
 
-// 	_, res.Err = client.Get(client.ServiceURL(ServersUrl, id, InterfaceUrl), &res.Body, &gophercloud.RequestOpts{
-// 		OkCodes: []int{200},
-// 	})
+	var res gophercloud.Result
 
-// 	attachPorts, err := models.ExtractAttachPorts(res)
+	_, res.Err = client.Post(client.ServiceURL(ServersUrl, id, InterfaceUrl), reqBody, &res.Body, &gophercloud.RequestOpts{
+		OkCodes: []int{200},
+	})
 
-// 	portIDs = make([]string, len(attachPorts))
-// 	for index, port := range attachPorts {
-// 		portIDs[index] = port.PortId
-// 	}
+	return res.Err
+}
 
-// 	return portIDs, err
-// }
+func (sp *ServerPorter) Unbind(id, portID string) error {
+	if id == "" || portID == "" {
+		return errors.ErrInvalidParams
+	}
 
-// // TODO
-// func (ser *Servers) UnbindPort(id, portID string) error {
-// 	if id == "" || portID == "" || ser.Client.ProjectID() == "" {
-// 		return errors.ErrInvalidParams
-// 	}
+	client, err := sp.Client.ComputeClient()
+	if err != nil {
+		return err
+	}
 
-// 	return errors.ErrNotImplemented
-// }
+	var res gophercloud.Result
+
+	_, res.Err = client.Delete(client.ServiceURL(ServersUrl, id, InterfaceUrl, portID), &gophercloud.RequestOpts{
+		OkCodes: []int{202},
+	})
+
+	return res.Err
+}

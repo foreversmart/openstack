@@ -29,9 +29,9 @@ type ServerManager interface {
 }
 
 type ServerPorter interface {
-	All(serverID string) (ports *[]models.PortModel, err error) // 获取虚拟机的网卡
-	Bind(serverID, portID string) error                         // 绑定网卡
-	Unbind(serverID, portID string) error                       // 解绑网卡
+	All(serverID string) (ports []*models.AttachPortModel, err error) // 获取虚拟机的网卡
+	Bind(serverID, portID string) error                               // 绑定网卡
+	Unbind(serverID, portID string) error                             // 解绑网卡
 }
 
 type ServerKeyer interface {
@@ -40,7 +40,7 @@ type ServerKeyer interface {
 }
 
 type ServerVolumer interface {
-	All(serverID string) (volumes *[]models.VolumeModel, err error)
+	All(serverID string) (volumes []*models.VolumeModel, err error)
 	Mount(serverID, volumeID string) error   // 挂载磁盘
 	Unmount(serverID, volumeID string) error // 卸载磁盘
 }

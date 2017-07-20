@@ -35,9 +35,9 @@ func (c *Compute) NewServerKeyer() ifaces.ServerKeyer {
 	return server.NewServerKeyer(c.client)
 }
 
-// func (c *Compute) NewServerPorter() ifaces.ServerPorter {
-// 	return server.NewServerPorter(c.client)
-// }
+func (c *Compute) NewServerPorter() ifaces.ServerPorter {
+	return server.NewServerPorter(c.client)
+}
 
 // func (c *Compute) NewServerVolumer() ifaces.ServerVolumer {
 // 	return server.NewServerVolumer(c.client)
