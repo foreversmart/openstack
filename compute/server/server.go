@@ -9,7 +9,9 @@ import (
 )
 
 const (
-	ServersUrl = "servers"
+	ServersUrl   = "servers"
+	InterfaceUrl = "os-interface"
+	ActionUrl    = "action"
 )
 
 type Server struct {

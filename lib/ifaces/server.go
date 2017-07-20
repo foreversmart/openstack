@@ -47,5 +47,5 @@ type ServerVolumer interface {
 }
 
 type ServerImager interface {
-	Create(serverID, imageName string) (image *models.ImageModel, err error) // 创建主机快照
+	Create(serverID, imageName string) (imageID string, err error) // 创建主机快照
 }

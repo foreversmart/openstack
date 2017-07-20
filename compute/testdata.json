@@ -533,6 +533,9 @@
         "metadata": {}
       }
     },
-    "DELETE /servers/:id": {}
+    "DELETE /servers/:id": {},
+    "POST /servers/:id/action/image": {
+      "image_id": "0e7761dd-ee98-41f0-ba35-05994e446431"
+    }
   }
 }

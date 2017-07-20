@@ -119,39 +119,6 @@ func NewServerManager(client ifaces.Openstacker) *ServerManager {
 // 	return startstop.Stop(client, id).ExtractErr()
 // }
 
-// func (ser *Servers) CreateSnapshot(id, name string) (snapshotID string, err error) {
-// 	if id == "" || name == "" {
-// 		err = errors.ErrInvalidParams
-// 		return
-// 	}
-
-// 	client, err := ser.Client.ComputeClient()
-// 	if err != nil {
-// 		return
-// 	}
-
-// 	vm, err := ser.Show(id)
-// 	if err != nil {
-// 		return
-// 	}
-
-// 	baseImageID := vm.Image
-// 	if vm.Metadata != nil && vm.Metadata["base_image_id"] != "" {
-// 		baseImageID = (vm.Metadata["base_image_id"]).(string)
-// 	}
-
-// 	opts := servers.CreateImageOpts{
-// 		Name: name,
-// 		Metadata: map[string]string{
-// 			"base_image_id": baseImageID,
-// 		},
-// 	}
-
-// 	result := servers.CreateImage(client, id, opts)
-
-// 	return result.ExtractImageID()
-// }
-
 // func (ser *Servers) BindPort(id, portID string) error {
 // 	if id == "" || portID == "" {
 // 		return errors.ErrInvalidParams

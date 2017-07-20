@@ -8,8 +8,6 @@ import (
 	"github.com/qbox/openstack-golang-sdk/lib/options"
 )
 
-const computerPort = "8774"
-
 func Test_Create_Server(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 

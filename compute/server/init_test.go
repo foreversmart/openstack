@@ -23,6 +23,8 @@ var (
 	jsonheader  http.Header
 )
 
+const computerPort = "8774"
+
 func TestMain(m *testing.M) {
 	// setup dependences
 	apiv3 = testdata.NewWithFilename("../", auth.V3)

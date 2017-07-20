@@ -23,25 +23,25 @@ func (c *Compute) NewServer() ifaces.Server {
 	return server.New(c.client)
 }
 
-func (c *Compute) NewServerManager() ifaces.ServerManager {
-	return server.NewServerManager(c.client)
-}
+// func (c *Compute) NewServerManager() ifaces.ServerManager {
+// 	return server.NewServerManager(c.client)
+// }
 
 func (c *Compute) NewServerImager() ifaces.ServerImager {
 	return server.NewServerImager(c.client)
 }
 
-func (c *Compute) NewServerKeyer() ifaces.ServerKeyer {
-	return server.NewServerKeyer(c.client)
-}
+// func (c *Compute) NewServerKeyer() ifaces.ServerKeyer {
+// 	return server.NewServerKeyer(c.client)
+// }
 
-func (c *Compute) NewServerPorter() ifaces.ServerPorter {
-	return server.NewServerPorter(c.client)
-}
+// func (c *Compute) NewServerPorter() ifaces.ServerPorter {
+// 	return server.NewServerPorter(c.client)
+// }
 
-func (c *Compute) NewServerVolumer() ifaces.ServerVolumer {
-	return server.NewServerVolumer(c.client)
-}
+// func (c *Compute) NewServerVolumer() ifaces.ServerVolumer {
+// 	return server.NewServerVolumer(c.client)
+// }
 
 func (c *Compute) NewFlavor() ifaces.Flavor {
 	return flavor.New(c.client)
