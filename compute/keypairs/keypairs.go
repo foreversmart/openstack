@@ -44,17 +44,17 @@ func (k *Keypairs) Create(opts *options.CreateKeypairOpts) (keypair *models.Keyp
 	return models.ExtractKeypair(res)
 }
 
-func (f *Keypairs) All() (KeypairModels []*models.KeypairModel, err error) {
-	return f.AllByParams(nil)
+func (k *Keypairs) All() (KeypairModels []*models.KeypairModel, err error) {
+	return k.AllByParams(nil)
 }
 
-func (f *Keypairs) AllByParams(opts *options.ListKeypairOpts) (keypairModels []*models.KeypairModel, err error) {
+func (k *Keypairs) AllByParams(opts *options.ListKeypairOpts) (keypairModels []*models.KeypairModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
 	}
 
-	client, err := f.Client.ComputeClient()
+	client, err := k.Client.ComputeClient()
 	if err != nil {
 		return
 	}
