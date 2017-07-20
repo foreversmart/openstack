@@ -1,534 +1,567 @@
 {
-    "endpoint": "mitm://api.ecloud.com",
-    "admin": {
-        "endpoint": "mitm://api.ecloud.com:35357",
-        "domain_name": "default",
-        "username": "admin",
-        "password": "admin",
-        "emails": [
-            "admin@ecloud.com"
+  "endpoint": "mitm://api.ecloud.com",
+  "admin": {
+    "endpoint": "mitm://api.ecloud.com:35357",
+    "domain_name": "default",
+    "username": "admin",
+    "password": "admin",
+    "emails": ["admin@ecloud.com"],
+    "project_id": "fcfeddf071284e4a8c54760d4bf67c29"
+  },
+  "user": {
+    "endpoint": "mitm://api.ecloud.com:5000",
+    "domain_name": "default",
+    "username": "demo",
+    "password": "71WM#R$Lr&yNq^02%f",
+    "emails": ["user@ecloud.com"],
+    "project_id": "803d363c5c4649b591fd74b96a8c30f5"
+  },
+  "token": {
+    "id": "gAAAAABZZ0WpjvHW2uYDzG2WubWMXmW9CqtlIbreDyKtheDoutkbOM5iE4EBXT0sTCsLLnebugfLwTLIeEy-IHg0o58VAJl7zSKC2OxXCpOjnXEV4x3RUAD5TJnjGkZv2TKGw4eg3Z7KmpKIfYDEh7o4ZBCl1vRkp7svr_7wCywmO5YjWqiaNZE"
+  },
+  "v2": {
+    "scoped": {
+      "access": {
+        "token": {
+          "issued_at": "2017-06-22T06:54:29.000000Z",
+          "expires": "2017-06-22T07:54:29.000000Z",
+          "id": "gAAAAABZYI3IKodjH8PPo-0ijSUnPM8Vf_55D2YUw8RlL5z5Hq_ucyrG_D2SUTiTgjywJ6abw5HjRDcGvQUbH_k0FGF2oOOwSezwYfaSCVAXj8vt-HEvAb9etncPnv3bcNW5t0O7PYC3Tl_YUdGTf6ust5_DR8QhM65NitMvtaJ0GHK3TcM0IfQ",
+          "tenant": {
+            "description": "for testing",
+            "enabled": true,
+            "id": "63397e0193f04dc4b2165490669ed4a1",
+            "name": "testing"
+          },
+          "audit_ids": ["oKhX6cZzRgqQ_JZkpIvkyg"]
+        },
+        "serviceCatalog": [
+          {
+            "endpoints": [
+              {
+                "adminURL": "mitm://api.ecloud.com/v2.0/network",
+                "region": "RegionOne",
+                "internalURL": "mitm://api.ecloud.com/v2.0/network",
+                "id": "58037b7153b64994b5575f1dc5b8ea89",
+                "publicURL": "mitm://api.ecloud.com/v2.0/network"
+              }
+            ],
+            "endpoints_links": [],
+            "type": "network",
+            "name": "neutron"
+          },
+          {
+            "endpoints": [
+              {
+                "adminURL": "mitm://api.ecloud.com/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
+                "region": "RegionOne",
+                "internalURL": "mitm://api.ecloud.com/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
+                "id": "5f9eb7c6701a499b9461853126f23c17",
+                "publicURL": "mitm://api.ecloud.com/v2.1/compute/63397e0193f04dc4b2165490669ed4a1"
+              }
+            ],
+            "endpoints_links": [],
+            "type": "compute",
+            "name": "nova"
+          },
+          {
+            "endpoints": [
+              {
+                "adminURL": "mitm://api.ecloud.com/v3/admin",
+                "region": "RegionOne",
+                "internalURL": "mitm://api.ecloud.com/v3/identity",
+                "id": "2171a51cbce646ae807fb2f07263f61d",
+                "publicURL": "mitm://api.ecloud.com/v3/identity"
+              }
+            ],
+            "endpoints_links": [],
+            "type": "identity",
+            "name": "keystone"
+          }
         ],
-        "project_id": "fcfeddf071284e4a8c54760d4bf67c29"
-    },
-    "user": {
-        "endpoint": "mitm://api.ecloud.com:5000",
-        "domain_name": "default",
-        "username": "demo",
-        "password": "71WM#R$Lr&yNq^02%f",
-        "emails": [
-            "user@ecloud.com"
-        ],
-        "project_id": "803d363c5c4649b591fd74b96a8c30f5"
-    },
-    "token": {
-        "id": "gAAAAABZZ0WpjvHW2uYDzG2WubWMXmW9CqtlIbreDyKtheDoutkbOM5iE4EBXT0sTCsLLnebugfLwTLIeEy-IHg0o58VAJl7zSKC2OxXCpOjnXEV4x3RUAD5TJnjGkZv2TKGw4eg3Z7KmpKIfYDEh7o4ZBCl1vRkp7svr_7wCywmO5YjWqiaNZE"
-    },
-    "v2": {
-        "scoped": {
-            "access": {
-                "token": {
-                    "issued_at": "2017-06-22T06:54:29.000000Z",
-                    "expires": "2017-06-22T07:54:29.000000Z",
-                    "id": "gAAAAABZYI3IKodjH8PPo-0ijSUnPM8Vf_55D2YUw8RlL5z5Hq_ucyrG_D2SUTiTgjywJ6abw5HjRDcGvQUbH_k0FGF2oOOwSezwYfaSCVAXj8vt-HEvAb9etncPnv3bcNW5t0O7PYC3Tl_YUdGTf6ust5_DR8QhM65NitMvtaJ0GHK3TcM0IfQ",
-                    "tenant": {
-                        "description": "for testing",
-                        "enabled": true,
-                        "id": "63397e0193f04dc4b2165490669ed4a1",
-                        "name": "testing"
-                    },
-                    "audit_ids": [
-                        "oKhX6cZzRgqQ_JZkpIvkyg"
-                    ]
-                },
-                "serviceCatalog": [
-                    {
-                        "endpoints": [
-                            {
-                                "adminURL": "mitm://api.ecloud.com/v2.0/network",
-                                "region": "RegionOne",
-                                "internalURL": "mitm://api.ecloud.com/v2.0/network",
-                                "id": "58037b7153b64994b5575f1dc5b8ea89",
-                                "publicURL": "mitm://api.ecloud.com/v2.0/network"
-                            }
-                        ],
-                        "endpoints_links": [],
-                        "type": "network",
-                        "name": "neutron"
-                    },
-                    {
-                        "endpoints": [
-                            {
-                                "adminURL": "mitm://api.ecloud.com/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
-                                "region": "RegionOne",
-                                "internalURL": "mitm://api.ecloud.com/v2.1/compute/63397e0193f04dc4b2165490669ed4a1",
-                                "id": "5f9eb7c6701a499b9461853126f23c17",
-                                "publicURL": "mitm://api.ecloud.com/v2.1/compute/63397e0193f04dc4b2165490669ed4a1"
-                            }
-                        ],
-                        "endpoints_links": [],
-                        "type": "compute",
-                        "name": "nova"
-                    },
-                    {
-                        "endpoints": [
-                            {
-                                "adminURL": "mitm://api.ecloud.com/v3/admin",
-                                "region": "RegionOne",
-                                "internalURL": "mitm://api.ecloud.com/v3/identity",
-                                "id": "2171a51cbce646ae807fb2f07263f61d",
-                                "publicURL": "mitm://api.ecloud.com/v3/identity"
-                            }
-                        ],
-                        "endpoints_links": [],
-                        "type": "identity",
-                        "name": "keystone"
-                    }
-                ],
-                "user": {
-                    "username": "testing",
-                    "roles_links": [],
-                    "id": "668d5ce711f04629a35f4787cc5a1704",
-                    "roles": [
-                        {
-                            "name": "admin"
-                        }
-                    ],
-                    "name": "testing"
-                },
-                "metadata": {
-                    "is_admin": 0,
-                    "roles": [
-                        "e14b42707c1f448298e1846623a00f59"
-                    ]
-                }
+        "user": {
+          "username": "testing",
+          "roles_links": [],
+          "id": "668d5ce711f04629a35f4787cc5a1704",
+          "roles": [
+            {
+              "name": "admin"
             }
+          ],
+          "name": "testing"
+        },
+        "metadata": {
+          "is_admin": 0,
+          "roles": ["e14b42707c1f448298e1846623a00f59"]
         }
+      }
     },
-    "v3": {
-        "unscoped": {
-            "token": {
-                "issued_at": "2017-07-08T09:13:28.000000Z",
-                "audit_ids": [
-                    "B1-BRSkTT5Cd_Oga63mgiQ"
-                ],
-                "methods": [
-                    "password"
-                ],
-                "expires_at": "2017-07-08T10:13:28.000000Z",
-                "user": {
-                    "password_expires_at": null,
-                    "domain": {
-                        "id": "default",
-                        "name": "Default"
-                    },
-                    "id": "7a9e80c432354bf6bb58e5e5d5c7b795",
-                    "name": "admin"
-                }
-            }
+    "GET /keypairs": {
+      "keypairs": [
+        {
+          "keypair": {
+            "fingerprint": "7e:eb:ab:24:ba:d1:e1:88:ae:9a:fb:66:53:df:d3:bd",
+            "name": "keypair-5d935425-31d5-48a7-a0f1-e76e9813f2c3",
+            "type": "ssh",
+            "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkF3MX59OrlBs3dH5CU7lNmvpbrgZxSpyGjlnE8Flkirnc/Up22lpjznoxqeoTAwTW034k7Dz6aYIrZGmQwe2TkE084yqvlj45Dkyoj95fW/sZacm0cZNuL69EObEGHdprfGJQajrpz22NQoCD8TFB8Wv+8om9NH9Le6s+WPe98WC77KLw8qgfQsbIey+JawPWl4O67ZdL5xrypuRjfIPWjgy/VH85IXg/Z/GONZ2nxHgSShMkwqSFECAC5L3PHB+0+/12M/iikdatFSVGjpuHvkLOs3oe7m6HlOfluSJ85BzLWBbvva93qkGmLg4ZAc8rPh2O+YIsBUHNLLMM/oQp Generated-by-Nova"
+          }
         },
-        "scoped": {
-            "token": {
-                "is_domain": false,
-                "methods": [
-                    "password"
-                ],
-                "roles": [
-                    {
-                        "id": "f1e75d0b191e4a909f45fd57668f4e48",
-                        "name": "admin"
-                    }
-                ],
-                "expires_at": "2017-07-08T10:55:14.000000Z",
-                "project": {
-                    "domain": {
-                        "id": "default",
-                        "name": "Default"
-                    },
-                    "id": "fcfeddf071284e4a8c54760d4bf67c29",
-                    "name": "admin"
-                },
-                "catalog": [
-                    {
-                        "endpoints": [
-                            {
-                                "region_id": "RegionOne",
-                                "url": "mitm://api.ecloud.com:35357/v3",
-                                "region": "RegionOne",
-                                "interface": "admin",
-                                "id": "416a8465b7e54312a4b07a2c51595ee2"
-                            },
-                            {
-                                "region_id": "RegionOne",
-                                "url": "mitm://api.ecloud.com:5000/v3",
-                                "region": "RegionOne",
-                                "interface": "public",
-                                "id": "ad9d692c9cfc4bfc9e9f0b6c3b91e80f"
-                            },
-                            {
-                                "region_id": "RegionOne",
-                                "url": "mitm://api.ecloud.com:5000/v3",
-                                "region": "RegionOne",
-                                "interface": "internal",
-                                "id": "f08fb7f958014fa3a230263eb39fec62"
-                            }
-                        ],
-                        "type": "identity",
-                        "id": "2d8f8e19de1142769420837f9d9e3b49",
-                        "name": "keystone"
-                    },
-                    {
-                        "endpoints": [
-                            {
-                                "region_id": "RegionOne",
-                                "url": "mitm://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
-                                "region": "RegionOne",
-                                "interface": "admin",
-                                "id": "0b5868e38a254df4a2119a21fa2abea0"
-                            },
-                            {
-                                "region_id": "RegionOne",
-                                "url": "mitm://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
-                                "region": "RegionOne",
-                                "interface": "internal",
-                                "id": "3ba3a7c69a0a4eaba21cc42ea789cb19"
-                            },
-                            {
-                                "region_id": "RegionOne",
-                                "url": "mitm://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
-                                "region": "RegionOne",
-                                "interface": "public",
-                                "id": "4fe20af3817542d8b3d875e0e64c90a0"
-                            }
-                        ],
-                        "type": "compute",
-                        "id": "1d2c9ad6c8d94632ba4262c3ff56d84f",
-                        "name": "nova"
-                    }
-                ],
-                "user": {
-                    "password_expires_at": null,
-                    "domain": {
-                        "id": "default",
-                        "name": "Default"
-                    },
-                    "id": "7a9e80c432354bf6bb58e5e5d5c7b795",
-                    "name": "admin"
-                },
-                "audit_ids": [
-                    "AVAtPP-nR7iYERNmXTD2-A"
-                ],
-                "issued_at": "2017-07-08T09:55:14.000000Z"
-            }
+        {
+          "keypair": {
+            "fingerprint": "7e:eb:ab:24:ba:d1:e1:88:ae:9a:fb:66:53:df:d3:bd",
+            "name": "keypair-5d935425-31d5-48a7-a0f1-e76e9813f2c3",
+            "type": "ssh",
+            "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkF3MX59OrlBs3dH5CU7lNmvpbrgZxSpyGjlnE8Flkirnc/Up22lpjznoxqeoTAwTW034k7Dz6aYIrZGmQwe2TkE084yqvlj45Dkyoj95fW/sZacm0cZNuL69EObEGHdprfGJQajrpz22NQoCD8TFB8Wv+8om9NH9Le6s+WPe98WC77KLw8qgfQsbIey+JawPWl4O67ZdL5xrypuRjfIPWjgy/VH85IXg/Z/GONZ2nxHgSShMkwqSFECAC5L3PHB+0+/12M/iikdatFSVGjpuHvkLOs3oe7m6HlOfluSJ85BzLWBbvva93qkGmLg4ZAc8rPh2O+YIsBUHNLLMM/oQp Generated-by-Nova"
+          }
+        }
+      ],
+      "keypairs_links": [
+        {
+          "href": "http://openstack.example.com/v2.1/6f70656e737461636b20342065766572/keypairs?limit=1&marker=keypair-5d935425-31d5-48a7-a0f1-e76e9813f2c3",
+          "rel": "next"
+        }
+      ]
+    },
+    "GET /keypairs/:name": {
+      "keypair": {
+        "fingerprint": "44:fe:29:6e:23:14:b9:53:5b:65:82:58:1c:fe:5a:c3",
+        "name": "keypair-6638abdb-c4e8-407c-ba88-c8dd7cc3c4f1",
+        "type": "ssh",
+        "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1HTrHCbb9NawNLSV8N6tSa8i637+EC2dA+lsdHHfQlT54t+N0nHhJPlKWDLhc579j87vp6RDFriFJ/smsTnDnf64O12z0kBaJpJPH2zXrBkZFK6q2rmxydURzX/z0yLSCP77SFJ0fdXWH2hMsAusflGyryHGX20n+mZK6mDrxVzGxEz228dwQ5G7Az5OoZDWygH2pqPvKjkifRw0jwUKf3BbkP0QvANACOk26cv16mNFpFJfI1N3OC5lUsZQtKGR01ptJoWijYKccqhkAKuo902tg/qup58J5kflNm7I61sy1mJon6SGqNUSfoQagqtBH6vd/tU1jnlwZ03uUroAL Generated-by-Nova",
+        "user_id": "fake",
+        "deleted": false,
+        "created_at": "2014-05-07T12:06:13.681238",
+        "updated_at": null,
+        "deleted_at": null,
+        "id": 1
+      }
+    },
+    "POST /keypairs": {
+      "keypair": {
+        "name": "keypair-d20a3d59-9433-4b79-8726-20b431d89c78",
+        "type": "ssh",
+        "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDx8nkQv/zgGgB4rMYmIf+6A4l6Rr+o/6lHBQdW5aYd44bd8JttDCE/F/pNRr0lRE+PiqSPO8nDPHw0010JeMH9gYgnnFlyY3/OcJ02RhIPyyxYpv9FhY+2YiUkpwFOcLImyrxEsYXpD/0d3ac30bNH6Sw9JD9UZHYcpSxsIbECHw== Generated-by-Nova",
+        "user_id": "fake"
+      }
+    },
+    "DELETE /keypairs/:name": {}
+  },
+  "v3": {
+    "unscoped": {
+      "token": {
+        "issued_at": "2017-07-08T09:13:28.000000Z",
+        "audit_ids": ["B1-BRSkTT5Cd_Oga63mgiQ"],
+        "methods": ["password"],
+        "expires_at": "2017-07-08T10:13:28.000000Z",
+        "user": {
+          "password_expires_at": null,
+          "domain": {
+            "id": "default",
+            "name": "Default"
+          },
+          "id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+          "name": "admin"
+        }
+      }
+    },
+    "scoped": {
+      "token": {
+        "is_domain": false,
+        "methods": ["password"],
+        "roles": [
+          {
+            "id": "f1e75d0b191e4a909f45fd57668f4e48",
+            "name": "admin"
+          }
+        ],
+        "expires_at": "2017-07-08T10:55:14.000000Z",
+        "project": {
+          "domain": {
+            "id": "default",
+            "name": "Default"
+          },
+          "id": "fcfeddf071284e4a8c54760d4bf67c29",
+          "name": "admin"
         },
-        "POST /flavors": {
-            "flavor": {
-                "OS-FLV-DISABLED:disabled": false,
-                "disk": 10,
-                "OS-FLV-EXT-DATA:ephemeral": 0,
-                "os-flavor-access:is_public": true,
-                "id": "10",
-                "links": [
-                    {
-                        "href": "http://openstack.example.com/v2/6f70656e737461636b20342065766572/flavors/10",
-                        "rel": "self"
-                    },
-                    {
-                        "href": "http://openstack.example.com/6f70656e737461636b20342065766572/flavors/10",
-                        "rel": "bookmark"
-                    }
-                ],
-                "name": "test_flavor",
-                "ram": 1024,
-                "swap": "",
-                "rxtx_factor": 2.0,
-                "vcpus": 2
-            }
+        "catalog": [
+          {
+            "endpoints": [
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:35357/v3",
+                "region": "RegionOne",
+                "interface": "admin",
+                "id": "416a8465b7e54312a4b07a2c51595ee2"
+              },
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:5000/v3",
+                "region": "RegionOne",
+                "interface": "public",
+                "id": "ad9d692c9cfc4bfc9e9f0b6c3b91e80f"
+              },
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:5000/v3",
+                "region": "RegionOne",
+                "interface": "internal",
+                "id": "f08fb7f958014fa3a230263eb39fec62"
+              }
+            ],
+            "type": "identity",
+            "id": "2d8f8e19de1142769420837f9d9e3b49",
+            "name": "keystone"
+          },
+          {
+            "endpoints": [
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
+                "region": "RegionOne",
+                "interface": "admin",
+                "id": "0b5868e38a254df4a2119a21fa2abea0"
+              },
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
+                "region": "RegionOne",
+                "interface": "internal",
+                "id": "3ba3a7c69a0a4eaba21cc42ea789cb19"
+              },
+              {
+                "region_id": "RegionOne",
+                "url": "mitm://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29",
+                "region": "RegionOne",
+                "interface": "public",
+                "id": "4fe20af3817542d8b3d875e0e64c90a0"
+              }
+            ],
+            "type": "compute",
+            "id": "1d2c9ad6c8d94632ba4262c3ff56d84f",
+            "name": "nova"
+          }
+        ],
+        "user": {
+          "password_expires_at": null,
+          "domain": {
+            "id": "default",
+            "name": "Default"
+          },
+          "id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+          "name": "admin"
         },
-        "GET /flavors": {
-            "flavors": [
-                {
-                    "OS-FLV-DISABLED:disabled": false,
-                    "disk": 1,
-                    "OS-FLV-EXT-DATA:ephemeral": 0,
-                    "os-flavor-access:is_public": true,
-                    "id": "1",
-                    "links": [
-                        {
-                            "href": "http://openstack.example.com/v2/6f70656e737461636b20342065766572/flavors/1",
-                            "rel": "self"
-                        },
-                        {
-                            "href": "http://openstack.example.com/6f70656e737461636b20342065766572/flavors/1",
-                            "rel": "bookmark"
-                        }
-                    ],
-                    "name": "m1.tiny",
-                    "ram": 512,
-                    "swap": "",
-                    "vcpus": 1,
-                    "rxtx_factor": 1.0
-                }
+        "audit_ids": ["AVAtPP-nR7iYERNmXTD2-A"],
+        "issued_at": "2017-07-08T09:55:14.000000Z"
+      }
+    },
+    "POST /flavors": {
+      "flavor": {
+        "OS-FLV-DISABLED:disabled": false,
+        "disk": 10,
+        "OS-FLV-EXT-DATA:ephemeral": 0,
+        "os-flavor-access:is_public": true,
+        "id": "10",
+        "links": [
+          {
+            "href": "http://openstack.example.com/v2/6f70656e737461636b20342065766572/flavors/10",
+            "rel": "self"
+          },
+          {
+            "href": "http://openstack.example.com/6f70656e737461636b20342065766572/flavors/10",
+            "rel": "bookmark"
+          }
+        ],
+        "name": "test_flavor",
+        "ram": 1024,
+        "swap": "",
+        "rxtx_factor": 2.0,
+        "vcpus": 2
+      }
+    },
+    "GET /flavors": {
+      "flavors": [
+        {
+          "OS-FLV-DISABLED:disabled": false,
+          "disk": 1,
+          "OS-FLV-EXT-DATA:ephemeral": 0,
+          "os-flavor-access:is_public": true,
+          "id": "1",
+          "links": [
+            {
+              "href": "http://openstack.example.com/v2/6f70656e737461636b20342065766572/flavors/1",
+              "rel": "self"
+            },
+            {
+              "href": "http://openstack.example.com/6f70656e737461636b20342065766572/flavors/1",
+              "rel": "bookmark"
+            }
+          ],
+          "name": "m1.tiny",
+          "ram": 512,
+          "swap": "",
+          "vcpus": 1,
+          "rxtx_factor": 1.0
+        }
+      ]
+    },
+    "GET /flavors/:id": {
+      "flavor": {
+        "OS-FLV-DISABLED:disabled": false,
+        "disk": 1,
+        "OS-FLV-EXT-DATA:ephemeral": 0,
+        "os-flavor-access:is_public": true,
+        "id": "1",
+        "links": [
+          {
+            "href": "http://openstack.example.com/v2/6f70656e737461636b20342065766572/flavors/1",
+            "rel": "self"
+          },
+          {
+            "href": "http://openstack.example.com/6f70656e737461636b20342065766572/flavors/1",
+            "rel": "bookmark"
+          }
+        ],
+        "name": "m1.tiny",
+        "ram": 512,
+        "swap": "",
+        "vcpus": 1,
+        "rxtx_factor": 1.0
+      }
+    },
+    "DELETE /flavors/:id": {},
+    "POST /servers": {
+      "server": {
+        "id": "bf826d60-e9a0-4eb8-b444-b26a1e13e527"
+      }
+    },
+    "GET /servers": {
+      "servers": [
+        {
+          "OS-EXT-STS:task_state": null,
+          "addresses": {
+            "public": [
+              {
+                "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:bf:e4:36",
+                "version": 4,
+                "addr": "172.24.4.14",
+                "OS-EXT-IPS:type": "fixed"
+              }
             ]
-        },
-        "GET /flavors/:id": {
-            "flavor": {
-                "OS-FLV-DISABLED:disabled": false,
-                "disk": 1,
-                "OS-FLV-EXT-DATA:ephemeral": 0,
-                "os-flavor-access:is_public": true,
-                "id": "1",
-                "links": [
-                    {
-                        "href": "http://openstack.example.com/v2/6f70656e737461636b20342065766572/flavors/1",
-                        "rel": "self"
-                    },
-                    {
-                        "href": "http://openstack.example.com/6f70656e737461636b20342065766572/flavors/1",
-                        "rel": "bookmark"
-                    }
-                ],
-                "name": "m1.tiny",
-                "ram": 512,
-                "swap": "",
-                "vcpus": 1,
-                "rxtx_factor": 1.0
+          },
+          "links": [
+            {
+              "href": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/cb84edb5-3c26-43e3-95eb-4f83b7e3ad26",
+              "rel": "self"
+            },
+            {
+              "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/servers/cb84edb5-3c26-43e3-95eb-4f83b7e3ad26",
+              "rel": "bookmark"
             }
-        },
-        "DELETE /flavors/:id": {},
-        "POST /servers": {
-            "server": {
-                "id": "bf826d60-e9a0-4eb8-b444-b26a1e13e527"
-            }
-        },
-        "GET /servers": {
-            "servers": [
-                {
-                    "OS-EXT-STS:task_state": null,
-                    "addresses": {
-                        "public": [
-                            {
-                                "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:bf:e4:36",
-                                "version": 4,
-                                "addr": "172.24.4.14",
-                                "OS-EXT-IPS:type": "fixed"
-                            }
-                        ]
-                    },
-                    "links": [
-                        {
-                            "href": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/cb84edb5-3c26-43e3-95eb-4f83b7e3ad26",
-                            "rel": "self"
-                        },
-                        {
-                            "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/servers/cb84edb5-3c26-43e3-95eb-4f83b7e3ad26",
-                            "rel": "bookmark"
-                        }
-                    ],
-                    "image": "",
-                    "OS-EXT-STS:vm_state": "active",
-                    "OS-EXT-SRV-ATTR:instance_name": "instance-00000001",
-                    "OS-SRV-USG:launched_at": "2017-07-11T10:15:55.000000",
-                    "flavor": {
-                        "id": "1",
-                        "links": [
-                            {
-                                "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/flavors/1",
-                                "rel": "bookmark"
-                            }
-                        ]
-                    },
-                    "id": "cb84edb5-3c26-43e3-95eb-4f83b7e3ad26",
-                    "security_groups": [
-                        {
-                            "name": "default"
-                        }
-                    ],
-                    "user_id": "7a9e80c432354bf6bb58e5e5d5c7b795",
-                    "OS-DCF:diskConfig": "AUTO",
-                    "accessIPv4": "",
-                    "accessIPv6": "",
-                    "progress": 0,
-                    "OS-EXT-STS:power_state": 1,
-                    "OS-EXT-AZ:availability_zone": "nova",
-                    "metadata": {},
-                    "status": "ACTIVE",
-                    "updated": "2017-07-11T10:15:55Z",
-                    "hostId": "8188f7ddfad3f424a37a872b4f4a0297ca0eebf87c32950349658392",
-                    "OS-EXT-SRV-ATTR:host": "api.qiniu.com",
-                    "OS-SRV-USG:terminated_at": null,
-                    "key_name": "test",
-                    "OS-EXT-SRV-ATTR:hypervisor_hostname": "api.qiniu.com",
-                    "name": "test",
-                    "created": "2017-07-11T10:15:35Z",
-                    "tenant_id": "fcfeddf071284e4a8c54760d4bf67c29",
-                    "os-extended-volumes:volumes_attached": [
-                        {
-                            "id": "41f90a80-6560-4505-92ec-34459b112d27"
-                        }
-                    ],
-                    "config_drive": ""
-                }
+          ],
+          "image": "",
+          "OS-EXT-STS:vm_state": "active",
+          "OS-EXT-SRV-ATTR:instance_name": "instance-00000001",
+          "OS-SRV-USG:launched_at": "2017-07-11T10:15:55.000000",
+          "flavor": {
+            "id": "1",
+            "links": [
+              {
+                "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/flavors/1",
+                "rel": "bookmark"
+              }
             ]
-        },
-        "GET /servers/:id": {
-            "server": {
-                "OS-EXT-STS:task_state": null,
-                "addresses": {
-                    "public": [
-                        {
-                            "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:df:6c:e2",
-                            "version": 4,
-                            "addr": "172.24.4.7",
-                            "OS-EXT-IPS:type": "fixed"
-                        }
-                    ]
-                },
-                "links": [
-                    {
-                        "href": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
-                        "rel": "self"
-                    },
-                    {
-                        "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
-                        "rel": "bookmark"
-                    }
-                ],
-                "image": "",
-                "OS-EXT-STS:vm_state": "active",
-                "OS-EXT-SRV-ATTR:instance_name": "instance-00000002",
-                "OS-SRV-USG:launched_at": "2017-07-13T08:52:09.000000",
-                "flavor": {
-                    "id": "2bedc68b-3249-4ed9-83f7-fd0f201970cc",
-                    "links": [
-                        {
-                            "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/flavors/2bedc68b-3249-4ed9-83f7-fd0f201970cc",
-                            "rel": "bookmark"
-                        }
-                    ]
-                },
-                "id": "bf826d60-e9a0-4eb8-b444-b26a1e13e527",
-                "security_groups": [
-                    {
-                        "name": "default"
-                    }
-                ],
-                "user_id": "7a9e80c432354bf6bb58e5e5d5c7b795",
-                "OS-DCF:diskConfig": "AUTO",
-                "accessIPv4": "172.24.4.14",
-                "accessIPv6": "80fe::",
-                "progress": 0,
-                "OS-EXT-STS:power_state": 1,
-                "OS-EXT-AZ:availability_zone": "nova",
-                "metadata": {},
-                "status": "ACTIVE",
-                "updated": "2017-07-13T08:57:57Z",
-                "hostId": "8188f7ddfad3f424a37a872b4f4a0297ca0eebf87c32950349658392",
-                "OS-EXT-SRV-ATTR:host": "api.qiniu.com",
-                "OS-SRV-USG:terminated_at": null,
-                "key_name": "test",
-                "OS-EXT-SRV-ATTR:hypervisor_hostname": "api.qiniu.com",
-                "name": "TestModifyServer",
-                "created": "2017-07-13T08:51:38Z",
-                "tenant_id": "fcfeddf071284e4a8c54760d4bf67c29",
-                "os-extended-volumes:volumes_attached": [
-                    {
-                        "id": "8ae39911-130c-441d-9e1b-49cc86a264c4"
-                    }
-                ],
-                "config_drive": ""
+          },
+          "id": "cb84edb5-3c26-43e3-95eb-4f83b7e3ad26",
+          "security_groups": [
+            {
+              "name": "default"
             }
-        },
-        "PUT /servers/:id": {
-            "server": {
-                "status": "ACTIVE",
-                "updated": "2017-07-13T08:52:09Z",
-                "hostId": "8188f7ddfad3f424a37a872b4f4a0297ca0eebf87c32950349658392",
-                "user_id": "7a9e80c432354bf6bb58e5e5d5c7b795",
-                "name": "TestModifyServer",
-                "links": [
-                    {
-                        "href": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
-                        "rel": "self"
-                    },
-                    {
-                        "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
-                        "rel": "bookmark"
-                    }
-                ],
-                "created": "2017-07-13T08:51:38Z",
-                "tenant_id": "fcfeddf071284e4a8c54760d4bf67c29",
-                "image": "",
-                "OS-DCF:diskConfig": "AUTO",
-                "addresses": {
-                    "public": [
-                        {
-                            "version": 4,
-                            "addr": "172.24.4.7"
-                        }
-                    ]
-                },
-                "accessIPv4": "172.24.4.14",
-                "accessIPv6": "80fe::",
-                "progress": 0,
-                "flavor": {
-                    "id": "2bedc68b-3249-4ed9-83f7-fd0f201970cc",
-                    "links": [
-                        {
-                            "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/flavors/2bedc68b-3249-4ed9-83f7-fd0f201970cc",
-                            "rel": "bookmark"
-                        }
-                    ]
-                },
-                "id": "bf826d60-e9a0-4eb8-b444-b26a1e13e527",
-                "metadata": {}
+          ],
+          "user_id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+          "OS-DCF:diskConfig": "AUTO",
+          "accessIPv4": "",
+          "accessIPv6": "",
+          "progress": 0,
+          "OS-EXT-STS:power_state": 1,
+          "OS-EXT-AZ:availability_zone": "nova",
+          "metadata": {},
+          "status": "ACTIVE",
+          "updated": "2017-07-11T10:15:55Z",
+          "hostId": "8188f7ddfad3f424a37a872b4f4a0297ca0eebf87c32950349658392",
+          "OS-EXT-SRV-ATTR:host": "api.qiniu.com",
+          "OS-SRV-USG:terminated_at": null,
+          "key_name": "test",
+          "OS-EXT-SRV-ATTR:hypervisor_hostname": "api.qiniu.com",
+          "name": "test",
+          "created": "2017-07-11T10:15:35Z",
+          "tenant_id": "fcfeddf071284e4a8c54760d4bf67c29",
+          "os-extended-volumes:volumes_attached": [
+            {
+              "id": "41f90a80-6560-4505-92ec-34459b112d27"
             }
-        },
-        "DELETE /servers/:id": {},
-        "PUT /servers/:id": {
-            "server": {
-                "status": "ACTIVE",
-                "updated": "2017-07-13T08:52:09Z",
-                "hostId": "8188f7ddfad3f424a37a872b4f4a0297ca0eebf87c32950349658392",
-                "user_id": "7a9e80c432354bf6bb58e5e5d5c7b795",
-                "name": "TestModifyServer",
-                "links": [
-                    {
-                        "href": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
-                        "rel": "self"
-                    },
-                    {
-                        "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
-                        "rel": "bookmark"
-                    }
-                ],
-                "created": "2017-07-13T08:51:38Z",
-                "tenant_id": "fcfeddf071284e4a8c54760d4bf67c29",
-                "image": "",
-                "OS-DCF:diskConfig": "AUTO",
-                "addresses": {
-                    "public": [
-                        {
-                            "version": 4,
-                            "addr": "172.24.4.7"
-                        }
-                    ]
-                },
-                "accessIPv4": "172.24.4.14",
-                "accessIPv6": "80fe::",
-                "progress": 0,
-                "flavor": {
-                    "id": "2bedc68b-3249-4ed9-83f7-fd0f201970cc",
-                    "links": [
-                        {
-                            "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/flavors/2bedc68b-3249-4ed9-83f7-fd0f201970cc",
-                            "rel": "bookmark"
-                        }
-                    ]
-                },
-                "id": "bf826d60-e9a0-4eb8-b444-b26a1e13e527",
-                "metadata": {}
+          ],
+          "config_drive": ""
+        }
+      ]
+    },
+    "GET /servers/:id": {
+      "server": {
+        "OS-EXT-STS:task_state": null,
+        "addresses": {
+          "public": [
+            {
+              "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:df:6c:e2",
+              "version": 4,
+              "addr": "172.24.4.7",
+              "OS-EXT-IPS:type": "fixed"
             }
+          ]
         },
-        "DELETE /servers/:id": {}
-    }
+        "links": [
+          {
+            "href": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+            "rel": "self"
+          },
+          {
+            "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+            "rel": "bookmark"
+          }
+        ],
+        "image": "",
+        "OS-EXT-STS:vm_state": "active",
+        "OS-EXT-SRV-ATTR:instance_name": "instance-00000002",
+        "OS-SRV-USG:launched_at": "2017-07-13T08:52:09.000000",
+        "flavor": {
+          "id": "2bedc68b-3249-4ed9-83f7-fd0f201970cc",
+          "links": [
+            {
+              "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/flavors/2bedc68b-3249-4ed9-83f7-fd0f201970cc",
+              "rel": "bookmark"
+            }
+          ]
+        },
+        "id": "bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+        "security_groups": [
+          {
+            "name": "default"
+          }
+        ],
+        "user_id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+        "OS-DCF:diskConfig": "AUTO",
+        "accessIPv4": "172.24.4.14",
+        "accessIPv6": "80fe::",
+        "progress": 0,
+        "OS-EXT-STS:power_state": 1,
+        "OS-EXT-AZ:availability_zone": "nova",
+        "metadata": {},
+        "status": "ACTIVE",
+        "updated": "2017-07-13T08:57:57Z",
+        "hostId": "8188f7ddfad3f424a37a872b4f4a0297ca0eebf87c32950349658392",
+        "OS-EXT-SRV-ATTR:host": "api.qiniu.com",
+        "OS-SRV-USG:terminated_at": null,
+        "key_name": "test",
+        "OS-EXT-SRV-ATTR:hypervisor_hostname": "api.qiniu.com",
+        "name": "TestModifyServer",
+        "created": "2017-07-13T08:51:38Z",
+        "tenant_id": "fcfeddf071284e4a8c54760d4bf67c29",
+        "os-extended-volumes:volumes_attached": [
+          {
+            "id": "8ae39911-130c-441d-9e1b-49cc86a264c4"
+          }
+        ],
+        "config_drive": ""
+      }
+    },
+    "PUT /servers/:id": {
+      "server": {
+        "status": "ACTIVE",
+        "updated": "2017-07-13T08:52:09Z",
+        "hostId": "8188f7ddfad3f424a37a872b4f4a0297ca0eebf87c32950349658392",
+        "user_id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+        "name": "TestModifyServer",
+        "links": [
+          {
+            "href": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+            "rel": "self"
+          },
+          {
+            "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+            "rel": "bookmark"
+          }
+        ],
+        "created": "2017-07-13T08:51:38Z",
+        "tenant_id": "fcfeddf071284e4a8c54760d4bf67c29",
+        "image": "",
+        "OS-DCF:diskConfig": "AUTO",
+        "addresses": {
+          "public": [
+            {
+              "version": 4,
+              "addr": "172.24.4.7"
+            }
+          ]
+        },
+        "accessIPv4": "172.24.4.14",
+        "accessIPv6": "80fe::",
+        "progress": 0,
+        "flavor": {
+          "id": "2bedc68b-3249-4ed9-83f7-fd0f201970cc",
+          "links": [
+            {
+              "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/flavors/2bedc68b-3249-4ed9-83f7-fd0f201970cc",
+              "rel": "bookmark"
+            }
+          ]
+        },
+        "id": "bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+        "metadata": {}
+      }
+    },
+    "DELETE /servers/:id": {},
+    "PUT /servers/:id": {
+      "server": {
+        "status": "ACTIVE",
+        "updated": "2017-07-13T08:52:09Z",
+        "hostId": "8188f7ddfad3f424a37a872b4f4a0297ca0eebf87c32950349658392",
+        "user_id": "7a9e80c432354bf6bb58e5e5d5c7b795",
+        "name": "TestModifyServer",
+        "links": [
+          {
+            "href": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+            "rel": "self"
+          },
+          {
+            "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+            "rel": "bookmark"
+          }
+        ],
+        "created": "2017-07-13T08:51:38Z",
+        "tenant_id": "fcfeddf071284e4a8c54760d4bf67c29",
+        "image": "",
+        "OS-DCF:diskConfig": "AUTO",
+        "addresses": {
+          "public": [
+            {
+              "version": 4,
+              "addr": "172.24.4.7"
+            }
+          ]
+        },
+        "accessIPv4": "172.24.4.14",
+        "accessIPv6": "80fe::",
+        "progress": 0,
+        "flavor": {
+          "id": "2bedc68b-3249-4ed9-83f7-fd0f201970cc",
+          "links": [
+            {
+              "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/flavors/2bedc68b-3249-4ed9-83f7-fd0f201970cc",
+              "rel": "bookmark"
+            }
+          ]
+        },
+        "id": "bf826d60-e9a0-4eb8-b444-b26a1e13e527",
+        "metadata": {}
+      }
+    },
+    "DELETE /servers/:id": {}
+  }
 }

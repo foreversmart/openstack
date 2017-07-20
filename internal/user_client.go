@@ -32,7 +32,7 @@ func (os *Openstack) VolumeClient() (client *gophercloud.ServiceClient, err erro
 	return
 }
 
-func (os *Openstack) ComputerClient() (client *gophercloud.ServiceClient, err error) {
+func (os *Openstack) ComputeClient() (client *gophercloud.ServiceClient, err error) {
 	opts := gophercloud.EndpointOpts{
 		Type:         "compute",
 		Name:         "nova",
