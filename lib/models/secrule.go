@@ -43,6 +43,8 @@ type SecGroupRuleModel struct {
 	// can specify either RemoteGroupID or RemoteIPPrefix.
 	RemoteGroupID string `mapstructure:"remote_group_id" json:"remote_group_id"`
 
+	RemoteGroupName string `mapstructure:"remote_group_name" json:"remote_group_name"`
+
 	// The remote IP prefix to be associated with this security group rule. You
 	// can specify either RemoteGroupID or RemoteIPPrefix . This attribute
 	// matches the specified IP prefix as the source IP address of the IP packet.
