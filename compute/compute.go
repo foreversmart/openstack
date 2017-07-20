@@ -31,9 +31,9 @@ func (c *Compute) NewServerImager() ifaces.ServerImager {
 	return server.NewServerImager(c.client)
 }
 
-// func (c *Compute) NewServerKeyer() ifaces.ServerKeyer {
-// 	return server.NewServerKeyer(c.client)
-// }
+func (c *Compute) NewServerKeyer() ifaces.ServerKeyer {
+	return server.NewServerKeyer(c.client)
+}
 
 // func (c *Compute) NewServerPorter() ifaces.ServerPorter {
 // 	return server.NewServerPorter(c.client)

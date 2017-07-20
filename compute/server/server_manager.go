@@ -182,64 +182,6 @@ func NewServerManager(client ifaces.Openstacker) *ServerManager {
 // 	return errors.ErrNotImplemented
 // }
 
-// func (ser *Servers) BindKeys(id string, keys []string) error {
-// 	if id == "" || len(keys) == 0 {
-// 		return errors.ErrInvalidParams
-// 	}
-
-// 	client, err := ser.Client.ComputeClient()
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	opts := map[string]interface{}{
-// 		"key_names": keys,
-// 	}
-
-// 	reqBody := map[string]interface{}{
-// 		"attachKeypairs": opts,
-// 	}
-
-// 	var result gophercloud.Result
-// 	_, err = client.Post(client.ServiceURL(ServersUrl, id, ActionUrl), reqBody, &result.Body, &gophercloud.RequestOpts{
-// 		OkCodes: []int{202},
-// 	})
-// 	if err.Error() == "EOF" {
-// 		err = nil
-// 	}
-
-// 	return err
-// }
-
-// func (ser *Servers) UnbindKeys(id string, keys []string) error {
-// 	if id == "" || len(keys) == 0 {
-// 		return errors.ErrInvalidParams
-// 	}
-
-// 	client, err := ser.Client.ComputeClient()
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	opts := map[string]interface{}{
-// 		"key_names": keys,
-// 	}
-
-// 	reqBody := map[string]interface{}{
-// 		"detachKeypairs": opts,
-// 	}
-
-// 	var result gophercloud.Result
-// 	_, err = client.Post(client.ServiceURL(ServersUrl, id, ActionUrl), reqBody, &result.Body, &gophercloud.RequestOpts{
-// 		OkCodes: []int{202},
-// 	})
-// 	if err.Error() == "EOF" {
-// 		err = nil
-// 	}
-
-// 	return err
-// }
-
 // func (ser *Servers) MountVolume(id, volumeID string) error {
 // 	if id == "" || volumeID == "" {
 // 		return errors.ErrInvalidParams

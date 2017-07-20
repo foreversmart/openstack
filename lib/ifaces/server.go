@@ -35,15 +35,14 @@ type ServerPorter interface {
 }
 
 type ServerKeyer interface {
-	All(serverID string) (keypairs *[]models.KeypairModel, err error)
-	Bind(id string, keys []string) error   // 绑定key
-	Unbind(id string, keys []string) error // 解绑key
+	Bind(serverID string, keys []string) error   // 绑定key
+	Unbind(serverID string, keys []string) error // 解绑key
 }
 
 type ServerVolumer interface {
 	All(serverID string) (volumes *[]models.VolumeModel, err error)
-	MountVolume(id, volumeID string) error   // 挂载磁盘
-	UnmountVolume(id, volumeID string) error // 卸载磁盘
+	MountVolume(serverID, volumeID string) error   // 挂载磁盘
+	UnmountVolume(serverID, volumeID string) error // 卸载磁盘
 }
 
 type ServerImager interface {
