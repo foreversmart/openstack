@@ -30,8 +30,7 @@ func (s *SecurityGroups) All() (infos []*models.SecurityGroupModel, err error) {
 
 func (s *SecurityGroups) AllByParams(opts *options.ListSecurityGroupsOpts) (securitygroups []*models.SecurityGroupModel, err error) {
 	if !opts.IsValid() {
-		err = errors.ErrInvalidParams
-		return
+		return nil, errors.ErrInvalidParams
 	}
 
 	client, err := s.Client.NetworkClient()
