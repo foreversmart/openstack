@@ -28,7 +28,7 @@ func Test_Create_Server(t *testing.T) {
 	assertion.NotNil(server)
 
 	assertion.Equal(apiv3.APIString("POST /servers.server.id"), server.ID)
-	assertion.Equal(apiv3.APIString("POST /servers.server.admin_pass"), server.AdminPass)
+	assertion.Equal(apiv3.APIString("POST /servers.server.adminPass"), server.AdminPass)
 }
 
 func Test_All_Servers(t *testing.T) {

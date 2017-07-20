@@ -149,7 +149,7 @@ func (ser *Servers) ChangeAdminPassword(id, newPassword string) error {
 		return errors.ErrInvalidParams
 	}
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return err
 	}
@@ -163,7 +163,7 @@ func (ser *Servers) AdminPassword(id string) (password string, err error) {
 		return
 	}
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return
 	}
@@ -186,7 +186,7 @@ func (ser *Servers) Start(id string) error {
 		return errors.ErrInvalidParams
 	}
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return err
 	}
@@ -199,7 +199,7 @@ func (ser *Servers) Reboot(id string) error {
 		return errors.ErrInvalidParams
 	}
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return err
 	}
@@ -221,7 +221,7 @@ func (ser *Servers) Stop(id string) error {
 		return errors.ErrInvalidParams
 	}
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return err
 	}
@@ -235,7 +235,7 @@ func (ser *Servers) CreateSnapshot(id, name string) (snapshotID string, err erro
 		return
 	}
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return
 	}
@@ -267,7 +267,7 @@ func (ser *Servers) BindPort(id, portID string) error {
 		return errors.ErrInvalidParams
 	}
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return err
 	}
@@ -295,7 +295,7 @@ func (ser *Servers) Ports(id string) (portIDs []string, err error) {
 		return
 	}
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return
 	}
@@ -330,7 +330,7 @@ func (ser *Servers) BindKeys(id string, keys []string) error {
 		return errors.ErrInvalidParams
 	}
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return err
 	}
@@ -359,7 +359,7 @@ func (ser *Servers) UnbindKeys(id string, keys []string) error {
 		return errors.ErrInvalidParams
 	}
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return err
 	}
@@ -388,7 +388,7 @@ func (ser *Servers) MountVolume(id, volumeID string) error {
 		return errors.ErrInvalidParams
 	}
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return err
 	}
@@ -407,7 +407,7 @@ func (ser *Servers) UnmountVolume(id, volumeID string) error {
 
 	var volumeAttachID string
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return err
 	}
@@ -443,7 +443,7 @@ func (ser *Servers) ModifyFlavor(id, flavorID string) error {
 		return errors.ErrInvalidParams
 	}
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return err
 	}
@@ -493,7 +493,7 @@ func (ser *Servers) Rebuild(id, imageID string) (serverModel *models.ServersMode
 		return
 	}
 
-	client, err := ser.Client.ComputerClient()
+	client, err := ser.Client.ComputeClient()
 	if err != nil {
 		return
 	}
