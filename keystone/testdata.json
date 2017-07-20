@@ -912,6 +912,7 @@
                 }
             ]
         },
+        "GET /role_assignments": {},
         "PUT /projects/:id/users/:id/roles/:id": {},
         "HEAD /projects/:id/users/:id/roles/:id": {},
         "DELETE /projects/:id/users/:id/roles/:id": {}
