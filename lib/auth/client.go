@@ -49,7 +49,9 @@ func v2auth(client *gophercloud.ProviderClient, endpoint string, options AuthOpt
 			}
 		}
 
-		return nil
+		if !options.ForceReauth {
+			return nil
+		}
 	}
 
 	v2client := openstack.NewIdentityV2(client)
@@ -122,7 +124,9 @@ func v3auth(client *gophercloud.ProviderClient, endpoint string, options AuthOpt
 			}
 		}
 
-		return nil
+		if !options.ForceReauth {
+			return nil
+		}
 	}
 
 	// Override the generated service endpoint with the one returned by the version endpoint.
@@ -153,6 +157,7 @@ func v3auth(client *gophercloud.ProviderClient, endpoint string, options AuthOpt
 		}
 	}
 
+	v3options.TokenID = options.TokenID
 	result := tokens3.Create(v3client, tokens3.AuthOptions{AuthOptions: v3options}, scope)
 
 	token, err := result.ExtractToken()

@@ -20,6 +20,7 @@ type AuthOptions struct {
 	Catalog   interface{}
 	ExpiredAt time.Time
 
+	ForceReauth bool            // set true will create new token with options even old token is valid
 	SuccessFunc AuthSuccessFunc // execute when reauth success, useful for cache
 }
 
