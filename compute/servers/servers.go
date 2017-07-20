@@ -30,7 +30,7 @@ func (ser *Servers) Create(opts options.CreateServersOpts) (server *models.Serve
 		return
 	}
 
-	client, err := ser.Client.ComputeClient()
+	client, err := ser.Client.ComputerClient()
 	if err != nil {
 		return
 	}
@@ -53,7 +53,7 @@ func (ser *Servers) AllByParams(opts *options.ListServersOpts) (Serverss []*mode
 		err = errors.ErrInvalidParams
 		return
 	}
-	client, err := ser.Client.ComputeClient()
+	client, err := ser.Client.ComputerClient()
 	if err != nil {
 		return
 	}
@@ -72,7 +72,7 @@ func (ser *Servers) Show(id string) (server *models.ServersModel, err error) {
 		return nil, errors.ErrInvalidParams
 	}
 
-	client, err := ser.Client.ComputeClient()
+	client, err := ser.Client.ComputerClient()
 	if err != nil {
 		return
 	}
@@ -92,7 +92,7 @@ func (ser *Servers) Update(id string, opts options.UpdateServersOpts) (server *m
 		return
 	}
 
-	client, err := ser.Client.ComputeClient()
+	client, err := ser.Client.ComputerClient()
 	if err != nil {
 		return
 	}
@@ -111,7 +111,7 @@ func (ser *Servers) Delete(id string) (err error) {
 		return errors.ErrInvalidParams
 	}
 
-	client, err := ser.Client.ComputeClient()
+	client, err := ser.Client.ComputerClient()
 	if err != nil {
 		return
 	}
