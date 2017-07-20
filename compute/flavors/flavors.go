@@ -33,7 +33,7 @@ func (f *Flavors) AllByParams(opts *options.ListFlavorsOpts) (flavors []*models.
 		return
 	}
 
-	client, err := f.Client.ComputerClient()
+	client, err := f.Client.ComputeClient()
 	if err != nil {
 		return
 	}
@@ -53,7 +53,7 @@ func (f *Flavors) Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorM
 		return nil, errors.ErrInvalidParams
 	}
 
-	client, err := f.Client.ComputerClient()
+	client, err := f.Client.ComputeClient()
 	if err != nil {
 		return
 	}
@@ -71,7 +71,7 @@ func (f *Flavors) Show(id string) (flavor *models.FlavorModel, err error) {
 		return nil, errors.ErrInvalidParams
 	}
 
-	client, err := f.Client.ComputerClient()
+	client, err := f.Client.ComputeClient()
 	if err != nil {
 		return
 	}
@@ -89,7 +89,7 @@ func (f *Flavors) Delete(id string) (err error) {
 		return errors.ErrInvalidParams
 	}
 
-	client, err := f.Client.ComputerClient()
+	client, err := f.Client.ComputeClient()
 
 	if err != nil {
 		return

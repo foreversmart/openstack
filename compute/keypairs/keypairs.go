@@ -72,7 +72,7 @@ func (k *Keypairs) Show(name string) (keypairModel *models.KeypairModel, err err
 		err = errors.ErrInvalidParams
 		return
 	}
-	client, err := k.Client.ComputerClient()
+	client, err := k.Client.ComputeClient()
 	if err != nil {
 		return
 	}
@@ -90,7 +90,7 @@ func (k *Keypairs) Delete(name string) error {
 		return errors.ErrInvalidParams
 	}
 
-	client, err := k.Client.ComputerClient()
+	client, err := k.Client.ComputeClient()
 	if err != nil {
 		return err
 	}
