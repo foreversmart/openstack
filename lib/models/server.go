@@ -8,7 +8,7 @@ import (
 	"github.com/rackspace/gophercloud/openstack/networking/v2/ports"
 )
 
-type ServersModel struct {
+type ServerModel struct {
 	ID                               string                                  `mapstructure:"id" json:"id"`
 	Name                             string                                  `mapstructure:"name" json:"name"`
 	ConfigDrive                      string                                  `mapstructure:"config_drive" json:"config_drive"`
@@ -85,13 +85,13 @@ type OsExtendedVolumesVolumesAttachedModel struct {
 	DeleteOnTermination bool   `mapstructure:"delete_on_termination" json:"delete_on_termination"`
 }
 
-func ExtractServer(result gophercloud.Result) (serverInfo *ServersModel, err error) {
+func ExtractServer(result gophercloud.Result) (serverInfo *ServerModel, err error) {
 	if result.Err != nil {
 		return nil, result.Err
 	}
 
 	var response struct {
-		Server *ServersModel `mapstructure:"server" json:"server"`
+		Server *ServerModel `mapstructure:"server" json:"server"`
 	}
 
 	err = mapstructure.Decode(result.Body, &response)
@@ -102,13 +102,13 @@ func ExtractServer(result gophercloud.Result) (serverInfo *ServersModel, err err
 	return
 }
 
-func ExtractServers(result gophercloud.Result) (serverInfo []*ServersModel, err error) {
+func ExtractServers(result gophercloud.Result) (serverInfo []*ServerModel, err error) {
 	if result.Err != nil {
 		return nil, result.Err
 	}
 
 	var response struct {
-		Servers []*ServersModel `mapstructure:"servers" json:"servers"`
+		Servers []*ServerModel `mapstructure:"servers" json:"servers"`
 	}
 
 	err = mapstructure.Decode(result.Body, &response)

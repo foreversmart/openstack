@@ -7,12 +7,7 @@ import (
 	"strconv"
 )
 
-type ListOpts struct {
-	Type   *string `json:"type"`
-	UserID *string `json:"user_id"`
-}
-
-// ListOpts allows the filtering and sorting of paginated collections through
+// ListServersOpts allows the filtering and sorting of paginated collections through
 // the API. Filtering is achieved by passing in struct field values that map to
 // the server attributes you want to see returned. Marker and Limit are used
 // for pagination.
@@ -268,7 +263,7 @@ func (f *ServerFileOpts) MarshalJSON() ([]byte, error) {
 }
 
 // CreateOpts specifies server creation parameters.
-type CreateServersOpts struct {
+type CreateServerOpts struct {
 	// Name [required] is the name to assign to the newly launched server.
 	Name *string `json:"name"`
 
@@ -322,13 +317,13 @@ type CreateServersOpts struct {
 	OSDcfDiskConfig *string `json:"OS-DCF:diskConfig"`
 }
 
-func (opts *CreateServersOpts) IsValid() bool {
+func (opts *CreateServerOpts) IsValid() bool {
 	return opts != nil && opts.Name != nil && (opts.FlavorRef != nil || opts.ImageRef != nil)
 }
 
-func (opts *CreateServersOpts) ToPayload() interface{} {
+func (opts *CreateServerOpts) ToPayload() interface{} {
 	type payload struct {
-		Server *CreateServersOpts `json:"server"`
+		Server *CreateServerOpts `json:"server"`
 	}
 
 	return payload{

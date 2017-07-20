@@ -12,6 +12,6 @@ func Test_Compute(t *testing.T) {
 
 	cmp := New(nil)
 	assertion.NotNil(cmp)
-	assertion.Implements((*ifaces.Serverser)(nil), cmp.NewServerser())
+	assertion.Implements((*ifaces.Server)(nil), cmp.NewServer())
 	assertion.Implements((*ifaces.Flavorer)(nil), cmp.NewFlavors())
 }

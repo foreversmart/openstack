@@ -2,7 +2,7 @@ package compute
 
 import (
 	"github.com/qbox/openstack-golang-sdk/compute/flavors"
-	"github.com/qbox/openstack-golang-sdk/compute/servers"
+	"github.com/qbox/openstack-golang-sdk/compute/server"
 	"github.com/qbox/openstack-golang-sdk/lib/ifaces"
 )
 
@@ -18,8 +18,8 @@ func New(client ifaces.Openstacker) *Compute {
 	}
 }
 
-func (c *Compute) NewServerser() ifaces.Serverser {
-	return servers.New(c.client)
+func (c *Compute) NewServer() ifaces.Server {
+	return server.New(c.client)
 }
 
 func (c *Compute) NewFlavors() ifaces.Flavorer {
