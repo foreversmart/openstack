@@ -15,7 +15,7 @@ func Test_Compute(t *testing.T) {
 
 	assertion.Implements((*ifaces.Server)(nil), cmp.NewServer())
 
-	// assertion.Implements((*ifaces.ServerManager)(nil), cmp.NewServerManager())
+	assertion.Implements((*ifaces.ServerManager)(nil), cmp.NewServerManager())
 	assertion.Implements((*ifaces.ServerImager)(nil), cmp.NewServerImager())
 	assertion.Implements((*ifaces.ServerKeyer)(nil), cmp.NewServerKeyer())
 	// assertion.Implements((*ifaces.ServerPorter)(nil), cmp.NewServerPorter())

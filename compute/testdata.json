@@ -536,6 +536,12 @@
     "DELETE /servers/:id": {},
     "POST /servers/:id/action/image": {
       "image_id": "0e7761dd-ee98-41f0-ba35-05994e446431"
+    },
+    "POST /servers/vnc": {
+      "console": {
+        "type": "novnc",
+        "url": "http://127.0.0.1:6080/vnc_auto.html?token=191996c3-7b0f-42f3-95a7-f1839f2da6ed"
+      }
     }
   }
 }

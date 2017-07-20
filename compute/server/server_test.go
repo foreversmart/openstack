@@ -110,37 +110,3 @@ func Test_Delete_Servers(t *testing.T) {
 	err := New(openstacker).Delete(serverID)
 	assertion.Nil(err)
 }
-
-// func Test_ChangeAdminPassword(t *testing.T) {
-// 	mitm := mocker.StubDefaultTransport(t)
-
-// 	serverID := apiv3.APIString("POST /servers.server.id")
-
-// 	mitm.MockRequest(http.MethodPost, apiv3.MockResourceURLWithPort(computerPort, "v2.1/"+testProjectId+"/servers/"+serverID+"/action")).WithResponse(http.StatusAccepted, jsonheader, "")
-// 	//mitm.Pause()
-
-// 	assertion := assert.New(t)
-
-// 	err := New(openstacker).ChangeAdminPassword(serverID, "newpass")
-// 	assertion.Nil(err)
-// }
-
-// func Test_Start_Stop_Reboot_Shutdown_Server(t *testing.T) {
-// 	mitm := mocker.StubDefaultTransport(t)
-
-// 	serverID := apiv3.APIString("POST /servers.server.id")
-
-// 	mitm.MockRequest(http.MethodPost, apiv3.MockResourceURLWithPort(computerPort, "v2.1/"+testProjectId+"/servers/"+serverID+"/action")).WithResponse(http.StatusAccepted, jsonheader, "").AnyTimes()
-// 	//mitm.Pause()
-
-// 	assertion := assert.New(t)
-
-// 	err := New(openstacker).Start(serverID)
-// 	assertion.Nil(err)
-// 	err = New(openstacker).Stop(serverID)
-// 	assertion.Nil(err)
-// 	err = New(openstacker).Reboot(serverID)
-// 	assertion.Nil(err)
-// 	err = New(openstacker).Shutdown(serverID)
-// 	assertion.Nil(err)
-// }

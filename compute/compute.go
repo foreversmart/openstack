@@ -23,9 +23,9 @@ func (c *Compute) NewServer() ifaces.Server {
 	return server.New(c.client)
 }
 
-// func (c *Compute) NewServerManager() ifaces.ServerManager {
-// 	return server.NewServerManager(c.client)
-// }
+func (c *Compute) NewServerManager() ifaces.ServerManager {
+	return server.NewServerManager(c.client)
+}
 
 func (c *Compute) NewServerImager() ifaces.ServerImager {
 	return server.NewServerImager(c.client)

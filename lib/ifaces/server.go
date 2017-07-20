@@ -41,8 +41,8 @@ type ServerKeyer interface {
 
 type ServerVolumer interface {
 	All(serverID string) (volumes *[]models.VolumeModel, err error)
-	MountVolume(serverID, volumeID string) error   // 挂载磁盘
-	UnmountVolume(serverID, volumeID string) error // 卸载磁盘
+	Mount(serverID, volumeID string) error   // 挂载磁盘
+	Unmount(serverID, volumeID string) error // 卸载磁盘
 }
 
 type ServerImager interface {
