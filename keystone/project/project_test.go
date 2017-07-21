@@ -35,21 +35,18 @@ func Test_Create_Project(t *testing.T) {
 
 	assertion := assert.New(t)
 
-	domainID := "default"
-	isDomain := false
-	isEnabled := true
 	opts := options.CreateProjectOpts{
-		DomainID: &domainID,
+		DomainID: options.String("default"),
 		Name:     options.String("testing project"),
-		Enabled:  &isEnabled,
-		IsDomain: &isDomain,
+		Enabled:  options.Bool(true),
+		IsDomain: options.Bool(false),
 	}
 
 	project, err := New(openstacker).Create(opts)
 	assertion.Nil(err)
-	assertion.Equal(opts.Name, &project.Name)
-	assertion.Equal(domainID, project.DomainID)
-	assertion.Equal(domainID, project.ParentID)
+	assertion.Equal("testing project", project.Name)
+	assertion.Equal("default", project.DomainID)
+	assertion.Equal("default", project.ParentID)
 	assertion.False(project.IsDomain)
 	assertion.True(project.Enabled)
 }
