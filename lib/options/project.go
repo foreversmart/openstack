@@ -7,8 +7,8 @@ import (
 type ListProjectOpts struct {
 	DomainID *string `json:"domain_id"`
 	Name     *string `json:"name"`
-	IsDomain bool    `json:"is_domain"`
-	Enabled  bool    `json:"enabled"`
+	IsDomain *bool   `json:"is_domain"`
+	Enabled  *bool   `json:"enabled"`
 	ParentID *string `json:"parent_id"`
 }
 
@@ -34,7 +34,7 @@ func (opts *ListProjectOpts) ToQuery() (options url.Values) {
 
 type CreateProjectOpts struct {
 	DomainID    *string `json:"domain_id,omitempty"`
-	Name        string  `json:"name,omitempty"`
+	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	IsDomain    *bool   `json:"is_domain,omitempty"`
 	Enabled     *bool   `json:"enabled,omitempty"`
@@ -52,7 +52,7 @@ func (opts *CreateProjectOpts) ToPayload() interface{} {
 }
 
 type UpdateProjectOpts struct {
-	Name        string  `json:"name,omitempty"`
+	Name        *string `json:"name,omitempty"`
 	DomainID    *string `json:"domain_id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	IsDomain    *bool   `json:"is_domain,omitempty"`

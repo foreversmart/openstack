@@ -10,17 +10,17 @@ import (
 // CreateOpts represents the attributes used when creating a new subnet.
 type CreateSubnetOpts struct {
 	// Required
-	NetworkID *string `json:"network_id"`
-	CIDR      *string `json:"cidr"`
+	NetworkID *string `json:"network_id,omitempty"`
+	CIDR      *string `json:"cidr,omitempty"`
 	// Optional
-	Name            *string                  `json:"name"`
-	TenantID        *string                  `json:"tenant_id"`
-	AllocationPools []*models.AllocationPool `json:"allocation_pools "`
-	GatewayIP       *string                  `json:"gateway_ip"`
-	IPVersion       *int                     `json:"ip_version"`
-	EnableDHCP      *bool                    `json:"enable_dhcp"`
-	DNSNameservers  []*string                `json:"dns_nameservers "`
-	HostRoutes      []*models.HostRoute      `json:"host_routes"`
+	Name            *string                  `json:"name,omitempty"`
+	TenantID        *string                  `json:"tenant_id,omitempty"`
+	AllocationPools []*models.AllocationPool `json:"allocation_pools,omitempty"`
+	GatewayIP       *string                  `json:"gateway_ip,omitempty"`
+	IPVersion       *int                     `json:"ip_version,omitempty"`
+	EnableDHCP      *bool                    `json:"enable_dhcp,omitempty"`
+	DNSNameservers  []*string                `json:"dns_nameservers,omitempty"`
+	HostRoutes      []*models.HostRoute      `json:"host_routes,omitempty"`
 }
 
 func (opts *CreateSubnetOpts) IsValid() bool {
@@ -41,13 +41,13 @@ func (opts *CreateSubnetOpts) ToPayload() interface{} {
 }
 
 type UpdateSubnetOpts struct {
-	Name           *string                  `json:"name"`
-	EnableDHCP     *bool                    `json:"enable_dhcp"`
-	DNSNameservers []*string                `json:"dns_nameservers "`
-	AllocPools     []*models.AllocationPool `json:"allocation_pools "`
-	HostRoutes     []*models.HostRoute      `json:"host_routes"`
-	GatewayIP      *string                  `json:"gateway_ip"`
-	Description    *string                  `json:"description"`
+	Name           *string                  `json:"name,omitempty"`
+	EnableDHCP     *bool                    `json:"enable_dhcp,omitempty"`
+	DNSNameservers []*string                `json:"dns_nameservers,omitempty"`
+	AllocPools     []*models.AllocationPool `json:"allocation_pools,omitempty"`
+	HostRoutes     []*models.HostRoute      `json:"host_routes,omitempty"`
+	GatewayIP      *string                  `json:"gateway_ip,omitempty"`
+	Description    *string                  `json:"description,omitempty"`
 }
 
 func (opts *UpdateSubnetOpts) IsValid() bool {

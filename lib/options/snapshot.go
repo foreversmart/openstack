@@ -1,10 +1,10 @@
 package options
 
 type CreateSnapshotOpts struct {
-	Name        *string `json:"name"`
-	Description *string `json:"description"`
-	Force       *bool   `json:"force"`
-	VolumeID    *string `json:"volume_id"`
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Force       *bool   `json:"force,omitempty"`
+	VolumeID    *string `json:"volume_id,omitempty"`
 }
 
 func (opts *CreateSnapshotOpts) IsValid() bool {
@@ -22,8 +22,8 @@ func (opts *CreateSnapshotOpts) ToPayload() interface{} {
 }
 
 type UpdateSnapshotOpts struct {
-	Name        *string `json:"name"`
-	Description *string `json:"description"`
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
 }
 
 func (opts *UpdateSnapshotOpts) IsValid() bool {
