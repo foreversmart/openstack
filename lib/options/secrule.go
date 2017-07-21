@@ -6,15 +6,15 @@ import (
 )
 
 type CreateSecruleOpts struct {
-	RemoteGroupID  *string `json:"remote_group_id"`
-	Direction      *string `json:"direction"`
-	Protocol       *string `json:"protocol"`
-	EtherType      *string `json:"ethertype"`
-	PortRangeMin   *int    `json:"port_range_min"`
-	PortRangeMax   *int    `json:"port_range_max"`
-	SecGroupID     *string `json:"security_group_id"`
-	RemoteIPPrefix *string `json:"remote_ip_prefix"`
-	Description    *string `json:"description"`
+	RemoteGroupID  *string `json:"remote_group_id,omitempty"`
+	Direction      *string `json:"direction,omitempty"`
+	Protocol       *string `json:"protocol,omitempty"`
+	EtherType      *string `json:"ethertype,omitempty"`
+	PortRangeMin   *int    `json:"port_range_min,omitempty"`
+	PortRangeMax   *int    `json:"port_range_max,omitempty"`
+	SecGroupID     *string `json:"security_group_id,omitempty"`
+	RemoteIPPrefix *string `json:"remote_ip_prefix,omitempty"`
+	//Description    *string `json:"description,omitempty"`  //NOTE: Unrecognized attribute(s)
 }
 
 func (opts *CreateSecruleOpts) IsValid() bool {
@@ -23,7 +23,7 @@ func (opts *CreateSecruleOpts) IsValid() bool {
 
 func (opts *CreateSecruleOpts) ToPayload() interface{} {
 	type request struct {
-		Secrule *CreateSecruleOpts `json:"secrule"`
+		Secrule *CreateSecruleOpts `json:"security_group_rule"`
 	}
 
 	return request{
