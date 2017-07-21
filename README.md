@@ -1,6 +1,6 @@
 # openstack
 
-[![Build Status](https://travis-ci.org/qbox/openstack.svg?branch=master)](https://travis-ci.org/qbox/openstack)
+[![Build Status](https://travis-ci.com/qbox/openstack-golang-sdk.svg?token=xVhwiPqf5vzbEdkBEEvV&branch=master)](https://travis-ci.com/qbox/openstack-golang-sdk)
 
 Golang SDK of Openstack services.
 
