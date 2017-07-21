@@ -115,6 +115,6 @@ func (opts *ListRoleAssignmentOpts) ToQuery() (param url.Values) {
 	return param
 }
 
-func (opts *ListRoleAssignmentOpts) Valid() bool {
+func (opts *ListRoleAssignmentOpts) IsValid() bool {
 	return true
 }

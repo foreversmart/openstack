@@ -1,6 +1,7 @@
 package role
 
 import (
+	"github.com/qbox/openstack-golang-sdk/lib/errors"
 	"github.com/qbox/openstack-golang-sdk/lib/ifaces"
 	"github.com/qbox/openstack-golang-sdk/lib/models"
 	"github.com/qbox/openstack-golang-sdk/lib/options"
@@ -28,6 +29,10 @@ func (r *RoleAssignment) All() (assignments []*models.RoleAssignmentModel, err e
 }
 
 func (r *RoleAssignment) AllByParams(opts *options.ListRoleAssignmentOpts) (assignments []*models.RoleAssignmentModel, err error) {
+	if !opts.IsValid() {
+		err = errors.ErrInvalidParams
+		return
+	}
 	client, err := r.Client.AdminIdentityClientV3()
 	if err != nil {
 		return
