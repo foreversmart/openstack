@@ -47,7 +47,7 @@ func Test_Create_Project(t *testing.T) {
 
 	project, err := New(openstacker).Create(opts)
 	assertion.Nil(err)
-	assertion.Equal(opts.Name, project.Name)
+	assertion.Equal(opts.Name, &project.Name)
 	assertion.Equal(domainID, project.DomainID)
 	assertion.Equal(domainID, project.ParentID)
 	assertion.False(project.IsDomain)
