@@ -1,4 +1,4 @@
-package servers
+package server
 
 import (
 	"github.com/qbox/openstack-golang-sdk/lib/errors"
@@ -9,22 +9,25 @@ import (
 )
 
 const (
-	ServersUrl = "servers"
+	ServersUrl   = "servers"
+	InterfaceUrl = "os-interface"
+	VolumeUrl    = "os-volume_attachments"
+	ActionUrl    = "action"
 )
 
-type Servers struct {
+type Server struct {
 	Client ifaces.Openstacker
 
 	_ bool
 }
 
-func New(client ifaces.Openstacker) *Servers {
-	return &Servers{
+func New(client ifaces.Openstacker) *Server {
+	return &Server{
 		Client: client,
 	}
 }
 
-func (ser *Servers) Create(opts options.CreateServersOpts) (server *models.ServersModel, err error) {
+func (ser *Server) Create(opts options.CreateServerOpts) (server *models.ServerModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
@@ -38,17 +41,17 @@ func (ser *Servers) Create(opts options.CreateServersOpts) (server *models.Serve
 	var result gophercloud.Result
 
 	_, err = client.Post(client.ServiceURL(ServersUrl), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
-		OkCodes: []int{201},
+		OkCodes: []int{202},
 	})
 
 	return models.ExtractServer(result)
 }
 
-func (ser *Servers) All() (servers []*models.ServersModel, err error) {
+func (ser *Server) All() (servers []*models.ServerModel, err error) {
 	return ser.AllByParams(nil)
 }
 
-func (ser *Servers) AllByParams(opts *options.ListServersOpts) (Serverss []*models.ServersModel, err error) {
+func (ser *Server) AllByParams(opts *options.ListServersOpts) (Servers []*models.ServerModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
@@ -67,7 +70,7 @@ func (ser *Servers) AllByParams(opts *options.ListServersOpts) (Serverss []*mode
 	return models.ExtractServers(result)
 }
 
-func (ser *Servers) Show(id string) (server *models.ServersModel, err error) {
+func (ser *Server) Show(id string) (server *models.ServerModel, err error) {
 	if id == "" {
 		return nil, errors.ErrInvalidParams
 	}
@@ -86,7 +89,7 @@ func (ser *Servers) Show(id string) (server *models.ServersModel, err error) {
 	return models.ExtractServer(result)
 }
 
-func (ser *Servers) Update(id string, opts options.UpdateServersOpts) (server *models.ServersModel, err error) {
+func (ser *Server) Update(id string, opts options.UpdateServersOpts) (server *models.ServerModel, err error) {
 	if id == "" || !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
@@ -106,7 +109,7 @@ func (ser *Servers) Update(id string, opts options.UpdateServersOpts) (server *m
 	return models.ExtractServer(result)
 }
 
-func (ser *Servers) Delete(id string) (err error) {
+func (ser *Server) Delete(id string) (err error) {
 	if id == "" {
 		return errors.ErrInvalidParams
 	}

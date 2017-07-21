@@ -7,12 +7,7 @@ import (
 	"strconv"
 )
 
-type ListOpts struct {
-	Type   *string `json:"type"`
-	UserID *string `json:"user_id"`
-}
-
-// ListOpts allows the filtering and sorting of paginated collections through
+// ListServersOpts allows the filtering and sorting of paginated collections through
 // the API. Filtering is achieved by passing in struct field values that map to
 // the server attributes you want to see returned. Marker and Limit are used
 // for pagination.
@@ -80,7 +75,7 @@ type ListServersOpts struct {
 	Limit *int `json:"limit"`
 
 	// Bool to show all tenants
-	AllTenants *bool `json:"all_tenants"`
+	AllTenants *int `json:"all_tenants"`
 }
 
 func (opts *ListServersOpts) IsValid() bool {
@@ -220,8 +215,8 @@ func (opts *ListServersOpts) ToQuery() (options url.Values) {
 		if opts.Limit != nil {
 			options.Add("limit", strconv.Itoa(*opts.Limit))
 		}
-		if opts.AllTenants != nil && *opts.AllTenants == true {
-			options.Add("all_tenants", "true")
+		if opts.AllTenants != nil {
+			options.Add("all_tenants", strconv.Itoa(*opts.AllTenants))
 		}
 	}
 
@@ -245,7 +240,7 @@ type ServerNetworkOpts struct {
 // Personality is an array of files that are injected into the server at launch.
 type ServerPersonalityOpts []*ServerFileOpts
 
-// File is used within CreateOpts and RebuildOpts to inject a file into the server at launch.
+// File is used within CreateOpts and RebuildServerOpts to inject a file into the server at launch.
 // File implements the json.Marshaler interface, so when a Create or Rebuild operation is requested,
 // json.Marshal will call File's MarshalJSON method.
 type ServerFileOpts struct {
@@ -268,7 +263,7 @@ func (f *ServerFileOpts) MarshalJSON() ([]byte, error) {
 }
 
 // CreateOpts specifies server creation parameters.
-type CreateServersOpts struct {
+type CreateServerOpts struct {
 	// Name [required] is the name to assign to the newly launched server.
 	Name *string `json:"name"`
 
@@ -322,13 +317,13 @@ type CreateServersOpts struct {
 	OSDcfDiskConfig *string `json:"OS-DCF:diskConfig"`
 }
 
-func (opts *CreateServersOpts) IsValid() bool {
+func (opts *CreateServerOpts) IsValid() bool {
 	return opts != nil && opts.Name != nil && (opts.FlavorRef != nil || opts.ImageRef != nil)
 }
 
-func (opts *CreateServersOpts) ToPayload() interface{} {
+func (opts *CreateServerOpts) ToPayload() interface{} {
 	type payload struct {
-		Server *CreateServersOpts `json:"server"`
+		Server *CreateServerOpts `json:"server"`
 	}
 
 	return payload{
@@ -364,4 +359,36 @@ func (opts *UpdateServersOpts) ToPayload() interface{} {
 	return payload{
 		Server: opts,
 	}
+}
+
+// RebuildServerOpts represents the configuration options used in a server rebuild
+// operation
+type RebuildServerOpts struct {
+	// Required. The ID of the image you want your server to be provisioned on
+	ImageID string
+
+	// Name to set the server to
+	Name string
+
+	// Metadata [optional] contains key-value pairs (up to 255 bytes each) to attach to the server.
+	Metadata map[string]string
+}
+
+// ToServerRebuildMap formats a RebuildServerOpts struct into a map for use in JSON
+func (opts RebuildServerOpts) ToServerRebuildMap() (map[string]interface{}, error) {
+	var err error
+	server := make(map[string]interface{})
+
+	if err != nil {
+		return server, err
+	}
+
+	server["name"] = opts.Name
+	server["imageRef"] = opts.ImageID
+
+	if opts.Metadata != nil {
+		server["metadata"] = opts.Metadata
+	}
+
+	return map[string]interface{}{"rebuild": server}, nil
 }

@@ -5,7 +5,7 @@ import (
 	"github.com/qbox/openstack-golang-sdk/lib/options"
 )
 
-type Keypairer interface {
+type Keypair interface {
 	Create(opts *options.CreateKeypairOpts) (keypair *models.KeypairModel, err error)
 	All() (KeypairModels []*models.KeypairModel, err error)
 	AllByParams(opts *options.ListKeypairOpts) (keypairModels []*models.KeypairModel, err error)

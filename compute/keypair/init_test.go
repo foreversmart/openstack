@@ -1,4 +1,4 @@
-package servers
+package keypair
 
 import (
 	"net/http"
@@ -17,6 +17,7 @@ var (
 	testProjectId string
 
 	apiv3 *testdata.TestData
+	apiv2 *testdata.TestData
 
 	mocker      *httpmitm.MitmTransport
 	openstacker ifaces.Openstacker
@@ -26,6 +27,7 @@ var (
 func TestMain(m *testing.M) {
 	// setup dependences
 	apiv3 = testdata.NewWithFilename("../", auth.V3)
+	apiv2 = testdata.NewWithFilename("../", auth.V2)
 	testProjectId = apiv3.GetString("admin.project_id")
 
 	mocker = httpmitm.NewMitmTransport().StubDefaultTransport(nil)

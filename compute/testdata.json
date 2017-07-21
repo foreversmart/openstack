@@ -330,7 +330,24 @@
     "DELETE /flavors/:id": {},
     "POST /servers": {
       "server": {
-        "id": "bf826d60-e9a0-4eb8-b444-b26a1e13e527"
+        "OS-DCF:diskConfig": "AUTO",
+        "adminPass": "6NpUwoz2QDRN",
+        "id": "f5dc173b-6804-445a-a6d8-c705dad5b5eb",
+        "links": [
+          {
+            "href": "http://openstack.example.com/v2/6f70656e737461636b20342065766572/servers/f5dc173b-6804-445a-a6d8-c705dad5b5eb",
+            "rel": "self"
+          },
+          {
+            "href": "http://openstack.example.com/6f70656e737461636b20342065766572/servers/f5dc173b-6804-445a-a6d8-c705dad5b5eb",
+            "rel": "bookmark"
+          }
+        ],
+        "security_groups": [
+          {
+            "name": "default"
+          }
+        ]
       }
     },
     "GET /servers": {
@@ -517,51 +534,54 @@
       }
     },
     "DELETE /servers/:id": {},
-    "PUT /servers/:id": {
-      "server": {
-        "status": "ACTIVE",
-        "updated": "2017-07-13T08:52:09Z",
-        "hostId": "8188f7ddfad3f424a37a872b4f4a0297ca0eebf87c32950349658392",
-        "user_id": "7a9e80c432354bf6bb58e5e5d5c7b795",
-        "name": "TestModifyServer",
-        "links": [
-          {
-            "href": "http://api.ecloud.com:8774/v2.1/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
-            "rel": "self"
-          },
-          {
-            "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/servers/bf826d60-e9a0-4eb8-b444-b26a1e13e527",
-            "rel": "bookmark"
-          }
-        ],
-        "created": "2017-07-13T08:51:38Z",
-        "tenant_id": "fcfeddf071284e4a8c54760d4bf67c29",
-        "image": "",
-        "OS-DCF:diskConfig": "AUTO",
-        "addresses": {
-          "public": [
-            {
-              "version": 4,
-              "addr": "172.24.4.7"
-            }
-          ]
-        },
-        "accessIPv4": "172.24.4.14",
-        "accessIPv6": "80fe::",
-        "progress": 0,
-        "flavor": {
-          "id": "2bedc68b-3249-4ed9-83f7-fd0f201970cc",
-          "links": [
-            {
-              "href": "http://api.ecloud.com:8774/fcfeddf071284e4a8c54760d4bf67c29/flavors/2bedc68b-3249-4ed9-83f7-fd0f201970cc",
-              "rel": "bookmark"
-            }
-          ]
-        },
-        "id": "bf826d60-e9a0-4eb8-b444-b26a1e13e527",
-        "metadata": {}
+    "POST /servers/:id/action/image": {
+      "image_id": "0e7761dd-ee98-41f0-ba35-05994e446431"
+    },
+    "POST /servers/vnc": {
+      "console": {
+        "type": "novnc",
+        "url": "http://127.0.0.1:6080/vnc_auto.html?token=191996c3-7b0f-42f3-95a7-f1839f2da6ed"
       }
     },
-    "DELETE /servers/:id": {}
+    "GET /servers/ports": {
+      "interfaceAttachments": [
+        {
+          "fixed_ips": [
+            {
+              "ip_address": "192.168.1.3",
+              "subnet_id": "f8a6e8f8-c2ec-497c-9f23-da9616de54ef"
+            }
+          ],
+          "mac_addr": "fa:16:3e:4c:2c:30",
+          "net_id": "3cb9bc59-5699-4588-a4b1-b87f96708bc6",
+          "port_id": "ce531f90-199f-48c0-816c-13e38010b442",
+          "port_state": "ACTIVE"
+        }
+      ]
+    },
+    "GET /servers/volumes": {
+      "volumeAttachments": [
+        {
+          "device": "/dev/sdd",
+          "id": "a26887c6-c47b-4654-abb5-dfadf7d3f803",
+          "serverId": "4d8c3732-a248-40ed-bebc-539a6ffd25c0",
+          "volumeId": "a26887c6-c47b-4654-abb5-dfadf7d3f803"
+        },
+        {
+          "device": "/dev/sdc",
+          "id": "a26887c6-c47b-4654-abb5-dfadf7d3f804",
+          "serverId": "4d8c3732-a248-40ed-bebc-539a6ffd25c0",
+          "volumeId": "a26887c6-c47b-4654-abb5-dfadf7d3f804"
+        }
+      ]
+    },
+    "POST /servers/volumes": {
+      "volumeAttachment": {
+        "device": "/dev/vdd",
+        "id": "a26887c6-c47b-4654-abb5-dfadf7d3f803",
+        "serverId": "0c92f3f6-c253-4c9b-bd43-e880a8d2eb0a",
+        "volumeId": "a26887c6-c47b-4654-abb5-dfadf7d3f803"
+      }
+    }
   }
 }

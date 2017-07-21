@@ -1,4 +1,4 @@
-package servers
+package server
 
 import (
 	"net/http"
@@ -8,7 +8,26 @@ import (
 	"github.com/qbox/openstack-golang-sdk/lib/options"
 )
 
-const computerPort = "8774"
+func Test_Create_Server(t *testing.T) {
+	mitm := mocker.StubDefaultTransport(t)
+
+	mitm.MockRequest(http.MethodPost, apiv3.MockResourceURLWithPort(computerPort, "v2.1/"+testProjectId+"/servers")).WithResponse(http.StatusAccepted, jsonheader, apiv3.APIString("POST /servers"))
+	// mitm.Pause()
+
+	assertion := assert.New(t)
+
+	server, err := New(openstacker).Create(options.CreateServerOpts{
+		Name:      options.String("newvm"),
+		ImageRef:  options.String("70a599e0-31e7-49b7-b260-868f441e862b"),
+		FlavorRef: options.String("1"),
+	})
+
+	assertion.Nil(err)
+	assertion.NotNil(server)
+
+	assertion.Equal(apiv3.APIString("POST /servers.server.id"), server.ID)
+	assertion.Equal(apiv3.APIString("POST /servers.server.adminPass"), server.AdminPass)
+}
 
 func Test_All_Servers(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)

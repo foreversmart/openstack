@@ -1,4 +1,4 @@
-package flavors
+package flavor
 
 import (
 	"github.com/qbox/openstack-golang-sdk/lib/errors"
@@ -12,22 +12,23 @@ const (
 	FlavorUrl = "flavors"
 )
 
-type Flavors struct {
+type Flavor struct {
 	Client ifaces.Openstacker
 
 	_ bool
 }
 
-func New(client ifaces.Openstacker) *Flavors {
-	return &Flavors{
+func New(client ifaces.Openstacker) *Flavor {
+	return &Flavor{
 		Client: client,
 	}
 }
 
-func (f *Flavors) All() (flavors []*models.FlavorModel, err error) {
+func (f *Flavor) All() (flavors []*models.FlavorModel, err error) {
 	return f.AllByParams(nil)
 }
-func (f *Flavors) AllByParams(opts *options.ListFlavorsOpts) (flavors []*models.FlavorModel, err error) {
+
+func (f *Flavor) AllByParams(opts *options.ListFlavorsOpts) (flavors []*models.FlavorModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
@@ -48,7 +49,7 @@ func (f *Flavors) AllByParams(opts *options.ListFlavorsOpts) (flavors []*models.
 
 }
 
-func (f *Flavors) Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorModel, err error) {
+func (f *Flavor) Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorModel, err error) {
 	if !opts.IsValid() {
 		return nil, errors.ErrInvalidParams
 	}
@@ -66,7 +67,7 @@ func (f *Flavors) Create(opts *options.CreateFlavorOpts) (flavor *models.FlavorM
 	return models.ExtractFlavor(result)
 }
 
-func (f *Flavors) Show(id string) (flavor *models.FlavorModel, err error) {
+func (f *Flavor) Show(id string) (flavor *models.FlavorModel, err error) {
 	if id == "" {
 		return nil, errors.ErrInvalidParams
 	}
@@ -84,7 +85,7 @@ func (f *Flavors) Show(id string) (flavor *models.FlavorModel, err error) {
 	return models.ExtractFlavor(result)
 }
 
-func (f *Flavors) Delete(id string) (err error) {
+func (f *Flavor) Delete(id string) (err error) {
 	if id == "" {
 		return errors.ErrInvalidParams
 	}

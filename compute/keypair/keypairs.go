@@ -1,4 +1,4 @@
-package keypairs
+package keypair
 
 import (
 	"github.com/qbox/openstack-golang-sdk/lib/errors"
@@ -13,19 +13,19 @@ const (
 	KeyUrl = "os-keypairs"
 )
 
-type Keypairs struct {
+type Keypair struct {
 	Client ifaces.Openstacker
 
 	_ bool
 }
 
-func New(client ifaces.Openstacker) *Keypairs {
-	return &Keypairs{
+func New(client ifaces.Openstacker) *Keypair {
+	return &Keypair{
 		Client: client,
 	}
 }
 
-func (k *Keypairs) Create(opts *options.CreateKeypairOpts) (keypair *models.KeypairModel, err error) {
+func (k *Keypair) Create(opts *options.CreateKeypairOpts) (keypair *models.KeypairModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
@@ -44,11 +44,11 @@ func (k *Keypairs) Create(opts *options.CreateKeypairOpts) (keypair *models.Keyp
 	return models.ExtractKeypair(res)
 }
 
-func (k *Keypairs) All() (KeypairModels []*models.KeypairModel, err error) {
+func (k *Keypair) All() (KeypairModels []*models.KeypairModel, err error) {
 	return k.AllByParams(nil)
 }
 
-func (k *Keypairs) AllByParams(opts *options.ListKeypairOpts) (keypairModels []*models.KeypairModel, err error) {
+func (k *Keypair) AllByParams(opts *options.ListKeypairOpts) (keypairModels []*models.KeypairModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
@@ -67,7 +67,7 @@ func (k *Keypairs) AllByParams(opts *options.ListKeypairOpts) (keypairModels []*
 	return models.ExtractKeypairs(result)
 }
 
-func (k *Keypairs) Show(name string) (keypairModel *models.KeypairModel, err error) {
+func (k *Keypair) Show(name string) (keypairModel *models.KeypairModel, err error) {
 	if name == "" {
 		err = errors.ErrInvalidParams
 		return
@@ -85,7 +85,7 @@ func (k *Keypairs) Show(name string) (keypairModel *models.KeypairModel, err err
 	return models.ExtractKeypair(result)
 }
 
-func (k *Keypairs) Delete(name string) error {
+func (k *Keypair) Delete(name string) error {
 	if name == "" {
 		return errors.ErrInvalidParams
 	}

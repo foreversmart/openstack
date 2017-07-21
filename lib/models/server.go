@@ -1,11 +1,14 @@
 package models
 
 import (
+	"encoding/json"
+
 	"github.com/mitchellh/mapstructure"
 	"github.com/rackspace/gophercloud"
+	"github.com/rackspace/gophercloud/openstack/networking/v2/ports"
 )
 
-type ServersModel struct {
+type ServerModel struct {
 	ID                               string                                  `mapstructure:"id" json:"id"`
 	Name                             string                                  `mapstructure:"name" json:"name"`
 	ConfigDrive                      string                                  `mapstructure:"config_drive" json:"config_drive"`
@@ -82,13 +85,13 @@ type OsExtendedVolumesVolumesAttachedModel struct {
 	DeleteOnTermination bool   `mapstructure:"delete_on_termination" json:"delete_on_termination"`
 }
 
-func ExtractServer(result gophercloud.Result) (serverInfo *ServersModel, err error) {
+func ExtractServer(result gophercloud.Result) (serverInfo *ServerModel, err error) {
 	if result.Err != nil {
 		return nil, result.Err
 	}
 
 	var response struct {
-		Server *ServersModel `mapstructure:"server" json:"server"`
+		Server *ServerModel `mapstructure:"server" json:"server"`
 	}
 
 	err = mapstructure.Decode(result.Body, &response)
@@ -99,13 +102,13 @@ func ExtractServer(result gophercloud.Result) (serverInfo *ServersModel, err err
 	return
 }
 
-func ExtractServers(result gophercloud.Result) (serverInfo []*ServersModel, err error) {
+func ExtractServers(result gophercloud.Result) (serverInfo []*ServerModel, err error) {
 	if result.Err != nil {
 		return nil, result.Err
 	}
 
 	var response struct {
-		Servers []*ServersModel `mapstructure:"servers" json:"servers"`
+		Servers []*ServerModel `mapstructure:"servers" json:"servers"`
 	}
 
 	err = mapstructure.Decode(result.Body, &response)
@@ -115,4 +118,90 @@ func ExtractServers(result gophercloud.Result) (serverInfo []*ServersModel, err 
 	}
 
 	return
+}
+
+type AttachPortModel struct {
+	// UUID for the port.
+	PortId string `mapstructure:"port_id" json:"port_id"`
+
+	// Network that this port is associated with.
+	NetworkID string `mapstructure:"net_id" json:"net_id"`
+
+	PortState string `mapstructure:"port_state" json:"port_state"`
+
+	// Mac address to use on this port.
+	MacAddr string `mapstructure:"mac_addr" json:"mac_addr"`
+
+	// Specifies IP addresses for the port thus associating the port itself with
+	FixedIPs []ports.IP `mapstructure:"fixed_ips" json:"fixed_ips"`
+}
+
+func ExtractAttachPorts(r gophercloud.Result) ([]*AttachPortModel, error) {
+	if r.Err != nil {
+		return nil, r.Err
+	}
+
+	var res struct {
+		AttachPorts []*AttachPortModel `mapstructure:"interfaceAttachments"`
+	}
+
+	err := mapstructure.Decode(r.Body, &res)
+
+	return res.AttachPorts, err
+}
+
+type AttachVolumeModel struct {
+	ID       string `mapstructure:"id" json:"id"`
+	Device   string `mapstructure:"device" json:"device"`
+	ServerID string `mapstructure:"serverId" json:"serverId"`
+	VolumeID string `mapstructure:"volumeId" json:"volumeId"`
+}
+
+func ExtractAttachVolumes(r gophercloud.Result) ([]*AttachVolumeModel, error) {
+	if r.Err != nil {
+		return nil, r.Err
+	}
+
+	var res struct {
+		AttachVolumes []*AttachVolumeModel `mapstructure:"volumeAttachments"`
+	}
+
+	err := mapstructure.Decode(r.Body, &res)
+
+	return res.AttachVolumes, err
+}
+
+func ExtractAttachVolume(r gophercloud.Result) (*AttachVolumeModel, error) {
+	if r.Err != nil {
+		return nil, r.Err
+	}
+
+	var res struct {
+		AttachVolume *AttachVolumeModel `mapstructure:"volumeAttachment"`
+	}
+
+	err := mapstructure.Decode(r.Body, &res)
+
+	return res.AttachVolume, err
+}
+
+type OpenVNCResult struct {
+	Console struct {
+		Type string `json:"type"`
+		URL  string `json:"url"`
+	} `json:"console"`
+}
+
+func ExtractOpenVNCResult(body interface{}) (result *OpenVNCResult, err error) {
+	b, err := json.Marshal(body)
+	if err != nil {
+		return
+	}
+
+	err = json.Unmarshal(b, &result)
+	return
+}
+
+func (result *OpenVNCResult) URL() string {
+	return result.Console.URL + "&path=v1.0/websocket/websockify"
 }

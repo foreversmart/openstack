@@ -1,4 +1,4 @@
-package flavors
+package server
 
 import (
 	"net/http"
@@ -23,10 +23,11 @@ var (
 	jsonheader  http.Header
 )
 
+const computerPort = "8774"
+
 func TestMain(m *testing.M) {
 	// setup dependences
 	apiv3 = testdata.NewWithFilename("../", auth.V3)
-
 	testProjectId = apiv3.GetString("admin.project_id")
 
 	mocker = httpmitm.NewMitmTransport().StubDefaultTransport(nil)
@@ -37,7 +38,7 @@ func TestMain(m *testing.M) {
 	jsonheader.Add("X-Subject-Token", apiv3.GetString("token.id"))
 
 	mocker.MockRequest("POST", apiv3.MockAdminURL("/v3/auth/tokens")).WithResponse(201, jsonheader, apiv3.APIString("scoped"))
-	// mocker.Pause()
+	//mocker.Pause()
 
 	openstacker = internal.New(apiv3.GetString("admin.endpoint"))
 
