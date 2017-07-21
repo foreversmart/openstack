@@ -40,11 +40,11 @@ func (opts *ListVolumeOpts) ToQuery() url.Values {
  * used to create volume
  */
 type CreateVolumeOpts struct {
-	Name        *string `json:"name"`
-	Description *string `json:"description"`
-	VolumeType  *string `json:"volume_type"`
-	Size        *int    `json:"size"`
-	SnapshotID  *string `json:"snapshot_id"` // create volume from a snapshot
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+	VolumeType  *string `json:"volume_type,omitempty"`
+	Size        *int    `json:"size,omitempty"`
+	SnapshotID  *string `json:"snapshot_id,omitempty"` // create volume from a snapshot
 }
 
 func (opts *CreateVolumeOpts) IsValid() bool {
@@ -65,8 +65,8 @@ func (opts *CreateVolumeOpts) ToPayload() interface{} {
  * used to update volume name & description info
  */
 type UpdateVolumeOpts struct {
-	Name        *string `json:"name"`
-	Description *string `json:"description"`
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
 }
 
 func (opts *UpdateVolumeOpts) IsValid() bool {
