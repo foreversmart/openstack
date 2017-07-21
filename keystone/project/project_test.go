@@ -40,7 +40,7 @@ func Test_Create_Project(t *testing.T) {
 	isEnabled := true
 	opts := options.CreateProjectOpts{
 		DomainID: &domainID,
-		Name:     "testing project",
+		Name:     options.String("testing project"),
 		Enabled:  &isEnabled,
 		IsDomain: &isDomain,
 	}
