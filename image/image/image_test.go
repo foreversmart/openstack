@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/golib/assert"
+	"github.com/qbox/openstack-golang-sdk/lib/enums"
 	"github.com/qbox/openstack-golang-sdk/lib/models"
 	"github.com/qbox/openstack-golang-sdk/lib/options"
 )
@@ -147,7 +148,7 @@ func assertModel(assertion *assert.Assertions, pathPrefix string, image *models.
 	assertion.Equal(apiv2.APIString(pathPrefix+".id"), image.ID)
 	assertion.Equal(apiv2.APIString(pathPrefix+".name"), image.Name)
 	assertion.Equal(apiv2.APIString(pathPrefix+".status"), image.Status)
-	assertion.Equal(apiv2.APIString(pathPrefix+".visibility"), image.Visibility)
+	assertion.Equal(enums.ImageVisibility(apiv2.APIString(pathPrefix+".visibility")), image.Visibility)
 	assertion.Equal(apiv2.APIString(pathPrefix+".self"), image.Self)
 	assertion.Equal(apiv2.APIString(pathPrefix+".file"), image.File)
 	assertion.Equal(apiv2.APIString(pathPrefix+".schema"), image.Schema)
