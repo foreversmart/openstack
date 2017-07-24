@@ -19,6 +19,8 @@ type ImageModel struct {
 	File       string                `mapstructure:"file" json:"file"`
 	Schema     string                `mapstructure:"schema" json:"schema"`
 
+	ImageType string `mapstructure:"image_type" json:"image_type"`
+
 	// DiskFormat is the format of the disk.
 	// If set, valid values are ami, ari, aki, vhd, vmdk, raw, qcow2, vdi, and iso.
 	DiskFormat string `mapstructure:"disk_format" json:"disk_format"`
