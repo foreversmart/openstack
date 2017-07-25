@@ -26,6 +26,10 @@ func (opts *ListFloatingIPOpts) ToQuery() url.Values {
 	options := url.Values{}
 
 	if opts != nil {
+		if opts.AllTenants != nil {
+			options.Add("all_tenants", *opts.AllTenants)
+		}
+
 		if opts.FloatingNetworkID != nil {
 			options.Add("floating_network_id", *opts.FloatingNetworkID)
 		}
