@@ -79,6 +79,10 @@ func (ks *Keystone) NewProjectGroupRole() ifaces.AbstractRoler {
 	return role.NewProjectGroupRole(ks.client)
 }
 
+func (ks *Keystone) NewRoleAssginment() ifaces.RoleAssginmenter {
+	return role.NewAssignment(ks.client)
+}
+
 func (ks *Keystone) NewService() ifaces.Servicer {
 	return service.New(ks.client)
 }

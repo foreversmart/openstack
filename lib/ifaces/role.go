@@ -21,6 +21,11 @@ type AbstractRoler interface {
 	Delete(resourceID, scopeID, roleID string) (err error)
 }
 
+type RoleAssginmenter interface {
+	All() (assignments []*models.RoleAssignmentModel, err error)
+	AllByParams(opts *options.ListRoleAssignmentOpts) (assignments []*models.RoleAssignmentModel, err error)
+}
+
 type DomainGroupRoler interface {
 	AbstractRoler
 }
