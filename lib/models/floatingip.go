@@ -7,6 +7,8 @@ import (
 
 type FloatingIPModel struct {
 	ID          string `mapstructure:"id" json:"id"`
+	// UUID of the external network where the floating IP is to be created.
+	FloatingNetworkID string `json:"floating_network_id" mapstructure:"floating_network_id"`
 	Status      string `mapstructure:"status" json:"status"`
 	RouterID    string `mapstructure:"router_id" json:"router_id"`
 	ProjectID   string `mapstructure:"project_id" json:"project_id"`
