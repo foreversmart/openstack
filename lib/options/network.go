@@ -4,7 +4,8 @@ import "net/url"
 
 type ListNetworkOpt struct {
 	AllTenants *string `json:"all_tenants"`
-	ProjectId  *string `json:"project_id"`
+	ProjectId  *string `json:"tenant_id"`
+	Status     *string `json:"status"`
 }
 
 func (opts *ListNetworkOpt) IsValid() bool {
@@ -22,7 +23,11 @@ func (opts *ListNetworkOpt) ToQuery() (options url.Values) {
 	}
 
 	if opts.ProjectId != nil {
-		options.Add("project_id", *opts.ProjectId)
+		options.Add("tenant_id", *opts.ProjectId)
+	}
+
+	if opts.Status != nil {
+		options.Add("status", *opts.Status)
 	}
 
 	return
