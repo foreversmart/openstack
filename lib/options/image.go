@@ -4,6 +4,7 @@ import (
 	"net/url"
 	"strconv"
 
+	"github.com/qbox/openstack-golang-sdk/lib/enums"
 	"github.com/rackspace/gophercloud/openstack/imageservice/v2/images"
 )
 
@@ -11,21 +12,21 @@ import (
  * used to list imaegs by params
  */
 type ListImagesOpts struct {
-	Limit        *int    `json:"limit"`
-	Marker       *string `json:"marker"`
-	Name         *string `json:"name"`
-	Owner        *string `json:"owner"`
-	Status       *int    `json:"status"`
-	Tag          *string `json:"tag"`
-	Visibility   *string `json:"visibility"`
-	MemberStatus *string `json:"member_status"`
-	SizeMax      *string `json:"size_max"`
-	SizeMin      *string `json:"size_min"`
-	CreatedAt    *string `json:"created_at"`
-	UpdatedAt    *string `json:"updated_at"`
-	SortDir      *string `json:"sort_dir"`
-	SortKey      *string `json:"sort_key"`
-	Sort         *string `json:"sort"`
+	Limit        *int                   `json:"limit"`
+	Marker       *string                `json:"marker"`
+	Name         *string                `json:"name"`
+	Owner        *string                `json:"owner"`
+	Status       *string                `json:"status"`
+	Tag          *string                `json:"tag"`
+	Visibility   *enums.ImageVisibility `json:"visibility"`
+	MemberStatus *string                `json:"member_status"`
+	SizeMax      *string                `json:"size_max"`
+	SizeMin      *string                `json:"size_min"`
+	CreatedAt    *string                `json:"created_at"`
+	UpdatedAt    *string                `json:"updated_at"`
+	SortDir      *string                `json:"sort_dir"`
+	SortKey      *string                `json:"sort_key"`
+	Sort         *string                `json:"sort"`
 }
 
 func (opts *ListImagesOpts) IsValid() bool {
@@ -52,13 +53,13 @@ func (opts *ListImagesOpts) ToQuery() (options url.Values) {
 		options.Add("owner", *opts.Owner)
 	}
 	if opts.Status != nil {
-		options.Add("status", strconv.Itoa(*opts.Status))
+		options.Add("status", *opts.Status)
 	}
 	if opts.Tag != nil {
 		options.Add("tag", *opts.Tag)
 	}
 	if opts.Visibility != nil {
-		options.Add("visibility", *opts.Visibility)
+		options.Add("visibility", string(*opts.Visibility))
 	}
 	if opts.MemberStatus != nil {
 		options.Add("member_status", *opts.MemberStatus)
@@ -92,15 +93,15 @@ func (opts *ListImagesOpts) ToQuery() (options url.Values) {
  * used to create image
  */
 type CreateImagesOpts struct {
-	ID              *string   `json:"id"`
-	Name            *string   `json:"name"`
-	ContainerFormat *string   `json:"container_format"`
-	DiskFormat      *string   `json:"disk_format"`
-	MinDisk         *int      `json:"min_disk"`
-	MinRam          *int      `json:"min_ram"`
-	Protected       *bool     `json:"protected"`
-	Tags            *[]string `json:"tags"`
-	Visibility      *string   `json:"visibility"`
+	ID              *string                `json:"id,omitempty"`
+	Name            *string                `json:"name,omitempty"`
+	ContainerFormat *string                `json:"container_format,omitempty"`
+	DiskFormat      *string                `json:"disk_format,omitempty"`
+	MinDisk         *int                   `json:"min_disk,omitempty"`
+	MinRam          *int                   `json:"min_ram,omitempty"`
+	Protected       *bool                  `json:"protected,omitempty"`
+	Tags            *[]string              `json:"tags,omitempty"`
+	Visibility      *enums.ImageVisibility `json:"visibility,omitempty"`
 }
 
 func (opts *CreateImagesOpts) IsValid() bool {
@@ -115,8 +116,8 @@ func (opts *CreateImagesOpts) ToPayload() interface{} {
  * used to update image
  */
 type UpdateImagesOpts struct {
-	Name *string   `json:"name"`
-	Tags *[]string `json:"tags"`
+	Name *string   `json:"name,omitempty"`
+	Tags *[]string `json:"tags,omitempty"`
 }
 
 func (opts *UpdateImagesOpts) IsValid() bool {

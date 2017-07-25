@@ -4,19 +4,22 @@ import (
 	"io"
 
 	"github.com/mitchellh/mapstructure"
+	"github.com/qbox/openstack-golang-sdk/lib/enums"
 	"github.com/rackspace/gophercloud"
 )
 
 type ImageModel struct {
-	ID         string   `mapstructure:"id" json:"id"`
-	Name       string   `mapstructure:"name" json:"name"`
-	Status     string   `mapstructure:"status" json:"status"`
-	Visibility string   `mapstructure:"visibility" json:"visibility"`
-	Size       int      `mapstructure:"size" json:"size"`
-	Tags       []string `mapstructure:"tags" json:"tags"`
-	Self       string   `mapstructure:"self" json:"self"`
-	File       string   `mapstructure:"file" json:"file"`
-	Schema     string   `mapstructure:"schema" json:"schema"`
+	ID         string                `mapstructure:"id" json:"id"`
+	Name       string                `mapstructure:"name" json:"name"`
+	Status     string                `mapstructure:"status" json:"status"`
+	Visibility enums.ImageVisibility `mapstructure:"visibility" json:"visibility"`
+	Size       int                   `mapstructure:"size" json:"size"`
+	Tags       []string              `mapstructure:"tags" json:"tags"`
+	Self       string                `mapstructure:"self" json:"self"`
+	File       string                `mapstructure:"file" json:"file"`
+	Schema     string                `mapstructure:"schema" json:"schema"`
+
+	ImageType string `mapstructure:"image_type" json:"image_type"`
 
 	// DiskFormat is the format of the disk.
 	// If set, valid values are ami, ari, aki, vhd, vmdk, raw, qcow2, vdi, and iso.
