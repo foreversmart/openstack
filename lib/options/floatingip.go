@@ -6,6 +6,7 @@ import (
 )
 
 type ListFloatingIPOpts struct {
+	AllTenants        *string `mapstructure:"all_tenants" json:"all_tenants"`
 	FloatingNetworkID *string `mapstructure:"floating_network_id" json:"floating_network_id"`
 	PortID            *string `mapstructure:"port_id" json:"port_id"`
 	FixedIP           *string `mapstructure:"fixed_ip_address" json:"fixed_ip_address"`
