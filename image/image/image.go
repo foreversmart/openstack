@@ -1,4 +1,4 @@
-package images
+package image
 
 import (
 	"io"
@@ -17,19 +17,19 @@ const (
 	ImageUploadUrl = "file"
 )
 
-type Images struct {
+type Image struct {
 	Client ifaces.Openstacker
 
 	_ bool
 }
 
-func New(client ifaces.Openstacker) *Images {
-	return &Images{
+func New(client ifaces.Openstacker) *Image {
+	return &Image{
 		Client: client,
 	}
 }
 
-func (i *Images) Create(opts *options.CreateImagesOpts) (image *models.ImageModel, err error) {
+func (i *Image) Create(opts *options.CreateImagesOpts) (image *models.ImageModel, err error) {
 	if !opts.IsValid() {
 		return nil, errors.ErrInvalidParams
 	}
@@ -47,11 +47,11 @@ func (i *Images) Create(opts *options.CreateImagesOpts) (image *models.ImageMode
 	return models.ExtractImage(result)
 }
 
-func (i *Images) All() (images []*models.ImageModel, err error) {
+func (i *Image) All() (images []*models.ImageModel, err error) {
 	return i.AllByParams(nil)
 }
 
-func (i *Images) AllByParams(opts *options.ListImagesOpts) (imageModels []*models.ImageModel, err error) {
+func (i *Image) AllByParams(opts *options.ListImagesOpts) (imageModels []*models.ImageModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
@@ -71,7 +71,7 @@ func (i *Images) AllByParams(opts *options.ListImagesOpts) (imageModels []*model
 	return models.ExtractImages(result)
 }
 
-func (i *Images) Show(id string) (image *models.ImageModel, err error) {
+func (i *Image) Show(id string) (image *models.ImageModel, err error) {
 	if id == "" {
 		err = errors.ErrInvalidParams
 		return
@@ -90,7 +90,7 @@ func (i *Images) Show(id string) (image *models.ImageModel, err error) {
 	return models.ExtractImage(result)
 }
 
-func (i *Images) Update(id string, opts *options.UpdateImagesOpts) (imageModel *models.ImageModel, err error) {
+func (i *Image) Update(id string, opts *options.UpdateImagesOpts) (imageModel *models.ImageModel, err error) {
 	if id == "" || !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
@@ -105,7 +105,7 @@ func (i *Images) Update(id string, opts *options.UpdateImagesOpts) (imageModel *
 	return models.ExtractImage(res.Result)
 }
 
-func (i *Images) Delete(id string) error {
+func (i *Image) Delete(id string) error {
 	if id == "" {
 		return errors.ErrInvalidParams
 	}
@@ -118,7 +118,7 @@ func (i *Images) Delete(id string) error {
 	return images.Delete(client, id).Err
 }
 
-func (i *Images) Upload(id string, data io.Reader) error {
+func (i *Image) Upload(id string, data io.Reader) error {
 	if id == "" {
 		return errors.ErrInvalidParams
 	}
@@ -141,7 +141,7 @@ func (i *Images) Upload(id string, data io.Reader) error {
 	return err
 }
 
-func (i *Images) Download(id string) (data io.Reader, err error) {
+func (i *Image) Download(id string) (data io.Reader, err error) {
 	if id == "" {
 		return nil, errors.ErrInvalidParams
 	}
