@@ -6,19 +6,19 @@ import (
 )
 
 type FloatingIPModel struct {
-	ID          string `mapstructure:"id" json:"id"`
-	// UUID of the external network where the floating IP is to be created.
+	ID                string `mapstructure:"id" json:"id"`
 	FloatingNetworkID string `json:"floating_network_id" mapstructure:"floating_network_id"`
-	Status      string `mapstructure:"status" json:"status"`
-	RouterID    string `mapstructure:"router_id" json:"router_id"`
-	ProjectID   string `mapstructure:"project_id" json:"project_id"`
-	TenantID    string `mapstructure:"tenant_id" json:"tenant_id"`
-	PortID      string `mapstructure:"port_id" json:"port_id"`
-	FloatingIP  string `mapstructure:"floating_ip_address" json:"floating_ip_address"`
-	FixedIP     string `mapstructure:"fixed_ip_address" json:"fixed_ip_address"`
-	Description string `mapstructure:"description" json:"description"`
-	CreatedAt   string `mapstructure:"created_at" json:"created_at"`
-	UpdatedAt   string `mapstructure:"updated_at" json:"updated_at"`
+	Status            string `mapstructure:"status" json:"status"`
+	RouterID          string `mapstructure:"router_id" json:"router_id"`
+	ProjectID         string `mapstructure:"project_id" json:"project_id"`
+	TenantID          string `mapstructure:"tenant_id" json:"tenant_id"`
+	PortID            string `mapstructure:"port_id" json:"port_id"`
+	FloatingIP        string `mapstructure:"floating_ip_address" json:"floating_ip_address"`
+	FixedIP           string `mapstructure:"fixed_ip_address" json:"fixed_ip_address"`
+	Description       string `mapstructure:"description" json:"description"`
+	RateLimit         int    `json:"rate_limit"`
+	CreatedAt         string `mapstructure:"created_at" json:"created_at"`
+	UpdatedAt         string `mapstructure:"updated_at" json:"updated_at"`
 }
 
 func ExtractFloatingIP(result gophercloud.Result) (ip *FloatingIPModel, err error) {
