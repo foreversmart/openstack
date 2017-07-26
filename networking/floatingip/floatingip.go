@@ -44,17 +44,25 @@ func (f *FloatingIP) Create(opts *options.CreateFloatingIPOpts) (ip *models.Floa
 }
 
 func (f *FloatingIP) All() (ips []*models.FloatingIPModel, err error) {
-	client, err := f.Client.NetworkClient()
-	if err != nil {
-		return
+	return f.AllByParams(nil)
+}
+
+func (f *FloatingIP) AllByParams(opts *options.ListFloatingIPOpts) (ips []*models.FloatingIPModel, err error) {
+	if !opts.IsValid() {
+		return nil, errors.ErrInvalidParams
 	}
 
-	var res gophercloud.Result
-	_, res.Err = client.Get(client.ServiceURL(FloatingIPUrl), &res.Body, &gophercloud.RequestOpts{
+	client, err := f.Client.NetworkClient()
+	if err != nil {
+		return nil, err
+	}
+
+	var result gophercloud.Result
+	_, result.Err = client.Get(client.ServiceURL(FloatingIPUrl)+"?"+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 
-	return models.ExtractFloatingIPs(res)
+	return models.ExtractFloatingIPs(result)
 }
 
 func (f *FloatingIP) Show(id string) (ip *models.FloatingIPModel, err error) {
