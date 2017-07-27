@@ -107,6 +107,10 @@ func (f *FloatingIP) Update(id string, opts *options.UpdateFloatingIPOpts) (ip *
 	return models.ExtractFloatingIP(res)
 }
 
+func (f *FloatingIP) Resize(id string, rateLimit int) error {
+	return errors.ErrNotImplemented
+}
+
 func (f *FloatingIP) Delete(id string) error {
 	if id == "" {
 		return errors.ErrInvalidParams
