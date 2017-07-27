@@ -95,7 +95,7 @@ func Test_TestData_API(t *testing.T) {
 	td := New("v2")
 
 	// should work
-	id := td.APIString("catalog.scoped.access.token.tenant.id")
+	id := td.APIString("scoped.access.token.tenant.id")
 	assertion.Equal("63397e0193f04dc4b2165490669ed4a1", id)
 
 	// should panic

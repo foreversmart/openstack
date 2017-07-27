@@ -261,6 +261,8 @@ func (td *TestData) MockCatalog() interface{} {
 			panic(err.Error())
 		}
 
+		fmt.Println(string(data))
+
 		var result struct {
 			Entries []tokens2.CatalogEntry `json:"serviceCatalog"`
 		}
