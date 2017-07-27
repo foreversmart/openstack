@@ -106,9 +106,10 @@ func (opts *CreateFloatingIPOpts) ToPayload() interface{} {
  * used to update floatingip
  */
 type UpdateFloatingIPOpts struct {
-	PortID      *string `mapstructure:"port_id" json:"port_id"`
-	FixedIP     *string `mapstructure:"fixed_ip_address" json:"fixed_ip_address"`
-	Description *string `mapstructure:"description" json:"description"`
+	PortID      *string `json:"port_id,omitempty"`
+	FixedIP     *string `json:"fixed_ip_address,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Unbind      *bool   `json:"-"`
 }
 
 func (opts *UpdateFloatingIPOpts) IsValid() bool {
