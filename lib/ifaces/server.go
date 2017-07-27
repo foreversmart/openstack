@@ -15,15 +15,15 @@ type Server interface {
 }
 
 type ServerManager interface {
-	ChangeAdminPassword(serverID, newPassword string) error                   // 重置系统管理员帐号密码
-	AdminPassword(serverID string) (passwd string, err error)                 // 查询系统管理员帐号密码
-	Start(serverID string) error                                              // 开机
-	Stop(serverID string) error                                               // 强制关闭
-	Reboot(serverID string) error                                             // 重启
-	Shutdown(serverID string) error                                           // 软关闭
-	Rebuild(serverID, imageID string) (server *models.ServerModel, err error) // 重置主机
-	Resize(serverID, flavorID string) error                                   // 修改主机配置
-	Vnc(serverID string) (url string, err error)                              // vnc link
+	ChangeAdminPassword(serverID, newPassword string) error                                           // 重置系统管理员帐号密码
+	AdminPassword(serverID string) (passwd string, err error)                                         // 查询系统管理员帐号密码
+	Start(serverID string) error                                                                      // 开机
+	Stop(serverID string) error                                                                       // 强制关闭
+	Reboot(serverID string) error                                                                     // 重启
+	Shutdown(serverID string) error                                                                   // 软关闭
+	Rebuild(serverID string, opts *options.RebuildServerOpts) (server *models.ServerModel, err error) // 重置主机
+	Resize(serverID, flavorID string) error                                                           // 修改主机配置
+	Vnc(serverID string) (url string, err error)                                                      // vnc link
 
 	SearchByFixedIP(ip string) (servers []*models.ServerModel, err error)
 }
