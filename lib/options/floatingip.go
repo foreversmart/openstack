@@ -83,7 +83,6 @@ type CreateFloatingIPOpts struct {
 	FixedIP     *string `json:"fixed_ip_address,omitempty"`
 	SubnetID    *string `json:"subnet_id,omitempty"`
 	Description *string `json:"description,omitempty"`
-	RateLimit   *int    `json:"-"`
 }
 
 func (opts *CreateFloatingIPOpts) IsValid() bool {
