@@ -24,10 +24,6 @@ func New(client ifaces.Openstacker) *FloatingIP {
 	}
 }
 
-func (f *FloatingIP) CreateWithProvider(name, networkdId, provider string, rateLimit int) (string, error) {
-	return "", errors.ErrNotImplemented
-}
-
 func (f *FloatingIP) Create(opts *options.CreateFloatingIPOpts) (ip *models.FloatingIPModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
