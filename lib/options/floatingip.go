@@ -78,11 +78,12 @@ type CreateFloatingIPOpts struct {
 	FloatingNetworkID *string `json:"floating_network_id"`
 
 	// following are optional ref: https://developer.openstack.org/api-ref/networking/v2/index.html
-	PortID      *string `mapstructure:"port_id" json:"port_id"`
-	FloatingIP  *string `mapstructure:"floating_ip_address" json:"floating_ip_address"`
-	FixedIP     *string `mapstructure:"fixed_ip_address" json:"fixed_ip_address"`
-	SubnetID    *string `mapstructure:"subnet_id" json:"subnet_id"`
-	Description *string `mapstructure:"description" json:"description"`
+	PortID      *string `json:"port_id"`
+	FloatingIP  *string `json:"floating_ip_address"`
+	FixedIP     *string `json:"fixed_ip_address"`
+	SubnetID    *string `json:"subnet_id"`
+	Description *string `json:"description"`
+	RateLimit   *int    `json:"-"`
 }
 
 func (opts *CreateFloatingIPOpts) IsValid() bool {
