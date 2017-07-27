@@ -43,6 +43,10 @@ func (f *FloatingIP) Create(opts *options.CreateFloatingIPOpts) (ip *models.Floa
 	return models.ExtractFloatingIP(res)
 }
 
+func (f *FloatingIP) CreateWithProvider(name, provider string, opts *options.CreateFloatingIPOpts) (ip *models.FloatingIPModel, err error) {
+	return f.Create(opts)
+}
+
 func (f *FloatingIP) All() (ips []*models.FloatingIPModel, err error) {
 	return f.AllByParams(nil)
 }

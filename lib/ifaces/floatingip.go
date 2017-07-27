@@ -6,6 +6,7 @@ import (
 )
 
 type FloatingIPer interface {
+	CreateWithProvider(name, provider string, opts *options.CreateFloatingIPOpts) (ip *models.FloatingIPModel, err error)
 	Resize(id string, rateLimit int) error // 修改带宽
 	Create(opts *options.CreateFloatingIPOpts) (ip *models.FloatingIPModel, err error)
 	All() (ips []*models.FloatingIPModel, err error)

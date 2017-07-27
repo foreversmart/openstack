@@ -84,8 +84,6 @@ type CreateFloatingIPOpts struct {
 	SubnetID    *string `json:"subnet_id,omitempty"`
 	Description *string `json:"description,omitempty"`
 	RateLimit   *int    `json:"rate_limit,omitempty"`
-	Provider    *string `json:"uos:service_provider,omitempty"` // CHINATELECOM or CHINAUNICOM
-	Name        *string `json:"uos:name,omitempty"`
 }
 
 func (opts *CreateFloatingIPOpts) IsValid() bool {
