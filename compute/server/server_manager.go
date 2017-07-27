@@ -5,7 +5,6 @@ import (
 	"github.com/qbox/openstack-golang-sdk/lib/ifaces"
 	"github.com/qbox/openstack-golang-sdk/lib/models"
 	"github.com/qbox/openstack-golang-sdk/lib/options"
-	"github.com/qiniu/osl/vm"
 	"github.com/rackspace/gophercloud"
 	"github.com/rackspace/gophercloud/openstack"
 	"github.com/rackspace/gophercloud/openstack/compute/v2/extensions/startstop"
@@ -112,9 +111,11 @@ func (sm *ServerManager) Shutdown(id string) error {
 		return err
 	}
 
-	reqBody := map[string]interface{}{"os-stop": {"shutdown_type": "SOFT"}}
+	reqBody := map[string]interface{}{
+		"os-stop": map[string]string{"shutdown_type": "SOFT"},
+	}
 	_, err = client.Post(client.ServiceURL("servers", id, "action"), reqBody, nil, nil)
-	return
+	return err
 }
 
 // hard close machine
