@@ -374,6 +374,14 @@ type RebuildServerOpts struct {
 	Metadata map[string]string
 }
 
+func (opts *RebuildServerOpts) IsValid() bool {
+	if opts.ImageID == "" {
+		return false
+	}
+
+	return true
+}
+
 // ToServerRebuildMap formats a RebuildServerOpts struct into a map for use in JSON
 func (opts RebuildServerOpts) ToServerRebuildMap() (map[string]interface{}, error) {
 	var err error
