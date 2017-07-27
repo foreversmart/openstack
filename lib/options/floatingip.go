@@ -6,16 +6,16 @@ import (
 )
 
 type ListFloatingIPOpts struct {
-	AllTenants        *string `mapstructure:"all_tenants" json:"all_tenants"`
-	FloatingNetworkID *string `mapstructure:"floating_network_id" json:"floating_network_id"`
-	PortID            *string `mapstructure:"port_id" json:"port_id"`
-	FixedIP           *string `mapstructure:"fixed_ip_address" json:"fixed_ip_address"`
-	FloatingIP        *string `mapstructure:"floating_ip_address" json:"floating_ip_address"`
-	TenantID          *string `mapstructure:"tenant_id" json:"tenant_id"`
-	Limit             *int    `mapstructure:"limit" json"limit"`
-	Marker            *string `mapstructure:"marker" json:"marker"`
-	SortKey           *string `mapstructure:"sort_key" json:"sort_key"`
-	SortDir           *string `mapstructure:"sort_dir" json:"sort_dir"`
+	AllTenants        *string `json:"all_tenants"`
+	FloatingNetworkID *string `json:"floating_network_id"`
+	PortID            *string `json:"port_id"`
+	FixedIP           *string `json:"fixed_ip_address"`
+	FloatingIP        *string `json:"floating_ip_address"`
+	TenantID          *string `json:"tenant_id"`
+	Limit             *int    `json"limit"`
+	Marker            *string `json:"marker"`
+	SortKey           *string `json:"sort_key"`
+	SortDir           *string `json:"sort_dir"`
 }
 
 func (opts *ListFloatingIPOpts) IsValid() bool {
@@ -73,16 +73,17 @@ func (opts *ListFloatingIPOpts) ToQuery() url.Values {
  * used to create floatingip
  */
 type CreateFloatingIPOpts struct {
-	ProjectID         *string `mapstructure:"project_id" json:"project_id"`
-	TenantID          *string `mapstructure:"tenant_id" json:"tenant_id"`
-	FloatingNetworkID *string `mapstructure:"floating_network_id" json:"floating_network_id"`
+	ProjectID         *string `json:"project_id,omitempty"`
+	TenantID          *string `json:"tenant_id,omitempty"`
+	FloatingNetworkID *string `json:"floating_network_id,omitempty"`
 
 	// following are optional ref: https://developer.openstack.org/api-ref/networking/v2/index.html
-	PortID      *string `mapstructure:"port_id" json:"port_id"`
-	FloatingIP  *string `mapstructure:"floating_ip_address" json:"floating_ip_address"`
-	FixedIP     *string `mapstructure:"fixed_ip_address" json:"fixed_ip_address"`
-	SubnetID    *string `mapstructure:"subnet_id" json:"subnet_id"`
-	Description *string `mapstructure:"description" json:"description"`
+	PortID      *string `json:"port_id,omitempty"`
+	FloatingIP  *string `json:"floating_ip_address,omitempty"`
+	FixedIP     *string `json:"fixed_ip_address,omitempty"`
+	SubnetID    *string `json:"subnet_id,omitempty"`
+	Description *string `json:"description,omitempty"`
+	RateLimit   *int    `json:"rate_limit,omitempty"`
 }
 
 func (opts *CreateFloatingIPOpts) IsValid() bool {
@@ -106,9 +107,10 @@ func (opts *CreateFloatingIPOpts) ToPayload() interface{} {
  * used to update floatingip
  */
 type UpdateFloatingIPOpts struct {
-	PortID      *string `mapstructure:"port_id" json:"port_id"`
-	FixedIP     *string `mapstructure:"fixed_ip_address" json:"fixed_ip_address"`
-	Description *string `mapstructure:"description" json:"description"`
+	PortID      *string `json:"port_id,omitempty"`
+	FixedIP     *string `json:"fixed_ip_address,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Unbind      *bool   `json:"-"`
 }
 
 func (opts *UpdateFloatingIPOpts) IsValid() bool {

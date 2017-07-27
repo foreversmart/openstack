@@ -43,6 +43,10 @@ func (f *FloatingIP) Create(opts *options.CreateFloatingIPOpts) (ip *models.Floa
 	return models.ExtractFloatingIP(res)
 }
 
+func (f *FloatingIP) CreateWithProvider(name, provider string, opts *options.CreateFloatingIPOpts) (ip *models.FloatingIPModel, err error) {
+	return f.Create(opts)
+}
+
 func (f *FloatingIP) All() (ips []*models.FloatingIPModel, err error) {
 	return f.AllByParams(nil)
 }
@@ -101,6 +105,10 @@ func (f *FloatingIP) Update(id string, opts *options.UpdateFloatingIPOpts) (ip *
 	})
 
 	return models.ExtractFloatingIP(res)
+}
+
+func (f *FloatingIP) Resize(id string, rateLimit int) error {
+	return errors.ErrNotImplemented
 }
 
 func (f *FloatingIP) Delete(id string) error {
