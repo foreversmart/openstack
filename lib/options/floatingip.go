@@ -73,16 +73,16 @@ func (opts *ListFloatingIPOpts) ToQuery() url.Values {
  * used to create floatingip
  */
 type CreateFloatingIPOpts struct {
-	ProjectID         *string `json:"project_id"`
-	TenantID          *string `json:"tenant_id"`
-	FloatingNetworkID *string `json:"floating_network_id"`
+	ProjectID         *string `json:"project_id,omitempty"`
+	TenantID          *string `json:"tenant_id,omitempty"`
+	FloatingNetworkID *string `json:"floating_network_id,omitempty"`
 
 	// following are optional ref: https://developer.openstack.org/api-ref/networking/v2/index.html
-	PortID      *string `json:"port_id"`
-	FloatingIP  *string `json:"floating_ip_address"`
-	FixedIP     *string `json:"fixed_ip_address"`
-	SubnetID    *string `json:"subnet_id"`
-	Description *string `json:"description"`
+	PortID      *string `json:"port_id,omitempty"`
+	FloatingIP  *string `json:"floating_ip_address,omitempty"`
+	FixedIP     *string `json:"fixed_ip_address,omitempty"`
+	SubnetID    *string `json:"subnet_id,omitempty"`
+	Description *string `json:"description,omitempty"`
 	RateLimit   *int    `json:"-"`
 }
 
