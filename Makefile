@@ -25,13 +25,18 @@ goreinstall:
 	go get -u -v github.com/satori/go.uuid
 	go get -u -v github.com/rackspace/gophercloud
 
+define deep_test
+    $(eval gopath = $(subst :, ,$(GOPATH)))
+    $(eval firstGopath = $(word 1,$(gopath)))
+    $(eval current = $(subst ...,,$(1)))
+    $(eval files = $(wildcard $(firstGopath)/src/$(current)*/))
+    $(eval testFiles = $(filter %_test.go, $(files)))
+    $(if $(testFiles),go test $(current))
+    $(eval packages = $(filter %/, $(files)))
+    $(if $(packages),$(foreach package,$(packages),$(call deep_test,$(subst $(firstGopath)/src/,,$(package))...)))
+endef
+
 gotest: goinstall
-	go test github.com/qbox/openstack-golang-sdk
-	go test github.com/qbox/openstack-golang-sdk/lib/...
-	go test github.com/qbox/openstack-golang-sdk/internal/...
-	go test github.com/qbox/openstack-golang-sdk/keystone/...
-	go test github.com/qbox/openstack-golang-sdk/networking/...
-	go test github.com/qbox/openstack-golang-sdk/blockstorage/...
-	go test github.com/qbox/openstack-golang-sdk/compute/...
+	$(call deep_test,github.com/qbox/openstack-golang-sdk/...)
 
 travis: gobuild gotest
