@@ -100,15 +100,25 @@ func (sm *ServerManager) Reboot(id string) error {
 	return servers.Reboot(client, id, servers.SoftReboot).ExtractErr()
 }
 
-// TODO add own shutdown impl (openstack sdk has no shutdown method)
+// soft close machine
 func (sm *ServerManager) Shutdown(id string) error {
 	if id == "" {
 		return errors.ErrInvalidParams
 	}
 
-	return sm.Stop(id)
+	client, err := sm.Client.ComputeClient()
+	if err != nil {
+		return err
+	}
+
+	reqBody := map[string]interface{}{
+		"os-stop": map[string]string{"shutdown_type": "SOFT"},
+	}
+	_, err = client.Post(client.ServiceURL("servers", id, "action"), reqBody, nil, nil)
+	return err
 }
 
+// hard close machine
 func (sm *ServerManager) Stop(id string) error {
 	if id == "" {
 		return errors.ErrInvalidParams
@@ -170,9 +180,8 @@ func (sm *ServerManager) Resize(id, flavorID string) error {
 	return err
 }
 
-// TODO: after finish image package to do this then
-func (sm *ServerManager) Rebuild(id, imageID string) (serverModel *models.ServerModel, err error) {
-	if id == "" || imageID == "" {
+func (sm *ServerManager) Rebuild(id string, opts *options.RebuildServerOpts) (serverModel *models.ServerModel, err error) {
+	if id == "" || !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
 	}
@@ -182,32 +191,13 @@ func (sm *ServerManager) Rebuild(id, imageID string) (serverModel *models.Server
 		return
 	}
 
-	serverClient := New(sm.Client)
+	if opts.Metadata != nil {
+		opts.Metadata["hypervisor_type"] = "qemu"
 
-	vm, err := serverClient.Show(id)
-	if err != nil {
-		return
-	}
-
-	// // fetch base image id
-	// baseImageId := imageID
-	// imager := images.New(ser.Client)
-	// image, err := imager.Show(imageID)
-	// if err != nil {
-	// 	return err
-	// }
-
-	// if image.BaseImageID != "" {
-	// 	baseImageId = image.BaseImageId
-	// }
-	// 这块逻辑应该实现在controller层
-
-	opts := options.RebuildServerOpts{
-		Name:    vm.Name,
-		ImageID: imageID,
-		Metadata: map[string]string{
+	} else {
+		opts.Metadata = map[string]string{
 			"hypervisor_type": "qemu",
-		},
+		}
 	}
 
 	res := servers.Rebuild(client, id, opts)
@@ -217,18 +207,6 @@ func (sm *ServerManager) Rebuild(id, imageID string) (serverModel *models.Server
 	}
 
 	return models.ExtractServer(res.Result)
-
-	// // update server base image id metadata
-	// metaDataOpts := params.UpdateMetadataOpts{
-	// 	Metadata: map[string]string{
-	// 		"base_image_id": baseImageId,
-	// 		"admin_pass":    res.AdminPass,
-	// 	},
-	// }
-
-	// err = servers.UpdateMetadata(client, id, metaDataOpts).Err
-	// return
-	// 这段逻辑应该实现在controller层
 }
 
 func (sm *ServerManager) Vnc(id string) (vncURL string, err error) {

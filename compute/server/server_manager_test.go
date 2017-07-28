@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/golib/assert"
+	"github.com/qbox/openstack-golang-sdk/lib/options"
 )
 
 func Test_ChangeAdminPassword(t *testing.T) {
@@ -86,7 +87,11 @@ func Test_Rebuild(t *testing.T) {
 
 	serverManager := NewServerManager(openstacker)
 
-	server, err := serverManager.Rebuild(serverID, "testImageId")
+	opts := &options.RebuildServerOpts{
+		ImageID: "testImageId",
+	}
+
+	server, err := serverManager.Rebuild(serverID, opts)
 
 	assertion.Nil(err)
 	assertion.NotNil(server)

@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
-if [ "$APPROOT" = "" ]; then
-    export APPROOT=$(pwd)
+
+if [ "$APPGOPATH" = "" ]; then
+    export APPGOPATH=$(dirname $(pwd))/gopkg
+    mkdir -p $APPGOPATH
 fi
 
 # adjust GOPATH
 case ":$GOPATH:" in
-    *":$APPROOT:"*) :;;
-    *) GOPATH=$APPROOT:$GOPATH;;
+    *":$APPGOPATH:"*) :;;
+    *) GOPATH=$APPGOPATH:$GOPATH;;
 esac
 export GOPATH
 
@@ -40,10 +42,10 @@ if [ -f "$APPROOT/openstack.go" ]; then
             cp -r "$APPROOT" "$parent/gopkg/src/github.com/qbox"
         fi
     else
-        if [ ! -d "$APPROOT/src/github.com/qbox/openstack-golang-sdk" ]; then
-            mkdir -p "$APPROOT/src/github.com/qbox"
+        if [ ! -d "$APPGOPATH/src/github.com/qbox/openstack-golang-sdk" ]; then
+            mkdir -p "$APPGOPATH/src/github.com/qbox"
 
-            ln -s "$APPROOT" "$APPROOT/src/github.com/qbox"
+            ln -s "$APPROOT" "$APPGOPATH/src/github.com/qbox"
         fi
     fi
 fi
