@@ -1,5 +1,7 @@
 package options
 
+import "net/url"
+
 type CreateSnapshotOpts struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -38,4 +40,28 @@ func (opts *UpdateSnapshotOpts) ToPayload() interface{} {
 	return request{
 		Snapshot: opts,
 	}
+}
+
+type ListSnapshotOpts struct {
+	ProjectID  *string `json:"project_id,omitempty"`
+	AllTenants *string `json:"all_tenants,omitempty"`
+}
+
+func (opts *ListSnapshotOpts) IsValid() bool {
+	return true
+}
+
+func (opts *ListSnapshotOpts) ToQuery() url.Values {
+	options := url.Values{}
+
+	if opts != nil {
+		if opts.ProjectID != nil {
+			options.Add("project_id", *opts.ProjectID)
+		}
+		if opts.AllTenants != nil {
+			options.Add("all_tenants", *opts.AllTenants)
+		}
+	}
+
+	return options
 }

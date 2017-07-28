@@ -39,7 +39,6 @@ func ExtractVolume(r gophercloud.Result) (volume *VolumeModel, err error) {
 
 	err = mapstructure.Decode(r.Body, &response)
 	volume = response.Volume
-
 	return
 }
 

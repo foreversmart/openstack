@@ -10,5 +10,6 @@ type Snapshoter interface {
 	All() (snapshots []*models.SnapshotModel, err error)
 	Show(id string) (snapshot *models.SnapshotModel, err error)
 	Update(id string, opts *options.UpdateSnapshotOpts) (snapshot *models.SnapshotModel, err error)
+	AllByParams(opts *options.ListSnapshotOpts) (Snapshots []*models.SnapshotModel, err error)
 	Delete(id string) error
 }
