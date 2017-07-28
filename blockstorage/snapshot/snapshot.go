@@ -7,7 +7,6 @@ import (
 	"github.com/qbox/openstack-golang-sdk/lib/options"
 	"github.com/rackspace/gophercloud"
 	"github.com/rackspace/gophercloud/openstack/blockstorage/v1/snapshots"
-	"qbox.us/gogo/lib/evm/platform"
 )
 
 const (
@@ -53,7 +52,7 @@ func (s *Snapshot) All() (Snapshots []*models.SnapshotModel, err error) {
 func (s *Snapshot) AllByParams(opts *options.ListSnapshotOpts) (snapshotModels []*models.SnapshotModel, err error) {
 
 	if !opts.IsValid() {
-		return nil, platform.ErrInvalidParams
+		return nil, errors.ErrInvalidParams
 	}
 	client, err := s.Client.VolumeClient()
 	if err != nil {
