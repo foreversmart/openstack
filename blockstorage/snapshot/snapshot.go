@@ -26,7 +26,7 @@ func New(client ifaces.Openstacker) *Snapshot {
 	}
 }
 
-func (s *Snapshot) Create(opts options.CreateSnapshotOpts) (snapshot *models.SnapshotModel, err error) {
+func (s *Snapshot) Create(opts *options.CreateSnapshotOpts) (snapshot *models.SnapshotModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
@@ -45,7 +45,15 @@ func (s *Snapshot) Create(opts options.CreateSnapshotOpts) (snapshot *models.Sna
 	return models.ExtractSnapshot(res)
 }
 
-func (s *Snapshot) All() (snapshotModels []*models.SnapshotModel, err error) {
+func (s *Snapshot) All() (Snapshots []*models.SnapshotModel, err error) {
+	return s.AllByParams(nil)
+}
+
+func (s *Snapshot) AllByParams(opts *options.ListSnapshotOpts) (snapshotModels []*models.SnapshotModel, err error) {
+
+	if !opts.IsValid() {
+		return nil, errors.ErrInvalidParams
+	}
 	client, err := s.Client.VolumeClient()
 	if err != nil {
 		return

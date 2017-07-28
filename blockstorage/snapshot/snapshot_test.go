@@ -40,7 +40,7 @@ func Test_Create_Snapshot(t *testing.T) {
 	mitm.MockRequest("POST", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/snapshots")).WithResponse(http.StatusAccepted, jsonheader, apiv2.APIString("POST /snapshots"))
 	// mitm.Pause()
 
-	snapshot, err := New(openstacker).Create(options.CreateSnapshotOpts{
+	snapshot, err := New(openstacker).Create(&options.CreateSnapshotOpts{
 		VolumeID:    options.String(testVolumeId),
 		Name:        options.String("test snapshot"),
 		Description: options.String("test create snapshot"),
