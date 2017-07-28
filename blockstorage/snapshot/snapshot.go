@@ -27,7 +27,7 @@ func New(client ifaces.Openstacker) *Snapshot {
 	}
 }
 
-func (s *Snapshot) Create(opts options.CreateSnapshotOpts) (snapshot *models.SnapshotModel, err error) {
+func (s *Snapshot) Create(opts *options.CreateSnapshotOpts) (snapshot *models.SnapshotModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
