@@ -41,7 +41,7 @@ if [ -f "$APPROOT/openstack.go" ]; then
         if [ ! -d "APPGOPATH/src/github.com/qbox/openstack-golang-sdk" ]; then
             mkdir -p "$APPGOPATH/src/github.com/qbox"
 
-            cp -r "$APPROOT" "APPGOPATH/src/github.com/qbox"
+            cp -r "$APPROOT" "$APPGOPATH/src/github.com/qbox"
         fi
     else
         if [ ! -d "$APPGOPATH/src/github.com/qbox/openstack-golang-sdk" ]; then
