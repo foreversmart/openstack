@@ -3,6 +3,7 @@
 
 if [ "$APPGOPATH" = "" ]; then
     export APPGOPATH=$(dirname $(pwd))/gopkg
+    mkdir -p $APPGOPATH
 fi
 
 # adjust GOPATH
