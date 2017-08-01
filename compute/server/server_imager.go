@@ -38,9 +38,16 @@ func (ser *ServerImager) Create(serverID, imageName string) (imageID string, err
 		return
 	}
 
-	baseImageID := server.Image
-	if server.Metadata != nil && server.Metadata["base_image_id"] != nil {
-		baseImageID = (server.Metadata["base_image_id"]).(string)
+	var baseImageID string
+	if server.Image != nil {
+		ImageId, ok := server.Image["id"].(string)
+		if ok {
+			baseImageID = ImageId
+		}
+	}
+
+	if server.BaseImageID() != "" {
+		baseImageID = server.BaseImageID()
 	}
 
 	reqBody, err := servers.CreateImageOpts{
@@ -50,6 +57,7 @@ func (ser *ServerImager) Create(serverID, imageName string) (imageID string, err
 		},
 	}.ToServerCreateImageMap()
 	if err != nil {
+
 		return
 	}
 
