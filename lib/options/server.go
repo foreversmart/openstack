@@ -277,11 +277,11 @@ type CreateServerOpts struct {
 	FlavorRef *string `json:"flavorRef"`
 
 	// SecurityGroups [optional] lists the names of the security groups to which this server should belong.
-	SecurityGroups []*string `json:"security_groups"`
+	SecurityGroups []string `json:"security_groups"`
 
 	// UserData [optional] contains configuration information or scripts to use upon launch.
 	// Create will base64-encode it for you.
-	UserData []*byte `json:"user_data"`
+	UserData []byte `json:"user_data"`
 
 	// AvailabilityZone [optional] in which to launch the server.
 	AvailabilityZone *string `json:"availability_zone"`
