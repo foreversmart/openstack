@@ -32,7 +32,7 @@ type ListServersOpts struct {
 	NotTagsAny       *string `json:"not-tags-any"`
 	PowerState       *string `json:"power_state"`
 	Progress         *string `json:"progress"`
-	ProjectId        *string `json:"project_id"`
+	ProjectID        *string `json:"project_id"`
 	RamdiskID        *string `json:"ramdisk_id"`
 	ReservationID    *string `json:"reservation_id "`
 	RootDeviceName   *string `json:"root_device_name"`
@@ -149,8 +149,8 @@ func (opts *ListServersOpts) ToQuery() (options url.Values) {
 		if opts.Progress != nil {
 			options.Add("progress", *opts.Progress)
 		}
-		if opts.ProjectId != nil {
-			options.Add("project_id", *opts.ProjectId)
+		if opts.ProjectID != nil {
+			options.Add("project_id", *opts.ProjectID)
 		}
 		if opts.RamdiskID != nil {
 			options.Add("ramdisk_id", *opts.RamdiskID)
@@ -231,10 +231,10 @@ type ServerNetworkOpts struct {
 
 	// Port of a neutron network to attach to the newly provisioned server.
 	// Required unless UUID is provided.
-	Port string `json:"port"`
+	Port *string `json:"port,omitempty"`
 
 	// FixedIP [optional] specifies a fixed IPv4 address to be used on this network.
-	FixedIP string `json:"fixed_ip"`
+	FixedIP *string `json:"fixed_ip,omitempty"`
 }
 
 // Personality is an array of files that are injected into the server at launch.
@@ -270,55 +270,56 @@ type CreateServerOpts struct {
 	// ImageRef [optional; required if ImageName is not provided] is the ID or full
 	// URL to the image that contains the server's OS and initial state.
 	// Also optional if using the boot-from-volume extension.
-	ImageRef *string `json:"imageRef"`
+	ImageRef *string `json:"imageRef,omitempty"`
 
 	// FlavorRef [optional; required if FlavorName is not provided] is the ID or
 	// full URL to the flavor that describes the server's specs.
-	FlavorRef *string `json:"flavorRef"`
+	FlavorRef *string `json:"flavorRef,omitempty"`
 
 	// SecurityGroups [optional] lists the names of the security groups to which this server should belong.
-	SecurityGroups []string `json:"security_groups"`
+	SecurityGroups []string `json:"security_groups,omitempty"`
 
 	// UserData [optional] contains configuration information or scripts to use upon launch.
 	// Create will base64-encode it for you.
-	UserData []byte `json:"user_data"`
+	UserData []byte `json:"user_data,omitempty"`
 
 	// AvailabilityZone [optional] in which to launch the server.
-	AvailabilityZone *string `json:"availability_zone"`
+	AvailabilityZone *string `json:"availability_zone,omitempty"`
 
 	// Networks [optional] dictates how this server will be attached to available networks.
 	// By default, the server will be attached to all isolated networks for the tenant.
-	Networks []*ServerNetworkOpts `json:"networks"`
+	Networks []*ServerNetworkOpts `json:"networks,omitempty"`
 
 	// Metadata [optional] contains key-value pairs (up to 255 bytes each) to attach to the server.
-	Metadata map[string]string `json:"metadata"`
+	Metadata map[string]string `json:"metadata,omitempty"`
 
 	// Personality [optional] includes files to inject into the server at launch.
 	// Create will base64-encode file contents for you.
-	Personality *ServerPersonalityOpts `json:"personality"`
+	Personality *ServerPersonalityOpts `json:"personality,omitempty"`
 
 	// ConfigDrive [optional] enables metadata injection through a configuration drive.
-	ConfigDrive *bool `json:"config_drive"`
+	ConfigDrive *bool `json:"config_drive,omitempty"`
 
 	// KeyName [optional] Key pair name.
-	KeyName *bool `json:"key_name"`
+	KeyName *bool `json:"key_name,omitempty"`
 
 	// AdminPass [optional] sets the root user password. If not set, a randomly-generated
 	// password will be created and returned in the response.
-	AdminPass *string `json:"adminPass"`
+	AdminPass *string `json:"adminPass,omitempty"`
 
 	// AccessIPv4 [optional ] specifies an IPv4 address for the instance.
-	AccessIPv4 *string `json:"accessIPv4"`
+	AccessIPv4 *string `json:"accessIPv4,omitempty"`
 
 	// AccessIPv6 [optional] specifies an IPv6 address for the instance.
-	AccessIPv6 *string `json:"accessIPv6"`
+	AccessIPv6 *string `json:"accessIPv6,omitempty"`
 
 	//Controls how the API partitions the disk when you create, rebuild, or resize servers.
-	OSDcfDiskConfig *string `json:"OS-DCF:diskConfig"`
+	OSDcfDiskConfig *string `json:"OS-DCF:diskConfig,omitempty"`
 }
 
 func (opts *CreateServerOpts) IsValid() bool {
-	return opts != nil && opts.Name != nil && (opts.FlavorRef != nil || opts.ImageRef != nil)
+	return opts != nil && opts.Name != nil && (opts.FlavorRef != nil || opts.ImageRef != nil) &&
+		(opts.OSDcfDiskConfig==nil ||( *opts.OSDcfDiskConfig == "AUTO" || *opts.OSDcfDiskConfig == "MANUAL"))
 }
 
 func (opts *CreateServerOpts) ToPayload() interface{} {
