@@ -2,7 +2,6 @@ package models
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/mitchellh/mapstructure"
 	"github.com/rackspace/gophercloud"
@@ -42,7 +41,7 @@ type ServerModel struct {
 	Flavor *ServerFlavor `mapstructure:"flavor" json:"flavor"`
 
 	// Addresses includes a list of all IP addresses assigned to the server, keyed by pool.
-	Addresses map[string]interface{} `mapstructure:"addresses" json:"addresses"`
+	Addresses map[string][]*ServerAddress `mapstructure:"addresses" json:"addresses"`
 
 	// Metadata includes a list of all user-specified key-value pairs attached to the server.
 	Metadata map[string]string `mapstructure:"metadata" json:"metadata"`
@@ -99,6 +98,12 @@ type ServerImage struct {
 	Links []interface{} `mapstructure:"links" json:"links"`
 }
 
+type ServerAddress struct {
+	Addr    string `mapstructure:"addr" json:"addr"`
+	Type    string `mapstructure:"OS-EXT-IPS:type" json:"OS-EXT-IPS:type"`
+	Version int    `mapstructure:"version" json:"version"`
+}
+
 func (server *ServerModel) FlavorID() (flavorID string) {
 	if server.Flavor != nil {
 		return server.Flavor.ID
@@ -111,13 +116,10 @@ func (server *ServerModel) FixedIps() (fixedIPs []string) {
 	fixedIPs = make([]string, 0, 1)
 	// extract ip address info
 	for _, value := range server.Addresses {
-		arr := value.([]interface{})
-		for _, addresses := range arr {
-			addressMap := addresses.(map[string]interface{})
-
-			switch addressMap["OS-EXT-IPS:type"].(string) {
+		for _, address := range value {
+			switch address.Type {
 			case "fixed":
-				fixedIPs = append(fixedIPs, addressMap["addr"].(string))
+				fixedIPs = append(fixedIPs, address.Addr)
 			}
 		}
 	}
@@ -129,13 +131,10 @@ func (server *ServerModel) FloatingIPs() (floatingIPs []string) {
 	floatingIPs = make([]string, 0, 1)
 	// extract ip address info
 	for _, value := range server.Addresses {
-		arr := value.([]interface{})
-		for _, addresses := range arr {
-			addressMap := addresses.(map[string]interface{})
-
-			switch addressMap["OS-EXT-IPS:type"].(string) {
+		for _, address := range value {
+			switch address.Type {
 			case "floating":
-				floatingIPs = append(floatingIPs, addressMap["addr"].(string))
+				floatingIPs = append(floatingIPs, address.Addr)
 			}
 		}
 	}
@@ -145,7 +144,7 @@ func (server *ServerModel) FloatingIPs() (floatingIPs []string) {
 
 func (server *ServerModel) ImageID() (imageID string) {
 	if server.Image != nil {
-		return server.ID
+		return server.Image.ID
 	}
 
 	return
@@ -153,7 +152,7 @@ func (server *ServerModel) ImageID() (imageID string) {
 
 func (server *ServerModel) ImageName() (imageName string) {
 	if server.Image != nil {
-		return server.Name
+		return server.Image.Name
 	}
 
 	return
@@ -177,9 +176,6 @@ func ExtractServer(result gophercloud.Result) (serverInfo *ServerModel, err erro
 	if result.Err != nil {
 		return nil, result.Err
 	}
-
-	res, _ := json.MarshalIndent(result, "\t", "\t")
-	fmt.Println(string(res))
 
 	var response struct {
 		Server *ServerModel `mapstructure:"server" json:"server"`
