@@ -27,7 +27,7 @@ func New(client ifaces.Openstacker) *Server {
 	}
 }
 
-func (ser *Server) Create(opts options.CreateServerOpts) (server *models.ServerModel, err error) {
+func (ser *Server) Create(opts *options.CreateServerOpts) (server *models.ServerModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
@@ -43,6 +43,10 @@ func (ser *Server) Create(opts options.CreateServerOpts) (server *models.ServerM
 	_, err = client.Post(client.ServiceURL(ServersUrl), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{202},
 	})
+
+	if err != nil {
+		return
+	}
 
 	return models.ExtractServer(result)
 }
