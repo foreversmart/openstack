@@ -9,26 +9,8 @@ import (
 )
 
 type ServerModel struct {
-	ID                               string                                  `mapstructure:"id" json:"id"`
-	Name                             string                                  `mapstructure:"name" json:"name"`
-	ConfigDrive                      string                                  `mapstructure:"config_drive" json:"config_drive"`
-	OSDcfDiskConfig                  string                                  `mapstructure:"OS-DCF:diskConfig" json:"OS-DCF:diskConfig"`
-	OSExtAzAvailabilityZone          string                                  `mapstructure:"OS-EXT-AZ:availability_zone" json:"OS-EXT-AZ:availability_zone"`
-	OSExtSrvAttrHost                 string                                  `mapstructure:"OS-EXT-SRV-ATTR:host" json:"OS-EXT-SRV-ATTR:host"`
-	OSExtSrvAttrHypervisorHostname   string                                  `mapstructure:"OS-EXT-SRV-ATTR:hypervisor_hostname" json:"OS-EXT-SRV-ATTR:hypervisor_hostname"`
-	OSExtSrvAttrInstanceName         string                                  `mapstructure:"OS-EXT-SRV-ATTR:instance_name" json:"OS-EXT-SRV-ATTR:instance_name"`
-	OSExtStsPowerState               int64                                   `mapstructure:"OS-EXT-STS:power_state" json:"OS-EXT-STS:power_state"`
-	OSExtStsTaskState                string                                  `mapstructure:"OS-EXT-STS:task_state" json:"OS-EXT-STS:task_state"`
-	OSExtStsVmState                  string                                  `mapstructure:"OS-EXT-STS:vm_state" json:"OS-EXT-STS:vm_state"`
-	OSExtSrvAttrKernelID             string                                  `mapstructure:"S-EXT-SRV-ATTR:kernel_id" json:"S-EXT-SRV-ATTR:kernel_id"`
-	OSExtSrvAttrLaunchIndex          int64                                   `mapstructure:"OS-EXT-SRV-ATTR:launch_index" json:"OS-EXT-SRV-ATTR:launch_index"`
-	OSExtSrvAttrRamdiskID            string                                  `mapstructure:"OS-EXT-SRV-ATTR:ramdisk_id" json:"OS-EXT-SRV-ATTR:ramdisk_id"`
-	OSExtSrvAttrRootDeviceName       string                                  `mapstructure:"OS-EXT-SRV-ATTR:root_device_name" json:"OS-EXT-SRV-ATTR:root_device_name"`
-	OSExtSrvAttrReservationID        string                                  `mapstructure:"OS-EXT-SRV-ATTR:reservation_id" json:"OS-EXT-SRV-ATTR:reservation_id"`
-	OSExtSrvAttrUserData             string                                  `mapstructure:"OS-EXT-SRV-ATTR:user_data" json:"OS-EXT-SRV-ATTR:user_data"`
-	OSSrvUsgLaunchedAt               string                                  `mapstructure:"OS-SRV-USG:launched_at" json:"OS-SRV-USG:launched_at"`
-	OSSrvUsgTerminatedAt             string                                  `mapstructure:"OS-SRV-USG:terminated_at" json:"OS-SRV-USG:terminated_at"`
-	OsExtendedVolumesVolumesAttached []OsExtendedVolumesVolumesAttachedModel `mapstructure:"os-extended-volumes:volumes_attached" json:"os-extended-volumes:volumes_attached"`
+	ID   string `mapstructure:"id" json:"id"`
+	Name string `mapstructure:"name" json:"name"`
 	// TenantID identifies the tenant owning this server resource.
 	TenantID string `mapstructure:"tenant_id" json:"tenant_id"`
 
@@ -53,16 +35,16 @@ type ServerModel struct {
 	AccessIPv6 string `mapstructure:"accessIPv6" json:"accessIPv6"`
 
 	// Image refers to a JSON object, which itself indicates the OS image used to deploy the server.
-	Image string `mapstructure:"image" json:"image"`
+	Image *ServerImageModel `mapstructure:"image" json:"image"`
 
 	// Flavor refers to a JSON object, which itself indicates the hardware configuration of the deployed server.
-	Flavor map[string]interface{} `mapstructure:"flavor" json:"flavor"`
+	Flavor *ServerFlavorModel `mapstructure:"flavor" json:"flavor"`
 
 	// Addresses includes a list of all IP addresses assigned to the server, keyed by pool.
-	Addresses map[string]interface{} `mapstructure:"addresses" json:"addresses"`
+	Addresses map[string][]*ServerAddressModel `mapstructure:"addresses" json:"addresses"`
 
 	// Metadata includes a list of all user-specified key-value pairs attached to the server.
-	Metadata map[string]interface{} `mapstructure:"metadata" json:"metadata"`
+	Metadata map[string]string `mapstructure:"metadata" json:"metadata"`
 
 	// Links includes HTTP references to the itself, useful for passing along to other APIs that might want a server reference.
 	Links []interface{}
@@ -77,7 +59,112 @@ type ServerModel struct {
 	// SecurityGroups includes the security groups that this instance has applied to it
 	SecurityGroups []map[string]interface{} `mapstructure:"security_groups" json:"security_groups"`
 
+	ConfigDrive                      string                                  `mapstructure:"config_drive" json:"config_drive"`
+	OSDcfDiskConfig                  string                                  `mapstructure:"OS-DCF:diskConfig" json:"OS-DCF:diskConfig"`
+	OSExtAzAvailabilityZone          string                                  `mapstructure:"OS-EXT-AZ:availability_zone" json:"OS-EXT-AZ:availability_zone"`
+	OSExtSrvAttrHost                 string                                  `mapstructure:"OS-EXT-SRV-ATTR:host" json:"OS-EXT-SRV-ATTR:host"`
+	OSExtSrvAttrHypervisorHostname   string                                  `mapstructure:"OS-EXT-SRV-ATTR:hypervisor_hostname" json:"OS-EXT-SRV-ATTR:hypervisor_hostname"`
+	OSExtSrvAttrInstanceName         string                                  `mapstructure:"OS-EXT-SRV-ATTR:instance_name" json:"OS-EXT-SRV-ATTR:instance_name"`
+	OSExtStsPowerState               int64                                   `mapstructure:"OS-EXT-STS:power_state" json:"OS-EXT-STS:power_state"`
+	OSExtStsTaskState                string                                  `mapstructure:"OS-EXT-STS:task_state" json:"OS-EXT-STS:task_state"`
+	OSExtStsVmState                  string                                  `mapstructure:"OS-EXT-STS:vm_state" json:"OS-EXT-STS:vm_state"`
+	OSExtSrvAttrKernelID             string                                  `mapstructure:"OS-EXT-SRV-ATTR:kernel_id" json:"OS-EXT-SRV-ATTR:kernel_id"`
+	OSExtSrvAttrLaunchIndex          int64                                   `mapstructure:"OS-EXT-SRV-ATTR:launch_index" json:"OS-EXT-SRV-ATTR:launch_index"`
+	OSExtSrvAttrRamdiskID            string                                  `mapstructure:"OS-EXT-SRV-ATTR:ramdisk_id" json:"OS-EXT-SRV-ATTR:ramdisk_id"`
+	OSExtSrvAttrRootDeviceName       string                                  `mapstructure:"OS-EXT-SRV-ATTR:root_device_name" json:"OS-EXT-SRV-ATTR:root_device_name"`
+	OSExtSrvAttrReservationID        string                                  `mapstructure:"OS-EXT-SRV-ATTR:reservation_id" json:"OS-EXT-SRV-ATTR:reservation_id"`
+	OSExtSrvAttrUserData             string                                  `mapstructure:"OS-EXT-SRV-ATTR:user_data" json:"OS-EXT-SRV-ATTR:user_data"`
+	OSSrvUsgLaunchedAt               string                                  `mapstructure:"OS-SRV-USG:launched_at" json:"OS-SRV-USG:launched_at"`
+	OSSrvUsgTerminatedAt             string                                  `mapstructure:"OS-SRV-USG:terminated_at" json:"OS-SRV-USG:terminated_at"`
+	OsExtendedVolumesVolumesAttached []OsExtendedVolumesVolumesAttachedModel `mapstructure:"os-extended-volumes:volumes_attached" json:"os-extended-volumes:volumes_attached"`
+
 	Locked bool `mapstructure:"locked" json:"locked"`
+}
+
+type ServerFlavorModel struct {
+	ID           string        `mapstructure:"id" json:"id"`
+	Links        []interface{} `mapstructure:"links" json:"links"`
+	Vcpus        int           `mapstructure:"vcpus" json:"vcpus"`
+	Ram          int           `mapstructure:"ram" json:"ram"`
+	Disk         int           `mapstructure:"disk" json:"disk"`
+	Ephemeral    int           `mapstructure:"ephemeral" json:"ephemeral"`
+	Swap         int           `mapstructure:"swap" json:"id"`
+	OriginalName string        `mapstructure:"original_name" json:"original_name"`
+}
+
+type ServerImageModel struct {
+	ID    string        `mapstructure:"id" json:"id"`
+	Name  string        `mapstructure:"name" json:"name"`
+	Links []interface{} `mapstructure:"links" json:"links"`
+}
+
+type ServerAddressModel struct {
+	Addr    string `mapstructure:"addr" json:"addr"`
+	Type    string `mapstructure:"OS-EXT-IPS:type" json:"OS-EXT-IPS:type"`
+	Version int    `mapstructure:"version" json:"version"`
+}
+
+func (server *ServerModel) FlavorID() (flavorID string) {
+	if server.Flavor != nil {
+		return server.Flavor.ID
+	}
+
+	return
+}
+
+func (server *ServerModel) FixedIps() (fixedIPs []string) {
+	fixedIPs = make([]string, 0, 1)
+	// extract ip address info
+	for _, value := range server.Addresses {
+		for _, address := range value {
+			switch address.Type {
+			case "fixed":
+				fixedIPs = append(fixedIPs, address.Addr)
+			}
+		}
+	}
+
+	return
+}
+
+func (server *ServerModel) FloatingIPs() (floatingIPs []string) {
+	floatingIPs = make([]string, 0, 1)
+	// extract ip address info
+	for _, value := range server.Addresses {
+		for _, address := range value {
+			switch address.Type {
+			case "floating":
+				floatingIPs = append(floatingIPs, address.Addr)
+			}
+		}
+	}
+
+	return
+}
+
+func (server *ServerModel) ImageID() (imageID string) {
+	if server.Image != nil {
+		return server.Image.ID
+	}
+
+	return
+}
+
+func (server *ServerModel) ImageName() (imageName string) {
+	if server.Image != nil {
+		return server.Image.Name
+	}
+
+	return
+
+}
+
+func (server *ServerModel) BaseImageID() string {
+	if id, ok := server.Metadata["base_image_id"]; ok {
+		return id
+	}
+
+	return server.ImageID()
 }
 
 type OsExtendedVolumesVolumesAttachedModel struct {

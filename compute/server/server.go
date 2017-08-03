@@ -27,7 +27,7 @@ func New(client ifaces.Openstacker) *Server {
 	}
 }
 
-func (ser *Server) Create(opts options.CreateServerOpts) (server *models.ServerModel, err error) {
+func (ser *Server) Create(opts *options.CreateServerOpts) (server *models.ServerModel, err error) {
 	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
@@ -40,7 +40,7 @@ func (ser *Server) Create(opts options.CreateServerOpts) (server *models.ServerM
 
 	var result gophercloud.Result
 
-	_, err = client.Post(client.ServiceURL(ServersUrl), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
+	_, result.Err = client.Post(client.ServiceURL(ServersUrl), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{202},
 	})
 
@@ -102,7 +102,7 @@ func (ser *Server) Update(id string, opts options.UpdateServersOpts) (server *mo
 
 	var result gophercloud.Result
 
-	_, err = client.Put(client.ServiceURL(ServersUrl, id), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
+	_, result.Err = client.Put(client.ServiceURL(ServersUrl, id), opts.ToPayload(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 

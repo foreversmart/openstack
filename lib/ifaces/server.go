@@ -6,7 +6,7 @@ import (
 )
 
 type Server interface {
-	Create(opts options.CreateServerOpts) (server *models.ServerModel, err error)
+	Create(opts *options.CreateServerOpts) (server *models.ServerModel, err error)
 	All() (servers []*models.ServerModel, err error)
 	AllByParams(opts *options.ListServersOpts) (servers []*models.ServerModel, err error)
 	Show(id string) (server *models.ServerModel, err error)
