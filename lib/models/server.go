@@ -2,6 +2,7 @@ package models
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/mitchellh/mapstructure"
 	"github.com/rackspace/gophercloud"
@@ -9,8 +10,8 @@ import (
 )
 
 type ServerModel struct {
-	ID                               string                                  `mapstructure:"id" json:"id"`
-	Name                             string                                  `mapstructure:"name" json:"name"`
+	ID   string `mapstructure:"id" json:"id"`
+	Name string `mapstructure:"name" json:"name"`
 	// TenantID identifies the tenant owning this server resource.
 	TenantID string `mapstructure:"tenant_id" json:"tenant_id"`
 
@@ -35,10 +36,10 @@ type ServerModel struct {
 	AccessIPv6 string `mapstructure:"accessIPv6" json:"accessIPv6"`
 
 	// Image refers to a JSON object, which itself indicates the OS image used to deploy the server.
-	Image map[string]interface{} `mapstructure:"image" json:"image"`
+	Image *ServerImage `mapstructure:"image" json:"image"`
 
 	// Flavor refers to a JSON object, which itself indicates the hardware configuration of the deployed server.
-	Flavor map[string]interface{} `mapstructure:"flavor" json:"flavor"`
+	Flavor *ServerFlavor `mapstructure:"flavor" json:"flavor"`
 
 	// Addresses includes a list of all IP addresses assigned to the server, keyed by pool.
 	Addresses map[string]interface{} `mapstructure:"addresses" json:"addresses"`
@@ -81,18 +82,32 @@ type ServerModel struct {
 	Locked bool `mapstructure:"locked" json:"locked"`
 }
 
+type ServerFlavor struct {
+	ID           string        `mapstructure:"id" json:"id"`
+	Links        []interface{} `mapstructure:"links" json:"links"`
+	Vcpus        int           `mapstructure:"vcpus" json:"vcpus"`
+	Ram          int           `mapstructure:"ram" json:"ram"`
+	Disk         int           `mapstructure:"disk" json:"disk"`
+	Ephemeral    int           `mapstructure:"ephemeral" json:"ephemeral"`
+	Swap         int           `mapstructure:"swap" json:"id"`
+	OriginalName string        `mapstructure:"original_name" json:"original_name"`
+}
+
+type ServerImage struct {
+	ID    string        `mapstructure:"id" json:"id"`
+	Name  string        `mapstructure:"name" json:"name"`
+	Links []interface{} `mapstructure:"links" json:"links"`
+}
+
 func (server *ServerModel) FlavorID() (flavorID string) {
 	if server.Flavor != nil {
-		id, ok := server.Flavor["id"].(string)
-		if ok {
-			flavorID = id
-		}
+		return server.Flavor.ID
 	}
 
 	return
 }
 
-func (server *ServerModel) FixedIps() (fixedIPs []string){
+func (server *ServerModel) FixedIps() (fixedIPs []string) {
 	fixedIPs = make([]string, 0, 1)
 	// extract ip address info
 	for _, value := range server.Addresses {
@@ -128,30 +143,9 @@ func (server *ServerModel) FloatingIPs() (floatingIPs []string) {
 	return
 }
 
-func (s *ServerModel) GetSubnetId() (subnetId string) {
-	for _, value := range s.Addresses {
-		arr := value.([]interface{})
-
-		for _, addresses := range arr {
-			if subnetId != "" {
-				break
-			}
-			addressMap := addresses.(map[string]interface{})
-			if addressMap["UOS-EXT-IPS:subnet_id"] != nil {
-				subnetId = addressMap["UOS-EXT-IPS:subnet_id"].(string)
-			}
-		}
-	}
-
-	return
-}
-
 func (server *ServerModel) ImageID() (imageID string) {
 	if server.Image != nil {
-		id, ok := server.Image["id"].(string)
-		if ok {
-			imageID = id
-		}
+		return server.ID
 	}
 
 	return
@@ -159,10 +153,7 @@ func (server *ServerModel) ImageID() (imageID string) {
 
 func (server *ServerModel) ImageName() (imageName string) {
 	if server.Image != nil {
-		name, ok := server.Image["name"].(string)
-		if ok {
-			imageName = name
-		}
+		return server.Name
 	}
 
 	return
@@ -170,7 +161,11 @@ func (server *ServerModel) ImageName() (imageName string) {
 }
 
 func (server *ServerModel) BaseImageID() string {
-	return server.Metadata["base_image_id"]
+	if id, ok := server.Metadata["base_image_id"]; ok {
+		return id
+	}
+
+	return server.Image.ID
 }
 
 type OsExtendedVolumesVolumesAttachedModel struct {
@@ -182,6 +177,9 @@ func ExtractServer(result gophercloud.Result) (serverInfo *ServerModel, err erro
 	if result.Err != nil {
 		return nil, result.Err
 	}
+
+	res, _ := json.MarshalIndent(result, "\t", "\t")
+	fmt.Println(string(res))
 
 	var response struct {
 		Server *ServerModel `mapstructure:"server" json:"server"`

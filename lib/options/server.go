@@ -319,7 +319,7 @@ type CreateServerOpts struct {
 
 func (opts *CreateServerOpts) IsValid() bool {
 	return opts != nil && opts.Name != nil && (opts.FlavorRef != nil || opts.ImageRef != nil) &&
-		(opts.OSDcfDiskConfig==nil ||( *opts.OSDcfDiskConfig == "AUTO" || *opts.OSDcfDiskConfig == "MANUAL"))
+		(opts.OSDcfDiskConfig == nil || (*opts.OSDcfDiskConfig == "AUTO" || *opts.OSDcfDiskConfig == "MANUAL"))
 }
 
 func (opts *CreateServerOpts) ToPayload() interface{} {
