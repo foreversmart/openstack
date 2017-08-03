@@ -16,7 +16,7 @@ func Test_Create_Server(t *testing.T) {
 
 	assertion := assert.New(t)
 
-	server, err := New(openstacker).Create(options.CreateServerOpts{
+	server, err := New(openstacker).Create(&options.CreateServerOpts{
 		Name:      options.String("newvm"),
 		ImageRef:  options.String("70a599e0-31e7-49b7-b260-868f441e862b"),
 		FlavorRef: options.String("1"),
