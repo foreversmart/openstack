@@ -128,6 +128,24 @@ func (server *ServerModel) FloatingIPs() (floatingIPs []string) {
 	return
 }
 
+func (s *ServerModel) GetSubnetId() (subnetId string) {
+	for _, value := range s.Addresses {
+		arr := value.([]interface{})
+
+		for _, addresses := range arr {
+			if subnetId != "" {
+				break
+			}
+			addressMap := addresses.(map[string]interface{})
+			if addressMap["UOS-EXT-IPS:subnet_id"] != nil {
+				subnetId = addressMap["UOS-EXT-IPS:subnet_id"].(string)
+			}
+		}
+	}
+
+	return
+}
+
 func (server *ServerModel) ImageID() (imageID string) {
 	if server.Image != nil {
 		id, ok := server.Image["id"].(string)
