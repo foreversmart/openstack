@@ -35,13 +35,13 @@ type ServerModel struct {
 	AccessIPv6 string `mapstructure:"accessIPv6" json:"accessIPv6"`
 
 	// Image refers to a JSON object, which itself indicates the OS image used to deploy the server.
-	Image *ServerImage `mapstructure:"image" json:"image"`
+	Image *ServerImageModel `mapstructure:"image" json:"image"`
 
 	// Flavor refers to a JSON object, which itself indicates the hardware configuration of the deployed server.
-	Flavor *ServerFlavor `mapstructure:"flavor" json:"flavor"`
+	Flavor *ServerFlavorModel `mapstructure:"flavor" json:"flavor"`
 
 	// Addresses includes a list of all IP addresses assigned to the server, keyed by pool.
-	Addresses map[string][]*ServerAddress `mapstructure:"addresses" json:"addresses"`
+	Addresses map[string][]*ServerAddressModel `mapstructure:"addresses" json:"addresses"`
 
 	// Metadata includes a list of all user-specified key-value pairs attached to the server.
 	Metadata map[string]string `mapstructure:"metadata" json:"metadata"`
@@ -81,7 +81,7 @@ type ServerModel struct {
 	Locked bool `mapstructure:"locked" json:"locked"`
 }
 
-type ServerFlavor struct {
+type ServerFlavorModel struct {
 	ID           string        `mapstructure:"id" json:"id"`
 	Links        []interface{} `mapstructure:"links" json:"links"`
 	Vcpus        int           `mapstructure:"vcpus" json:"vcpus"`
@@ -92,13 +92,13 @@ type ServerFlavor struct {
 	OriginalName string        `mapstructure:"original_name" json:"original_name"`
 }
 
-type ServerImage struct {
+type ServerImageModel struct {
 	ID    string        `mapstructure:"id" json:"id"`
 	Name  string        `mapstructure:"name" json:"name"`
 	Links []interface{} `mapstructure:"links" json:"links"`
 }
 
-type ServerAddress struct {
+type ServerAddressModel struct {
 	Addr    string `mapstructure:"addr" json:"addr"`
 	Type    string `mapstructure:"OS-EXT-IPS:type" json:"OS-EXT-IPS:type"`
 	Version int    `mapstructure:"version" json:"version"`
@@ -164,7 +164,7 @@ func (server *ServerModel) BaseImageID() string {
 		return id
 	}
 
-	return server.Image.ID
+	return server.ImageID()
 }
 
 type OsExtendedVolumesVolumesAttachedModel struct {
