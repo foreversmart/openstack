@@ -70,7 +70,12 @@ func (sm *ServerManager) AdminPassword(id string) (password string, err error) {
 		return
 	}
 
-	password = res.Metadata["admin_pass"].(string)
+	password, ok := res.Metadata["admin_pass"].(string)
+	if !ok {
+		err = errors.ErrNotFound
+		return
+	}
+
 	return
 }
 
