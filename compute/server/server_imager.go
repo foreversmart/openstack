@@ -50,10 +50,13 @@ func (ser *ServerImager) Create(serverID, imageName string) (imageID string, err
 	}
 
 	var result gophercloud.Result
-
-	_, err = client.Post(client.ServiceURL(ServersUrl, serverID, "action"), reqBody, &result.Body, &gophercloud.RequestOpts{
+	_, result.Err = client.Post(client.ServiceURL(ServersUrl, serverID, "action"), reqBody, &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{202},
 	})
+
+	if result.Err != nil {
+		return "", result.Err
+	}
 
 	var response struct {
 		ImageID string `mapstructure:"image_id"`
