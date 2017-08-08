@@ -392,8 +392,11 @@ func (opts RebuildServerOpts) ToServerRebuildMap() (map[string]interface{}, erro
 		return server, err
 	}
 
-	server["name"] = opts.Name
 	server["imageRef"] = opts.ImageID
+
+	if opts.Name != "" {
+		server["name"] = opts.Name
+	}
 
 	if opts.Metadata != nil {
 		server["metadata"] = opts.Metadata
