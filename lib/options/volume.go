@@ -9,10 +9,11 @@ import (
  * used to list volumes by params
  */
 type ListVolumeOpts struct {
-	TenantID *string `json:"tenant_id"`
-	Sort     *string `json:"sort"`
-	Limit    *int    `json:"limit"`
-	Marker   *string `json:"marker"`
+	AllTenants *string `json:"all_tenants"`
+	TenantID   *string `json:"tenant_id"`
+	Sort       *string `json:"sort"`
+	Limit      *int    `json:"limit"`
+	Marker     *string `json:"marker"`
 }
 
 func (opts *ListVolumeOpts) IsValid() bool {
@@ -42,12 +43,12 @@ func (opts *ListVolumeOpts) ToQuery() url.Values {
  */
 type ShowVolumeOpts struct {
 	//The UUID of the tenant in a multi-tenancy cloud.Optional
-	TenantID *string `json:"tenant_id"`
-	VolumeID *string `json:"volume_id"`
+	AllTenants *string `json:"all_tenants"`
+	TenantID   *string `json:"tenant_id"`
 }
 
 func (opts *ShowVolumeOpts) IsValid() bool {
-	return opts != nil && opts.VolumeID != nil
+	return true
 }
 
 /**
@@ -83,6 +84,7 @@ type UpdateVolumeOpts struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	TenantID    *string `json:"tenant_id"` //Optional
+	AllTenants  *string `json:"all_tenants"`
 }
 
 func (opts *UpdateVolumeOpts) IsValid() bool {

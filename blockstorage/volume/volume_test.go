@@ -65,9 +65,13 @@ func Test_All_Volume_By_Params(t *testing.T) {
 	// mitm.Pause()
 
 	assertion := assert.New(t)
+	tenant_id := "803d363c5c4649b591fd74b96a8c30f5"
+	all_tenants := "1"
 
 	volumes, err := New(openstacker).AllByParams(&options.ListVolumeOpts{
-		Limit: options.Int(10),
+		Limit:      options.Int(10),
+		TenantID:   &tenant_id,
+		AllTenants: &all_tenants,
 	})
 	assertion.Nil(err)
 	assertion.NotNil(volumes)
@@ -87,13 +91,13 @@ func Test_All_Volume_By_Params(t *testing.T) {
 func Test_Show_Volume(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
+	testVolumeId = "5aa119a8-d25b-45a7-8d1b-88e127885635"
+
 	mitm.MockRequest("GET", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId)).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("GET /volumes/:id"))
 
 	assertion := assert.New(t)
 
-	volume, err := New(openstacker).Show(&options.ShowVolumeOpts{
-		VolumeID: &testVolumeId,
-	})
+	volume, err := New(openstacker).Show(testVolumeId)
 	assertion.Nil(err)
 	assertion.NotNil(volume)
 
@@ -140,15 +144,19 @@ func Test_Reset_Volume(t *testing.T) {
 
 func Test_Update_Volume(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
-
+	testVolumeId = "5aa119a8-d25b-45a7-8d1b-88e127885635"
 	mitm.MockRequest("PUT", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/volumes/"+testVolumeId)).WithResponse(http.StatusOK, nil, apiv2.APIString("PUT /volumes/:id"))
 	//mitm.Pause()
 
 	assertion := assert.New(t)
+	tenant_id := "803d363c5c4649b591fd74b96a8c30f5"
+	all_tenants := "1"
 
 	volume, err := New(openstacker).Update(testVolumeId, &options.UpdateVolumeOpts{
 		Name:        options.String("update volume name"),
 		Description: options.String("update volume desc"),
+		TenantID:    &tenant_id,
+		AllTenants:  &all_tenants,
 	})
 	assertion.Nil(err)
 
