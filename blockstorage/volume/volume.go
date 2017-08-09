@@ -1,6 +1,8 @@
 package volume
 
 import (
+	"net/url"
+
 	"github.com/qbox/openstack-golang-sdk/lib/errors"
 	"github.com/qbox/openstack-golang-sdk/lib/ifaces"
 	"github.com/qbox/openstack-golang-sdk/lib/models"
@@ -61,8 +63,19 @@ func (v *Volume) AllByParams(opts *options.ListVolumeOpts) (volumes []*models.Vo
 		return
 	}
 
+	param := url.Values{}
+	if opts != nil {
+		if opts.AllTenants != nil {
+			param.Add("all_tenants", *opts.AllTenants)
+		}
+
+		if opts.TenantID != nil {
+			param.Add("tenant_id", *opts.TenantID)
+		}
+	}
+
 	var result gophercloud.Result
-	_, result.Err = client.Get(client.ServiceURL(VolumesDetailUrl)+"?"+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
+	_, result.Err = client.Get(client.ServiceURL(VolumesDetailUrl)+"?"+param.Encode()+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 
@@ -71,8 +84,7 @@ func (v *Volume) AllByParams(opts *options.ListVolumeOpts) (volumes []*models.Vo
 
 func (v *Volume) Show(id string) (volume *models.VolumeModel, err error) {
 	if id == "" {
-		err = errors.ErrInvalidParams
-		return
+		return nil, errors.ErrInvalidParams
 	}
 
 	client, err := v.Client.VolumeClient()
@@ -134,9 +146,17 @@ func (v *Volume) Update(id string, opts *options.UpdateVolumeOpts) (volume *mode
 	if err != nil {
 		return
 	}
+	param := url.Values{}
+	if opts.AllTenants != nil {
+		param.Add("all_tenants", *opts.AllTenants)
+	}
+
+	if opts.TenantID != nil {
+		param.Add("tenant_id", *opts.TenantID)
+	}
 
 	var res gophercloud.Result
-	_, res.Err = client.Put(client.ServiceURL(VolumesUrl, id), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
+	_, res.Err = client.Put(client.ServiceURL(VolumesUrl, id)+"?"+param.Encode(), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 
