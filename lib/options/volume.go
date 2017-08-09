@@ -39,19 +39,6 @@ func (opts *ListVolumeOpts) ToQuery() url.Values {
 }
 
 /**
- * used to show volume
- */
-type ShowVolumeOpts struct {
-	//The UUID of the tenant in a multi-tenancy cloud.Optional
-	AllTenants *string `json:"all_tenants"`
-	TenantID   *string `json:"tenant_id"`
-}
-
-func (opts *ShowVolumeOpts) IsValid() bool {
-	return true
-}
-
-/**
  * used to create volume
  */
 type CreateVolumeOpts struct {
