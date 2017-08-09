@@ -74,7 +74,8 @@ func v2auth(client *gophercloud.ProviderClient, endpoint string, options AuthOpt
 	// callback if exists
 	// NOTE: is it safety to ignore callback error?
 	if options.SuccessFunc != nil {
-		err = options.SuccessFunc(token.ID, token.ExpiresAt, result.Result)
+		catalogStr, _ := MarshalCatalog(catalog)
+		err = options.SuccessFunc(token.ID, token.ExpiresAt, catalogStr)
 		if err != nil {
 			return
 		}
@@ -173,7 +174,8 @@ func v3auth(client *gophercloud.ProviderClient, endpoint string, options AuthOpt
 	// callback if exists
 	// NOTE: is it safety to ignore callback error?
 	if options.SuccessFunc != nil {
-		err = options.SuccessFunc(token.ID, token.ExpiresAt, result.Result)
+		catalogStr, _ := MarshalCatalog(catalog)
+		err = options.SuccessFunc(token.ID, token.ExpiresAt, catalogStr)
 		if err != nil {
 			return
 		}
