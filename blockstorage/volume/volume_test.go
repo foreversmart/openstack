@@ -91,7 +91,9 @@ func Test_Show_Volume(t *testing.T) {
 
 	assertion := assert.New(t)
 
-	volume, err := New(openstacker).Show(testVolumeId)
+	volume, err := New(openstacker).Show(&options.ShowVolumeOpts{
+		VolumeID: &testVolumeId,
+	})
 	assertion.Nil(err)
 	assertion.NotNil(volume)
 

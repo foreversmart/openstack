@@ -69,8 +69,8 @@ func (v *Volume) AllByParams(opts *options.ListVolumeOpts) (volumes []*models.Vo
 	return models.ExtractVolumes(result)
 }
 
-func (v *Volume) Show(id string) (volume *models.VolumeModel, err error) {
-	if id == "" {
+func (v *Volume) Show(opts *options.ShowVolumeOpts) (volume *models.VolumeModel, err error) {
+	if !opts.IsValid() {
 		err = errors.ErrInvalidParams
 		return
 	}
@@ -81,7 +81,7 @@ func (v *Volume) Show(id string) (volume *models.VolumeModel, err error) {
 	}
 
 	var result gophercloud.Result
-	_, result.Err = client.Get(client.ServiceURL(VolumesUrl, id), &result.Body, &gophercloud.RequestOpts{
+	_, result.Err = client.Get(client.ServiceURL(VolumesUrl, *opts.VolumeID), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 
