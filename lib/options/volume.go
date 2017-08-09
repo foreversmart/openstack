@@ -9,9 +9,10 @@ import (
  * used to list volumes by params
  */
 type ListVolumeOpts struct {
-	Sort   *string `json:"sort"`
-	Limit  *int    `json:"limit"`
-	Marker *string `json:"marker"`
+	TenantID *string `json:"tenant_id"`
+	Sort     *string `json:"sort"`
+	Limit    *int    `json:"limit"`
+	Marker   *string `json:"marker"`
 }
 
 func (opts *ListVolumeOpts) IsValid() bool {
@@ -37,6 +38,19 @@ func (opts *ListVolumeOpts) ToQuery() url.Values {
 }
 
 /**
+ * used to show volume
+ */
+type ShowVolumeOpts struct {
+	//The UUID of the tenant in a multi-tenancy cloud.Optional
+	TenantID *string `json:"tenant_id"`
+	VolumeID *string `json:"volume_id"`
+}
+
+func (opts *ShowVolumeOpts) IsValid() bool {
+	return opts != nil && opts.VolumeID != nil
+}
+
+/**
  * used to create volume
  */
 type CreateVolumeOpts struct {
@@ -45,6 +59,7 @@ type CreateVolumeOpts struct {
 	VolumeType  *string `json:"volume_type,omitempty"`
 	Size        *int    `json:"size,omitempty"`
 	SnapshotID  *string `json:"snapshot_id,omitempty"` // create volume from a snapshot
+	TenantID    *string `json:"tenant_id"`             //Optional
 }
 
 func (opts *CreateVolumeOpts) IsValid() bool {
@@ -67,6 +82,7 @@ func (opts *CreateVolumeOpts) ToPayload() interface{} {
 type UpdateVolumeOpts struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
+	TenantID    *string `json:"tenant_id"` //Optional
 }
 
 func (opts *UpdateVolumeOpts) IsValid() bool {
