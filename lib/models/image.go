@@ -32,7 +32,7 @@ type ImageModel struct {
 	CreatedAt string `mapstructure:"created_at" json:"created_at"`
 }
 
-func ExtractImages(result gophercloud.Result) (images []*ImageModel, err error) {
+func ExtractImages(result gophercloud.Result) (images []*ImageModel, hasNext bool, err error) {
 	if result.Err != nil {
 		err = result.Err
 		return
@@ -40,11 +40,16 @@ func ExtractImages(result gophercloud.Result) (images []*ImageModel, err error) 
 
 	var response struct {
 		Images []*ImageModel `mapstructure:"images"`
+		Next string `mapstructure:"next"`
 	}
 
 	err = mapstructure.Decode(result.Body, &response)
 	if err == nil {
 		images = response.Images
+	}
+
+	if response.Next == "" {
+		hasNext = true
 	}
 
 	return
