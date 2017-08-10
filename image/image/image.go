@@ -54,7 +54,7 @@ func (i *Image) All() (images []*models.ImageModel, err error) {
 			Limit: options.Int(50),
 		}
 
-		tempImages, hasNext, err := i.AllByParams(nil)
+		tempImages, hasNext, err := i.AllByParams(opts)
 
 		if err != nil {
 			return images, err
