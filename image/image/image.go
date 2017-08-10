@@ -15,6 +15,8 @@ import (
 const (
 	ImagesUrl      = "images"
 	ImageUploadUrl = "file"
+
+	DefaultLimit = 50
 )
 
 type Image struct {
@@ -48,10 +50,10 @@ func (i *Image) Create(opts *options.CreateImagesOpts) (image *models.ImageModel
 }
 
 func (i *Image) All() (images []*models.ImageModel, err error) {
-	images = make([]*models.ImageModel, 0, 50)
+	images = make([]*models.ImageModel, 0, DefaultLimit)
 	for {
 		opts := &options.ListImagesOpts{
-			Limit: options.Int(50),
+			Limit: &DefaultLimit,
 		}
 
 		tempImages, hasNext, err := i.AllByParams(opts)
