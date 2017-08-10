@@ -26,6 +26,8 @@ func (opts *CreateSnapshotOpts) ToPayload() interface{} {
 type UpdateSnapshotOpts struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
+	TenantID    *string `json:"tenant_id"` //Optional
+	AllTenants  *string `json:"all_tenants"`
 }
 
 func (opts *UpdateSnapshotOpts) IsValid() bool {
@@ -43,7 +45,7 @@ func (opts *UpdateSnapshotOpts) ToPayload() interface{} {
 }
 
 type ListSnapshotOpts struct {
-	ProjectID  *string `json:"project_id,omitempty"`
+	TenantID   *string `json:"project_id,omitempty"`
 	AllTenants *string `json:"all_tenants,omitempty"`
 }
 
@@ -55,12 +57,14 @@ func (opts *ListSnapshotOpts) ToQuery() url.Values {
 	options := url.Values{}
 
 	if opts != nil {
-		if opts.ProjectID != nil {
-			options.Add("project_id", *opts.ProjectID)
-		}
 		if opts.AllTenants != nil {
 			options.Add("all_tenants", *opts.AllTenants)
 		}
+
+		if opts.TenantID != nil {
+			options.Add("project_id", *opts.TenantID)
+		}
+
 	}
 
 	return options

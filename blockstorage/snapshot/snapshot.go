@@ -1,6 +1,8 @@
 package snapshot
 
 import (
+	"net/url"
+
 	"github.com/qbox/openstack-golang-sdk/lib/errors"
 	"github.com/qbox/openstack-golang-sdk/lib/ifaces"
 	"github.com/qbox/openstack-golang-sdk/lib/models"
@@ -60,7 +62,7 @@ func (s *Snapshot) AllByParams(opts *options.ListSnapshotOpts) (snapshotModels [
 	}
 
 	var result gophercloud.Result
-	_, result.Err = client.Get(client.ServiceURL(SnapshotDetailUrl), &result.Body, &gophercloud.RequestOpts{
+	_, result.Err = client.Get(client.ServiceURL(SnapshotDetailUrl)+"?"+opts.ToQuery().Encode(), &result.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 
@@ -96,8 +98,17 @@ func (s *Snapshot) Update(id string, opts *options.UpdateSnapshotOpts) (snapshot
 		return
 	}
 
+	param := url.Values{}
+	if opts.AllTenants != nil {
+		param.Add("all_tenants", *opts.AllTenants)
+	}
+
+	if opts.TenantID != nil {
+		param.Add("tenant_id", *opts.TenantID)
+	}
+
 	var res gophercloud.Result
-	_, res.Err = client.Put(client.ServiceURL(SnapshotUrl, id), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
+	_, res.Err = client.Put(client.ServiceURL(SnapshotUrl, id)+"?"+param.Encode(), opts.ToPayload(), &res.Body, &gophercloud.RequestOpts{
 		OkCodes: []int{200},
 	})
 

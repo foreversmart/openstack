@@ -62,7 +62,13 @@ func Test_All_Snapshot(t *testing.T) {
 
 	assertion := assert.New(t)
 
-	snapshots, err := New(openstacker).All()
+	tenant_id := "5aa119a8-d25b-45a7-8d1b-88e127885635"
+	all_tenants := "1"
+
+	snapshots, err := New(openstacker).AllByParams(&options.ListSnapshotOpts{
+		TenantID:   &tenant_id,
+		AllTenants: &all_tenants,
+	})
 	assertion.Nil(err)
 	assertion.NotNil(snapshots)
 	assertion.EqualValues(1, len(snapshots))
@@ -99,14 +105,21 @@ func Test_Show_Snapshot(t *testing.T) {
 func Test_Update_Snapshot(t *testing.T) {
 	mitm := mocker.StubDefaultTransport(t)
 
+	testSnapshotId := "4b502fcb-1f26-45f8-9fe5-3b9a0a52eaf2"
+
 	mitm.MockRequest("PUT", apiv2.MockResourceURLWithPort("8776", "/v2/"+testProjectId+"/snapshots/"+testSnapshotId)).WithResponse(http.StatusOK, jsonheader, apiv2.APIString("PUT /snapshots/:id"))
 	//mitm.Pause()
+
+	tenant_id := "803d363c5c4649b591fd74b96a8c30f5"
+	all_tenants := "1"
 
 	assertion := assert.New(t)
 
 	snapshot, err := New(openstacker).Update(testSnapshotId, &options.UpdateSnapshotOpts{
 		Name:        options.String("updated name"),
 		Description: options.String("test update name"),
+		TenantID:    &tenant_id,
+		AllTenants:  &all_tenants,
 	})
 	assertion.Nil(err)
 	assertion.NotNil(snapshot)
