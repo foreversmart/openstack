@@ -53,7 +53,7 @@ func (i *Image) All() (images []*models.ImageModel, err error) {
 	images = make([]*models.ImageModel, 0, DefaultLimit)
 	for {
 		opts := &options.ListImagesOpts{
-			Limit: &DefaultLimit,
+			Limit: options.Int(DefaultLimit),
 		}
 
 		tempImages, hasNext, err := i.AllByParams(opts)
