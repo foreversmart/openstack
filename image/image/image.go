@@ -64,7 +64,7 @@ func (i *Image) All() (images []*models.ImageModel, err error) {
 
 		images = append(images, tempImages...)
 
-		if hasNext {
+		if !hasNext {
 			break
 		}
 
