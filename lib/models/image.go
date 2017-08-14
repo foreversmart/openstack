@@ -48,7 +48,7 @@ func ExtractImages(result gophercloud.Result) (images []*ImageModel, hasNext boo
 		images = response.Images
 	}
 
-	if response.Next == "" {
+	if response.Next != "" {
 		hasNext = true
 	}
 
